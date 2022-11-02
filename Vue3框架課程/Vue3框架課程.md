@@ -5,18 +5,10 @@
   - Vite 提供開發者一個快速建置 Vue.js 架構，包含相關功能、套件安裝。
   只要簡單勾選欲安裝的選項，建置工具就會產生Vue完整架構及完成相關設定。
 
-  - vite 是 Vue.js 的作者所做的一個新的 bundler，不同於以往的建置工具 (如：Vue Cli)，Vite 在開發環境使用了ESM技術 (ES6 Modules or JavaScript Modules)，
-  Vite在本地端開發階段時不做打包，而是使用原生瀏覽器支援的 es6 module 來載入相依性 (等到瀏覽器遇到 import 語句時才發出模組的請求)，使前端啟動開發伺服器時，能快速啟動。
-
-  - 不過 vite 在 production build 時還是會做打包，
-  原因在於發布正式檔案時，JavaScript 已被 babel 編譯過了，無法再透過瀏覽器遇到 import 才做模組請求，
-  必須將所有套件的相依性一起編譯進 JavaScript。
-
-  - Vite 延伸了原本打包的精神，並解決啟動開發環境時，緩慢的編譯速度 (只要檔案經過變更就需要重新打包)。
+  - Vite 在本地端開發階段時不做打包，而是使用原生瀏覽器支援的 es6 module 來載入相依性 (等到瀏覽器遇到 import 語句時才發出模組的請求)，使前端啟動開發伺服器時，能快速啟動。
 
   - ### Module 發展史
-    - #### CJS
-      全名 **CommonJS**。
+    - #### CommonJS
       - exporting
         ```js
           module.exports = function doSomething(n) {
@@ -33,31 +25,6 @@
         如：`const someModule = require('./some/local/file');`。
       - CJS引入模塊的一個複製文件。
       - CJS不能在瀏覽器裡工作。要在瀏覽器裡使用，則需要轉碼和打包(如：`webpack`)。
-      
-    - #### AMD
-      又稱 **異步模塊定義** (Asynchronous Module Definition)。
-      - exporting
-        ```js
-          // moduleA.js 
-          define( function (){
-            var add = function ( x, y ){
-              return x + y;
-            };
-            return {
-              add : add
-        　　　};
-        　});
-        ```
-      - importing
-        ```js
-          // index.js
-          require([ 'moduleA' ], function( moduleA ){
-            console.log(moduleA) // {add：function}
-        　});
-        ```
-      - AMD異步引入模塊，也是因此得名。
-      - ADM是給前端用的
-      - AMD不如CJS直觀
 
     - #### ESM (ES6 Modules / JavaScript Module)
       早期在瀏覽器並沒有原生的 `module` 機制，所以才會產生出各個標準，
@@ -83,28 +50,46 @@
             }
           ```
 
-      除了有了規範以外，更令人興奮的是現在所有的主流瀏覽器都已經原生支援 ESM 了！
+      現在幾乎所有的主流瀏覽器都已經原生支援 ESM！
       以往在瀏覽器不支援的情況下，我們需要經過 webpack 或其他軟體打包檔案，
       `import` 跟 `export` 在輸出時，可能已經被 babel 或 webpack 轉成 CommonJS 或其他形式。
 
       webpack這些打包工作之所以慢的原因，在於打包及編譯的過程，需要分析過所有檔案以及套件的相依性，再根據這些資訊把東西包在一起。
 
-      而 Vite 就是避開了 bundling，採用 `Native ESM`，利用瀏覽器處理複雜的相依性，是 Vite 之所以快的原因。
+      而 Vite 就是避開了 bundling，採用 `Native ESM`，利用瀏覽器處理複雜的相依性。
 
       ![image](./bundler.37740380.png)
       ![image](./esm.3070012d.png)
 
-  - ### Production環境
+  - ### 開發環境 vs 生產環境
     vite 在 Production 產生 build 時 採用與webpack一樣的方式，將所有套件以及依賴都打包進去。
     而vite使用的是 `rollup`工具，走傳統的打包策略，跟webpack沒兩樣。
-    開發環境與生產環境使用不同編譯方式最大的考量在於 `套件的相依性`，
-    - 開發環境使用 `Native ESM` 是因為，所有套件依賴其實都在本機產生的local server中，瀏覽器可以很快速的找到依賴。
-    - 而在生產環境，瀏覽器就要等到這些套件全部都下載完成以後才能開始執行JavaScript，而且瀏覽器會有同時下載量的限制，執行速度反而會更慢。
+
+    開發環境與生產環境使用不同編譯方式：
+    - `開發環境`：使用 `Native ESM` 是因為所有套件依賴其實都在本機產生的local server中，瀏覽器可以很快速的找到依賴。
+    - `生產環境`：瀏覽器就要等到這些套件全部都下載完成以後才能開始執行JavaScript，而且瀏覽器會有同時下載量的限制，執行速度反而會更慢。
 
 ## Vue3 基礎
   - ### 創建Vue應用
     ```sh
-      npm init vue@latest
+    npm init vue@latest
+    ```
+    這一指令將會安裝並執行`create-vue`，它是 `Vue` 官方的項目腳手架工具。
+    將會看到一些諸如 TypeScript 和測試支持之類的可選功能提示：
+  
+    ```sh
+    ✔ Project name: … <your-project-name>
+    ✔ Add TypeScript? … No / Yes
+    ✔ Add JSX Support? … No / Yes
+    ✔ Add Vue Router for Single Page Application development? … No / Yes
+    ✔ Add Pinia for state management? … No / Yes
+    ✔ Add Vitest for Unit testing? … No / Yes
+    ✔ Add Cypress for both Unit and End-to-End testing? … No / Yes
+    ✔ Add ESLint for code quality? … No / Yes
+    ✔ Add Prettier for code formatting? … No / Yes
+
+    Scaffolding project in ./<your-project-name>...
+    Done.
     ```
     - #### 應用實例
       每個Vue應用都是通過 `createApp` 函數創建一個新的 **應用實例**：
@@ -215,6 +200,9 @@
       - 使用JavaScript表達式
         這些表達式都會被作為JavaScript，以組件為作用域解析執行。
         ```js
+
+            {{ if (ok) { return message } }}
+
           {{ number + 1 }}
 
           {{ ok ? 'YES' : 'NO' }}
@@ -275,8 +263,12 @@
     若想插入HTML，需要使用 `v-html` 指令：
     
     ```html
-      <p>Using text interpolation: {{ rawHtml }}</p>
-      <p>Using v-html directive: <span v-html="rawHtml"></span></p>
+      <p>使用文本插值：{{ rawHtml }}</p>
+      <p>使用 v-html 指令：<span v-html="rawHtml"></span></p>
+    ```
+
+    ```js
+      let rawHtml = '<span style="color: red">這應該是紅色的。</span>'
     ```
 
     `使用文本插值：<span style="color: red">這應該是紅色的。</span>`
@@ -348,6 +340,8 @@
     ```html
       <button @click="say('hello')">Say hello</button>
       <button @click="say('bye')">Say bye</button>
+
+      <div @scroll.passive="onScroll">...</div>
     ```
 
   - ### 事件修飾符
@@ -410,6 +404,15 @@
       - `.right`：右鍵
       - `.middle`：中鍵
 
+      ```html
+        <!-- 當按下 左鍵 時 觸發 -->
+        <button @click.left="onClickLeft">Left</button>
+        <!-- 當按下 右鍵 時 觸發 -->
+        <button @click.right="onClickRight">Right</button>
+        <!-- 當按下 中鍵 時 觸發 -->
+        <button @click.middle="onClickMiddle">Middle</button>
+      ```
+
   - ### 表單輸入綁定 (v-model)
     當需要將表單輸入的內容同步綁定時，需處理手動連接值和事件監聽綁定：
     ```html
@@ -432,7 +435,7 @@
 
     - #### 修飾符
       - ##### `.lazy`
-        默認情況下，`v-model`會在得次`input`事件後更新數據。
+        默認情況下，`v-model`會在每次`input`事件後更新數據。
         若想改為在每次 `change`事件觸發時更新數據(`:blur`)，可加上`.lazy`修飾符：
         ```html
           <input v-model.lazy="msg" />
@@ -563,7 +566,7 @@
         console.log(count.value) // 1
       ```
 
-      和響應式物件的屬性類似，ref 的 `.value` 屬性也是響應式的。同時，當值為對像類型時，會用 `reactive()` 自動轉換它的`.value`。
+      和響應式物件的屬性類似，ref 的 `.value` 屬性也是響應式的。同時，當值為物件類型時，會用 `reactive()` 自動轉換它的`.value`。
       ```js
         const objectRef = ref({ count: 0 })
 
@@ -724,7 +727,7 @@
             <div :style="styleObject"></div>
           ```
       - ##### 綁定陣列
-        可以給 `:style` 綁定一個包含多個樣式對象的數組。這些對象會被合併後渲染到同一元素上：
+        可以給 `:style` 綁定一個包含多個樣式物件的數組。這些物件會被合併後渲染到同一元素上：
         ```html
           <div :style="[baseStyles, overridingStyles]"></div>
         ```
