@@ -10,6 +10,8 @@
 - [TailwindCSS 中文文檔](https://www.tailwindcss.cn/docs)
 - [TailwindCSS 英文官網](https://tailwindcss.com/)
 
+-----
+
 ## 第1章 行前準備
 ### 單元 3 - Vite - 快速啟動的本地開發工具
 [Vite 中文官網](https://cn.vitejs.dev/)、[Vite 英文官網](https://vitejs.dev/)、[簡報](https://lucas-hiskio-2021-tailwindcss-slide.vercel.app/vite/1) (左右鍵切換)
@@ -169,5 +171,59 @@
 
 ### 單元 7 - postcss-import - CSS檔案模組化
   - #### [官方文檔](https://tailwindcss.com/docs/using-with-preprocessors#build-time-imports)
+  - ##### 安裝
+    ```sh
+      npm install -D postcss-import
+    ```
+
+  - ##### 設定 `postcss.config.js`
+    ```js
+      // postcss.config.js
+      module.exports = {
+        plugins: {
+          'postcss-import': {},
+          tailwindcss: {},
+          autoprefixer: {},
+        }
+      }
+    ```
+
+  - ##### 將 @tailwind 改為 @import
+    ```css
+      @tailwind base;
+      @tailwind components;
+      @tailwind utilities;
+    ```
+    改為
+    ```css
+      @import 'taiwindcss/base';
+      @import 'taiwindcss/components';
+      @import 'taiwindcss/utilities';
+    ```
+  
+  - ##### 欲撰寫像SCSS的巢狀結構，可安裝 `tailwindcss/nesting` 插件
+    - ###### 安裝
+      ```sh
+        npm install -D postcss-nesting
+      ```
+    - ###### 設定 `postcss.config.js`
+      ```js
+        // postcss.config.js
+        module.exports = {
+          plugins: {
+            'postcss-import': {},
+            'tailwindcss/nesting': {},
+            tailwindcss: {},
+            autoprefixer: {},
+          }
+        }
+      ```
 ### 單元 8 - 專案設定
+  [Customizing Colors - Tailwind CSS](https://tailwindcss.com/docs/customizing-colors)
+  [Tailwind CSS Shades Generator](https://javisperez.github.io/tailwindcolorshades/)
+  [Noto Sans TC 字型](https://fonts.google.com/noto/specimen/Noto+Sans+TC)
+  [Using webpack aliases / jsconfig](https://code.visualstudio.com/docs/languages/jsconfig#_using-webpack-aliases)
 ### 單元 9 - vite-plugin-pages - 檔案驅動的 Vite 路由套件
+
+-----
+
