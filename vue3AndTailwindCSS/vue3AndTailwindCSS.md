@@ -170,6 +170,7 @@
 
 
 ### 單元 7 - postcss-import - CSS檔案模組化
+  在tailwind 使用 import
   - #### [官方文檔](https://tailwindcss.com/docs/using-with-preprocessors#build-time-imports)
   - ##### 安裝
     ```sh
@@ -219,9 +220,121 @@
         }
       ```
 ### 單元 8 - 專案設定
-  [Customizing Colors - Tailwind CSS](https://tailwindcss.com/docs/customizing-colors)
-  [Tailwind CSS Shades Generator](https://javisperez.github.io/tailwindcolorshades/)
-  [Noto Sans TC 字型](https://fonts.google.com/noto/specimen/Noto+Sans+TC)
+  - #### 導出顏色
+    - ##### 更改預設色票
+      調整Tailwind color 預設指定的色票，更改別名對應的顏色
+      色票對照表 => [Tailwind CSS - Customizing Colors - 顏色別名](https://tailwindcss.com/docs/customizing-colors)
+      ```js
+        // tailwind.config.js
+        const colors = require('tailwindcss/colors')
+        module.exports = {
+          content: {},
+          theme: {
+            extend: {
+              colors: {
+                'gray': colors.zinc,
+              }
+            }
+          }
+        }
+      ```
+      > 注意：若無`extend`，會覆蓋原本定義的其他色碼，其他顏色會消失，只保留有設定的色票。
+
+    - ##### 生成自定義顏色的 50 到 900 的色階
+      [Tailwind CSS Shades Generator](https://javisperez.github.io/tailwindcolorshades/) (只支援16位元，如：#FFFFFF)
+      
+      - ###### 使用範例
+        ```js
+          module.exports = {
+            theme: {
+              extend: {
+                colors: {
+                  brown: {
+                    50: '#fdf8f6',
+                    100: '#f2e8e5',
+                    200: '#eaddd7',
+                    300: '#e0cec7',
+                    400: '#d2bab0',
+                    500: '#bfa094',
+                    600: '#a18072',
+                    700: '#977669',
+                    800: '#846358',
+                    900: '#43302b',
+                  },
+                }
+              },
+            },
+          }
+        ```
+
+  - #### 安裝字型
+    - [Google Fonts](https://fonts.google.com/)
+    - [Noto Sans TC 字型](https://fonts.google.com/noto/specimen/Noto+Sans+TC)
+    
+    - ##### 產生套用格式
+      針對要安裝的字型，並在下方的『Styles』勾選字體樣式(可多選)，
+      選取後，會自動產生 html 的 `<link>` 與 `@import` 格式 與 CSS格式，
+      
+      `<link>` 如下：
+        ```html
+          <link rel="preconnect" href="https://fonts.googleapis.com">
+          <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        ```
+      `@import`如下：
+        ```html
+          <style>
+          @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@100;300&display=swap');
+          </style>
+        ```
+      CSS 格式，如下：
+        ```css
+          font-family: 'Noto Sans TC', sans-serif;
+        ```
+      就可直接複製使用。
+    - ##### 引入html
+      直接找到 index.html 貼上即可。
+      ```html
+        <html>
+          ...
+          <head>
+            ...
+            <link rel="preconnect" href="https://fonts.googleapis.com">
+          </head>
+        </html>
+      ```
+
+    - ##### 調整 TailwindCss 字體
+      字型分為 襯線字體(sans)、非襯線字體、等寬字體
+      ```js
+        const { fantFamily } = require('tailwindcss/defaultTheme')
+        module.exports = {
+            theme: {
+              extend: {
+                ...
+                fontFamily: {
+                  // 前面放要追加的字體，並將原本預設的字體保留
+                  sans: ['Noto Sans TC', ...fantFamily.sans],
+                }
+              },
+            },
+          }
+      ```
+
+    - ##### 套用到 CSS
+      ```css
+        // styles/base
+        @layer base {
+          html {
+            @apply font-light;
+          }
+        }
+      ```
+
+  - #### vscode 支援 alias
+
+  
+  
+  
   [Using webpack aliases / jsconfig](https://code.visualstudio.com/docs/languages/jsconfig#_using-webpack-aliases)
 ### 單元 9 - vite-plugin-pages - 檔案驅動的 Vite 路由套件
 
