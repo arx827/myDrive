@@ -621,5 +621,167 @@
     ```sh
       npm i @vueuse/core
     ```
+
 -----
 
+## 第2章 佈局篇
+  ![image](./emxyp36ehoszi7q.png)
+### 單元 1 - 頁面佈局 - 桌機版
+### 單元 2 - 頁面佈局 - 手機版
+### 單元 3 - 抽離選單資料
+### 單元 4 - 用戶功能選單
+  - [Menu - Headless UI](https://headlessui.com/vue/menu)
+
+-----
+
+## 第3章 組件篇
+### 單元 1 - 按鈕組件
+  - [Tailwind UI 按鈕原始碼](https://tailwindui.com/components/application-ui/forms/form-layouts)
+
+### 單元 2 - 常用表單組件
+  - [@tailwindcss/forms 中 class 的使用方式](https://github.com/tailwindlabs/tailwindcss-forms#using-classes-instead-of-element-selectors)
+
+### 單元 3 - 彈出視窗組件
+  - [Modal - Headless UI](https://headlessui.com/vue/dialog)
+  - [useVModel](https://vueuse.org/core/usevmodel/)
+
+### 單元 4 - 確認視窗組件 - 樣式
+
+### 單元 5 - 確認視窗組件 - 功能
+  - [mitt](https://github.com/developit/mitt)
+
+### 單元 6 - 訊息提示組件 - 樣式
+  - [@kyvg/vue3-notification](https://github.com/kyvg/vue3-notification)
+
+### 單元 7 - 訊息提示組件 - 功能
+
+-----
+
+## 第4章 顯示資料篇 - 文章列表
+### 單元 1 - 文章列表 - 表格樣式
+
+### 單元 2 - 文章列表 - 組件化
+
+### 單元 3 - 文章列表 - 編輯/刪除按鈕
+### 單元 4 - 文章列表 - 分頁
+  - [@hennge/vue3-pagination](https://github.com/HENNGE/vue3-pagination)
+
+### 單元 5 - 表格多行操作 - 核選框組件
+
+### 單元 6 - 表格多行操作 - 多行選取狀態
+
+### 單元 7 - 表格多行操作 - 多行操作欄
+  - [Box Shadow](https://tailwindcss.com/docs/box-shadow)
+### 單元 8 - 篩選選單 & 搜尋輸入框 - 樣式
+  - [Popover - Headless UI](https://headlessui.com/vue/popover)
+### 單元 9 - 篩選選單 & 搜尋輸入框 - 功能
+### 單元 10 - 排序選單
+  - [Listbox (Select) - Headless UI](https://headlessui.com/vue/listbox)
+### 單元 11 - 細節調整
+
+-----
+
+## 第5章 顯示資料篇 - 首頁&圖表
+### 單元 1 - 首頁 - 上排資料統計卡片
+### 單元 2 - 首頁 - 第二排圖表 | Chart.js 介紹 & 使用
+  - [Chart.js](https://www.chartjs.org/)
+### 單元 3 - 首頁 - 包裝圖表邏輯
+### 單元 4 - 首頁 - 左下熱門文章
+### 單元 5 - 首頁 - 右下最新留言
+
+-----
+
+## 第6章 表單篇 - 新增文章
+### 單元 1 - 基本表單排版
+
+### 單元 2 - 文章標題 - 文字輸入框組件
+
+### 單元 3 - 文章縮圖 - 上傳圖片組件
+
+### 單元 4 - 文章標籤 - 標籤輸入框
+  - [@sipec/vue3-tags-input](https://github.com/sipec/vue-tags-input)
+
+### 單元 5 - 表單送出載入中狀態
+  - [Tailwind CSS 範例的 Loading Icon](https://tailwindcss.com/docs/animation#spin)
+  - [useTimeout / promiseTimeout](https://vueuse.org/shared/usetimeout/)
+
+### 單元 6 - 編輯表單頁面
+
+-----
+
+## 第7章 表單篇 - 文章內容編輯器
+### 單元 1 - tiptap：無樣式的所見即所得編輯器
+  - [Tiptap](https://tiptap.dev/)
+
+### 單元 2 - 文章內容 - 所見即所得編輯器
+  - [Tiptap - Vue.js 3 安裝](https://tiptap.dev/installation/vue3)
+  - [@tailwindcss/typography](https://tailwindcss.com/docs/typography-plugin)
+
+### 單元 3 - 編輯器 - 工具列定位
+
+### 單元 4 - 編輯器 - 插入連結樣式
+  - [Link - Tiptap](https://tiptap.dev/api/marks/link)
+
+### 單元 5 - 編輯器 - 插入連結功能
+
+### 單元 6 - 編輯器 - 插入圖片
+  - [Image - Tiptap](https://tiptap.dev/api/nodes/image)
+  - [Tabs - Headless UI](https://headlessui.com/vue/tabs)
+  - [onClickOutside - VueUse](https://vueuse.org/core/onclickoutside/)
+
+-----
+
+## 第8章 其他頁面
+### 單元 1 - 登入頁面
+### 單元 2 - 註冊頁面
+### 單元 3 - 個人資料頁面
+
+-----
+
+## 第9章 總結
+
+### 單元 1 - 優化 Tailwind CSS 的 12 個小技巧
+  - [簡報](https://lucas-hiskio-2021-tailwindcss-slide.vercel.app/tailwindcss-12-tips/1)
+
+### 單元 2 - 部署專案到 Vercel
+  - [Vercel](https://vercel.com/)
+  - [lucas-press.vercel.app](https://lucas-press.vercel.app/)
+
+### 單元 3 - 優化 Vite 依賴預編譯
+  - [依賴預構建 - Vite](https://cn.vitejs.dev/guide/dep-pre-bundling.html#customizing-the-behavior)
+
+### 單元 4 - 課程總結
+  - [Ant Design Vue](https://www.antdv.com/docs/vue/introduce-cn/)
+  - [Element Plus](https://element-plus.org/en-US/)
+  - [Tailwind Components](https://tailwindcomponents.com/)
+  - [Awesome Tailwind CSS](https://github.com/aniftyco/awesome-tailwindcss)
+
+### 單元 5 - 作業：部落格後台 UI
+
+-----
+
+## 第10章 【彩蛋章節】簡易部落格前台篇
+### 單元 1 - 部落格前台 - 初始化專案
+  - [Install Tailwind CSS with Vue 3 and Vite](https://tailwindcss.com/docs/guides/vite)
+  - [vite-plugin-pages](https://github.com/hannoeru/vite-plugin-pages)
+  - [unplugin-icons](https://github.com/antfu/unplugin-icons)
+  - [unplugin-vue-components](https://github.com/antfu/unplugin-vue-components)
+  - [Noto Sans TC 字型](https://fonts.google.com/noto/specimen/Noto+Sans+TC)
+
+### 單元 2 - 部落格前台 - 文章列表
+
+### 單元 3 - 部落格前台 - 文章頁面
+  - [@tailwindcss/typography](https://tailwindcss.com/docs/typography-plugin)
+
+### 單元 4 - 部落格前台 - 靜態頁面生成和部署到 Vercel
+  - [Vercel - cleanUrls / trailingSlash](https://vercel.com/docs/project-configuration#project-configuration/clean-urls)
+
+-----
+
+## 第11章 【彩蛋章節】切換主題顏色篇
+### 單元 1 - 主題 - 安裝 tailwindcss-multi-theme & 主題下拉選單
+  - [tailwindcss-multi-theme](https://github.com/estevanmaito/tailwindcss-multi-theme)
+### 單元 2 - 頁面佈局 - 手機版
+  - [Customizing Colors](https://tailwindcss.com/docs/customizing-colors)
+### 單元 3 - 抽離選單資料
+### 單元 4 - 用戶功能選單
