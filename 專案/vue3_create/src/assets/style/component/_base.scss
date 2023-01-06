@@ -1,0 +1,25 @@
+.svg__currentColor {
+  fill: currentColor;
+}
+
+.page__container {
+  padding: 15px;
+}
+.section__container {
+  padding: 15px;
+}
+
+.container__wrap {
+  border: 1px solid $COLOR-GRAY6;
+  padding: 25px 20px 15px;
+  border-radius: 5px;
+  box-shadow: 1px 1px 5px $COLOR-GRAY5;
+  + .container__wrap {
+    margin-top: 20px;
+  }
+}
+
+// ------------------- icon & text color ------------------- //
+.c-red {
+  color: $COLOR-MAIN6 !important;
+}
