@@ -1,0 +1,55 @@
+{
+  "customerDataPage": {
+    "isShow": true,
+    "matchResultMessageTxtGroup": [
+      "確認要保人、被保險人、關係人等有無負面新聞。",
+      "確認交易時間點、犯罪時間點、負面新聞被揭露時間點…等各時間點是否有關聯，有否隱匿不法資金(如還款資金來源有無合理說明)。",
+      "確認資金來源與其身分、收入是否相當；或與其營利性質是否相關。"
+    ],
+    "isVerifiedByClientShow": false
+  },
+  "transactionRecordPage": {
+    "isShow": true,
+    "isRecordCountShow": true,
+    "insureRecord": false,
+    "transactionChangeRecord": true,
+    "transactionChangeRecordMessageTxtGroup": [
+      "短期密集交易。",
+      "給付前，短期頻繁要保人、給付對象(受益人)之異常情形。"
+    ],
+    "borrowAndRepayRecord": true,
+    "borrowAndRepayRecordMessageTxtGroup": [
+      "短期密集借還款、大額還款交易。",
+      "給付前，是否有密集或大額借款之異常情形。"
+    ],
+    "paymentRecord": true,
+    "paymentRecordMessageTxtGroup": "提醒：繳款後，短期內辦理借款…等。",
+    "suspendAndBorrowRecord": false
+  },
+  "financialAndJobInfoPage": {
+    "isShow": true,
+    "fnOccuImagesMessageTxtGroup": [
+      "若名單客戶非要保人且有其他保單者，需說明名單客戶及命中保單之要保人資訊。",
+      "若名單客戶非要保人且無查無其他保單者，請說明命中保單之要保人資訊。"
+    ],
+    "isRepay50w": true,
+    "isIntensiveTrading": true,
+    "isIncrease50w": false,
+    "isPay50w": false
+  },
+  "suspectLaunderingPage": {
+    "isShow": true
+  },
+  "evidenceDataPage": {
+    "isShow": true
+  },
+  "reviewHistoryPage": {
+    "isShow": true
+  },
+  "dataSourcePage": {
+    "isShow": false
+  },
+  "ReviewBottom": {
+    "isConfirmMergeCaseBtnShow": false
+  }
+}

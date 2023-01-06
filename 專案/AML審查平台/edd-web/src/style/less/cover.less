@@ -1,0 +1,92 @@
+@import "~ant-design-vue/dist/antd.less";
+@import "variable.less";
+
+// ant design less變數變更
+
+//=== reference ===//
+// https://github.com/vueComponent/ant-design-vue/blob/master/components/style/themes/default.less
+
+//=== For compacted styling ===//
+@body-background: #f0f2f5;
+@border-radius-base: 2px;
+@layout-header-background: #fff;
+@layout-header-height: 60px;
+
+//=== For compacted menu styling ===//
+@menu-item-vertical-margin: 0;
+@menu-item-boundary-margin: 0;
+@menu-dark-color: #fff;
+@menu-dark-bg: transparent;
+
+//=== tabs樣式 ===//
+@tabs-title-font-size: 16px;
+@tabs-card-active-color: @table-bg-primary;
+@tabs-bar-margin: 0 0 19px 0;
+.ant-tabs.ant-tabs-card .ant-tabs-card-bar {
+  color: #333333;
+  .ant-tabs-tab-active {
+    background-color: @table-bg-primary;
+    color: #fff;
+  }
+}
+.ant-tabs-nav .ant-tabs-tab {
+  &:hover {
+    color: #333333;
+  }
+}
+
+.ant-tabs.ant-tabs-card .ant-tabs-card-bar .ant-tabs-tab {
+  border-radius: 5px 5px 0px 0px;
+  border-color: @border-main;
+}
+.ant-tabs-nav-scroll {
+  background-color: #f0f2f5;
+}
+.ant-tabs-card-content {
+  padding: 0px 22px;
+}
+.ant-tabs-nav-scroll {
+  padding: 0px 3px;
+}
+
+//=== form樣式 ===//
+.ant-form-item label {
+  font-weight: bold;
+}
+
+// === pagination ===//
+.ant-table-pagination.ant-pagination {
+  float: left;
+}
+//=== Buttons樣式 ===//
+
+//=== layout樣式 ===//
+.ant-page-header{
+  padding: 16px 32px;
+}
+
+//=== table樣式 ===//
+@table-border-radius-base: 4px;
+.ant-table-small{
+  border: none;
+}
+// z-index list, order by `z-index`
+@zindex-popover: 1070;
+
+.ant-table {
+  font-size: 16px;
+}
+.ant-select-tree {
+  font-size: 16px;
+}
+
+.ant-tooltip-inner {
+  background-color: #fff;
+  color: #000;
+  padding: 16px 27px;
+}
+.ant-tooltip-arrow::before {
+  background-color: #fff;
+  width: 10px;
+  height: 10px;
+}

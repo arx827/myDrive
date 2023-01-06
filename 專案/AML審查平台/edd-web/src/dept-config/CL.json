@@ -1,0 +1,42 @@
+{ 
+  "customerDataPage": {
+    "isShow": true,
+    "matchResultMessageTxtGroup" : null,
+    "isVerifiedByClientShow" : false
+  },
+  "transactionRecordPage": {
+    "isShow": true,
+    "insureRecord": true,
+    "isRecordCountShow": false,
+    "transactionChangeRecord": true,
+    "transactionChangeRecordMessageTxtGroup": null,
+    "borrowAndRepayRecord": true,
+    "borrowAndRepayRecordMessageTxtGroup": null,
+    "paymentRecord": false,
+    "paymentRecordMessageTxtGroup": null,
+    "suspendAndBorrowRecord": false
+  },
+  "financialAndJobInfoPage": {
+    "isShow": true,
+    "fnOccuImagesMessageTxtGroup" : null,
+    "isRepay50w": false,
+    "isIntensiveTrading":false,
+    "isIncrease50w": false,
+    "isPay50w": false
+  },
+  "suspectLaunderingPage": {
+    "isShow": true
+  },
+  "evidenceDataPage": {
+    "isShow": true
+  },
+  "reviewHistoryPage": {
+    "isShow": true
+  },
+  "dataSourcePage": {
+    "isShow": false
+  },
+  "ReviewBottom": {
+    "isConfirmMergeCaseBtnShow": true
+  }
+}

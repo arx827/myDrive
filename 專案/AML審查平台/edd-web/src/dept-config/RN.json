@@ -1,0 +1,47 @@
+{ 
+  "customerDataPage": {
+    "isShow": true,
+    "matchResultMessageTxtGroup" : [
+      "確認要保人、被保險人、關係人(受益人…等)，有無負面新聞。",
+      "確認交易時間點、犯罪時間點、負面新聞被揭露時間點…等各時間點是否有關聯，有否隱匿不法資金，購買保單或繳交保費。"],
+    "isVerifiedByClientShow" : true
+  },
+  "transactionRecordPage": {
+    "isShow": true,
+    "isRecordCountShow": true,
+    "insureRecord": false,
+    "transactionChangeRecord": false,
+    "transactionChangeRecordMessageTxtGroup": null,
+    "borrowAndRepayRecord": false,
+    "borrowAndRepayRecordMessageTxtGroup": null,
+    "paymentRecord": true,
+    "paymentRecordMessageTxtGroup": [
+      "繳款人非保單關係人",
+      "繳款後短期內部終止/解約…等"
+    ],
+    "suspendAndBorrowRecord": false
+  },
+  "financialAndJobInfoPage": {
+    "isShow": true,
+    "fnOccuImagesMessageTxtGroup" : [],
+    "isRepay50w": false,
+    "isIntensiveTrading":false,
+    "isIncrease50w": false,
+    "isPay50w": true
+  },
+  "suspectLaunderingPage": {
+    "isShow": true
+  },
+  "evidenceDataPage": {
+    "isShow": true
+  },
+  "reviewHistoryPage": {
+    "isShow": true
+  },
+  "dataSourcePage": {
+    "isShow": false
+  },
+  "ReviewBottom": {
+    "isConfirmMergeCaseBtnShow": true
+  }
+}
