@@ -150,9 +150,6 @@ export class GlobalService {
 
           // 用自己 name 先找到該層級
           if (routeNameArray.includes(route.name)) {
-            // console.log(routes);
-            // console.log(route);
-
             // 已找到該層級，取得 同流程的功能頁 並儲存name陣列
             routeSibling = routes
               .filter(i => i.name !== null && new RegExp(route.path.split('/')[1]).test(i.path))

@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { ExclamationCircleFilled } from '@ant-design/icons-vue'
-import { defineProps } from 'vue'
 defineProps({
   title: {
     type: String,
@@ -18,7 +17,6 @@ const $emit = defineEmits(['confirm'])
  * Event
  */
 const onHandleDelete = () => {
-  console.log(1)
   $emit('confirm')
 }
 </script>
@@ -54,9 +52,6 @@ const onHandleDelete = () => {
     padding-left: 0;
   }
   .ant-popover-message-title {
-    // padding-left: 0;
-    // display: inline-flex;
-    // justify-content: center;
     text-align: center;
     .anticon {
       color: $COLOR-MAIN10;

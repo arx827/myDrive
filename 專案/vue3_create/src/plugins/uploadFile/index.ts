@@ -46,7 +46,7 @@ export default class UploadFile {
     }
     if (count) {
       let currentCount = curruntUploadFile.length
-      console.log(currentCount)
+      // console.log(currentCount)
       if (curruntUploadFile.length > 0) {
         curruntUploadFile.some(e => e.name === '未選取任何文件') ? (currentCount -= 1) : currentCount
       }

@@ -14,7 +14,6 @@ import 'vue-router'
 import { importCompVue } from './importVue'
 
 // demo
-
 declare module 'vue-router' {
   interface RouteMeta {
     breadcrumb?: {
@@ -34,7 +33,7 @@ const routes: Array<RouteRecordRaw> = [
       name: 'Form',
     },
     children: [
-      /* ----------------------------------- 範例 ------------------------------------- */
+      /* ----------------------------------- component ------------------------------------- */
       {
         path: 'comp',
         component: EmptyRouterView,
@@ -128,6 +127,7 @@ const routes: Array<RouteRecordRaw> = [
           },
         ],
       },
+      /* ----------------------------------- 常用範例 ------------------------------------- */
       {
         path: 'demo',
         component: EmptyRouterView,
@@ -150,7 +150,7 @@ const routes: Array<RouteRecordRaw> = [
             meta: {
               breadcrumb: {
                 mainTitle: '功能範例',
-                subTitle: ['參數傳遞', '傳送'],
+                subTitle: ['參數傳遞', '接收'],
               },
             },
           },
@@ -186,15 +186,162 @@ const routes: Array<RouteRecordRaw> = [
           },
         ],
       },
+      /* ----------------------------------- 使用手冊 ------------------------------------- */
+      {
+        path: 'doc',
+        component: EmptyRouterView,
+        children: [
+          {
+            path: 'doc-create',
+            name: 'DocCreate',
+            component: importCompVue.DocCreateVue,
+            meta: {
+              breadcrumb: {
+                mainTitle: '使用手冊',
+                subTitle: ['建置專案'],
+              },
+            },
+          },
+          {
+            path: 'doc-architecture',
+            name: 'DocArchitecture',
+            component: importCompVue.DocArchitectureVue,
+            meta: {
+              breadcrumb: {
+                mainTitle: '使用手冊',
+                subTitle: ['架構說明'],
+              },
+            },
+          },
+          {
+            path: 'doc-unplugin-vue-components',
+            name: 'DocUnpluginVueVomponents',
+            component: importCompVue.DocUnpluginVueVomponentsVue,
+            meta: {
+              breadcrumb: {
+                mainTitle: '使用手冊',
+                subTitle: ['Unplugin-vue-components'],
+              },
+            },
+          },
+          {
+            path: 'doc-style',
+            name: 'DocStyle',
+            component: importCompVue.DocStyleVue,
+            meta: {
+              breadcrumb: {
+                mainTitle: '使用手冊',
+                subTitle: ['樣式客製說明'],
+              },
+            },
+          },
+          {
+            path: 'doc-table',
+            name: 'DocTable',
+            component: importCompVue.DocTableVue,
+            meta: {
+              breadcrumb: {
+                mainTitle: '使用手冊',
+                subTitle: ['表格元件'],
+              },
+            },
+          },
+          {
+            path: 'doc-form-validate',
+            name: 'DocFormValidate',
+            component: importCompVue.DocFormValidateVue,
+            meta: {
+              breadcrumb: {
+                mainTitle: '使用手冊',
+                subTitle: ['欄位檢核'],
+              },
+            },
+          },
+          {
+            path: 'doc-modal-and-notification',
+            name: 'DocModalAndNotification',
+            component: importCompVue.DocModalAndNotificationVue,
+            meta: {
+              breadcrumb: {
+                mainTitle: '使用手冊',
+                subTitle: ['彈窗功能、confirm視窗'],
+              },
+            },
+          },
+          {
+            path: 'doc-add-global',
+            name: 'DocAddGlobal',
+            component: importCompVue.DocAddGlobalVue,
+            meta: {
+              breadcrumb: {
+                mainTitle: '使用手冊',
+                subTitle: ['共用元件處理 (共用、Loading)'],
+              },
+            },
+          },
+          {
+            path: 'doc-api',
+            name: 'DocApi',
+            component: importCompVue.DocApiVue,
+            meta: {
+              breadcrumb: {
+                mainTitle: '使用手冊',
+                subTitle: ['宣告及呼叫API'],
+              },
+            },
+          },
+          {
+            path: 'doc-user',
+            name: 'DocUser',
+            component: importCompVue.DocUserVue,
+            meta: {
+              breadcrumb: {
+                mainTitle: '使用手冊',
+                subTitle: ['會員機制'],
+              },
+            },
+          },
+        ],
+      },
+
+      /* ----------------------------------- Vue3 實作練習 ------------------------------------- */
+      {
+        path: 'vue3',
+        component: EmptyRouterView,
+        children: [
+          {
+            path: 'doc-vue3',
+            name: 'DocVue3',
+            component: importCompVue.DocVue3Vue,
+            meta: {
+              breadcrumb: {
+                mainTitle: '使用手冊',
+                subTitle: ['Vue3基礎知識'],
+              },
+            },
+          },
+          {
+            path: 'doc-vue3-answer',
+            name: 'DocVue3Answer',
+            component: importCompVue.DocVue3AnswerVue,
+            meta: {
+              breadcrumb: {
+                mainTitle: '使用手冊',
+                subTitle: ['[解]_ToDoList 小作業'],
+              },
+            },
+          },
+        ],
+      },
     ],
-    beforeEnter(to, from, next) {
-      if (!user.hasValidToken()) {
-        message.warning({ content: '尚未登入' })
-        next({ name: 'Login' })
-      } else {
-        next()
-      }
-    },
+    // beforeEnter(to, from, next) {
+    //   if (!user.hasValidToken()) {
+    //     message.warning({ content: '尚未登入' })
+    //     next({ name: 'Login' })
+    //   } else {
+    //     next()
+    //   }
+    // },
   },
   // 無法識別的path => 匹配 notFound
   { path: '/:catchAll(.*)', component: NotFound },
@@ -203,6 +350,10 @@ const routes: Array<RouteRecordRaw> = [
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes,
+  scrollBehavior(to, from, savedPosition) {
+    const $main = document.querySelector('.main__content')
+    $main.scrollTop = 0
+  },
 })
 
 export default router

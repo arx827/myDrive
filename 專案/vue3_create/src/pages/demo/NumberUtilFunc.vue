@@ -25,10 +25,10 @@ const form5 = ref<{ number: string | number; ad: number }>({
 
 const form1_percen = computed<number>({
   get() {
-    return $numberUtil.percentToNum(form1.value.number)
+    return $numberUtil.numToPercent(form1.value.number, 5)
   },
   set(val) {
-    form1.value.number = $numberUtil.numToPercent(val)
+    form1.value.number = $numberUtil.percentToNum(val, 5)
   },
 })
 const form2_round = computed<number>(() => $numberUtil.round(form2.value.number, form2.value.unit))

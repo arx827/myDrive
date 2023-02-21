@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { useForm } from 'ant-design-vue/es/form'
-// import { FblColumnType } from '@shared/data-grid/model'
 import { getCurrentInstance, onMounted, ref } from 'vue'
 
 const {
@@ -52,7 +51,6 @@ const grid = ref({
     {
       type: 'PLAIN',
       title: '交易編號',
-      property: 'txCode',
       dataIndex: 'txCode',
       key: 'txCode',
       inspect: true,
@@ -66,7 +64,7 @@ const grid = ref({
       title: '交易確認狀態',
       dataIndex: 'cfStatus',
       key: 'cfStatus',
-      width: '500px',
+      width: '110',
       bodyTemp: 'cfStatus',
     },
     {
@@ -76,17 +74,21 @@ const grid = ref({
       key: 'applyId',
     },
     {
+      type: 'PLAIN',
       title: '測試文字刪節符',
+      width: '150',
       key: 'ellipsisTest',
       dataIndex: 'ellipsisTest',
       ellipsis: true,
     },
     {
+      type: 'PLAIN',
       title: '送審日期',
       key: 'applyDate',
       dataIndex: 'applyDate',
     },
     {
+      type: 'PLAIN',
       title: '指示時間',
       key: 'cutOffDatetime',
       dataIndex: 'cutOffDatetime',
@@ -94,7 +96,7 @@ const grid = ref({
     {
       type: 'TEMPLATE',
       title: '操控',
-      width: '300px',
+      width: '100',
       fixed: 'right',
       bodyTemp: 'action',
     },
@@ -125,7 +127,7 @@ const rulesRef = ref({
 
 const { validate, validateInfos, resetFields } = useForm(form, rulesRef)
 
-const testValue = ref<string[]>([])
+const selectorValue = ref<string[]>([])
 
 interface ModalState {
   infoModal: {
@@ -174,8 +176,8 @@ const handleTableSelect = selectedRows => {
 }
 
 const multipleControl = () => {
-  if (testValue.value.length > 0) {
-    console.log('多筆操作 =>', testValue.value)
+  if (selectorValue.value.length > 0) {
+    console.log('多筆操作 =>', selectorValue.value)
   }
 }
 
@@ -212,8 +214,8 @@ onMounted(() => {})
 <template>
   <div class="page__container flex-fill">
     <div class="d-flex justify-content-end mb-2 gap-2">
-      <a-button class="btn__secondary" @click="multipleControl" :disabled="!testValue.length">多筆操作</a-button>
-      <a-button class="btn__danger" @click="multipleControl" :disabled="!testValue.length">多筆刪除</a-button>
+      <a-button class="btn__secondary" @click="multipleControl" :disabled="!selectorValue.length">多筆操作</a-button>
+      <a-button class="btn__danger" @click="multipleControl" :disabled="!selectorValue.length">多筆刪除</a-button>
       <button class="table__btn text-nowrap btn__primary" @click="addData">新增</button>
     </div>
     <FblDataGrid
@@ -228,7 +230,7 @@ onMounted(() => {})
       @inspectClick="workContent"
       @tableChange="handleTableChange"
       @onSelect="handleTableSelect"
-      v-model:test="testValue"
+      v-model:selector="selectorValue"
     >
       <template #customTitle>
         <span class="d-flex align-items-center"> <smile-outlined /> 交易編號(自定義temp標題) </span>

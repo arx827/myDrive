@@ -22,34 +22,26 @@ import './assets/style/layout.scss'
 
 import { useRoute } from 'vue-router'
 import DatePicker from '@fubonlife/vue-datepicker-next/index.es.js'
-import ZhTW from '@fubonlife/vue-datepicker-next/locale/zh-tw'
-// import DatePicker from 'vue-datepicker-next'
-import '@fubonlife/vue-datepicker-next/locale/zh-tw'
+import ZhTW from '@fubonlife/vue-datepicker-next/locale/zh-tw.es'
 import '@fubonlife/vue-datepicker-next/index.css'
 
-// import VXETable from 'vxe-table'
-// import XEUtils from 'xe-utils'
-// import zhTW from 'vxe-table/lib/locale/lang/zh-TW'
-// import 'vxe-table/lib/style.css'
+import VueHighlightJS from 'vue3-highlightjs'
+import 'highlight.js/styles/solarized-dark.css'
 
 const app = createApp(App)
-
-// app.use(VXETable, {
-//   i18n: (key, args) => XEUtils.toFormatString(XEUtils.get(zhTW, key), args),
-// })
 
 app.use(createPinia())
 app.use(Api)
 
 app.use(Global, { Router })
 app.use(EnumData)
-
 app.use(User, { Router })
-
 app.use(NumberUtil, { EnumData, ValidateUtil })
 app.use(DateTimeUtil, { Global, EnumData })
 app.use(ValidateUtil, { Global, EnumData })
 app.use(BlobUtils)
+
+app.use(VueHighlightJS)
 
 app.use(Message)
 app.use(Notification)

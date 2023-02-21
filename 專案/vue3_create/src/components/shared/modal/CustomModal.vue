@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { defineProps, defineEmits, useAttrs, computed } from 'vue'
+import { useAttrs, computed } from 'vue'
 const widthEnum = {
   lg: '1200px',
   md: '600px',

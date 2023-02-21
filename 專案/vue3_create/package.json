@@ -1,6 +1,6 @@
 {
-  "name": "vue3_1104_create",
-  "version": "0.0.0",
+  "name": "vue3_create",
+  "version": "1.0.0",
   "scripts": {
     "dev": "vite --mode development --port 8200",
     "build": "run-p type-check build-only",
@@ -9,21 +9,23 @@
     "build:prod": "vite build --mode production",
     "preview": "vite preview",
     "build-only": "vite build",
-    "type-check": "vue-tsc --noEmit",
+    "type-check": "vue-tsc --noEmit --skipLibCheck",
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore"
   },
   "dependencies": {
     "@ant-design/icons-vue": "6.1.0",
-    "@fubonlife/iams-api-axios-sdk": "0.94.0",
+    "@fubonlife/iams-api-axios-sdk": "0.97.0",
     "@fubonlife/vue-datepicker-next": "1.0.6",
     "@popperjs/core": "2.11.6",
     "ant-design-vue": "3.2.14",
-    "axios": "^0.21.1",
+    "axios": "^0.19.2",
     "bootstrap": "5.2.2",
     "pinia": "2.0.23",
     "vite-svg-loader": "3.6.0",
     "vue": "3.2.41",
-    "vue-router": "4.1.5"
+    "vue-router": "4.1.5",
+    "vue-uuid": "3.0.0",
+    "vue3-highlightjs": "1.0.5"
   },
   "devDependencies": {
     "@rushstack/eslint-patch": "1.1.4",

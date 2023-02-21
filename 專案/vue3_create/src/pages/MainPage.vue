@@ -1,12 +1,20 @@
 <script setup lang="ts">
-import { ref, computed, onMounted } from 'vue'
-import { useRouter } from 'vue-router'
-const collapsed = ref<boolean>(false)
-const title = 'Vue3_生成器'
-
+import { ref, computed, watch } from 'vue'
+import { useRouter, useRoute } from 'vue-router'
 const $router = useRouter()
+const $route = useRoute()
 
-// TEST: 測試用 側邊選單
+const title = ref(import.meta.env.VITE_APP_TITLE)
+const sideMenuState = ref({
+  theme: 'dark',
+  collapsed: false,
+  openKeys: [],
+  preOpenKeys: [],
+  selectedKeys: [],
+  mode: 'vertical',
+})
+
+// TEST: 測試用 側邊選單 假資料
 const apiMenuItems = ref([
   {
     item: {
@@ -127,7 +135,7 @@ const apiMenuItems = ref([
           uri: 'https://www.google.com/',
           enabled: true,
           menuSort: 1,
-          parentId: '',
+          parentId: null,
           caseCount: 0,
         },
         children: [],
@@ -218,10 +226,203 @@ const apiMenuItems = ref([
       },
     ],
   },
+  {
+    item: {
+      menuId: 'vue3',
+      isLeaf: false,
+      menuName: 'Vue3 實作練習',
+      route: null,
+      uri: null,
+      enabled: true,
+      menuSort: 1,
+      parentId: null,
+    },
+    children: [
+      {
+        item: {
+          menuId: 'docVue3',
+          isLeaf: true,
+          menuName: 'Vue3基礎知識',
+          route: '/vue3/doc-vue3',
+          uri: null,
+          enabled: true,
+          menuSort: 1,
+          parentId: 'vue3',
+          caseCount: 0,
+        },
+        children: [],
+      },
+      {
+        item: {
+          menuId: 'docVue3Answer',
+          isLeaf: true,
+          menuName: '[解]_ToDoList 小作業',
+          route: '/vue3/doc-vue3-answer',
+          uri: null,
+          enabled: true,
+          menuSort: 1,
+          parentId: 'vue3',
+          caseCount: 0,
+        },
+        children: [],
+      },
+    ],
+  },
+  {
+    item: {
+      menuId: 'doc',
+      isLeaf: false,
+      menuName: '使用手冊',
+      route: null,
+      uri: null,
+      enabled: true,
+      menuSort: 1,
+      parentId: null,
+    },
+    children: [
+      {
+        item: {
+          menuId: 'docCreate',
+          isLeaf: true,
+          menuName: '建置專案',
+          route: '/doc/doc-create',
+          uri: null,
+          enabled: true,
+          menuSort: 1,
+          parentId: 'doc',
+          caseCount: 0,
+        },
+        children: [],
+      },
+      {
+        item: {
+          menuId: 'docArchitecture',
+          isLeaf: true,
+          menuName: '架構說明',
+          route: '/doc/doc-architecture',
+          uri: null,
+          enabled: true,
+          menuSort: 1,
+          parentId: 'doc',
+          caseCount: 0,
+        },
+        children: [],
+      },
+      {
+        item: {
+          menuId: 'docUnpluginVueComponents',
+          isLeaf: true,
+          menuName: 'Unplugin-vue-components',
+          route: '/doc/doc-unplugin-vue-components',
+          uri: null,
+          enabled: true,
+          menuSort: 1,
+          parentId: 'doc',
+          caseCount: 0,
+        },
+        children: [],
+      },
+      {
+        item: {
+          menuId: 'docStyle',
+          isLeaf: true,
+          menuName: '樣式客製說明 (SCSS、Ant Design Vue、Bootstrap 5)',
+          route: '/doc/doc-style',
+          uri: null,
+          enabled: true,
+          menuSort: 1,
+          parentId: 'doc',
+          caseCount: 0,
+        },
+        children: [],
+      },
+      {
+        item: {
+          menuId: 'docTable',
+          isLeaf: true,
+          menuName: '表格元件',
+          route: '/doc/doc-table',
+          uri: null,
+          enabled: true,
+          menuSort: 1,
+          parentId: 'doc',
+          caseCount: 0,
+        },
+        children: [],
+      },
+      {
+        item: {
+          menuId: 'docFormValidate',
+          isLeaf: true,
+          menuName: '欄位檢核',
+          route: '/doc/doc-form-validate',
+          uri: null,
+          enabled: true,
+          menuSort: 1,
+          parentId: 'doc',
+          caseCount: 0,
+        },
+        children: [],
+      },
+      {
+        item: {
+          menuId: 'docAddGlobal',
+          isLeaf: true,
+          menuName: '共用方法建立與使用',
+          route: '/doc/doc-add-global',
+          uri: null,
+          enabled: true,
+          menuSort: 1,
+          parentId: 'doc',
+          caseCount: 0,
+        },
+        children: [],
+      },
+      {
+        item: {
+          menuId: 'docModalAndNotification',
+          isLeaf: true,
+          menuName: '彈窗、通知提醒框使用',
+          route: '/doc/doc-modal-and-notification',
+          uri: null,
+          enabled: true,
+          menuSort: 1,
+          parentId: 'doc',
+          caseCount: 0,
+        },
+        children: [],
+      },
+      {
+        item: {
+          menuId: 'docApi',
+          isLeaf: true,
+          menuName: '宣告及呼叫API',
+          route: '/doc/doc-api',
+          uri: null,
+          enabled: true,
+          menuSort: 1,
+          parentId: 'doc',
+          caseCount: 0,
+        },
+        children: [],
+      },
+      {
+        item: {
+          menuId: 'docUser',
+          isLeaf: true,
+          menuName: '會員機制',
+          route: '/doc/doc-user',
+          uri: null,
+          enabled: true,
+          menuSort: 1,
+          parentId: 'doc',
+          caseCount: 0,
+        },
+        children: [],
+      },
+    ],
+  },
 ])
-
-// 預設開啟的menu 項目
-const openKeys = ref(['comp'])
 
 function toMenuItem(node) {
   const { item, children } = node
@@ -257,54 +458,53 @@ const menuItems = computed(() => {
 
 const autoActionMenu = () => {
   // 尋找 目前路徑 對應的 menu list
-  const filterCurrentPage = getFlatMenuList(menuItems.value).find(i => {
-    return $router.currentRoute.value.path.includes(i.route)
+  const flatMenuListArr = getFlatMenuList(menuItems.value)
+  const filterCurrentPage = flatMenuListArr.find(i => {
+    const iArr: string[] = Array.from<string>(i.route.split('/')).filter(el => el) // 每一組陣列
+    const routerArr: string[] = Array.from<string>($router.currentRoute.value.fullPath.split('/')).filter(el => el) // 目前router
+    // 判斷 iArr 全包含在 routerArr 中
+    return i.route && iArr.every(i => routerArr.includes(i))
   })
-
+  // 作用中的 menu
+  sideMenuState.value.selectedKeys = [filterCurrentPage.key]
   // 將 目前主題 加入 openKeys
-  openKeys.value = [filterCurrentPage.parentId]
+  sideMenuState.value.openKeys = [filterCurrentPage.parentId]
 }
 
-onMounted(() => {
-  autoActionMenu()
-})
+function toggleCollapsed() {
+  sideMenuState.value.collapsed = !sideMenuState.value.collapsed
+  if (!sideMenuState.value.collapsed) {
+    autoActionMenu()
+  }
+}
+
+/**
+ * 監聽
+ */
+watch(
+  () => $route,
+  () => {
+    autoActionMenu()
+  },
+  {
+    immediate: true,
+    deep: true,
+  },
+)
 </script>
 <template>
   <div class="h-100">
     <LayoutHeader />
     <Loading />
-    <div id="components-layout-demo-fixed-sider" class="d-flex" :class="{ collapsed: collapsed }">
+    <div id="components-layout-demo-fixed-sider" class="d-flex" :class="{ collapsed: sideMenuState.collapsed }">
       <div class="layout__sideWrap">
         <FblSideMenu
-          :collapsed="collapsed"
+          :propData="sideMenuState"
           :title="title"
           :items="menuItems"
-          :openKeys="openKeys"
-          @update:openKeys="openKeys = $event"
-          @update:collapsed="collapsed = !collapsed"
-        >
-          <!-- 主選單 -->
-          <template v-slot:renderer="slotProp">
-            <div class="sideMenu__titleWrap justify-content-between">
-              <span class="sideMenu__title">{{ slotProp.data.title }}</span>
-              <down-outlined :rotate="openKeys.includes(slotProp.data.key) ? 180 : 0" />
-            </div>
-          </template>
-          <!-- 次選單 -->
-          <template v-slot:subrenderer="slotProp">
-            <div class="sideMenu__titleWrap">
-              <a-badge :dot="!!slotProp.data.caseCount && collapsed">
-                <snippets-outlined class="menu-icon__color" />
-              </a-badge>
-              <span class="sideMenu__title">{{ slotProp.data.title }}</span>
-              <a-badge
-                v-if="slotProp.data.caseCount && !collapsed"
-                class="sideMenu__badge ms-auto"
-                :count="slotProp.data.caseCount"
-              />
-            </div>
-          </template>
-        </FblSideMenu>
+          @update:openKeys="sideMenuState.openKeys = $event"
+          @update:collapsed="toggleCollapsed"
+        />
       </div>
       <div class="main__content">
         <LayoutBreadcrumb />
@@ -342,31 +542,30 @@ onMounted(() => {
       nth($COLOR-MAIN-BG-LINEAR, 3) 100%
     )
     0% 0% no-repeat padding-box;
+  padding-bottom: 20px;
   .sideMenu__titleWrap {
     display: flex;
-    align-items: center;
+    align-items: start;
     :deep(.ant-badge) {
-      margin: 1px;
+      margin: 1px 5px 1px 1px;
     }
   }
 
   .sideMenu__title {
     font-size: 16px;
+    white-space: break-spaces;
   }
 }
 
 $container__margin__y: 7px;
 .main__content {
-  // width: calc(100% - var(--fixed-sider-W) - ($container__margin__y * 2));
-  // min-height: calc(100% - ($container__margin__y * 2));
-  // margin: $container__margin__y;
   width: calc(100% - var(--fixed-sider-W));
   background: #fff;
   overflow: auto;
-  // border: 1px solid $COLOR-GRAY2;
   height: calc(100vh - #{$MAIN-HEADER-H}px);
   display: flex;
   flex-direction: column;
+  scroll-behavior: smooth;
 }
 
 :deep(.page__header__tabBar) {

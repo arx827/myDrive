@@ -3,8 +3,6 @@
   "include": ["vite.config.*", "vitest.config.*", "cypress.config.*", "playwright.config.*"],
   "compilerOptions": {
     "composite": true,
-    // "types": ["vite-svg-loader", "vite/client"],
-    // "types": ["node"],
   },
   "files": [
     // "env.d.ts",

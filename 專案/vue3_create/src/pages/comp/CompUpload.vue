@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref, getCurrentInstance } from 'vue'
 
-import UploadFile from '@plugins/uploadFile/UploadFile'
+import UploadFile from '@/plugins/uploadFile'
 
 const {
   proxy: { $notification },

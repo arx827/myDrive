@@ -68,7 +68,7 @@
   }
 }
 
-// 共用 警告按鈕
+// 共用 灰按鈕
 .btn__gray {
   &, &:focus {
     background-color: $COLOR-GRAY3;
@@ -94,6 +94,7 @@
   cursor: pointer;
   display: flex;
   align-items: center;
+  justify-content: center;
   transition: all .3s ease-in-out;
   margin: 5px;
   @include btnCreate()

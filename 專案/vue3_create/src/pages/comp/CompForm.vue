@@ -12,7 +12,7 @@ const form = ref({
   rate: 2,
   select: undefined,
   selectMultiple: [],
-  slider: 10,
+  slider: 70,
   switch: false,
   textarea: undefined,
   timePicker: '',
@@ -40,9 +40,7 @@ const rulesRef = ref({
     },
   ],
 })
-const { validate, validateInfos, resetFields } = useForm(form, rulesRef, {
-  onValidate: (...args) => console.log(...args),
-})
+const { validate, validateInfos, resetFields } = useForm(form, rulesRef)
 
 /**
  * Event
@@ -51,7 +49,7 @@ const { validate, validateInfos, resetFields } = useForm(form, rulesRef, {
 const handleSearch = () => {
   validate()
     .then(() => {
-      console.log(toRaw(form))
+      console.log(toRaw(form.value))
     })
     .catch(err => {
       console.log('error', err)
@@ -73,7 +71,7 @@ const resetSearch = () => {
 <template>
   <div class="page__container flex-fill">
     <div class="container__wrap" ref="formEl">
-      <a-form :labelWrap="true" :hideRequiredMark="true" :colon="false" :noStyle="true" :labelCol="{ span: 7 }">
+      <a-form :labelWrap="true" :colon="false" :noStyle="true" :labelCol="{ span: 7 }">
         <a-row :gutter="12">
           <!-- 文字輸入 -->
           <a-col :span="24" :md="12" :xl="8">
@@ -255,27 +253,52 @@ const resetSearch = () => {
         </a-row>
       </a-form>
 
-      <div class="d-flex justify-content-end">
-        <button class="btn__main" theme="primary" danger>按鈕</button>
-        <button class="btn__main" theme="light" danger>按鈕</button>
-        <button class="btn__main" theme="dashed" danger>按鈕</button>
-        <button class="btn__main" theme="text" danger>按鈕</button>
-        <button class="btn__main" theme="link" danger>按鈕</button>
+      <div class="d-block d-md-flex justify-content-end row row-cols-auto">
+        <div class="col">
+          <button class="btn__main btn-demo" theme="primary" danger>按鈕</button>
+        </div>
+        <div class="col">
+          <button class="btn__main btn-demo" theme="light" danger>按鈕</button>
+        </div>
+        <div class="col">
+          <button class="btn__main btn-demo" theme="dashed" danger>按鈕</button>
+        </div>
+        <div class="col">
+          <button class="btn__main btn-demo" theme="text" danger>按鈕</button>
+        </div>
+        <div class="col">
+          <button class="btn__main btn-demo" theme="link" danger>按鈕</button>
+        </div>
       </div>
 
-      <div class="d-flex justify-content-end">
-        <button class="btn__main" theme="primary">按鈕</button>
-        <button class="btn__main" theme="light">按鈕</button>
-        <button class="btn__main" theme="dashed">按鈕</button>
-        <button class="btn__main" theme="text">按鈕</button>
-        <button class="btn__main" theme="link">按鈕</button>
+      <div class="d-block d-md-flex justify-content-end row row-cols-auto">
+        <div class="col">
+          <button class="btn__main btn-demo" theme="primary">按鈕</button>
+        </div>
+        <div class="col">
+          <button class="btn__main btn-demo" theme="light">按鈕</button>
+        </div>
+        <div class="col">
+          <button class="btn__main btn-demo" theme="dashed">按鈕</button>
+        </div>
+        <div class="col">
+          <button class="btn__main btn-demo" theme="text">按鈕</button>
+        </div>
+        <div class="col">
+          <button class="btn__main btn-demo" theme="link">按鈕</button>
+        </div>
       </div>
-
       <a-divider />
 
-      <div class="d-flex justify-content-end">
-        <button class="btn__main" theme="light" @click="resetSearch">清除</button>
-        <button class="btn__main" theme="primary" @click="handleSearch"><SearchOutlined class="me-1" />查詢</button>
+      <div class="d-block d-md-flex justify-content-end row row-cols-auto">
+        <div class="col">
+          <button class="btn__main btn-demo" theme="light" @click="resetSearch">清除</button>
+        </div>
+        <div class="col">
+          <button class="btn__main btn-demo" theme="primary" @click="handleSearch">
+            <SearchOutlined class="me-1" />查詢
+          </button>
+        </div>
       </div>
     </div>
   </div>
@@ -284,5 +307,8 @@ const resetSearch = () => {
 <style scoped lang="scss">
 .slider__input {
   width: 50px;
+}
+.btn-demo {
+  width: calc(100% - 10px);
 }
 </style>

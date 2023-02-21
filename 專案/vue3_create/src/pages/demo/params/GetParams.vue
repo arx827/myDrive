@@ -34,7 +34,7 @@ const resetSearch = () => {
 <template>
   <div class="page__container flex-fill">
     <div class="container__wrap">
-      <h4>結果頁</h4>
+      <h4>查詢結果頁</h4>
       <div class="section__container">
         <p>傳送來源：{{ $query?.policyNo ? 'Query' : $params?.policyNo ? 'Params' : '' }}</p>
         <p v-if="$query?.policyNo">

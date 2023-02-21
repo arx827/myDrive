@@ -1,10 +1,13 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { ref } from 'vue'
+const footerCopyright = ref(
+  '建議瀏覽器版本：最新版本chrome、Firefox、Safari、Edge © Fubon Life Insurance Co.Ltd. All Rights Reserved',
+)
+</script>
 <template>
   <footer class="main__footer d-flex justify-content-center align-items-center">
     <p class="footer__copyright">
-      <span
-        >建議瀏覽器版本：最新版本chrome、Firefox、Safari、Edge © Fubon Life Insurance Co.Ltd. All Rights Reserved</span
-      >
+      <span>{{ footerCopyright }}</span>
     </p>
   </footer>
 </template>

@@ -1,17 +1,11 @@
 import { defineConfig, loadEnv, type JsonOptions, splitVendorChunkPlugin } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import Components from 'unplugin-vue-components/vite'
-import AutoImport from 'unplugin-auto-import/vite'
 import { AntDesignVueResolver } from 'unplugin-vue-components/resolvers'
 import { createHtmlPlugin } from 'vite-plugin-html'
 import svgLoader from 'vite-svg-loader'
 
-// 如果編輯器提示 path 模塊找不到，則可以安裝一下 @types/node -> npm i @types/node -D
-// import path, { resolve } from "path";
 import { resolve } from 'path'
-
-// const IS_PROD = ['production', 'prod'].includes(process.env.NODE_ENV);
-// const IS_UAT = ['uat', 'ut'].includes(process.env.NODE_ENV);
 
 function pathResolve(dir: string) {
   return resolve(__dirname, '.', dir)
@@ -24,12 +18,9 @@ export default defineConfig(({ mode }) => {
   const IS_PROD = ['production', 'prod', 'uat'].includes(mode)
 
   return {
-    // publicDir: env.VITE_APP_PUBLIC_PATH || false,
     build: {
       outDir: `dist/${mode}`,
       assetsDir: 'static',
-      // sourcemap: !IS_PROD,
-      // copyPublicDir: true,
       rollupOptions: {
         output: {
           assetFileNames: assetInfo => {
@@ -57,7 +48,6 @@ export default defineConfig(({ mode }) => {
       vue(),
       Components({
         // 從 `./src/components/` 路徑查找
-        // extensions: ['vue'],
         resolvers: [
           // ant design vue 按需載入
           AntDesignVueResolver({
@@ -70,10 +60,6 @@ export default defineConfig(({ mode }) => {
         exclude: [/[/]node_modules[/]/, /[/].git[/]/, /[/].nuxt[/]/],
         dts: 'src/auto-components.d.ts',
       }),
-      // AutoImport({
-      //   imports: ['vue', 'vue-router'],
-      //   dts: 'src/auto-import.d.ts',
-      // }),
       createHtmlPlugin({
         inject: {
           data: {
@@ -114,7 +100,6 @@ export default defineConfig(({ mode }) => {
           `,
         },
         less: {
-          // lessOptions: {
           modifyVars: {
             // https://github.com/vueComponent/ant-design-vue/blob/master/components/style/themes/default.less
             'border-radius-base': '4px',
@@ -123,18 +108,18 @@ export default defineConfig(({ mode }) => {
             'table-row-hover-bg': '#E6F7FF',
             'table-border-radius-base': '0px',
 
-            // 'primary-color': '#23C4A8',
-            // 'font-size-base': '16px',
-            // 'text-color': '#000000',
-            // 'btn-font-size': '16px',
-            // 'btn-height-base': '40px',
+            // menu
+            'menu-dark-bg': '#30ACB3',
+            'menu-dark-submenu-bg': '#02829B',
+            'menu-dark-inline-submenu-bg': 'transparent',
+            'menu-dark-item-active-bg': '#02829B',
 
-            // 'pagination-item-bg-active': '#999999',
-            // 'form-item-margin-bottom': '15px',
-            // 'input-border-color': '#EBEBEB',
+            // table
+            'table-header-sort-bg': '#02829B',
+            'table-body-selected-sort-bg': '#02829B',
+            'table-header-bg-sm': '#23C4A8',
           },
           javascriptEnabled: true,
-          // },
         },
       },
       devSourcemap: true,
@@ -144,7 +129,7 @@ export default defineConfig(({ mode }) => {
       proxy: {
         '^/api': {
           port: 8200,
-          target: 'http://sdtwlvx00404:8083/iams-api',
+          target: env.VITE_APP_API_BASE_URL,
           ws: true,
           changOrigin: true,
         },

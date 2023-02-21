@@ -1,47 +1,38 @@
 <script setup lang="ts">
-// import { FblColumn } from '@shared/data-grid/model'
-import { defineProps, computed, watch, ref, nextTick, defineEmits } from 'vue'
+import { computed, watch, ref, nextTick, useAttrs, useSlots } from 'vue'
+// import { uuid } from 'vue-uuid'
 
-const grid = defineProps(['dataSource', 'columns', 'pagination', 'bordered', 'size', 'isSelect', 'test', 'scroll'])
-const $emit = defineEmits(['inspectClick', 'tableChange', 'onSelect', 'batch', 'update:test'])
+const grid = defineProps(['isSelect', 'selector'])
+const $emit = defineEmits(['inspectClick', 'tableChange', 'onSelectChange', 'batch', 'update:selector'])
+
+const $attrs = useAttrs()
+const $slots = useSlots()
 
 const rowSelectoion = {
   onChange: (selectedRowKeys, selectedRows) => {
-    console.log(`selectedRowKeys: ${selectedRowKeys}`, 'selectedRows: ', selectedRows)
+    // 觸發父層 事件
+    $emit('onSelectChange', selectedRows)
   },
   onSelect: (record, selected, selectedRows) => {
-    // console.log('onselect', record, selected, selectedRows)
-    $emit('update:test', selectedRows)
+    // 更新父層 變數
+    $emit('update:selector', selectedRows)
   },
   onSelectAll: (selected, selectedRows, changeRows) => {
-    // console.log('onSelectAll', selected, selectedRows, changeRows)
-    $emit('update:test', selectedRows, changeRows)
+    // 更新父層 變數
+    $emit('update:selector', selectedRows, changeRows)
   },
 }
 
 const renderColumns = computed(() => {
-  return grid.columns.filter(c => !c.hidden)
+  return ($attrs.columns as any).filter(c => !c.hidden)
 })
 
-const plainTextOf = ({ record, column }) => {
+function plainTextOf({ record, column }): string {
   if (column.formatter) {
     return column.formatter(record)
   }
-  const props = column.dataIndex.toString().split('.')
-  let retVal = record[props[0]]
-  props.forEach((p, i) => {
-    if (i > 0) {
-      if (retVal !== undefined && retVal !== null) {
-        retVal = retVal[props[i]]
-      }
-    }
-  })
-  return retVal
+  return (record as any)[column.dataIndex]
 }
-
-// const widthOf = column => {
-//   return `${column.width}`
-// }
 
 /**
  * Event
@@ -61,18 +52,30 @@ const tableRef = ref(null)
  * 監聽
  */
 watch(
-  () => grid.columns,
+  () => $attrs.columns,
   () => {
     nextTick(() => {
-      // console.log(tableRef.value)
       if (tableRef.value) {
         const nativeTable = tableRef.value.$el
+        const allHeader = nativeTable.querySelectorAll(`.ant-table-thead th`)
         renderColumns.value.forEach((c, idx) => {
-          const head: any = nativeTable.querySelector(`.ant-table-thead th[colstart="${idx}"]`)
+          if (grid.isSelect) {
+            idx += 1
+          }
+          const head: any = allHeader[idx]
           if (c.width) {
-            head.style.minWidth = `${c.minWidth}`
+            head.style.width = `${c.width}px`
+            head.style.minWidth = `${c.width}px`
           } else {
-            head.style.minWidth = undefined
+            head.style.width = ''
+          }
+
+          if (c.ellipsis && c.width) {
+            if (c.width) {
+              head.style.maxWidth = `${c.width}px`
+            } else {
+              head.style.maxWidth = '100px'
+            }
           }
         })
       }
@@ -85,30 +88,35 @@ watch(
   <div>
     <a-table
       ref="tableRef"
-      :dataSource="dataSource"
-      :columns="columns"
-      :pagination="pagination"
-      :bordered="bordered"
       :rowClassName="(record, index) => (index % 2 === 1 ? 'table-striped' : null)"
-      :size="size"
-      :scroll="scroll"
       :row-selection="grid.isSelect ? rowSelectoion : null"
+      v-bind="$attrs"
       @change="handleTableChange"
     >
-      <template #headerCell="{ column: { headerTemp } }">
-        <slot :name="headerTemp"></slot>
+      <template #headerCell="scope">
+        <template v-if="scope.column.headerCellTemp">
+          <slot :name="scope.column.headerCellTemp" :scope="scope" />
+        </template>
       </template>
 
       <template #bodyCell="scope">
         <template v-if="scope.column.type === 'TEMPLATE'">
-          <slot :name="scope.column.bodyTemp" :scope="scope" />
+          <slot :name="scope.column.bodyCellTemp" :scope="scope" />
         </template>
         <template v-else-if="scope.column.type === 'PLAIN'">
-          <a class="link" v-if="scope.column.inspect" @click="handleInspectClick(scope)">{{ scope.text }}</a>
+          <a class="link" v-if="scope.column.inspect" @click="handleInspectClick(scope)">{{ plainTextOf(scope) }}</a>
           <span v-else>
             {{ plainTextOf(scope) }}
           </span>
         </template>
+      </template>
+
+      <template #title v-if="Object.keys($slots).includes('title')">
+        <slot name="title" />
+      </template>
+
+      <template #footer v-if="Object.keys($slots).includes('title')">
+        <slot name="footer" />
       </template>
     </a-table>
   </div>

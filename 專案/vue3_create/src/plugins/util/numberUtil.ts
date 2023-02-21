@@ -14,19 +14,21 @@ export class NumberService {
   /**
    *
    * @param {number} num 輸入口
+   * @param {number} decimal 小數第幾位
    * @returns {number}
    */
-  public numToPercent(num: number): number {
-    return Number(num / 100)
+  public numToPercent(num: number, decimal: number = 2): number {
+    return this.round(num * 100, decimal)
   }
 
   // 百分比轉數字
   /**
    * @param {number} num 輸入口
+   * @param {number} decimal 小數第幾位
    * @returns {number}
    */
-  public percentToNum(num: number): number {
-    return Number(num * 100)
+  public percentToNum(num: number, decimal: number = 2): number {
+    return this.round(num / 100, decimal)
   }
 
   // 將數字四捨五入到小數點後n位
@@ -37,8 +39,6 @@ export class NumberService {
    * @returns {number}
    */
   public round(num: number | string = 0, n: number = 0): number {
-    // return Math.round((num + Number.EPSILON) * Math.pow(10, n)) / Math.pow(10, n);
-    // Math.pow 調整成 exponentiation operator (指數運算子) 寫法
     return Math.round((Number(num) + Number.EPSILON) * 10 ** n) / 10 ** n || undefined
   }
 
@@ -63,9 +63,9 @@ export class NumberService {
     }
     return `${c}`
   }
+
   // 數字 移除千分位
   /**
-   *
    * @param {number | string} data 輸入口
    * @returns {number}
    */

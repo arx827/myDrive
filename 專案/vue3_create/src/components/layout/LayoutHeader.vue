@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref, getCurrentInstance } from 'vue'
 import { useRouter } from 'vue-router'
-import logoSvg from '@/assets/img/icon-fubon-logo.svg?component'
+import logoSvg from '@/assets/img/image_logo.svg?component'
 
 const router = useRouter()
 
@@ -36,7 +36,7 @@ function routerToHome() {
       <HomeOutlined class="d-flex align-items-center control__icon" @click="routerToHome" />
       <UserOutlined class="control__icon" />
       <a-dropdown overlayClassName="userDropdown">
-        <span class="cursor-pointer">B0123 陳X生</span>
+        <span class="cursor-pointer">B0123 李X文</span>
         <template #overlay>
           <a-menu>
             <a-menu-item @click="logout">登出</a-menu-item>

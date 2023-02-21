@@ -4,8 +4,13 @@
   "editor.codeActionsOnSave": {
     "source.fixAll": true,
     "source.fixAll.eslint": true, // 存檔自動解決lint問題
-    "source.fixAll.stylelint": true,
   },
+  /*
+  * 為每個段落顯示不同顏色的縮進
+  */
+  "editor.bracketPairColorization.enabled": true,
+  "editor.guides.bracketPairs":"active",
+  
   // eslint 支援 vue
   "eslint.validate": [
     "vue",
@@ -17,14 +22,6 @@
     // "sass",
     // "scss",
   ],
-  // "stylelint.validate": [
-  //   "css",
-  //   "less",
-  //   "postcss",
-  //   "sass",
-  //   "scss",
-  //   "vue",
-  // ],
   "eslint.alwaysShowStatus": true,
   "eslint.options": {
     "extensions": [
@@ -49,12 +46,15 @@
   //   "editor.defaultFormatter": "Vue.volar"
   // },
   "workbench.iconTheme": "material-icon-theme",
+  "workbench.editor.enablePreview": false,
   "vue3snippets.enable-compile-vue-file-on-did-save-code": false,
   // "files.autoSave": "onFocusChange",
   // "files.autoSave": "afterDelay",
   "files.autoSave": "off",
   "files.eol": "\n",
-
+  "files.associations": {
+    "*.vue": "vue"
+  },
   /*
   * Emmet
   */
@@ -97,4 +97,17 @@
   */
   "npm.scriptExplorerAction": "run",
   "npm.packageManager": "npm",
+
+  /*
+  * Volar
+  */
+  "volar.autoCompleteRefs": true,
+  "volar.codeLens.scriptSetupTools": true,
+  "volar.icon.splitEditors": true,
+
+  /*
+  * Git
+  */
+  "diffEditor.ignoreTrimWhitespace": false,
+  "git.autofetch": true,
 }

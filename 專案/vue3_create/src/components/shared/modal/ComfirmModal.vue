@@ -1,6 +1,5 @@
 <script setup lang="ts">
-import { onMounted, defineProps, defineEmits } from 'vue'
-// import { onMounted, defineProps } from 'vue'
+import { onMounted } from 'vue'
 const $props = defineProps({
   title: {
     type: String,
@@ -12,11 +11,6 @@ const $props = defineProps({
   },
 })
 const $emit = defineEmits(['update:visible', 'confirmModal', 'closeModal'])
-// const $slots = useSlots()
-// const $attrs = useAttrs()
-
-// const renderSlotArr = computed(() => Object.keys($slots))
-// const renderAttrArr = computed(() => Object.keys($attrs))
 
 const closeModal = () => {
   $emit('update:visible', false)
@@ -37,9 +31,6 @@ const handleCancel = () => {
  * Hooks
  */
 onMounted(() => {
-  // console.log('prop =>', $props)
-  // console.log('slot =>', $slots)
-  // console.log('attr =>', $attrs)
   // console.log(grid.columns)
   // console.log(renderArr)
 })

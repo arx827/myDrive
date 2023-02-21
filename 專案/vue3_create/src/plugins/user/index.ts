@@ -80,7 +80,7 @@ export class UserService {
     if (clearToken) {
       // 強制登出API, 後端銷毀token用
       await axios
-        .post(`${process.env.VUE_APP_API_BASE_URL}/api/oss-auth/logout`, {
+        .post(`${process.env.VITE_APP_API_BASE_URL}/api/oss-auth/logout`, {
           headers: {
             Authorization: `Bearer ${this.token}`,
           },

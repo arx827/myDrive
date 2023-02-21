@@ -1,14 +1,11 @@
 <script setup lang="ts">
-import { defineProps, defineEmits, computed, watch, ref } from 'vue'
-import type { PropType } from 'vue'
+import { computed, watch, ref } from 'vue'
 import { useRouter } from 'vue-router'
-import type { Key } from 'ant-design-vue/es/_util/type'
 
 const props = defineProps({
-  collapsed: Boolean,
+  propData: Object,
   title: String,
   items: Object,
-  openKeys: Array as PropType<Key[]>,
 })
 
 const $emit = defineEmits(['update:collapsed', 'update:openKeys'])
@@ -18,6 +15,10 @@ const router = useRouter()
 // 扁平化 items
 const renderItems = computed(() => {
   return props.items.map(m => toRenderItem(m, 1))
+})
+
+const mode = computed(() => {
+  return props.propData.collapsed ? 'vertical' : 'inline'
 })
 
 let currentOpenMenuKey = ref([])
@@ -60,14 +61,14 @@ function pushKeyMap(item) {
 // 主題展開收合
 function onOpenChange(twoMenuKeys) {
   currentOpenMenuKey.value = twoMenuKeys
-  $emit('update:openKeys', twoMenuKeys)
+  if (!props.propData.collapsed) {
+    $emit('update:openKeys', twoMenuKeys)
+  }
 }
 function itemClick(e) {
   const renderItem = keyMap[e.key]
   if (renderItem.route) {
-    if (renderItem.route) {
-      router.push(renderItem.route)
-    }
+    router.push(renderItem.route)
     if (renderItem.data.parentId) {
       $emit('update:openKeys', [renderItem.data.parentId])
     }
@@ -89,204 +90,102 @@ watch(
     deep: true,
   },
 )
-// watch(
-//   () => currentOpenMenuKey,
-//   nV => console.log(nV.value),
-//   { deep: true },
-// )
 </script>
 
 <template>
-  <div :class="{ collapsed: props.collapsed }">
-    <div class="layout-sider-logo d-flex align-items-center">
+  <div :class="{ collapsed: propData.collapsed }">
+    <div class="layout-sider-logoWrap d-flex align-items-center">
       <span class="layout-sider-title">{{ props.title }}</span>
       <div class="d-flex align-items-center">
         <a-divider class="layout-sider-logo__divider" type="vertical" />
         <button class="d-flex collapsedBtn" @click="$emit('update:collapsed')">
-          <menu-unfold-outlined v-if="props.collapsed" />
-          <menu-fold-outlined v-else />
+          <MenuUnfoldOutlined v-if="propData.collapsed" />
+          <MenuFoldOutlined v-else />
         </button>
       </div>
     </div>
-    <a-menu :open-keys="openKeys" mode="inline" @click="itemClick($event)" @openChange="onOpenChange">
-      <template v-for="item in items">
-        <a-menu-item v-if="!item.children" :key="item.key">
-          <slot :name="'renderer'" :data="item" />
-        </a-menu-item>
-        <FblSubMenu v-else :menu-info="item" :key="item.menuId">
-          <template v-slot:renderer="slotProp">
-            <slot :name="'renderer'" :data="slotProp.data" />
-          </template>
-          <template v-slot:subrenderer="slotProp">
-            <slot :name="'subrenderer'" :data="slotProp.data" />
-          </template>
-        </FblSubMenu>
+    <a-menu
+      :mode="mode"
+      :theme="propData.theme || 'light'"
+      :openKeys="propData.openKeys"
+      :selectedKeys="propData.selectedKeys"
+      @click="itemClick($event)"
+      @openChange="onOpenChange"
+    >
+      <template v-for="item in items" :key="item.menuId">
+        <template v-if="!(item.children && item.children?.length > 0)">
+          <!-- <div class="mainMenuClass"> -->
+          <MenuItem :menuInfo="item" />
+          <!-- </div> -->
+        </template>
+        <template v-else>
+          <FblSubMenu :key="item.key" :menu-info="item" />
+        </template>
       </template>
     </a-menu>
   </div>
 </template>
 
 <style lang="scss" scoped>
-.layout-sider-logo {
+.layout-sider-logoWrap {
   padding: 2px 5px 2px 15px;
   font-size: 20px;
   font-weight: 600;
   color: $COLOR-WHITE;
   justify-content: space-between;
-  .layout-sider-title {
-    line-height: 1.5;
-    transition: all 2ms;
-  }
+  border-bottom: 0.5px solid $COLOR-WHITE;
   .layout-sider-logo__divider {
     height: 30px;
     margin: 0 5px 0 11px;
     border-left: 1px solid #e8e8e8;
   }
-}
-
-:deep(.ant-menu) {
-  background: transparent;
-  // &:not(.ant-menu-horizontal) {
-  //   .ant-menu-item-selected {
-  //     background-color: initial;
-  //   }
-  // }
-  .ant-menu-item-selected {
-    background-color: $COLOR-MAIN9;
+  // 收合按鈕
+  .collapsedBtn {
+    border: 0;
+    background: transparent;
+    padding: 10px;
   }
-}
-
-:deep(.ant-menu-inline, .ant-menu-vertical, .ant-menu-vertical-left) {
-  border-right: 0;
-
-  .sideMenu__title {
-    margin-left: 0;
-  }
-}
-
-:deep(.ant-menu-item) {
-  height: auto;
 }
 
 :deep(.ant-menu-root) {
-  border: 0;
-  border-top: 0.5px solid $COLOR-WHITE;
-  > .ant-menu-item {
-    padding: 0 !important;
-    margin: 0 !important;
+  .ant-menu-item {
+    height: auto;
+    align-items: baseline;
+    line-height: 1.5;
+    padding: 10px 0;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    padding-right: 10px;
   }
-
-  .ant-menu-submenu {
-    &.ant-menu-submenu-open + .ant-menu-submenu {
-      border-top: 0.5px solid $COLOR-WHITE;
-    }
-    > .ant-menu-submenu-title {
-      width: 100%;
-      height: auto;
-      line-height: initial;
-      margin: 0;
-      padding: 3px 10px 3px 3px;
-      color: $COLOR-WHITE;
-      display: flex;
-      border-bottom: 0.5px solid $COLOR-WHITE;
-
-      .ant-menu-submenu-arrow {
-        display: none;
-      }
-    }
-  }
-}
-
-// 作用中的subMenu
-:deep(.ant-menu-sub) {
-  &.ant-menu-inline {
-    padding-top: 8px;
-    padding-bottom: 8px;
-
-    > .ant-menu-item {
-      width: 100%;
-      height: auto;
-      color: $COLOR-WHITE;
-      line-height: initial;
-      margin: 0;
-      padding: 0 !important;
-
-      .ant-menu-title-content {
-        padding: 7px 10px;
-      }
-
-      .sideMenu__title {
-        margin-left: 15px;
-      }
-
-      .sideMenu__badge {
-        .ant-badge-count {
-          background: transparent;
-          min-width: 3em;
-        }
-      }
-    }
-  }
-}
-
-:deep(.mainMenuClass) {
-  .ant-menu-submenu-title {
-    padding-left: 24px !important;
-  }
-}
-:deep(.subMenuClass) {
   .ant-menu-title-content {
-    padding-left: 34px !important;
+    white-space: break-spaces;
   }
 }
 
-// 收合按鈕
-.collapsedBtn {
-  border: 0;
-  background: transparent;
-  padding: 10px;
-}
-
-// 收合樣式
 .collapsed {
-  .layout-sider-logo {
+  .layout-sider-logoWrap {
     padding: 2px 14px;
     justify-content: center;
-
     .layout-sider-title,
-    .anticon-sync,
     .layout-sider-logo__divider {
       display: none;
     }
   }
-  .ant-menu-submenu-title {
-    padding-left: 3px !important;
-    > .ant-menu-title-content {
-      display: flex;
-      justify-content: center;
-    }
-  }
-  :deep(.mainMenuClass) {
-    .ant-menu-submenu-title {
-      padding-left: 10px !important;
-    }
-    > .ant-menu-submenu-title {
-      .sideMenu__titleWrap {
-        justify-content: center;
+  :deep(.ant-menu-inline-collapsed) {
+    width: auto;
+
+    .ant-menu-item {
+      .ant-menu-title-content {
+        display: none;
       }
     }
-  }
-  :deep(.subMenuClass) {
-    justify-content: center;
-    .ant-menu-title-content {
-      padding-left: 0 !important;
-      padding-right: 0 !important;
-    }
-    .sideMenu__titleWrap {
-      justify-content: center;
-    }
-    .sideMenu__title {
-      display: none;
+    .ant-menu-submenu {
+      .ant-menu-submenu-title {
+        .ant-menu-title-content {
+          display: none;
+        }
+      }
     }
   }
 }

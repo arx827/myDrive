@@ -6,12 +6,9 @@ import router from '@/router'
 import { useLoadingStore } from '@/stores'
 const store = useLoadingStore()
 
-// import type UserService from '@/plugins/user'
-
 const {
   proxy: { $user, $authApi },
 } = getCurrentInstance()
-
 const titleName = ref(import.meta.env.VITE_APP_TITLE)
 const isLoading = ref(false)
 
@@ -41,7 +38,7 @@ const disabled = computed(() => {
 function login(submitData: formType) {
   store.SET_LOADING(true)
   $authApi
-    .crowdLdapLoginUsingPOST(submitData)
+    .crowdLoginUsingPOST(submitData)
     .then(resp => {
       if (resp.status === 200) {
         $user.signIn(resp.data.jwtTokenPair.accessToken)
@@ -77,10 +74,6 @@ function onSubmit() {
  */
 onMounted(() => {
   resetFields()
-
-  // TEST:
-  form.value.username = 'B1060'
-  form.value.password = 'Aa123456'
 })
 </script>
 

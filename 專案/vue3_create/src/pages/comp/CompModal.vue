@@ -62,15 +62,6 @@ const warningMessage = () => {
   })
 }
 
-// const tryAsync = () => {
-//   validate().then(() => {
-//     $modal.info({
-//       title: '非同步關閉',
-//       content: '此功能無授權任一頁籤權限',
-//     })
-//   })
-// }
-
 const openModal = () => {
   customModal.value.visible = !customModal.value.visible
 }
@@ -143,10 +134,6 @@ const destroyModal = () => {
  * Hook
  */
 onMounted(() => {
-  // Test:
-  // customModal.value.visible = true
-  // customModal.value.center = false
-  // customModal.value.top = '20px'
   customModal.value.footer = null
 })
 </script>
