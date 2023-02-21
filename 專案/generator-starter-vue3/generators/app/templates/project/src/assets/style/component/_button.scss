@@ -1,0 +1,253 @@
+// ------------------- 共用 ------------------- //
+// 共用 主按鈕
+.btn__info {
+  &, &:focus {
+    background-color: $COLOR-MAIN5;
+    color: $COLOR-WHITE;
+    border-color: $COLOR-MAIN5;
+  }
+  &:hover {
+    background-color: lighten($COLOR-MAIN5, 50);
+    color: $COLOR-MAIN5;
+    border-color: $COLOR-MAIN5;
+  }
+}
+
+.btn__primary {
+  &, &:focus {
+    background-color: $COLOR-MAIN1;
+    color: $COLOR-WHITE;
+    border-color: $COLOR-MAIN1;
+  }
+  &:hover {
+    background-color: lighten($COLOR-MAIN1, 50);
+    color: $COLOR-MAIN1;
+    border-color: $COLOR-MAIN1;
+  }
+}
+
+// 共用 次按鈕
+.btn__secondary {
+  &, &:focus {
+    background-color: $COLOR-MAIN8;
+    color: $COLOR-WHITE;
+    border-color: $COLOR-MAIN8;
+  }
+  &:hover {
+    background-color: lighten($COLOR-MAIN8, 50);
+    color: $COLOR-MAIN8;
+    border-color: $COLOR-MAIN8;
+  }
+}
+
+// 共用 Error按鈕
+.btn__danger {
+  &, &:focus {
+    background-color: $COLOR-MAIN6;
+    color: $COLOR-WHITE;
+    border-color: $COLOR-MAIN6;
+  }
+  &:hover {
+    background-color: lighten($COLOR-MAIN6, 50);
+    color: $COLOR-MAIN6;
+    border-color: $COLOR-MAIN6;
+  }
+}
+
+// 共用 警告按鈕
+.btn__warning {
+  &, &:focus {
+    background-color: $COLOR-MAIN10;
+    color: $COLOR-WHITE;
+    border-color: $COLOR-MAIN10;
+  }
+  &:hover {
+    background-color: lighten($COLOR-MAIN10, 50);
+    color: $COLOR-MAIN10;
+    border-color: $COLOR-MAIN10;
+  }
+}
+
+// 共用 灰按鈕
+.btn__gray {
+  &, &:focus {
+    background-color: $COLOR-GRAY3;
+    color: $COLOR-GRAY6;
+    border-color: $COLOR-GRAY3;
+  }
+  &:hover {
+    background-color: lighten($COLOR-GRAY1, 50);
+    color: $COLOR-GRAY1;
+    border-color: $COLOR-GRAY1;
+  }
+}
+
+// ------------------- 一般按鈕 ------------------- //
+
+// 主要按鈕（圓角）
+.btn__main {
+  border-radius: 5px;
+  padding: 8px 50px;
+  border: 1px solid transparent;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all .3s ease-in-out;
+  margin: 5px;
+  @include btnCreate()
+}
+
+.btn__miniW {
+  padding: 8px 10px;
+}
+
+// ------------------- modal ------------------- //
+// modal
+.modal-btn__wrap {
+  .modal-btn {
+    flex: 1;
+    padding: 10px 24px;
+    border-radius: 5px;
+    border: 1px solid transparent;
+  }
+  .modal-btn__primary {
+    background-color: $COLOR-MAIN1;
+    color: $COLOR-WHITE;
+    &:hover {
+      background-color: darken($COLOR-MAIN1, 5);
+    }
+  }
+  .modal-btn__secondary {
+    background-color: $COLOR-GRAY4;
+    color: $COLOR-WHITE;
+    &:hover {
+      background-color: darken($COLOR-GRAY4, 5);
+    }
+  }
+}
+
+// ------------------- Table ------------------- //
+// 列表(table)動作icon
+.table__btn {
+  padding: 5px 15px;
+  border-radius: 4px;
+  border-width: 1px;
+  border-style: solid;
+  font-size: 12px;
+  // margin: 5px;
+  img, i{
+    width: 20px;
+    height: 20px;
+  }
+  &[disabled] {
+    cursor: not-allowed;
+    &, &:hover, &:focus, &:active {
+      color: rgba(0, 0, 0, 0.25);
+      border-color: #d9d9d9;
+      background: #f5f5f5;
+      text-shadow: none;
+      box-shadow: none;
+    }
+  }
+}
+
+// .btn__gray {
+
+// }
+
+// // 列表下一頁icon按鈕
+// .table__btn--next{
+//   padding: 0px 17px;
+//   margin-right: -17px;
+//   height: 100%;
+// }
+
+// .table__btn--single{
+//   padding: 5px 9px;
+// }
+
+// .table__btn--disabled{
+//   background-color: #CECECE;
+//   cursor: not-allowed;
+// }
+
+// // ant design model okType = danger
+// .ant-btn-danger, .ant-btn-danger:hover, .ant-btn-danger:focus{
+//   border: solid 1px #d9d9d9;
+//   background-color: rgba(0,0,0,0.04);
+//   color: #FC0000;
+//   font-size: 14px;
+// }
+
+// @mixin button_base($bg, $radius, $color, $fontSize, $borderColor) {
+//   transition: all .2s ease-in-out;
+//   background-color: $bg;
+//   border-radius: $radius;
+//   color: $color;
+//   text-align: center;
+//   border: 1px $borderColor solid;
+//   outline: 0;
+//   cursor: pointer;
+//   font-weight: 600;
+//   font-size: $fontSize;
+//   display: inline-block;
+//   > * {
+//     font-size: $fontSize;
+//   }
+//   &[disabled], &.disabled {
+//     cursor: not-allowed;
+//     background-color: #F5F5F5;
+//     border: 1px #D9D9D9 solid;
+//     color: #B7B7B7;
+//     &:hover {
+//       color: #B7B7B7;
+//       outline: 0;
+//     }
+//   }
+//   &:hover {
+//     color: $color;
+//     // outline: 3px #4CAAF566 solid;
+//   }
+// }
+
+// // 主色帶有圓角按鈕
+// .btn__radius--primary {
+//   @include button_base($BUTTON-MAIN, 50vh, #ffffff, 16px, $BUTTON-MAIN);
+//   padding: 8px 25px;
+// }
+// .btn__radius--primary--outline {
+//   @include button_base(#ffffff, 50vh, $BUTTON-MAIN, 16px, $BUTTON-MAIN);
+//   padding: 8px 25px;
+// }
+// .btn__radius--primary--bg--small {
+//   @include button_base($BUTTON-MAIN, 50vh, #ffffff, 16px, $BUTTON-MAIN);
+//   padding: 5px 24px;
+// }
+// .btn__radius--primary--outline--small {
+//   @include button_base(#ffffff, 50vh, $BUTTON-MAIN, 16px, $BUTTON-MAIN);
+//   padding: 5px 24px;
+// }
+// // 主色帶有一班圓角較小按鈕
+// .btn__radius--primary--small {
+//   @include button_base($BUTTON-MAIN, 3px, #ffffff, 14px, $BUTTON-MAIN);
+//   padding: 7px 10px;
+// }
+// // 黃色帶有一班圓角較小按鈕
+// .btn__radius--yellow--small {
+//   @include button_base(#FECE00, 3px, #000000, 14px, #FECE00);
+//   padding: 7px 10px;
+// }
+// .btn__radius--gray--outline--small {
+//   @include button_base(#ffffff, 50vh, #363636, 14px, #00000017);
+//   padding: 5px 24px;
+// }
+
+// // 頁面底部按鈕
+// .block__btns button {
+//   width: 150px;
+//   max-width: 100%;
+//   margin: 0 5px;
+// }

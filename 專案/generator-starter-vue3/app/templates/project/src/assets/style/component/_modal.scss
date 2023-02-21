@@ -1,0 +1,23 @@
+.modal__primary {
+  .modal__content__title {
+    font-size: 23px;
+    color: $COLOR-WHITE;
+  }
+  .ant-modal-header {
+    background: $COLOR-MAIN1;
+  }
+  .ant-modal-title {
+    color: $COLOR-WHITE;
+    text-align: center;
+  }
+  .ant-modal-footer {
+    padding: 15px 15px;
+  }
+}
+
+// ======================= Basic ======================= //
+.modalCustom {
+  .ant-modal-content {
+    border-radius: $BORDER-RADIUS;
+  }
+}
