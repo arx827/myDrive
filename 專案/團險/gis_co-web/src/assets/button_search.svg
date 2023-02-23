@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="14" height="14" viewBox="0 0 14 14">
+  <defs>
+    <clipPath id="clip-button_search">
+      <rect width="14" height="14"/>
+    </clipPath>
+  </defs>
+  <g id="button_search" clip-path="url(#clip-button_search)">
+    <g id="Icon_feather-search" data-name="Icon feather-search" transform="translate(-3.5 -3.5)">
+      <path id="Path_1012" data-name="Path 1012" d="M15.3,9.9A5.4,5.4,0,1,1,9.9,4.5a5.4,5.4,0,0,1,5.4,5.4Z" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+      <path id="Path_1013" data-name="Path 1013" d="M27.585,27.585l-2.61-2.61" transform="translate(-11.085 -11.085)" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+    </g>
+  </g>
+</svg>

@@ -1,0 +1,84 @@
+@import '../_varibles.scss';
+
+
+// ant design model 標題icon
+.modal__icon{
+  width: 22px;
+  height: 22px;
+  padding: 1px;
+  border-radius: 100%;
+  float: left;
+  margin-right: 10px;
+  border-radius: 50vh;
+  ~.ant-modal-confirm-content {
+    margin-left: 33px;
+  }
+}
+
+.modal__icon--delete{
+  background-image: url('../assets/image_delet.svg');
+  background-color: #E06262;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.modal__icon--alert{
+  background-image: url('../assets/image_alert_1.svg');
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.notification__success {
+  width: 250px;
+  margin-left: auto;
+  .ant-notification-close-x {
+    display: none;
+  }
+}
+
+// 上傳檔案錯誤彈窗
+.confirm__modal {
+  .ant-modal-title {
+    font-size: 16px;
+    padding-top: 3px;
+    color: #000000;
+  }
+  .ant-modal-header {
+    border: 0;
+  }
+  .ant-modal-body {
+    padding: 5px 24px;
+    color: #000000A6;
+  }
+}
+
+
+// 錯誤提示
+.alert-modal{
+  .alert__modal__title{
+    font-weight: bold;
+  }
+  .alert__modal__content{
+    font-size: 14px;
+    white-space:pre-line;
+  }
+  .alert__modal__list{
+    padding-left: 16px;
+    li{
+    font-size: 14px;
+    list-style-type: disc;
+    }
+  }
+  button{
+    height: 32px;
+   span{
+     font-size: 14px;
+   }
+ }
+}
+.password__modal {
+  .has-error .ant-form-explain{
+    color: #ED7D7D;
+    font-size: 13px !important;
+  }
+}
