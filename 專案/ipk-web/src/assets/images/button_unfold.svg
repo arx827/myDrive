@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="51" height="40" viewBox="0 0 51 40">
+  <defs>
+    <clipPath id="clip-button_unfold">
+      <rect width="51" height="40"/>
+    </clipPath>
+  </defs>
+  <g id="button_unfold" clip-path="url(#clip-button_unfold)">
+    <g id="Group_24985" data-name="Group 24985" transform="translate(-722.891 -88.91)">
+      <g id="_9068760_menu_unfold_icon" data-name="9068760_menu_unfold_icon" transform="translate(733.891 88.911)">
+        <rect id="Rectangle_7259" data-name="Rectangle 7259" width="51" height="40" transform="translate(-11)" fill="none"/>
+        <g id="Group_18312" data-name="Group 18312" transform="translate(-5)">
+          <path id="Path_13181" data-name="Path 13181" d="M8,11H20" transform="translate(2 1)" fill="none" stroke="#999" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"/>
+          <path id="Path_13182" data-name="Path 13182" d="M8,24H27.77" transform="translate(2 -4.441)" fill="none" stroke="#999" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"/>
+          <path id="Path_13183" data-name="Path 13183" d="M8,37H20" transform="translate(2 -9.883)" fill="none" stroke="#999" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"/>
+          <path id="Path_13184" data-name="Path 13184" d="M36.343,24.921l3.289-3.289-3.289-3.289" transform="translate(-9.863 -2.073)" fill="none" stroke="#999" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"/>
+        </g>
+      </g>
+    </g>
+  </g>
+</svg>

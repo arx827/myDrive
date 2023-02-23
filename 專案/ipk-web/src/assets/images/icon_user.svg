@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="20" height="25" viewBox="0 0 20 25">
+  <defs>
+    <clipPath id="clip-icon_user">
+      <rect width="20" height="25"/>
+    </clipPath>
+  </defs>
+  <g id="icon_user" clip-path="url(#clip-icon_user)">
+    <g id="Group_18421" data-name="Group 18421" transform="translate(0 1.363)">
+      <g id="user_account_people_man" data-name="user, account, people, man" transform="translate(-0.001 0)">
+        <path id="Path_1207" data-name="Path 1207" d="M22.034,16.164a.889.889,0,0,0-1.286.007.961.961,0,0,0,.007,1.328,8.534,8.534,0,0,1,2.426,6.007c0,1.149-3.187,2.817-8.182,2.817S6.818,24.654,6.818,23.5a8.536,8.536,0,0,1,2.4-5.975.961.961,0,0,0,0-1.328.889.889,0,0,0-1.286,0A10.435,10.435,0,0,0,5,23.506c0,3.05,5.152,4.7,10,4.7s10-1.646,10-4.7a10.426,10.426,0,0,0-2.966-7.342Z" transform="translate(-5 -4.565)" fill="#595959"/>
+        <path id="Path_1208" data-name="Path 1208" d="M15.575,16.147A6.573,6.573,0,1,0,9,9.573a6.574,6.574,0,0,0,6.575,6.573Zm0-11.269a4.7,4.7,0,1,1-4.7,4.7,4.7,4.7,0,0,1,4.7-4.7Z" transform="translate(-5.576 -4)" fill="#595959"/>
+      </g>
+    </g>
+  </g>
+</svg>

@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="51" height="39" viewBox="0 0 51 39">
+  <defs>
+    <clipPath id="clip-button_assets_blue">
+      <rect width="51" height="39"/>
+    </clipPath>
+  </defs>
+  <g id="button_assets_blue" clip-path="url(#clip-button_assets_blue)">
+    <g id="Component_247_2" data-name="Component 247 – 2">
+      <rect id="Rectangle_7836" data-name="Rectangle 7836" width="51" height="39" fill="none"/>
+      <g id="Group_18415" data-name="Group 18415" transform="translate(19087.621 22457.678)">
+        <path id="_8541701_chart_pie_icon" data-name="8541701_chart_pie_icon" d="M17.462,9.533H9.61l5.229,5.229a.531.531,0,0,0,.734.023,7.925,7.925,0,0,0,2.42-4.661.53.53,0,0,0-.531-.591Zm-.524-2.144A7.96,7.96,0,0,0,9.554.005.532.532,0,0,0,9,.541v7.4h7.4a.532.532,0,0,0,.536-.556Z" transform="translate(-19070.619 -22446.682)" fill="#00a59b"/>
+        <path id="_8541701_chart_pie_icon-2" data-name="8541701_chart_pie_icon" d="M7.41,9.533V1.682a.53.53,0,0,0-.59-.531A7.935,7.935,0,0,0,0,9.281a8.039,8.039,0,0,0,8.037,7.664,7.88,7.88,0,0,0,4.476-1.457.526.526,0,0,0,.052-.8Z" transform="translate(-19070.619 -22446.809)" fill="#0093c1"/>
+      </g>
+    </g>
+  </g>
+</svg>

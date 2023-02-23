@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="109" height="21" viewBox="0 0 109 21">
+  <defs>
+    <clipPath id="clip-image_InvestLogo">
+      <rect width="109" height="21"/>
+    </clipPath>
+  </defs>
+  <g id="image_InvestLogo" clip-path="url(#clip-image_InvestLogo)">
+    <g id="Group_18417" data-name="Group 18417" transform="translate(-301 -38)">
+      <text id="投資部位系統" transform="translate(310 54)" fill="#251715" font-size="14" font-family="PingFangTC-Regular, PingFang TC" letter-spacing="0.1em"><tspan x="0" y="0">投資部位系統</tspan></text>
+      <g id="Rectangle_59" data-name="Rectangle 59" transform="translate(301 38)" fill="none" stroke="#251715" stroke-width="1">
+        <rect width="109" height="21" stroke="none"/>
+        <rect x="0.5" y="0.5" width="108" height="20" fill="none"/>
+      </g>
+    </g>
+  </g>
+</svg>

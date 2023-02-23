@@ -1,0 +1,26 @@
+// modal footer 上邊線
+@mixin divider_base($borderColor) {
+  ::v-deep {
+    .ant-modal-footer {
+      border-top: 2px solid $borderColor;
+    }
+  }
+}
+.modal-cfStatus__0 {
+  @include divider_base(#FA8C16)
+}
+.modal-cfStatus__1 {
+  @include divider_base(#ffbe0b)
+}
+.modal-cfStatus__2 {
+  @include divider_base(#00BB00)
+}
+.modal-cfStatus__3 {
+  @include divider_base(#BEBEBE)
+}
+.modal-cfStatus__4 {
+  @include divider_base(#8E8E8E)
+}
+.modal-cfStatus__5 {
+  @include divider_base(#2894FF)
+}

@@ -1,0 +1,1046 @@
+{
+  "_id" : "@fubonlife/ipk-api-axios-sdk",
+  "_rev" : "1-0",
+  "name" : "@fubonlife/ipk-api-axios-sdk",
+  "description" : "OpenAPI client for @fubonlife/ipk-api-axios-sdk",
+  "dist-tags" : {
+    "latest" : "1.0.37-BETA"
+  },
+  "versions" : {
+    "1.0.4-BETA" : {
+      "name" : "@fubonlife/ipk-api-axios-sdk",
+      "description" : "OpenAPI client for @fubonlife/ipk-api-axios-sdk",
+      "version" : "1.0.4-BETA",
+      "author" : "OpenAPI-Generator Contributors",
+      "main" : "./dist/index.js",
+      "dist" : {
+        "tarball" : "http://10.42.70.218:80/artifactory/api/npm/npm-local/@fubonlife/ipk-api-axios-sdk/-/@fubonlife/ipk-api-axios-sdk-1.0.4-BETA.tgz",
+        "shasum" : "c9effc1305b8526e221fe353601ccead84982d0e"
+      },
+      "dependencies" : {
+        "axios" : "^0.21.1"
+      },
+      "devDependencies" : {
+        "@types/node" : "^12.11.5",
+        "typescript" : "^3.6.4"
+      },
+      "keywords" : [ "axios", "typescript", "openapi-client", "openapi-generator", "@fubonlife/ipk-api-axios-sdk" ],
+      "license" : "Unlicense",
+      "scripts" : {
+        "build" : "tsc --outDir dist/",
+        "prepublishOnly" : "npm run build"
+      },
+      "_id" : "@fubonlife/ipk-api-axios-sdk@1.0.4-BETA",
+      "typings" : "./dist/index.d.ts"
+    },
+    "1.0.33-BETA" : {
+      "name" : "@fubonlife/ipk-api-axios-sdk",
+      "description" : "OpenAPI client for @fubonlife/ipk-api-axios-sdk",
+      "version" : "1.0.33-BETA",
+      "author" : "OpenAPI-Generator Contributors",
+      "main" : "./dist/index.js",
+      "dist" : {
+        "tarball" : "http://10.42.70.218:80/artifactory/api/npm/npm-local/@fubonlife/ipk-api-axios-sdk/-/@fubonlife/ipk-api-axios-sdk-1.0.33-BETA.tgz",
+        "shasum" : "c4c4acdb6af193bed20d055933d3f6a8bbd545ac"
+      },
+      "dependencies" : {
+        "axios" : "^0.21.1"
+      },
+      "devDependencies" : {
+        "@types/node" : "^12.11.5",
+        "typescript" : "^3.6.4"
+      },
+      "keywords" : [ "axios", "typescript", "openapi-client", "openapi-generator", "@fubonlife/ipk-api-axios-sdk" ],
+      "license" : "Unlicense",
+      "scripts" : {
+        "build" : "tsc --outDir dist/",
+        "prepublishOnly" : "npm run build"
+      },
+      "_id" : "@fubonlife/ipk-api-axios-sdk@1.0.33-BETA",
+      "typings" : "./dist/index.d.ts"
+    },
+    "1.0.22-BETA" : {
+      "name" : "@fubonlife/ipk-api-axios-sdk",
+      "description" : "OpenAPI client for @fubonlife/ipk-api-axios-sdk",
+      "version" : "1.0.22-BETA",
+      "author" : "OpenAPI-Generator Contributors",
+      "main" : "./dist/index.js",
+      "dist" : {
+        "tarball" : "http://10.42.70.218:80/artifactory/api/npm/npm-local/@fubonlife/ipk-api-axios-sdk/-/@fubonlife/ipk-api-axios-sdk-1.0.22-BETA.tgz",
+        "shasum" : "334d138cff8e72d8a064343e6837397f40800197"
+      },
+      "dependencies" : {
+        "axios" : "^0.21.1"
+      },
+      "devDependencies" : {
+        "@types/node" : "^12.11.5",
+        "typescript" : "^3.6.4"
+      },
+      "keywords" : [ "axios", "typescript", "openapi-client", "openapi-generator", "@fubonlife/ipk-api-axios-sdk" ],
+      "license" : "Unlicense",
+      "scripts" : {
+        "build" : "tsc --outDir dist/",
+        "prepublishOnly" : "npm run build"
+      },
+      "_id" : "@fubonlife/ipk-api-axios-sdk@1.0.22-BETA",
+      "typings" : "./dist/index.d.ts"
+    },
+    "1.0.7-BETA" : {
+      "name" : "@fubonlife/ipk-api-axios-sdk",
+      "description" : "OpenAPI client for @fubonlife/ipk-api-axios-sdk",
+      "version" : "1.0.7-BETA",
+      "author" : "OpenAPI-Generator Contributors",
+      "main" : "./dist/index.js",
+      "dist" : {
+        "tarball" : "http://10.42.70.218:80/artifactory/api/npm/npm-local/@fubonlife/ipk-api-axios-sdk/-/@fubonlife/ipk-api-axios-sdk-1.0.7-BETA.tgz",
+        "shasum" : "ceacc7b4d3281cf6ffb4d4e5e113b2312dff1d50"
+      },
+      "dependencies" : {
+        "axios" : "^0.21.1"
+      },
+      "devDependencies" : {
+        "@types/node" : "^12.11.5",
+        "typescript" : "^3.6.4"
+      },
+      "keywords" : [ "axios", "typescript", "openapi-client", "openapi-generator", "@fubonlife/ipk-api-axios-sdk" ],
+      "license" : "Unlicense",
+      "scripts" : {
+        "build" : "tsc --outDir dist/",
+        "prepublishOnly" : "npm run build"
+      },
+      "_id" : "@fubonlife/ipk-api-axios-sdk@1.0.7-BETA",
+      "typings" : "./dist/index.d.ts"
+    },
+    "1.0.30-BETA" : {
+      "name" : "@fubonlife/ipk-api-axios-sdk",
+      "description" : "OpenAPI client for @fubonlife/ipk-api-axios-sdk",
+      "version" : "1.0.30-BETA",
+      "author" : "OpenAPI-Generator Contributors",
+      "main" : "./dist/index.js",
+      "dist" : {
+        "tarball" : "http://10.42.70.218:80/artifactory/api/npm/npm-local/@fubonlife/ipk-api-axios-sdk/-/@fubonlife/ipk-api-axios-sdk-1.0.30-BETA.tgz",
+        "shasum" : "f6ec36074c594d592d9161ea0581df1857290eb3"
+      },
+      "dependencies" : {
+        "axios" : "^0.21.1"
+      },
+      "devDependencies" : {
+        "@types/node" : "^12.11.5",
+        "typescript" : "^3.6.4"
+      },
+      "keywords" : [ "axios", "typescript", "openapi-client", "openapi-generator", "@fubonlife/ipk-api-axios-sdk" ],
+      "license" : "Unlicense",
+      "scripts" : {
+        "build" : "tsc --outDir dist/",
+        "prepublishOnly" : "npm run build"
+      },
+      "_id" : "@fubonlife/ipk-api-axios-sdk@1.0.30-BETA",
+      "typings" : "./dist/index.d.ts"
+    },
+    "1.0.19-BETA" : {
+      "name" : "@fubonlife/ipk-api-axios-sdk",
+      "description" : "OpenAPI client for @fubonlife/ipk-api-axios-sdk",
+      "version" : "1.0.19-BETA",
+      "author" : "OpenAPI-Generator Contributors",
+      "main" : "./dist/index.js",
+      "dist" : {
+        "tarball" : "http://10.42.70.218:80/artifactory/api/npm/npm-local/@fubonlife/ipk-api-axios-sdk/-/@fubonlife/ipk-api-axios-sdk-1.0.19-BETA.tgz",
+        "shasum" : "e33e7914d9bb648dc0edb4a8aec0d740bdec4571"
+      },
+      "dependencies" : {
+        "axios" : "^0.21.1"
+      },
+      "devDependencies" : {
+        "@types/node" : "^12.11.5",
+        "typescript" : "^3.6.4"
+      },
+      "keywords" : [ "axios", "typescript", "openapi-client", "openapi-generator", "@fubonlife/ipk-api-axios-sdk" ],
+      "license" : "Unlicense",
+      "scripts" : {
+        "build" : "tsc --outDir dist/",
+        "prepublishOnly" : "npm run build"
+      },
+      "_id" : "@fubonlife/ipk-api-axios-sdk@1.0.19-BETA",
+      "typings" : "./dist/index.d.ts"
+    },
+    "1.0.11-BETA" : {
+      "name" : "@fubonlife/ipk-api-axios-sdk",
+      "description" : "OpenAPI client for @fubonlife/ipk-api-axios-sdk",
+      "version" : "1.0.11-BETA",
+      "author" : "OpenAPI-Generator Contributors",
+      "main" : "./dist/index.js",
+      "dist" : {
+        "tarball" : "http://10.42.70.218:80/artifactory/api/npm/npm-local/@fubonlife/ipk-api-axios-sdk/-/@fubonlife/ipk-api-axios-sdk-1.0.11-BETA.tgz",
+        "shasum" : "c942b5ae6acc42487c505f1175936e29a9b5c1bd"
+      },
+      "dependencies" : {
+        "axios" : "^0.21.1"
+      },
+      "devDependencies" : {
+        "@types/node" : "^12.11.5",
+        "typescript" : "^3.6.4"
+      },
+      "keywords" : [ "axios", "typescript", "openapi-client", "openapi-generator", "@fubonlife/ipk-api-axios-sdk" ],
+      "license" : "Unlicense",
+      "scripts" : {
+        "build" : "tsc --outDir dist/",
+        "prepublishOnly" : "npm run build"
+      },
+      "_id" : "@fubonlife/ipk-api-axios-sdk@1.0.11-BETA",
+      "typings" : "./dist/index.d.ts"
+    },
+    "1.0.16-BETA" : {
+      "name" : "@fubonlife/ipk-api-axios-sdk",
+      "description" : "OpenAPI client for @fubonlife/ipk-api-axios-sdk",
+      "version" : "1.0.16-BETA",
+      "author" : "OpenAPI-Generator Contributors",
+      "main" : "./dist/index.js",
+      "dist" : {
+        "tarball" : "http://10.42.70.218:80/artifactory/api/npm/npm-local/@fubonlife/ipk-api-axios-sdk/-/@fubonlife/ipk-api-axios-sdk-1.0.16-BETA.tgz",
+        "shasum" : "60bcedf8c9fd7a730895f7a744947d38b3d5d1e9"
+      },
+      "dependencies" : {
+        "axios" : "^0.21.1"
+      },
+      "devDependencies" : {
+        "@types/node" : "^12.11.5",
+        "typescript" : "^3.6.4"
+      },
+      "keywords" : [ "axios", "typescript", "openapi-client", "openapi-generator", "@fubonlife/ipk-api-axios-sdk" ],
+      "license" : "Unlicense",
+      "scripts" : {
+        "build" : "tsc --outDir dist/",
+        "prepublishOnly" : "npm run build"
+      },
+      "_id" : "@fubonlife/ipk-api-axios-sdk@1.0.16-BETA",
+      "typings" : "./dist/index.d.ts"
+    },
+    "1.0.1-BETA" : {
+      "name" : "@fubonlife/ipk-api-axios-sdk",
+      "description" : "OpenAPI client for @fubonlife/ipk-api-axios-sdk",
+      "version" : "1.0.1-BETA",
+      "author" : "OpenAPI-Generator Contributors",
+      "main" : "./dist/index.js",
+      "dist" : {
+        "tarball" : "http://10.42.70.218:80/artifactory/api/npm/npm-local/@fubonlife/ipk-api-axios-sdk/-/@fubonlife/ipk-api-axios-sdk-1.0.1-BETA.tgz",
+        "shasum" : "d06db3a61f403957aced2575f463e1393668b476"
+      },
+      "dependencies" : {
+        "axios" : "^0.21.1"
+      },
+      "devDependencies" : {
+        "@types/node" : "^12.11.5",
+        "typescript" : "^3.6.4"
+      },
+      "keywords" : [ "axios", "typescript", "openapi-client", "openapi-generator", "@fubonlife/ipk-api-axios-sdk" ],
+      "license" : "Unlicense",
+      "scripts" : {
+        "build" : "tsc --outDir dist/",
+        "prepublishOnly" : "npm run build"
+      },
+      "_id" : "@fubonlife/ipk-api-axios-sdk@1.0.1-BETA",
+      "typings" : "./dist/index.d.ts"
+    },
+    "1.0.9-BETA" : {
+      "name" : "@fubonlife/ipk-api-axios-sdk",
+      "description" : "OpenAPI client for @fubonlife/ipk-api-axios-sdk",
+      "version" : "1.0.9-BETA",
+      "author" : "OpenAPI-Generator Contributors",
+      "main" : "./dist/index.js",
+      "dist" : {
+        "tarball" : "http://10.42.70.218:80/artifactory/api/npm/npm-local/@fubonlife/ipk-api-axios-sdk/-/@fubonlife/ipk-api-axios-sdk-1.0.9-BETA.tgz",
+        "shasum" : "8456ef878afeabdc8c4942d91fee6246a3632fa0"
+      },
+      "dependencies" : {
+        "axios" : "^0.21.1"
+      },
+      "devDependencies" : {
+        "@types/node" : "^12.11.5",
+        "typescript" : "^3.6.4"
+      },
+      "keywords" : [ "axios", "typescript", "openapi-client", "openapi-generator", "@fubonlife/ipk-api-axios-sdk" ],
+      "license" : "Unlicense",
+      "scripts" : {
+        "build" : "tsc --outDir dist/",
+        "prepublishOnly" : "npm run build"
+      },
+      "_id" : "@fubonlife/ipk-api-axios-sdk@1.0.9-BETA",
+      "typings" : "./dist/index.d.ts"
+    },
+    "1.0.27-BETA" : {
+      "name" : "@fubonlife/ipk-api-axios-sdk",
+      "description" : "OpenAPI client for @fubonlife/ipk-api-axios-sdk",
+      "version" : "1.0.27-BETA",
+      "author" : "OpenAPI-Generator Contributors",
+      "main" : "./dist/index.js",
+      "dist" : {
+        "tarball" : "http://10.42.70.218:80/artifactory/api/npm/npm-local/@fubonlife/ipk-api-axios-sdk/-/@fubonlife/ipk-api-axios-sdk-1.0.27-BETA.tgz",
+        "shasum" : "0371f358b9b65416aaafefe7a5e88a742f213eb6"
+      },
+      "dependencies" : {
+        "axios" : "^0.21.1"
+      },
+      "devDependencies" : {
+        "@types/node" : "^12.11.5",
+        "typescript" : "^3.6.4"
+      },
+      "keywords" : [ "axios", "typescript", "openapi-client", "openapi-generator", "@fubonlife/ipk-api-axios-sdk" ],
+      "license" : "Unlicense",
+      "scripts" : {
+        "build" : "tsc --outDir dist/",
+        "prepublishOnly" : "npm run build"
+      },
+      "_id" : "@fubonlife/ipk-api-axios-sdk@1.0.27-BETA",
+      "typings" : "./dist/index.d.ts"
+    },
+    "1.0.31-BETA" : {
+      "name" : "@fubonlife/ipk-api-axios-sdk",
+      "description" : "OpenAPI client for @fubonlife/ipk-api-axios-sdk",
+      "version" : "1.0.31-BETA",
+      "author" : "OpenAPI-Generator Contributors",
+      "main" : "./dist/index.js",
+      "dist" : {
+        "tarball" : "http://10.42.70.218:80/artifactory/api/npm/npm-local/@fubonlife/ipk-api-axios-sdk/-/@fubonlife/ipk-api-axios-sdk-1.0.31-BETA.tgz",
+        "shasum" : "1047e0bf942213799c3e1784afee68ebc5a8ac7a"
+      },
+      "dependencies" : {
+        "axios" : "^0.21.1"
+      },
+      "devDependencies" : {
+        "@types/node" : "^12.11.5",
+        "typescript" : "^3.6.4"
+      },
+      "keywords" : [ "axios", "typescript", "openapi-client", "openapi-generator", "@fubonlife/ipk-api-axios-sdk" ],
+      "license" : "Unlicense",
+      "scripts" : {
+        "build" : "tsc --outDir dist/",
+        "prepublishOnly" : "npm run build"
+      },
+      "_id" : "@fubonlife/ipk-api-axios-sdk@1.0.31-BETA",
+      "typings" : "./dist/index.d.ts"
+    },
+    "1.0.34-BETA" : {
+      "name" : "@fubonlife/ipk-api-axios-sdk",
+      "description" : "OpenAPI client for @fubonlife/ipk-api-axios-sdk",
+      "version" : "1.0.34-BETA",
+      "author" : "OpenAPI-Generator Contributors",
+      "main" : "./dist/index.js",
+      "dist" : {
+        "tarball" : "http://10.42.70.218:80/artifactory/api/npm/npm-local/@fubonlife/ipk-api-axios-sdk/-/@fubonlife/ipk-api-axios-sdk-1.0.34-BETA.tgz",
+        "shasum" : "18da71a165f78ff8a6ca15bd27e08cfd666cae40"
+      },
+      "dependencies" : {
+        "axios" : "^0.21.1"
+      },
+      "devDependencies" : {
+        "@types/node" : "^12.11.5",
+        "typescript" : "^3.6.4"
+      },
+      "keywords" : [ "axios", "typescript", "openapi-client", "openapi-generator", "@fubonlife/ipk-api-axios-sdk" ],
+      "license" : "Unlicense",
+      "scripts" : {
+        "build" : "tsc --outDir dist/",
+        "prepublishOnly" : "npm run build"
+      },
+      "_id" : "@fubonlife/ipk-api-axios-sdk@1.0.34-BETA",
+      "typings" : "./dist/index.d.ts"
+    },
+    "1.0.20-BETA" : {
+      "name" : "@fubonlife/ipk-api-axios-sdk",
+      "description" : "OpenAPI client for @fubonlife/ipk-api-axios-sdk",
+      "version" : "1.0.20-BETA",
+      "author" : "OpenAPI-Generator Contributors",
+      "main" : "./dist/index.js",
+      "dist" : {
+        "tarball" : "http://10.42.70.218:80/artifactory/api/npm/npm-local/@fubonlife/ipk-api-axios-sdk/-/@fubonlife/ipk-api-axios-sdk-1.0.20-BETA.tgz",
+        "shasum" : "e5c2625b71138ebd8989cd0b3a3b1dba1fee8cf6"
+      },
+      "dependencies" : {
+        "axios" : "^0.21.1"
+      },
+      "devDependencies" : {
+        "@types/node" : "^12.11.5",
+        "typescript" : "^3.6.4"
+      },
+      "keywords" : [ "axios", "typescript", "openapi-client", "openapi-generator", "@fubonlife/ipk-api-axios-sdk" ],
+      "license" : "Unlicense",
+      "scripts" : {
+        "build" : "tsc --outDir dist/",
+        "prepublishOnly" : "npm run build"
+      },
+      "_id" : "@fubonlife/ipk-api-axios-sdk@1.0.20-BETA",
+      "typings" : "./dist/index.d.ts"
+    },
+    "1.0.5-BETA" : {
+      "name" : "@fubonlife/ipk-api-axios-sdk",
+      "description" : "OpenAPI client for @fubonlife/ipk-api-axios-sdk",
+      "version" : "1.0.5-BETA",
+      "author" : "OpenAPI-Generator Contributors",
+      "main" : "./dist/index.js",
+      "dist" : {
+        "tarball" : "http://10.42.70.218:80/artifactory/api/npm/npm-local/@fubonlife/ipk-api-axios-sdk/-/@fubonlife/ipk-api-axios-sdk-1.0.5-BETA.tgz",
+        "shasum" : "73e60a9bbe6ba1ab402d3d09c4f56f5e924701b7"
+      },
+      "dependencies" : {
+        "axios" : "^0.21.1"
+      },
+      "devDependencies" : {
+        "@types/node" : "^12.11.5",
+        "typescript" : "^3.6.4"
+      },
+      "keywords" : [ "axios", "typescript", "openapi-client", "openapi-generator", "@fubonlife/ipk-api-axios-sdk" ],
+      "license" : "Unlicense",
+      "scripts" : {
+        "build" : "tsc --outDir dist/",
+        "prepublishOnly" : "npm run build"
+      },
+      "_id" : "@fubonlife/ipk-api-axios-sdk@1.0.5-BETA",
+      "typings" : "./dist/index.d.ts"
+    },
+    "1.0.23-BETA" : {
+      "name" : "@fubonlife/ipk-api-axios-sdk",
+      "description" : "OpenAPI client for @fubonlife/ipk-api-axios-sdk",
+      "version" : "1.0.23-BETA",
+      "author" : "OpenAPI-Generator Contributors",
+      "main" : "./dist/index.js",
+      "dist" : {
+        "tarball" : "http://10.42.70.218:80/artifactory/api/npm/npm-local/@fubonlife/ipk-api-axios-sdk/-/@fubonlife/ipk-api-axios-sdk-1.0.23-BETA.tgz",
+        "shasum" : "1ebaefb5b6ea77a6a9dcfb695686ad11a2292964"
+      },
+      "dependencies" : {
+        "axios" : "^0.21.1"
+      },
+      "devDependencies" : {
+        "@types/node" : "^12.11.5",
+        "typescript" : "^3.6.4"
+      },
+      "keywords" : [ "axios", "typescript", "openapi-client", "openapi-generator", "@fubonlife/ipk-api-axios-sdk" ],
+      "license" : "Unlicense",
+      "scripts" : {
+        "build" : "tsc --outDir dist/",
+        "prepublishOnly" : "npm run build"
+      },
+      "_id" : "@fubonlife/ipk-api-axios-sdk@1.0.23-BETA",
+      "typings" : "./dist/index.d.ts"
+    },
+    "1.0.8-BETA" : {
+      "name" : "@fubonlife/ipk-api-axios-sdk",
+      "description" : "OpenAPI client for @fubonlife/ipk-api-axios-sdk",
+      "version" : "1.0.8-BETA",
+      "author" : "OpenAPI-Generator Contributors",
+      "main" : "./dist/index.js",
+      "dist" : {
+        "tarball" : "http://10.42.70.218:80/artifactory/api/npm/npm-local/@fubonlife/ipk-api-axios-sdk/-/@fubonlife/ipk-api-axios-sdk-1.0.8-BETA.tgz",
+        "shasum" : "e962ca813bd3fefc41f2e775751db3fd02a015fc"
+      },
+      "dependencies" : {
+        "axios" : "^0.21.1"
+      },
+      "devDependencies" : {
+        "@types/node" : "^12.11.5",
+        "typescript" : "^3.6.4"
+      },
+      "keywords" : [ "axios", "typescript", "openapi-client", "openapi-generator", "@fubonlife/ipk-api-axios-sdk" ],
+      "license" : "Unlicense",
+      "scripts" : {
+        "build" : "tsc --outDir dist/",
+        "prepublishOnly" : "npm run build"
+      },
+      "_id" : "@fubonlife/ipk-api-axios-sdk@1.0.8-BETA",
+      "typings" : "./dist/index.d.ts"
+    },
+    "1.0.2-BETA" : {
+      "name" : "@fubonlife/ipk-api-axios-sdk",
+      "description" : "OpenAPI client for @fubonlife/ipk-api-axios-sdk",
+      "version" : "1.0.2-BETA",
+      "author" : "OpenAPI-Generator Contributors",
+      "main" : "./dist/index.js",
+      "dist" : {
+        "tarball" : "http://10.42.70.218:80/artifactory/api/npm/npm-local/@fubonlife/ipk-api-axios-sdk/-/@fubonlife/ipk-api-axios-sdk-1.0.2-BETA.tgz",
+        "shasum" : "cd3ad94d15ba5c1da8a087a7aa631c6cd4ee8532"
+      },
+      "dependencies" : {
+        "axios" : "^0.21.1"
+      },
+      "devDependencies" : {
+        "@types/node" : "^12.11.5",
+        "typescript" : "^3.6.4"
+      },
+      "keywords" : [ "axios", "typescript", "openapi-client", "openapi-generator", "@fubonlife/ipk-api-axios-sdk" ],
+      "license" : "Unlicense",
+      "scripts" : {
+        "build" : "tsc --outDir dist/",
+        "prepublishOnly" : "npm run build"
+      },
+      "_id" : "@fubonlife/ipk-api-axios-sdk@1.0.2-BETA",
+      "typings" : "./dist/index.d.ts"
+    },
+    "1.0.15-BETA" : {
+      "name" : "@fubonlife/ipk-api-axios-sdk",
+      "description" : "OpenAPI client for @fubonlife/ipk-api-axios-sdk",
+      "version" : "1.0.15-BETA",
+      "author" : "OpenAPI-Generator Contributors",
+      "main" : "./dist/index.js",
+      "dist" : {
+        "tarball" : "http://10.42.70.218:80/artifactory/api/npm/npm-local/@fubonlife/ipk-api-axios-sdk/-/@fubonlife/ipk-api-axios-sdk-1.0.15-BETA.tgz",
+        "shasum" : "d4c134d6d8b4dbebede254e22548768eaa493eb9"
+      },
+      "dependencies" : {
+        "axios" : "^0.21.1"
+      },
+      "devDependencies" : {
+        "@types/node" : "^12.11.5",
+        "typescript" : "^3.6.4"
+      },
+      "keywords" : [ "axios", "typescript", "openapi-client", "openapi-generator", "@fubonlife/ipk-api-axios-sdk" ],
+      "license" : "Unlicense",
+      "scripts" : {
+        "build" : "tsc --outDir dist/",
+        "prepublishOnly" : "npm run build"
+      },
+      "_id" : "@fubonlife/ipk-api-axios-sdk@1.0.15-BETA",
+      "typings" : "./dist/index.d.ts"
+    },
+    "1.0.12-BETA" : {
+      "name" : "@fubonlife/ipk-api-axios-sdk",
+      "description" : "OpenAPI client for @fubonlife/ipk-api-axios-sdk",
+      "version" : "1.0.12-BETA",
+      "author" : "OpenAPI-Generator Contributors",
+      "main" : "./dist/index.js",
+      "dist" : {
+        "tarball" : "http://10.42.70.218:80/artifactory/api/npm/npm-local/@fubonlife/ipk-api-axios-sdk/-/@fubonlife/ipk-api-axios-sdk-1.0.12-BETA.tgz",
+        "shasum" : "ae08f1d8cb32caaf2b6435d455391d9cc57eddba"
+      },
+      "dependencies" : {
+        "axios" : "^0.21.1"
+      },
+      "devDependencies" : {
+        "@types/node" : "^12.11.5",
+        "typescript" : "^3.6.4"
+      },
+      "keywords" : [ "axios", "typescript", "openapi-client", "openapi-generator", "@fubonlife/ipk-api-axios-sdk" ],
+      "license" : "Unlicense",
+      "scripts" : {
+        "build" : "tsc --outDir dist/",
+        "prepublishOnly" : "npm run build"
+      },
+      "_id" : "@fubonlife/ipk-api-axios-sdk@1.0.12-BETA",
+      "typings" : "./dist/index.d.ts"
+    },
+    "1.0.29-BETA" : {
+      "name" : "@fubonlife/ipk-api-axios-sdk",
+      "description" : "OpenAPI client for @fubonlife/ipk-api-axios-sdk",
+      "version" : "1.0.29-BETA",
+      "author" : "OpenAPI-Generator Contributors",
+      "main" : "./dist/index.js",
+      "dist" : {
+        "tarball" : "http://10.42.70.218:80/artifactory/api/npm/npm-local/@fubonlife/ipk-api-axios-sdk/-/@fubonlife/ipk-api-axios-sdk-1.0.29-BETA.tgz",
+        "shasum" : "7cdf1a768d436dd5aaea9a07522ca21202c0afe0"
+      },
+      "dependencies" : {
+        "axios" : "^0.21.1"
+      },
+      "devDependencies" : {
+        "@types/node" : "^12.11.5",
+        "typescript" : "^3.6.4"
+      },
+      "keywords" : [ "axios", "typescript", "openapi-client", "openapi-generator", "@fubonlife/ipk-api-axios-sdk" ],
+      "license" : "Unlicense",
+      "scripts" : {
+        "build" : "tsc --outDir dist/",
+        "prepublishOnly" : "npm run build"
+      },
+      "_id" : "@fubonlife/ipk-api-axios-sdk@1.0.29-BETA",
+      "typings" : "./dist/index.d.ts"
+    },
+    "1.0.18-BETA" : {
+      "name" : "@fubonlife/ipk-api-axios-sdk",
+      "description" : "OpenAPI client for @fubonlife/ipk-api-axios-sdk",
+      "version" : "1.0.18-BETA",
+      "author" : "OpenAPI-Generator Contributors",
+      "main" : "./dist/index.js",
+      "dist" : {
+        "tarball" : "http://10.42.70.218:80/artifactory/api/npm/npm-local/@fubonlife/ipk-api-axios-sdk/-/@fubonlife/ipk-api-axios-sdk-1.0.18-BETA.tgz",
+        "shasum" : "bcfbf1667d65604fcb817144d77be053e661420b"
+      },
+      "dependencies" : {
+        "axios" : "^0.21.1"
+      },
+      "devDependencies" : {
+        "@types/node" : "^12.11.5",
+        "typescript" : "^3.6.4"
+      },
+      "keywords" : [ "axios", "typescript", "openapi-client", "openapi-generator", "@fubonlife/ipk-api-axios-sdk" ],
+      "license" : "Unlicense",
+      "scripts" : {
+        "build" : "tsc --outDir dist/",
+        "prepublishOnly" : "npm run build"
+      },
+      "_id" : "@fubonlife/ipk-api-axios-sdk@1.0.18-BETA",
+      "typings" : "./dist/index.d.ts"
+    },
+    "1.0.26-BETA" : {
+      "name" : "@fubonlife/ipk-api-axios-sdk",
+      "description" : "OpenAPI client for @fubonlife/ipk-api-axios-sdk",
+      "version" : "1.0.26-BETA",
+      "author" : "OpenAPI-Generator Contributors",
+      "main" : "./dist/index.js",
+      "dist" : {
+        "tarball" : "http://10.42.70.218:80/artifactory/api/npm/npm-local/@fubonlife/ipk-api-axios-sdk/-/@fubonlife/ipk-api-axios-sdk-1.0.26-BETA.tgz",
+        "shasum" : "c9c52733b7597f796e614f359b2054ded7a83d65"
+      },
+      "dependencies" : {
+        "axios" : "^0.21.1"
+      },
+      "devDependencies" : {
+        "@types/node" : "^12.11.5",
+        "typescript" : "^3.6.4"
+      },
+      "keywords" : [ "axios", "typescript", "openapi-client", "openapi-generator", "@fubonlife/ipk-api-axios-sdk" ],
+      "license" : "Unlicense",
+      "scripts" : {
+        "build" : "tsc --outDir dist/",
+        "prepublishOnly" : "npm run build"
+      },
+      "_id" : "@fubonlife/ipk-api-axios-sdk@1.0.26-BETA",
+      "typings" : "./dist/index.d.ts"
+    },
+    "1.0.37-BETA" : {
+      "name" : "@fubonlife/ipk-api-axios-sdk",
+      "description" : "OpenAPI client for @fubonlife/ipk-api-axios-sdk",
+      "version" : "1.0.37-BETA",
+      "author" : "OpenAPI-Generator Contributors",
+      "main" : "./dist/index.js",
+      "dist" : {
+        "tarball" : "http://10.42.70.218:80/artifactory/api/npm/npm-local/@fubonlife/ipk-api-axios-sdk/-/@fubonlife/ipk-api-axios-sdk-1.0.37-BETA.tgz",
+        "shasum" : "12e4d6cdf174fe3020e359641fef56043f66713d"
+      },
+      "dependencies" : {
+        "axios" : "^0.21.1"
+      },
+      "devDependencies" : {
+        "@types/node" : "^12.11.5",
+        "typescript" : "^3.6.4"
+      },
+      "keywords" : [ "axios", "typescript", "openapi-client", "openapi-generator", "@fubonlife/ipk-api-axios-sdk" ],
+      "license" : "Unlicense",
+      "scripts" : {
+        "build" : "tsc --outDir dist/",
+        "prepublishOnly" : "npm run build"
+      },
+      "_id" : "@fubonlife/ipk-api-axios-sdk@1.0.37-BETA",
+      "typings" : "./dist/index.d.ts"
+    },
+    "1.0.35-BETA" : {
+      "name" : "@fubonlife/ipk-api-axios-sdk",
+      "description" : "OpenAPI client for @fubonlife/ipk-api-axios-sdk",
+      "version" : "1.0.35-BETA",
+      "author" : "OpenAPI-Generator Contributors",
+      "main" : "./dist/index.js",
+      "dist" : {
+        "tarball" : "http://10.42.70.218:80/artifactory/api/npm/npm-local/@fubonlife/ipk-api-axios-sdk/-/@fubonlife/ipk-api-axios-sdk-1.0.35-BETA.tgz",
+        "shasum" : "3fb1dbcc2a177973a64f225fe68d5823fba22584"
+      },
+      "dependencies" : {
+        "axios" : "^0.21.1"
+      },
+      "devDependencies" : {
+        "@types/node" : "^12.11.5",
+        "typescript" : "^3.6.4"
+      },
+      "keywords" : [ "axios", "typescript", "openapi-client", "openapi-generator", "@fubonlife/ipk-api-axios-sdk" ],
+      "license" : "Unlicense",
+      "scripts" : {
+        "build" : "tsc --outDir dist/",
+        "prepublishOnly" : "npm run build"
+      },
+      "_id" : "@fubonlife/ipk-api-axios-sdk@1.0.35-BETA",
+      "typings" : "./dist/index.d.ts"
+    },
+    "1.0.32-BETA" : {
+      "name" : "@fubonlife/ipk-api-axios-sdk",
+      "description" : "OpenAPI client for @fubonlife/ipk-api-axios-sdk",
+      "version" : "1.0.32-BETA",
+      "author" : "OpenAPI-Generator Contributors",
+      "main" : "./dist/index.js",
+      "dist" : {
+        "tarball" : "http://10.42.70.218:80/artifactory/api/npm/npm-local/@fubonlife/ipk-api-axios-sdk/-/@fubonlife/ipk-api-axios-sdk-1.0.32-BETA.tgz",
+        "shasum" : "9c374b2210bc98adaf5a71a6ce6c7a4046ca9793"
+      },
+      "dependencies" : {
+        "axios" : "^0.21.1"
+      },
+      "devDependencies" : {
+        "@types/node" : "^12.11.5",
+        "typescript" : "^3.6.4"
+      },
+      "keywords" : [ "axios", "typescript", "openapi-client", "openapi-generator", "@fubonlife/ipk-api-axios-sdk" ],
+      "license" : "Unlicense",
+      "scripts" : {
+        "build" : "tsc --outDir dist/",
+        "prepublishOnly" : "npm run build"
+      },
+      "_id" : "@fubonlife/ipk-api-axios-sdk@1.0.32-BETA",
+      "typings" : "./dist/index.d.ts"
+    },
+    "1.0.24-BETA" : {
+      "name" : "@fubonlife/ipk-api-axios-sdk",
+      "description" : "OpenAPI client for @fubonlife/ipk-api-axios-sdk",
+      "version" : "1.0.24-BETA",
+      "author" : "OpenAPI-Generator Contributors",
+      "main" : "./dist/index.js",
+      "dist" : {
+        "tarball" : "http://10.42.70.218:80/artifactory/api/npm/npm-local/@fubonlife/ipk-api-axios-sdk/-/@fubonlife/ipk-api-axios-sdk-1.0.24-BETA.tgz",
+        "shasum" : "fb3d78d737e9ee10258b9432074c91755c76c284"
+      },
+      "dependencies" : {
+        "axios" : "^0.21.1"
+      },
+      "devDependencies" : {
+        "@types/node" : "^12.11.5",
+        "typescript" : "^3.6.4"
+      },
+      "keywords" : [ "axios", "typescript", "openapi-client", "openapi-generator", "@fubonlife/ipk-api-axios-sdk" ],
+      "license" : "Unlicense",
+      "scripts" : {
+        "build" : "tsc --outDir dist/",
+        "prepublishOnly" : "npm run build"
+      },
+      "_id" : "@fubonlife/ipk-api-axios-sdk@1.0.24-BETA",
+      "typings" : "./dist/index.d.ts"
+    },
+    "1.0.21-BETA" : {
+      "name" : "@fubonlife/ipk-api-axios-sdk",
+      "description" : "OpenAPI client for @fubonlife/ipk-api-axios-sdk",
+      "version" : "1.0.21-BETA",
+      "author" : "OpenAPI-Generator Contributors",
+      "main" : "./dist/index.js",
+      "dist" : {
+        "tarball" : "http://10.42.70.218:80/artifactory/api/npm/npm-local/@fubonlife/ipk-api-axios-sdk/-/@fubonlife/ipk-api-axios-sdk-1.0.21-BETA.tgz",
+        "shasum" : "ecf2ff7410bddc9681a2fb79d83830da5469135f"
+      },
+      "dependencies" : {
+        "axios" : "^0.21.1"
+      },
+      "devDependencies" : {
+        "@types/node" : "^12.11.5",
+        "typescript" : "^3.6.4"
+      },
+      "keywords" : [ "axios", "typescript", "openapi-client", "openapi-generator", "@fubonlife/ipk-api-axios-sdk" ],
+      "license" : "Unlicense",
+      "scripts" : {
+        "build" : "tsc --outDir dist/",
+        "prepublishOnly" : "npm run build"
+      },
+      "_id" : "@fubonlife/ipk-api-axios-sdk@1.0.21-BETA",
+      "typings" : "./dist/index.d.ts"
+    },
+    "1.0.6-BETA" : {
+      "name" : "@fubonlife/ipk-api-axios-sdk",
+      "description" : "OpenAPI client for @fubonlife/ipk-api-axios-sdk",
+      "version" : "1.0.6-BETA",
+      "author" : "OpenAPI-Generator Contributors",
+      "main" : "./dist/index.js",
+      "dist" : {
+        "tarball" : "http://10.42.70.218:80/artifactory/api/npm/npm-local/@fubonlife/ipk-api-axios-sdk/-/@fubonlife/ipk-api-axios-sdk-1.0.6-BETA.tgz",
+        "shasum" : "d6fb891d4814a0151626f249eb9619be0782d5b9"
+      },
+      "dependencies" : {
+        "axios" : "^0.21.1"
+      },
+      "devDependencies" : {
+        "@types/node" : "^12.11.5",
+        "typescript" : "^3.6.4"
+      },
+      "keywords" : [ "axios", "typescript", "openapi-client", "openapi-generator", "@fubonlife/ipk-api-axios-sdk" ],
+      "license" : "Unlicense",
+      "scripts" : {
+        "build" : "tsc --outDir dist/",
+        "prepublishOnly" : "npm run build"
+      },
+      "_id" : "@fubonlife/ipk-api-axios-sdk@1.0.6-BETA",
+      "typings" : "./dist/index.d.ts"
+    },
+    "1.0.17-BETA" : {
+      "name" : "@fubonlife/ipk-api-axios-sdk",
+      "description" : "OpenAPI client for @fubonlife/ipk-api-axios-sdk",
+      "version" : "1.0.17-BETA",
+      "author" : "OpenAPI-Generator Contributors",
+      "main" : "./dist/index.js",
+      "dist" : {
+        "tarball" : "http://10.42.70.218:80/artifactory/api/npm/npm-local/@fubonlife/ipk-api-axios-sdk/-/@fubonlife/ipk-api-axios-sdk-1.0.17-BETA.tgz",
+        "shasum" : "f8079ae4b2885dcc8955536d987b7420bd1793e5"
+      },
+      "dependencies" : {
+        "axios" : "^0.21.1"
+      },
+      "devDependencies" : {
+        "@types/node" : "^12.11.5",
+        "typescript" : "^3.6.4"
+      },
+      "keywords" : [ "axios", "typescript", "openapi-client", "openapi-generator", "@fubonlife/ipk-api-axios-sdk" ],
+      "license" : "Unlicense",
+      "scripts" : {
+        "build" : "tsc --outDir dist/",
+        "prepublishOnly" : "npm run build"
+      },
+      "_id" : "@fubonlife/ipk-api-axios-sdk@1.0.17-BETA",
+      "typings" : "./dist/index.d.ts"
+    },
+    "1.0.3-BETA" : {
+      "name" : "@fubonlife/ipk-api-axios-sdk",
+      "description" : "OpenAPI client for @fubonlife/ipk-api-axios-sdk",
+      "version" : "1.0.3-BETA",
+      "author" : "OpenAPI-Generator Contributors",
+      "main" : "./dist/index.js",
+      "dist" : {
+        "tarball" : "http://10.42.70.218:80/artifactory/api/npm/npm-local/@fubonlife/ipk-api-axios-sdk/-/@fubonlife/ipk-api-axios-sdk-1.0.3-BETA.tgz",
+        "shasum" : "6fc0fd41ed612f46483b9ded41c246dc926ff63a"
+      },
+      "dependencies" : {
+        "axios" : "^0.21.1"
+      },
+      "devDependencies" : {
+        "@types/node" : "^12.11.5",
+        "typescript" : "^3.6.4"
+      },
+      "keywords" : [ "axios", "typescript", "openapi-client", "openapi-generator", "@fubonlife/ipk-api-axios-sdk" ],
+      "license" : "Unlicense",
+      "scripts" : {
+        "build" : "tsc --outDir dist/",
+        "prepublishOnly" : "npm run build"
+      },
+      "_id" : "@fubonlife/ipk-api-axios-sdk@1.0.3-BETA",
+      "typings" : "./dist/index.d.ts"
+    },
+    "1.0.10-BETA" : {
+      "name" : "@fubonlife/ipk-api-axios-sdk",
+      "description" : "OpenAPI client for @fubonlife/ipk-api-axios-sdk",
+      "version" : "1.0.10-BETA",
+      "author" : "OpenAPI-Generator Contributors",
+      "main" : "./dist/index.js",
+      "dist" : {
+        "tarball" : "http://10.42.70.218:80/artifactory/api/npm/npm-local/@fubonlife/ipk-api-axios-sdk/-/@fubonlife/ipk-api-axios-sdk-1.0.10-BETA.tgz",
+        "shasum" : "a6a79527908ecc31cde6fde68aa3d8246624787d"
+      },
+      "dependencies" : {
+        "axios" : "^0.21.1"
+      },
+      "devDependencies" : {
+        "@types/node" : "^12.11.5",
+        "typescript" : "^3.6.4"
+      },
+      "keywords" : [ "axios", "typescript", "openapi-client", "openapi-generator", "@fubonlife/ipk-api-axios-sdk" ],
+      "license" : "Unlicense",
+      "scripts" : {
+        "build" : "tsc --outDir dist/",
+        "prepublishOnly" : "npm run build"
+      },
+      "_id" : "@fubonlife/ipk-api-axios-sdk@1.0.10-BETA",
+      "typings" : "./dist/index.d.ts"
+    },
+    "1.0.13-BETA" : {
+      "name" : "@fubonlife/ipk-api-axios-sdk",
+      "description" : "OpenAPI client for @fubonlife/ipk-api-axios-sdk",
+      "version" : "1.0.13-BETA",
+      "author" : "OpenAPI-Generator Contributors",
+      "main" : "./dist/index.js",
+      "dist" : {
+        "tarball" : "http://10.42.70.218:80/artifactory/api/npm/npm-local/@fubonlife/ipk-api-axios-sdk/-/@fubonlife/ipk-api-axios-sdk-1.0.13-BETA.tgz",
+        "shasum" : "cffd33c04c43c63a8bee699ffa0d9d3c2c45fffe"
+      },
+      "dependencies" : {
+        "axios" : "^0.21.1"
+      },
+      "devDependencies" : {
+        "@types/node" : "^12.11.5",
+        "typescript" : "^3.6.4"
+      },
+      "keywords" : [ "axios", "typescript", "openapi-client", "openapi-generator", "@fubonlife/ipk-api-axios-sdk" ],
+      "license" : "Unlicense",
+      "scripts" : {
+        "build" : "tsc --outDir dist/",
+        "prepublishOnly" : "npm run build"
+      },
+      "_id" : "@fubonlife/ipk-api-axios-sdk@1.0.13-BETA",
+      "typings" : "./dist/index.d.ts"
+    },
+    "1.0.14-BETA" : {
+      "name" : "@fubonlife/ipk-api-axios-sdk",
+      "description" : "OpenAPI client for @fubonlife/ipk-api-axios-sdk",
+      "version" : "1.0.14-BETA",
+      "author" : "OpenAPI-Generator Contributors",
+      "main" : "./dist/index.js",
+      "dist" : {
+        "tarball" : "http://10.42.70.218:80/artifactory/api/npm/npm-local/@fubonlife/ipk-api-axios-sdk/-/@fubonlife/ipk-api-axios-sdk-1.0.14-BETA.tgz",
+        "shasum" : "c1944c672d64a899a68058fad8a226b0a4087e25"
+      },
+      "dependencies" : {
+        "axios" : "^0.21.1"
+      },
+      "devDependencies" : {
+        "@types/node" : "^12.11.5",
+        "typescript" : "^3.6.4"
+      },
+      "keywords" : [ "axios", "typescript", "openapi-client", "openapi-generator", "@fubonlife/ipk-api-axios-sdk" ],
+      "license" : "Unlicense",
+      "scripts" : {
+        "build" : "tsc --outDir dist/",
+        "prepublishOnly" : "npm run build"
+      },
+      "_id" : "@fubonlife/ipk-api-axios-sdk@1.0.14-BETA",
+      "typings" : "./dist/index.d.ts"
+    },
+    "1.0.25-BETA" : {
+      "name" : "@fubonlife/ipk-api-axios-sdk",
+      "description" : "OpenAPI client for @fubonlife/ipk-api-axios-sdk",
+      "version" : "1.0.25-BETA",
+      "author" : "OpenAPI-Generator Contributors",
+      "main" : "./dist/index.js",
+      "dist" : {
+        "tarball" : "http://10.42.70.218:80/artifactory/api/npm/npm-local/@fubonlife/ipk-api-axios-sdk/-/@fubonlife/ipk-api-axios-sdk-1.0.25-BETA.tgz",
+        "shasum" : "0073cd7a937cdc9763d48668d63fbde69b4fbc43"
+      },
+      "dependencies" : {
+        "axios" : "^0.21.1"
+      },
+      "devDependencies" : {
+        "@types/node" : "^12.11.5",
+        "typescript" : "^3.6.4"
+      },
+      "keywords" : [ "axios", "typescript", "openapi-client", "openapi-generator", "@fubonlife/ipk-api-axios-sdk" ],
+      "license" : "Unlicense",
+      "scripts" : {
+        "build" : "tsc --outDir dist/",
+        "prepublishOnly" : "npm run build"
+      },
+      "_id" : "@fubonlife/ipk-api-axios-sdk@1.0.25-BETA",
+      "typings" : "./dist/index.d.ts"
+    },
+    "1.0.0-BETA" : {
+      "name" : "@fubonlife/ipk-api-axios-sdk",
+      "description" : "OpenAPI client for @fubonlife/ipk-api-axios-sdk",
+      "version" : "1.0.0-BETA",
+      "author" : "OpenAPI-Generator Contributors",
+      "main" : "./dist/index.js",
+      "dist" : {
+        "tarball" : "http://10.42.70.218:80/artifactory/api/npm/npm-local/@fubonlife/ipk-api-axios-sdk/-/@fubonlife/ipk-api-axios-sdk-1.0.0-BETA.tgz",
+        "shasum" : "4a404097d6f2db44ef9627168856e337e146e2a2"
+      },
+      "dependencies" : {
+        "axios" : "^0.21.1"
+      },
+      "devDependencies" : {
+        "@types/node" : "^12.11.5",
+        "typescript" : "^3.6.4"
+      },
+      "keywords" : [ "axios", "typescript", "openapi-client", "openapi-generator", "@fubonlife/ipk-api-axios-sdk" ],
+      "license" : "Unlicense",
+      "scripts" : {
+        "build" : "tsc --outDir dist/",
+        "prepublishOnly" : "npm run build"
+      },
+      "_id" : "@fubonlife/ipk-api-axios-sdk@1.0.0-BETA",
+      "typings" : "./dist/index.d.ts"
+    },
+    "1.0.28-BETA" : {
+      "name" : "@fubonlife/ipk-api-axios-sdk",
+      "description" : "OpenAPI client for @fubonlife/ipk-api-axios-sdk",
+      "version" : "1.0.28-BETA",
+      "author" : "OpenAPI-Generator Contributors",
+      "main" : "./dist/index.js",
+      "dist" : {
+        "tarball" : "http://10.42.70.218:80/artifactory/api/npm/npm-local/@fubonlife/ipk-api-axios-sdk/-/@fubonlife/ipk-api-axios-sdk-1.0.28-BETA.tgz",
+        "shasum" : "36491160029b0635d98c361165c4eea2b622ae72"
+      },
+      "dependencies" : {
+        "axios" : "^0.21.1"
+      },
+      "devDependencies" : {
+        "@types/node" : "^12.11.5",
+        "typescript" : "^3.6.4"
+      },
+      "keywords" : [ "axios", "typescript", "openapi-client", "openapi-generator", "@fubonlife/ipk-api-axios-sdk" ],
+      "license" : "Unlicense",
+      "scripts" : {
+        "build" : "tsc --outDir dist/",
+        "prepublishOnly" : "npm run build"
+      },
+      "_id" : "@fubonlife/ipk-api-axios-sdk@1.0.28-BETA",
+      "typings" : "./dist/index.d.ts"
+    },
+    "1.0.36-BETA" : {
+      "name" : "@fubonlife/ipk-api-axios-sdk",
+      "description" : "OpenAPI client for @fubonlife/ipk-api-axios-sdk",
+      "version" : "1.0.36-BETA",
+      "author" : "OpenAPI-Generator Contributors",
+      "main" : "./dist/index.js",
+      "dist" : {
+        "tarball" : "http://10.42.70.218:80/artifactory/api/npm/npm-local/@fubonlife/ipk-api-axios-sdk/-/@fubonlife/ipk-api-axios-sdk-1.0.36-BETA.tgz",
+        "shasum" : "0ae14c2201c99fa872a7d22185b338da7c5d82b8"
+      },
+      "dependencies" : {
+        "axios" : "^0.21.1"
+      },
+      "devDependencies" : {
+        "@types/node" : "^12.11.5",
+        "typescript" : "^3.6.4"
+      },
+      "keywords" : [ "axios", "typescript", "openapi-client", "openapi-generator", "@fubonlife/ipk-api-axios-sdk" ],
+      "license" : "Unlicense",
+      "scripts" : {
+        "build" : "tsc --outDir dist/",
+        "prepublishOnly" : "npm run build"
+      },
+      "_id" : "@fubonlife/ipk-api-axios-sdk@1.0.36-BETA",
+      "typings" : "./dist/index.d.ts"
+    }
+  },
+  "author" : "OpenAPI-Generator Contributors",
+  "time" : {
+    "1.0.4-BETA" : "2021-12-15T07:15:26.066Z",
+    "1.0.33-BETA" : "2022-02-23T05:48:02.002Z",
+    "1.0.22-BETA" : "2022-01-03T06:42:03.504Z",
+    "1.0.7-BETA" : "2021-12-20T02:35:29.479Z",
+    "1.0.30-BETA" : "2022-01-26T03:54:46.096Z",
+    "1.0.19-BETA" : "2021-12-29T06:55:57.721Z",
+    "1.0.11-BETA" : "2021-12-27T09:34:33.610Z",
+    "1.0.16-BETA" : "2021-12-29T05:38:47.365Z",
+    "1.0.1-BETA" : "2021-12-13T06:30:00.908Z",
+    "1.0.9-BETA" : "2021-12-23T01:11:16.922Z",
+    "1.0.27-BETA" : "2022-01-19T06:13:33.414Z",
+    "1.0.31-BETA" : "2022-01-27T01:52:54.185Z",
+    "1.0.34-BETA" : "2022-02-23T07:54:18.529Z",
+    "1.0.20-BETA" : "2021-12-29T07:22:42.838Z",
+    "1.0.5-BETA" : "2021-12-16T06:56:52.846Z",
+    "modified" : "2022-03-09T10:02:18.460Z",
+    "1.0.23-BETA" : "2022-01-04T01:48:32.121Z",
+    "1.0.8-BETA" : "2021-12-21T06:52:05.105Z",
+    "1.0.2-BETA" : "2021-12-14T07:38:11.837Z",
+    "1.0.15-BETA" : "2021-12-29T05:29:45.731Z",
+    "1.0.12-BETA" : "2021-12-27T10:36:09.060Z",
+    "1.0.29-BETA" : "2022-01-25T06:27:22.344Z",
+    "created" : "2021-12-07T06:59:22.983Z",
+    "1.0.18-BETA" : "2021-12-29T06:40:47.286Z",
+    "1.0.26-BETA" : "2022-01-19T02:12:20.189Z",
+    "1.0.37-BETA" : "2022-03-09T10:02:18.460Z",
+    "1.0.35-BETA" : "2022-03-04T03:48:07.232Z",
+    "1.0.32-BETA" : "2022-02-23T04:08:51.391Z",
+    "1.0.24-BETA" : "2022-01-04T02:32:25.863Z",
+    "1.0.21-BETA" : "2021-12-30T04:21:44.165Z",
+    "1.0.6-BETA" : "2021-12-16T08:06:56.628Z",
+    "1.0.17-BETA" : "2021-12-29T06:31:53.228Z",
+    "1.0.3-BETA" : "2021-12-15T07:07:24.403Z",
+    "1.0.10-BETA" : "2021-12-23T06:57:23.705Z",
+    "1.0.13-BETA" : "2021-12-27T10:49:05.098Z",
+    "1.0.14-BETA" : "2021-12-29T03:57:04.468Z",
+    "1.0.25-BETA" : "2022-01-12T03:19:11.429Z",
+    "1.0.0-BETA" : "2021-12-07T06:59:22.983Z",
+    "1.0.28-BETA" : "2022-01-25T06:03:11.774Z",
+    "1.0.36-BETA" : "2022-03-09T09:25:06.675Z"
+  },
+  "users" : {
+  },
+  "keywords" : [ "axios", "typescript", "openapi-client", "openapi-generator", "@fubonlife/ipk-api-axios-sdk" ],
+  "license" : "Unlicense"
+}

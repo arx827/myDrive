@@ -1,0 +1,5 @@
+buildScripts:
+  - if [[ "\$DIM_SH_ENV" = "dev" ]]; then sh swarm-dev/cmd_package.sh; fi
+  - if [[ "\$DIM_SH_ENV" = "uat" ]]; then sh swarm-uat/cmd_package.sh; fi
+deployScripts:
+  - 
