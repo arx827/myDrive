@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="3" height="11" viewBox="0 0 3 11">
+  <defs>
+    <clipPath id="clip-image_alert">
+      <rect width="3" height="11"/>
+    </clipPath>
+  </defs>
+  <g id="image_alert" clip-path="url(#clip-image_alert)">
+    <g id="Group_16805" data-name="Group 16805">
+      <rect id="Rectangle_6521" data-name="Rectangle 6521" width="2.5" height="7" rx="1" transform="translate(0.25)" style="fill: #FFF"/>
+      <rect id="Rectangle_6522" data-name="Rectangle 6522" width="2.5" height="2" rx="1" transform="translate(0.25 9)" style="fill: #FFF"/>
+    </g>
+  </g>
+</svg>

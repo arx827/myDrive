@@ -1,0 +1,99 @@
+ .ime-floor{
+    position:absolute;
+    padding:0px 0px 0px 0px;
+    border:0;margin:0;border-spacing:0;
+    width: 94px;
+ }
+ .ime-door{
+    position:absolute;
+    padding:0px 0px 0px 0px;
+    border:0;margin:0;border-spacing:0;
+    width: 94px;
+ }
+ .ime-window{
+    position:absolute;
+    padding:0px 0px 0px 0px;
+    border:0;margin:0;border-spacing:0;
+    width: 94px;
+ }
+
+ .ime-Code{
+    position:absolute;
+    top:2px;
+    background-color:#13AEE3;
+    width:100px;
+    height:20px;
+    font-size:16px;
+ }
+
+ .ime-input{
+    width:80px;
+    background-color:#13AEE3;
+    height:20px;
+    font-size:14px;
+ }
+
+ .ime-table{
+    width:94px;
+    padding:0px 0px 0px 0px;
+    border: 1px solid rgb(0, 0, 0);
+ }
+ .ime-toolbar{
+    width:100%;
+    border: 1px solid rgb(0, 0, 0);
+    font-size:12px;
+    text-align: left;
+ }
+ .ime-item{
+    text-align: left;
+ }
+ .ime-item-num{
+    width:34px;
+    font-size: 14pt;
+ }
+ .ime-item-txt{
+    width:50px;
+    font-size: 14pt;
+    text-align: center;
+ }
+ .ime-cols-over{
+    background-color: gray;
+    color: white;
+ }
+ .ime-cols-out{
+    background-color: white;
+    color: black;
+ }
+ .ime-btnSPAN{
+    width:100%;
+    background-color:#DBDEDE;
+    font-size:14px;
+ }
+ .ime-btnPrev{
+    padding-left:0px;
+    padding-right:0px;
+    font-size:12px;
+    width:42px;
+    border-bottom-width: 1px;
+    border-left-width: 1px;
+    border-top-width: 1px;
+    border-right-width: 1px;
+    margin-right:0px;
+ }
+ .ime-btnNext{
+    padding-left:0px;
+    font-size:12px;
+    width:42px;
+    border-bottom-width: 1px;
+    border-left-width: 1px;
+    border-top-width: 1px;
+    border-right-width: 1px;
+ }
+ .ime-candidates{
+    filter:alpha(opacity=90);
+    opacity:0.9;
+    zoom:1;
+    color: black;
+    background-color: rgb(255, 255, 255);
+ }
+

@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="48" height="48" viewBox="0 0 48 48">
+  <defs>
+    <clipPath id="clip-image_IDface">
+      <rect width="48" height="48"/>
+    </clipPath>
+  </defs>
+  <g id="image_IDface" clip-path="url(#clip-image_IDface)">
+    <g id="Group_16915" data-name="Group 16915">
+      <g id="Rectangle_6557" data-name="Rectangle 6557" transform="translate(2 2)" fill="#fff" stroke="#fff" stroke-width="2">
+        <rect width="44" height="44" rx="22" stroke="none"/>
+        <rect x="-1" y="-1" width="46" height="46" rx="23" fill="none"/>
+      </g>
+      <path id="Icon_material-face" data-name="Icon material-face" d="M18.4,24.45a2.75,2.75,0,1,0,2.75,2.75A2.751,2.751,0,0,0,18.4,24.45Zm13.2,0a2.75,2.75,0,1,0,2.75,2.75A2.751,2.751,0,0,0,31.6,24.45ZM25,3A22,22,0,1,0,47,25,22.008,22.008,0,0,0,25,3Zm0,39.6A17.623,17.623,0,0,1,7.4,25a17.837,17.837,0,0,1,.11-1.892A22.136,22.136,0,0,0,18.972,11.294,21.943,21.943,0,0,0,36.924,20.6a21.473,21.473,0,0,0,4.95-.572A17.573,17.573,0,0,1,25,42.6Z" transform="translate(-1 -1)"/>
+    </g>
+  </g>
+</svg>

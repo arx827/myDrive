@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="14" height="14" viewBox="0 0 14 14">
+  <defs>
+    <clipPath id="clip-image_deletAlert">
+      <rect width="14" height="14"/>
+    </clipPath>
+  </defs>
+  <g id="image_deletAlert" clip-path="url(#clip-image_deletAlert)">
+    <g id="Group_16420" data-name="Group 16420" transform="translate(-0.707 -0.707)">
+      <path id="Path_11356" data-name="Path 11356" d="M0,0H15.413V15.413H0Z" fill="none"/>
+      <line id="Line_286" data-name="Line 286" x2="11.978" y2="11.978" transform="translate(1.723 1.713)" fill="none" stroke="#FFF" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"/>
+      <path id="Path_11357" data-name="Path 11357" d="M6.284,3h4.493l3.21,3.21V10.7m0,2.568A1.284,1.284,0,0,1,12.7,14.557H6.284A1.284,1.284,0,0,1,5,13.273V4.284" transform="translate(-1.787 -1.072)" fill="none" stroke="#FFF" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"/>
+    </g>
+  </g>
+</svg>

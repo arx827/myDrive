@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="15" height="17" viewBox="0 0 15 17">
+  <defs>
+    <clipPath id="clip-button_manual">
+      <rect width="15" height="17"/>
+    </clipPath>
+  </defs>
+  <g id="button_manual" clip-path="url(#clip-button_manual)">
+    <g id="Group_16796" data-name="Group 16796" transform="translate(-3 -2)">
+      <path id="Path_1406" data-name="Path 1406" d="M0,0H21V21H0Z" fill="none"/>
+      <path id="Path_1407" data-name="Path 1407" d="M14,3V6.5a.875.875,0,0,0,.875.875h3.5" transform="translate(-1.75 -0.375)" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+      <path id="Path_1408" data-name="Path 1408" d="M15.5,18.75H6.75A1.75,1.75,0,0,1,5,17V4.75A1.75,1.75,0,0,1,6.75,3h6.125L17.25,7.375V17A1.75,1.75,0,0,1,15.5,18.75Z" transform="translate(-0.625 -0.375)" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+      <path id="Path_1409" data-name="Path 1409" d="M11,14h.875v3.5h.875" transform="translate(-1.375 -1.75)" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+      <path id="Path_1410" data-name="Path 1410" d="M12,11h.009" transform="translate(-1.5 -1.375)" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+    </g>
+  </g>
+</svg>

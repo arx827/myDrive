@@ -1,0 +1,88 @@
+/* ------------- icon ------------- */
+.gio-icon {
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+}
+.icon-button {
+  padding: 7px;
+  background-color: $ICON-BUTTON-BG-BLUE;
+  border-radius: 4px;
+  border: 0;
+  min-width: 33px;
+  min-height: 33px;
+  text-align: center;
+  + .icon-button {
+    margin-left: 6px;
+  }
+  &.text-btn {
+    letter-spacing: 1px;
+  }
+  &.btn--gray {
+    background: $BUTTON-BG-GRAY;
+    color: $BUTTON-COLOR-WHITE;
+  }
+  &.icon__edit {
+    background-color: $BUTTON-BG-GRAY;
+    &.icon__edit--diabled{
+      background-color: $BUTTON-DISABLED-BG-GRAY;
+    }
+  }
+  &.icon__delete {
+    background-color: $ICON-BUTTON-BG-RED;
+    color: $BUTTON-COLOR-WHITE;
+  }
+  &.icon__upload {
+    letter-spacing: 1px;
+    display: flex;
+    align-items: center;
+    color: $COLOR-WHITE;
+    padding: 6px 20px;
+    &:hover, &:active, &:focus {
+      background-color: $BUTTON-BG-HOVER;
+    }
+  }
+  &.icon__upload-disabled {
+    letter-spacing: 1px;
+    display: flex;
+    align-items: center;
+    padding: 6px 20px;
+    color: $BUTTON-DISABLED-COLOR-GRAY;
+    background-color: $BUTTON-DISABLED-BG-GRAY;
+    &:hover, &:active, &:focus {
+      color: $BUTTON-DISABLED-COLOR-GRAY;
+      background-color: $BUTTON-DISABLED-BG-GRAY;
+    }
+  }
+}
+
+.gio-icon__home {
+  background: url('~@images/image_home.svg') no-repeat center;
+}
+.gio-icon__nextPage {
+  background: url('~@images/image_nextPage.svg') no-repeat center;
+  cursor: pointer;
+}
+.gio-icon__add {
+  background: url('~@images/button_add.svg') no-repeat center;
+}
+.gio-icon__download {
+  background: url('~@images/button_download.svg') no-repeat center;
+}
+.gio-icon__search {
+  background: url('~@images/button_search.svg') no-repeat center;
+}
+.icon-button__img {
+  display: block;
+  margin: 0 auto;
+  background-size: auto 19px;
+}
+.ant-input-group-addon {
+  .ant-btn {
+    padding: 0 10px;
+    background-color: $ICON-BUTTON-BG-BLUE;
+    &:hover {
+      background-color: $BUTTON-BG-HOVER;
+    }
+  }
+}
