@@ -122,13 +122,6 @@
 
       - [更版資訊](https://github.com/spring-projects/spring-boot/wiki#release-notes)
       
-      
-
-
-
-
-
-
   #### 02. SpringBoot2 入門
   #### 03. 了解自動配置原理
 
