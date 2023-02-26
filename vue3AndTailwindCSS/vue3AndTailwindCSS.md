@@ -627,6 +627,72 @@
 ## 第2章 佈局篇
   ![image](./emxyp36ehoszi7q.png)
 ### 單元 1 - 頁面佈局 - 桌機版
+  - #### Layout
+    路徑：`src/components/Layout.vue`
+    ```html
+      <template>
+        <div class="flex min-h-screen">
+          <!-- 左側選單欄 -->
+          <div class="flex flex-col justify-between bg-violet-600 text-white">
+            <div>
+              <!-- Logo -->
+              <div class="flex justify-center items-center h-16">
+                <heroicons-outline-book-open class="w-10 h-10 mr-2" />
+                <span class="text-xl font-medium">LucasPress</span>
+              </div>
+
+              <!-- 主要選單 -->
+              <ul>
+                <li>
+                  <RouterLink to="/" class="flex items-center px-5 py-3 text-white">
+                    <heroicons-outline-home class="w-5 h-5 mr-2" />
+                    首頁
+                  </RouterLink>
+                </li>
+                <li>
+                  <RouterLink to="/" class="flex items-center px-5 py-3 text-violet-400 hover:text-white">
+                    <heroicons-outline-document-text class="w-5 h-5 mr-2" />
+                    文章
+                  </RouterLink>
+                </li>
+                <li>
+                  <RouterLink to="/" class="flex items-center px-5 py-3 text-violet-400 hover:text-white">
+                    <heroicons-outline-user class="w-5 h-5 mr-2" />
+                    個人資料
+                  </RouterLink>
+                </li>
+              </ul>
+            </div>
+
+            <!-- 用戶名稱區塊 -->
+            <div class="flex justify-between items-center px-5 py-4 border-t border-violet-400">
+              <div class="flex items-center px-4 py-3">
+                <img class="w-8 h-8 rounded-full mr-2" src="https://cdn.jsdelivr.net/npm/slidev-theme-ycs77/public/images/lucas_v_avatar.jpg" alt="">
+                <div class="font-medium tracking-wide">Lucas 洛可</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 右側內容區 -->
+          <div class="flex-grow">
+            content
+          </div>
+        </div>
+      </template>
+
+      <script>
+      
+      </script>
+    ```
+
+  - #### index
+    路徑：`src/pages/index.vue`
+    ```html
+      <template>
+        <Layout>
+        </Layout>
+      </template>
+    ```
 ### 單元 2 - 頁面佈局 - 手機版
 ### 單元 3 - 抽離選單資料
 ### 單元 4 - 用戶功能選單
@@ -682,7 +748,115 @@
 -----
 
 ## 第5章 顯示資料篇 - 首頁&圖表
+  ![image](./zuaupucyu4krdqu.png)
 ### 單元 1 - 首頁 - 上排資料統計卡片
+  - #### index
+    路徑：`src/pages/index.vue`
+    ```xml
+      <template>
+        <Layout>
+          <PageHeader>
+            <template #title>首頁</template>
+          </PageHeader>
+
+          <div class="mt-6 grid grid-cols-12 gap-4">
+            <TrendingCard
+              class="md:col-span-12 lg:col-span-4"
+              icon="eye"
+              label="瀏覽人次"
+              value="145"
+              :is-up="true"
+              trending="12"
+            />
+            <TrendingCard
+              class="md:col-span-12 lg:col-span-4"
+              icon="star"
+              label="點讚數"
+              value="591"
+              :is-up="false"
+              trending="2"
+            />
+            <TrendingCard
+              class="md:col-span-12 lg:col-span-4"
+              icon="annotation"
+              label="留言數"
+              value="7"
+              :is-up="true"
+              trending="53"
+            />
+          </div>
+        </Layout>
+      </template>
+
+      <script>
+      </script>
+    ```
+
+  - #### 組件 - TrendingCard
+    路徑：`src/components/TrendingCard.vue`
+    ```xml
+      <template>
+        <Card class="flex items-center px-5 py-3">
+          <div class="w-10 h-10 flex justify-center items-center bg-violet-100 text-violet-600 rounded-full">
+            <heroicons-outline-eye v-if="icon === 'eye'"/>
+            <heroicons-outline-star v-else-if="icon === 'star'" />
+            <heroicons-outline-annotation v-else-if="icon === 'annotation'" />
+          </div>
+          <div class="ml-3 flex-grow">
+            <h4 class="text-gray-400 text-sm font-normal tracking-wider">
+              {{ label }}
+            </h4>
+            <div class="text-3xl font-semibold text-gray-800">
+              {{ value }}
+            </div>
+          </div>
+          <Trending :is-up="isUp" :value="trending" percentage />
+          
+        </Card>
+      </template>
+      <script>
+        export default {
+          props: {
+            icon: String,
+            label: String,
+            value: [Number, String],
+            isUp: Boolean,
+            trending: [Number, String],
+          },
+        }
+      </script>
+    ```
+
+  - #### 組件 - Trending
+    路徑：`src/components/Trending.vue`
+    ```xml
+      <template>
+        <div v-if="isUp" class="flex items-center text-green-500 font-medium self-end">
+          <heroicons-outline-trending-up />
+          <span class="ml-1">{{ value }}{{ percentage ? '%' : '' }}</span>
+        </div>
+        <div v-else class="flex items-center text-red-500 font-medium self-end">
+          <heroicons-outline-trending-down />
+          <span class="ml-1">{{ value }}{{ percentage ? '%' : '' }}</span>
+        </div>
+      </template>
+
+      <script>
+        export default {
+          props: {
+            isUp: {
+              type: Boolean,
+              default: true,
+            },
+            value: [Number, String],
+            percentage: {
+              type: Boolean,
+              default: false,
+            },
+          }
+        }
+      </script>
+    ```
 ### 單元 2 - 首頁 - 第二排圖表 | Chart.js 介紹 & 使用
   - [Chart.js](https://www.chartjs.org/)
 ### 單元 3 - 首頁 - 包裝圖表邏輯
@@ -721,6 +895,224 @@
 
 ### 單元 4 - 編輯器 - 插入連結樣式
   - [Link - Tiptap](https://tiptap.dev/api/marks/link)
+  - #### 安裝 
+    ```sh
+      npm i @tiptap/extension-link
+    ```
+  - #### 編輯時，避免誤觸另開視窗
+    路徑：src/components/Editor/Editor.vue
+    ```html
+      ...
+      <script>
+        import { useEditor, EditorContent } from '@tiptap/vue-3'
+        import Link from '@tiptap/extension-link'
+        export default {
+          setup(props, { emit }) {
+            const editor = useEditor({
+              ...
+              extensions: [
+                ...
+                Link.configure({
+                  autolink: false,
+                })
+              ],
+              ...
+            })
+            ...
+            return { editor }
+          },
+        }
+      </script>
+    ```
+  - #### 增加功能列
+    路徑：src/components/Editor/EditorMenuBar.vue
+    ```html
+      ...
+      <script>
+        export default {
+          ...
+          const items = [
+            ...
+            {
+              icon: 'link',
+              title: '連結',
+              action: url => {
+                //
+              },
+              isActive: () => editor.value.isActive('link'),
+            },
+            ...
+          ]
+        }
+      </script>
+    ```
+  - #### 增加網址編輯畫面
+    路徑：src/components/Editor/EditorMenuLink.vue
+    ```html
+      <template>
+        <div class="relative">
+          <button
+            class="mr-1 w-7 h-7 p-1 rounded"
+            :class="isActive() ? 'bg-violet-600 text-white' : 'hover:bg-violet-600 hover:text-white'"
+            :title="title"
+            @click="handleAction"
+          >
+            <RemixIcon :icon="icon" />
+          </button>
+
+          <div v-if="showPopover" class="mt-1.5 absolute top-full left-[-103px] md:left-auto w-[300px] p-2 flex items-center bg-white dark:bg-gray-600 border border-gray-200 dark:border-gray-500 rounded shadow-md">
+            <input
+              type="text"
+              ref="urlEl"
+              class="form-input text-sm px-2 py-1"
+              placeholder="連結..."
+              v-model="url"
+              @keyup.enter="handleSubmit"
+            >
+
+            <button
+              type="button"
+              title="插入連結"
+              class="ml-1 flex-shrink-0 w-7 h-7 p-1 hover:bg-violet-600 indigo:hover:bg-indigo-600 hover:text-white rounded"
+              @click="handleSubmit"
+            >
+              <RemixIcon icon="check-line" />
+            </button>
+
+            <button
+              type="button"
+              title="取消連結"
+              class="ml-1 flex-shrink-0 w-7 h-7 p-1 hover:bg-violet-600 indigo:hover:bg-indigo-600 hover:text-white rounded"
+              @click="handleUnlink"
+            >
+              <RemixIcon icon="link-unlink" />
+            </button>
+
+            <a
+              :href="url"
+              target="_blank"
+              title="瀏覽網頁"
+              class="ml-1 flex-shrink-0 w-7 h-7 p-1 hover:bg-violet-600 indigo:hover:bg-indigo-600 hover:text-white rounded"
+            >
+              <RemixIcon icon="external-link-line" />
+            </a>
+          </div>
+        </div>
+      </template>
+
+      <script>
+        import remixiconUrl from 'remixicon/fonts/remixicon.symbol.svg';
+
+        export default {
+          props: {
+            icon: {
+              type: String,
+              required: true,
+            },
+            title: {
+              type: String,
+              required: true,
+            },
+            action: {
+              type: Function,
+              required: true,
+            },
+            isActive: {
+              type: Function,
+              default: () => false,
+            },
+          },
+          setup(props) {
+            const editor = inject('editor')
+            const editorEvent = inject('editorEvent')
+
+            const url = ref('')
+            const urlEl = ref(null)
+
+            const showPopover = ref(false)
+
+            editorEvent.on('link-selected', attrs => {
+              url.value = attrs.href
+            })
+
+            onBeforeUnmount(() => {
+              editorEvent.off('link-selected')
+            })
+
+            watch(() => props.isActive(), isActive => {
+              if (!isActive) {
+                showPopover.value = false
+              }
+            })
+
+            const handleAction = () => {
+              showPopover.value = !showPopover.value
+
+              if (!showPopover.value) return
+
+              if (props.isActive()) {
+                // 更新連結
+                url.value = editor.value.getAttributes('link').href || ''
+              } else {
+                // 建立連結
+                url.value = ''
+                props.action(url.value)
+              }
+
+              setTimeout(() => {
+                urlEl.value.focus()
+              })
+            }
+            
+            const handleSubmit = () => {
+              props.action(url.value)
+              showPopover.value = false
+            }
+
+            const handleUnlink = () => {
+              props.action(null)
+              showPopover.value = false
+            }
+
+            return {
+              url,
+              urlEl,
+              showPopover,
+
+              handleAction,
+              handleSubmit,
+              handleUnlink,
+            }
+          },
+        }
+        </script>
+    ```
+
+    路徑：src/components/Editor/RemixIcon.vue
+    ```html
+      <template>
+        <svg class="w-full h-full fill-current">
+          <use :xlink:href="`${remixiconUrl}#ri-${icon}`" />
+        </svg>
+      </template>
+
+      <script>
+      import remixiconUrl from 'remixicon/fonts/remixicon.symbol.svg'
+
+      export default {
+        props: {
+          icon: {
+            type: String,
+            required: true,
+          },
+        },
+        setup() {
+          return { remixiconUrl }
+        },
+      }
+      </script>
+
+    ```
 
 ### 單元 5 - 編輯器 - 插入連結功能
 
@@ -742,6 +1134,220 @@
 
 ### 單元 1 - 優化 Tailwind CSS 的 12 個小技巧
   - [簡報](https://lucas-hiskio-2021-tailwindcss-slide.vercel.app/tailwindcss-12-tips/1)
+
+  - #### 1. 將 `佈局相關` 的class放在前面
+    大致建議順序：
+    `佈局`(dispaly / position / padding / margin)
+    ↓
+    `顏色/文字`(color / font / bg)
+    ↓
+    `其他`(shadow / ring / cursor)
+
+    <span style="color: red">✘</span> 不建議
+    ```html
+    <div class="shadow-lg uppercase p-4 opacity-25 text-xl border-t text-blue-500 flex">
+      <!-- ... -->
+    </div>
+    ```
+
+    <span style="color: green">✔︎</span> 建議
+    ```html
+    <div class="flex border-t p-4 text-xl uppercase text-blue-500 opacity-25 shadow-lg">
+      <!-- ... -->
+    </div>
+    ```
+    - 推薦插件：[Headwind(VSCode 插件)](https://marketplace.visualstudio.com/items?itemName=heybourn.headwind) (自動儲存時，會自動排序)
+
+  - #### 2. 將 `相同斷點` 的class放在一起
+    <span style="color: red">✘</span> 不建議
+    ```html
+    <div class="rounded sm:rounded-lg lg:rounded-2xl p-4 sm:p-6 lg:p-8">
+      <!-- ... -->
+    </div>
+    ```
+    <span style="color: green">✔︎</span> 建議
+    ```html
+    <div class="rounded p-4 sm:rounded-lg sm:p-6 lg:rounded-2xl lg:p-8">
+      <!-- ... -->
+    </div>
+    ```
+  
+  - #### 3. 將同屬性中 `所有變體(Variants)` 的class放在一起
+    <span style="color: red">✘</span> 不建議
+    ```html
+    <div class="text-gray-700 sm:hover:underline sm:text-center hover:text-gray-900">
+      <!-- ... -->
+    </div>
+    ```
+
+    <span style="color: green">✔︎</span> 建議
+    ```html
+    <div class="text-gray-700 hover:text-gray-900 sm:text-center sm:hover:underline">
+      <!-- ... -->
+    </div>
+    ```
+  
+  - #### 4. 為僅在 `特定條件` 中生效的class，使用`相同的斷點`
+    <span style="color: red">✘</span> 不建議
+    ```html
+    <div class="hidden justify-between items-center lg:flex">
+      <!-- ... -->
+    </div>
+    ```
+
+    <span style="color: green">✔︎</span> 建議
+    ```html
+    <div class="hidden lg:flex lg:justify-between lg:items-center">
+      <!-- ... -->
+    </div>
+    ```
+
+  - #### 5. 優先使用 margin-`top` 和 margin-`left`
+    <span style="color: red">✘</span> 不建議
+    ```html
+    <div>
+      <div class="mb-4">
+        Hello World!
+      </div>
+
+      <div>
+        一些文字......
+      </div>
+    </div>
+    ```
+
+    <span style="color: green">✔︎</span> 建議
+    ```html
+    <div>
+      <div>
+        Hello World!
+      </div>
+
+      <div class="mt-4">
+        一些文字......
+      </div>
+    </div>
+    ```
+
+  - #### 6. 但也有例外，如果元素需要`切換顯示`的時候就不適用
+    <span style="color: red">✘</span> 不建議
+    ```html
+    <div>
+      <p v-if="error" class="text-red-500">
+        密碼輸入錯誤
+      </p>
+      <input :class="error ? 'mt-2' : ''" type="password" />
+    </div>
+    ```
+    <span style="color: green">✔︎</span> 建議
+    ```html
+    <div>
+      <p v-if="error" class="mb-2 text-red-500">
+        密碼輸入錯誤
+      </p>
+      <input type="password" />
+    </div>
+    ```
+  
+  - #### 7. 把可選的元素設計成`易於刪除`
+    但是在複雜度和工作量不會差太多的前提下
+    <span style="color: red">✘</span> 不建議
+    ```html
+    <button class="pl-3 pr-4 py-2 ...">
+      <!-- 在這個按鈕中，icon 是可選的 -->
+      <svg><!-- ... --></svg>
+      <span class="ml-2">送出</span>
+    </button>
+    ```
+    <span style="color: green">✔︎</span> 建議
+    ```html
+    <button class="px-4 py-2 ...">
+      <!-- 把跟 icon 相關的 class 都集中起來，即使刪除 icon 也不會影響其他部分 -->
+      <svg class="-ml-1 mr-2"><!-- ... --></svg>
+      <span>送出</span>
+    </button>
+    ```
+
+  - #### 8. 把 margin設定盡量放在`最外層`的元素
+    <span style="color: red">✘</span> 不建議
+    ```html
+    <div>
+      <h1 class="mt-6">Hello World!</h1>
+      <p>一些文字......</p>
+    </div>
+    ```
+    <span style="color: green">✔︎</span> 建議
+    ```html
+    <div class="mt-6">
+      <h1>Hello World!</h1>
+      <p>一些文字......</p>
+    </div>
+    ```
+
+  - #### 9. 為迴圈的子元素設定`相同的class`
+    善用迴圈外層的父元素。使用負值的`margin`，和`flow-root`來去除 margin 的副作用並重新計算父元素高度。
+    <span style="color: red">✘</span> 不建議
+    ```html
+    <div class="mt-6">
+      <ul>
+        <li
+          v-for="(item, i) in items"
+          class="py-3"
+          :class="{
+            'pt-0': i === 0,
+            'pb-0': i === items.length - 1,
+          }"
+        >
+          <!-- ... -->
+        </li>
+      </ul>
+    </div>
+    ```
+    <span style="color: green">✔︎</span> 建議
+    ```html
+    <div class="mt-6 flow-root">
+      <ul class="-my-3">
+        <li v-for="item in items" class="py-3">
+          <!-- ... -->
+        </li>
+      </ul>
+    </div>
+    ```
+
+
+
+
+
+  
+
+
+  - #### 6. 但也有例外，如果元素需要`切換顯示`的時候就不適用
+    <span style="color: red">✘</span> 不建議
+    ```html
+
+    ```
+    <span style="color: green">✔︎</span> 建議
+    ```html
+
+    ```
+  - #### 6. 但也有例外，如果元素需要`切換顯示`的時候就不適用
+    <span style="color: red">✘</span> 不建議
+    ```html
+
+    ```
+    <span style="color: green">✔︎</span> 建議
+    ```html
+
+    ```
+  - #### 6. 但也有例外，如果元素需要`切換顯示`的時候就不適用
+    <span style="color: red">✘</span> 不建議
+    ```html
+
+    ```
+    <span style="color: green">✔︎</span> 建議
+    ```html
+
+    ```
 
 ### 單元 2 - 部署專案到 Vercel
   - [Vercel](https://vercel.com/)
