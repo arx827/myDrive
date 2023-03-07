@@ -84,8 +84,8 @@ Maven 也可被用於構建和管理各種項目，例如C#，Ruby，Scala 和�
     |Linux  |	/usr/local/apache-maven-3.3.9 |
     |Mac    |	/usr/local/apache-maven-3.3.9 |
 
-- ### 設置Maven 環境變量
-  添加環境變量MAVEN_HOME：
+- ### 設置Maven 環境變數
+  添加環境變數MAVEN_HOME：
 
   <table>
     <thead>
@@ -98,10 +98,10 @@ Maven 也可被用於構建和管理各種項目，例如C#，Ruby，Scala 和�
       <tr>
         <td>Windows</td>
         <td>
-          <p>右鍵"計算機"，選擇"屬性"，之後點擊"高級系統設置"，點擊"環境變量"，來設置環境變量，</p>
-          <p>有以下系統變量需要配置：新建系統變量MAVEN_HOME，變量值：E:\Maven\apache-maven-3.3.9</p>
+          <p>右鍵"計算機"，選擇"屬性"，之後點擊"高級系統設置"，點擊"環境變數"，來設置環境變數，</p>
+          <p>有以下系統變數需要配置：新建系統變數MAVEN_HOME，變數值：E:\Maven\apache-maven-3.3.9</p>
           <image src="./image_2.png"/>
-          <p>編輯系統變量Path，添加變量值：;%MAVEN_HOME%\bin</p>
+          <p>編輯系統變數Path，添加變數值：;%MAVEN_HOME%\bin</p>
           <image src="./image_3.png"/>
           注意：注意多個值之間需要有分號隔開，然後點擊確定。
         </td>
@@ -113,7 +113,7 @@ Maven 也可被用於構建和管理各種項目，例如C#，Ruby，Scala 和�
           <p># wget http://mirrors.hust.edu.cn/apache/maven/maven-3/3.3.9/binaries/apache-maven-3.3.9-bin.tar.gz # tar -xvf apache-maven-3.3.9-bin.tar.gz # sudo mv -f apache-maven-3.3.9 /usr/local/</p>
           <p>編輯/etc/profile文件sudo vim /etc/profile，在文件末尾添加如下代碼：</p>
           <p>export MAVEN_HOME = /usr/ local / apache - maven - 3.3 . 9 export PATH = $ { PATH }: $ { MAVEN_HOME }/ bin</p>
-          <p>保存文件，並運行如下命令使環境變量生效：</p>
+          <p>保存文件，並運行如下命令使環境變數生效：</p>
           <p># source /etc/profile</p>
           <p>在控制台輸入如下命令，如果能看到Maven 相關版本信息，則說明Maven 已經安裝成功：</p>
           <p># mvn -v</p>
@@ -128,7 +128,7 @@ Maven 也可被用於構建和管理各種項目，例如C#，Ruby，Scala 和�
           <p>$ sudo mv - f apache - maven - 3.3 . 9 / usr / local / </p>
           <p>編輯/etc/profile文件sudo vim /etc/profile，在文件末尾添加如下代碼：</p>
           <p>export MAVEN_HOME = /usr/ local / apache - maven - 3.3 . 9 export PATH = $ { PATH }: $ { MAVEN_HOME }/ bin</p>
-          <p>保存文件，並運行如下命令使環境變量生效：</p>
+          <p>保存文件，並運行如下命令使環境變數生效：</p>
           <p>$ source / etc / profile</p>
           <p>在控制台輸入如下命令，如果能看到Maven 相關版本信息，則說明Maven 已經安裝成功：</p>
           <p>$ mvn - v</p>

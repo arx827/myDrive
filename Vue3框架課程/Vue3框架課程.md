@@ -548,7 +548,7 @@
           // 上面的引用 ({ count: 0 }) 將不再被追蹤 (響應性連接已丟失！)
           state = reactive({ count: 1 })
         ```
-    - #### 用 `ref()` 定義響應式變量
+    - #### 用 `ref()` 定義響應式變數
       `reactive()` 的種種限制歸根結底是因為JavaScript 沒有可以作用於所有值類型的“引用” 機制。為此，Vue 提供了一個 `ref()` 方法來允許我們創建可以使用任何值類型的響應式ref：
       ```js
         import { ref } from 'vue';
