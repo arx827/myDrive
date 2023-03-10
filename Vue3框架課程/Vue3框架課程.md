@@ -214,10 +214,10 @@
         ```
       
         - 僅支援表達式，不合法範例如下：
-          | 範例 | 說明|
-          |----|-----|
-          | `{{ var a = 1 }}`| 不支援，因為 這是一個語句|
-          | `{{ if (ok) { return message } }}`|條件控制不支援 |
+          | 範例                               | 說明                     |
+          |------------------------------------|------------------------|
+          | `{{ var a = 1 }}`                  | 不支援，因為 這是一個語句 |
+          | `{{ if (ok) { return message } }}` | 條件控制不支援           |
 
   
   - ### v-bind (屬性綁定)
@@ -347,14 +347,14 @@
   - ### 事件修飾符
     為解決這一問題，Vue 為 `v-on` 提供了**事件修飾符**。
     修飾符是用 `.` 表示的指令後綴，包含以下這些：
-    | 修飾符 | 說明 | 範例 |
-    |-----|-----|-----|
-    |`.stop`| 單擊事件將停止傳遞 | `<a @click.stop="doThis"></a>` |
-    |`.prevent`| 停止html預設行為 | `<form @submit.prevent="onSubmit"></form>` |
-    |`.self`| 僅當 event.target是元素本身，才觸發 | `<div @click.self="doThat">...</div>` |
-    |`.capture`| 事件使用捕獲模式 | `<div @click.capture="doThis">...</div>` |
-    |`.once`| 點擊事件最多被觸發一次 | `<a @click.once="doThis"></a>` |
-    |`.passive`| 忽略`event.preventDefault()`，<br>`.prevent`會被忽略 | `<div @scroll.passive="onScroll">...</div>` |
+    | 修飾符     | 說明                                                | 範例                                        |
+    |------------|---------------------------------------------------|---------------------------------------------|
+    | `.stop`    | 單擊事件將停止傳遞                                  | `<a @click.stop="doThis"></a>`              |
+    | `.prevent` | 停止html預設行為                                    | `<form @submit.prevent="onSubmit"></form>`  |
+    | `.self`    | 僅當 event.target是元素本身，才觸發                  | `<div @click.self="doThat">...</div>`       |
+    | `.capture` | 事件使用捕獲模式                                    | `<div @click.capture="doThis">...</div>`    |
+    | `.once`    | 點擊事件最多被觸發一次                              | `<a @click.once="doThis"></a>`              |
+    | `.passive` | 忽略`event.preventDefault()`，<br>`.prevent`會被忽略 | `<div @scroll.passive="onScroll">...</div>` |
 
   - ### 按鍵修飾符
     - #### 按鍵別名

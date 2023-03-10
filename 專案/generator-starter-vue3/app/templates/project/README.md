@@ -47,23 +47,23 @@ $ npm install
 ![延伸模組](./md_image/md_image1.png)
 
   #### 延伸模組詳細
-  |名稱|延伸模組識別碼|說明、備註|
-  |---|----|---|
-  |Vue Language Features(Volar)|[Vue.volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar)|vue3 使用 Volar，vue2 使用 Vetur，需將 `Vetur`延伸模組 改為 disable|
-  |TypeScript Vue Plugin (Volar)|[Vue.vscode-typescript-vue-plugin](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin)|針對Vue中的 TypeScript 支援|
-  |Prettier - Code formatter|[SimonSiefke.prettier-vscode](https://marketplace.visualstudio.com/items?itemName=SimonSiefke.prettier-vscode)|VSCode Prettier 擴展|
-  |ESLint|[dbaeumer.vscode-eslint](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint)|VSCode ESLint 擴展|
-  |indent-rainbow|[oderwat.indent-rainbow](https://marketplace.visualstudio.com/items?itemName=oderwat.indent-rainbow)|為每個段落顯示不同顏色的縮進|
-  |Auto Close Tag|[formulahendry.auto-close-tag](https://marketplace.visualstudio.com/items?itemName=formulahendry.auto-close-tag)|自動增加尾標籤|
-  |Auto Rename Tag|[formulahendry.auto-rename-tag](https://marketplace.visualstudio.com/items?itemName=formulahendry.auto-rename-tag)|自動重命名標籤|
-  |GitLens — Git supercharged|[eamodio.gitlens](https://marketplace.visualstudio.com/items?itemName=eamodio.gitlens)|探索Git存儲庫，快速了解更改行與代碼塊人員及修改時間|
-  |NPM-Scripts|[traBpUkciP.vscode-npm-scripts](https://marketplace.visualstudio.com/items?itemName=traBpUkciP.vscode-npm-scripts)|提供 NPM 腳本介面|
-  |Svg Preview|[SimonSiefke.svg-preview](https://marketplace.visualstudio.com/items?itemName=SimonSiefke.svg-preview)|可即時編輯 與 預覽 SVG|
-  |TODO Highlight|[wayou.vscode-todo-highlight](https://marketplace.visualstudio.com/items?itemName=wayou.vscode-todo-highlight)|TODO標籤 Highlight設定|
-  |Todo Tree|[Gruntfuggly.todo-tree](https://marketplace.visualstudio.com/items?itemName=Gruntfuggly.todo-tree)|快速查找所有TODO等評論標籤|
-  |YAML|[redhat.vscode-yaml](https://marketplace.visualstudio.com/items?itemName=Gruntfuggly.todo-tree)|針對YAML語法支持|
-  |Import Cost|[wix.vscode-import-cost](https://marketplace.visualstudio.com/items?itemName=wix.vscode-import-cost)|可顯示 import 套件容量大小|
-  |Vue VSCode Snippets|[sdras.vue-vscode-snippets](https://marketplace.visualstudio.com/items?itemName=sdras.vue-vscode-snippets)|VSCode Vue 快速生成|
+    |名稱                          | 延伸模組識別碼                                                                                                           | 說明、備註|
+    |------------------------------|--------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------|
+    |Vue Language Features(Volar)  | [Vue.volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar)  |                                             | vue3 使用 Volar，vue2 使用 Vetur，需將 `Vetur`延伸模組 改為 disable|
+    |TypeScript Vue Plugin (Volar) | [Vue.vscode-typescript-vue-plugin](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin) | 針對Vue中的 TypeScript 支援|
+    |Prettier - Code formatter     | [SimonSiefke.prettier-vscode](https://marketplace.visualstudio.com/items?itemName=SimonSiefke.prettier-vscode)           | VSCode Prettier 擴展|
+    |ESLint                        | [dbaeumer.vscode-eslint](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint)                     | VSCode ESLint 擴展|
+    |indent-rainbow                | [oderwat.indent-rainbow](https://marketplace.visualstudio.com/items?itemName=oderwat.indent-rainbow)                     | 為每個段落顯示不同顏色的縮進|
+    |Auto Close Tag                | [formulahendry.auto-close-tag](https://marketplace.visualstudio.com/items?itemName=formulahendry.auto-close-tag)         | 自動增加尾標籤|
+    |Auto Rename Tag               | [formulahendry.auto-rename-tag](https://marketplace.visualstudio.com/items?itemName=formulahendry.auto-rename-tag)       | 自動重命名標籤|
+    |GitLens — Git supercharged    | [eamodio.gitlens](https://marketplace.visualstudio.com/items?itemName=eamodio.gitlens)                                   | 探索Git存儲庫，快速了解更改行與代碼塊人員及修改時間|
+    |NPM-Scripts                   | [traBpUkciP.vscode-npm-scripts](https://marketplace.visualstudio.com/items?itemName=traBpUkciP.vscode-npm-scripts)       | 提供 NPM 腳本介面|
+    |Svg Preview                   | [SimonSiefke.svg-preview](https://marketplace.visualstudio.com/items?itemName=SimonSiefke.svg-preview)                   | 可即時編輯 與 預覽 SVG|
+    |TODO Highlight                | [wayou.vscode-todo-highlight](https://marketplace.visualstudio.com/items?itemName=wayou.vscode-todo-highlight)           | TODO標籤 Highlight設定|
+    |Todo Tree                     | [Gruntfuggly.todo-tree](https://marketplace.visualstudio.com/items?itemName=Gruntfuggly.todo-tree)                       | 快速查找所有TODO等評論標籤|
+    |YAML                          | [redhat.vscode-yaml](https://marketplace.visualstudio.com/items?itemName=Gruntfuggly.todo-tree)                          | 針對YAML語法支持|
+    |Import Cost                   | [wix.vscode-import-cost](https://marketplace.visualstudio.com/items?itemName=wix.vscode-import-cost)                     | 可顯示 import 套件容量大小|
+    |Vue VSCode Snippets           | [sdras.vue-vscode-snippets](https://marketplace.visualstudio.com/items?itemName=sdras.vue-vscode-snippets)               | VSCode Vue 快速生成|
 
   > 安裝完畢須重啟IDE，使 TypeScript 及 Eslint 設定能正常運行
 

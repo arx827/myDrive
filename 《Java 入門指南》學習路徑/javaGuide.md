@@ -19,13 +19,13 @@ Java 為熱門的程式語言之一，中英文學習資源都琳瑯滿目，無
 
 ---
 
-| 主題 | 內容 |
-|-----|------|
-| 基礎篇 | 單元 1 - 認識 Java 語言<br>單元 2 - 在 NetBeans 8.2 建立專案並執行<br>單元 3 - 基本資料型態與參考<br>單元 4 - 變數命名規則<br>單元 5 - 運算式與陳述<br>單元 6 - 選擇<br>單元 7 - 迴圈<br>單元 8 - 類別<br>單元 9 - 封裝與建構子<br>單元 10 - 物件導向程式設計<br>單元 11 - 介面與套件<br>單元 12 - static |
-| 軟體開發篇 |單元 13 - Encrypt 類別<br>單元 14 - 實作 setCode()<br>單元 15 - 繼續測試<br>單元 16 - 修正後的數學公式<br>單元 17 - 編碼與解碼<br>單元 18 - 重構<br>單元 19 - 認識 Java API 與 JavaFX |
-| JavaFX App 篇 |單元 20 - MVC 模式與建立 JavaFX 專案<br>單元 21 - 利用 FXML 設計介面<br>單元 22 - 設定按鈕事件<br>單元 23 - 整合 Encrypt 類別<br>單元 24 - 存檔與載入<br>單元 25 - 完成版的 JavaFX 專案<br>單元 26 - 認識 Android App 開發 |
-| Android App 篇 |單元 27 - 建立 Android App 專案<br>單元 28 - string.xml 與 style.xml<br>單元 29 - 首頁<br>單元 30 - 換頁<br>單元 31 - 整合功能<br>單元 32 - 自訂 App 圖示與實機測試<br>單元 33 - 打包成 APK 或 Bundle 檔<br>單元 34 - 上架到 Google Play<br>單元 35 - 下一步 |
-| 範例程式篇 |📁Encrypt06 專案<br>__Encrypt06.java<br>📁Encrypt 專案<br>__Encrypt.java<br>📁JavaFX 專案<br>__FXMLDocument.fxml<br>__EncryptGUI.java<br>__FXMLDocumentController.java<br>📁AndroidAppDemo 專案<br>__strings.xml<br>__styles.xml<br>__activity_main.xml<br>__activity_encode.xml<br>__MainActivity.java<br>__EncodeActivity.java |
+| 主題           | 內容                                                                                                                                                                                                                                                                                                                             |
+|---------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| 基礎篇         | 單元 1 - 認識 Java 語言<br>單元 2 - 在 NetBeans 8.2 建立專案並執行<br>單元 3 - 基本資料型態與參考<br>單元 4 - 變數命名規則<br>單元 5 - 運算式與陳述<br>單元 6 - 選擇<br>單元 7 - 迴圈<br>單元 8 - 類別<br>單元 9 - 封裝與建構子<br>單元 10 - 物件導向程式設計<br>單元 11 - 介面與套件<br>單元 12 - static                        |
+| 軟體開發篇     | 單元 13 - Encrypt 類別<br>單元 14 - 實作 setCode()<br>單元 15 - 繼續測試<br>單元 16 - 修正後的數學公式<br>單元 17 - 編碼與解碼<br>單元 18 - 重構<br>單元 19 - 認識 Java API 與 JavaFX                                                                                                                                            |
+| JavaFX App 篇  | 單元 20 - MVC 模式與建立 JavaFX 專案<br>單元 21 - 利用 FXML 設計介面<br>單元 22 - 設定按鈕事件<br>單元 23 - 整合 Encrypt 類別<br>單元 24 - 存檔與載入<br>單元 25 - 完成版的 JavaFX 專案<br>單元 26 - 認識 Android App 開發                                                                                                       |
+| Android App 篇 | 單元 27 - 建立 Android App 專案<br>單元 28 - string.xml 與 style.xml<br>單元 29 - 首頁<br>單元 30 - 換頁<br>單元 31 - 整合功能<br>單元 32 - 自訂 App 圖示與實機測試<br>單元 33 - 打包成 APK 或 Bundle 檔<br>單元 34 - 上架到 Google Play<br>單元 35 - 下一步                                                                     |
+| 範例程式篇     | 📁Encrypt06 專案<br>__Encrypt06.java<br>📁Encrypt 專案<br>__Encrypt.java<br>📁JavaFX 專案<br>__FXMLDocument.fxml<br>__EncryptGUI.java<br>__FXMLDocumentController.java<br>📁AndroidAppDemo 專案<br>__strings.xml<br>__styles.xml<br>__activity_main.xml<br>__activity_encode.xml<br>__MainActivity.java<br>__EncodeActivity.java |
 
 > 本書所有範例與練習程式 - [下載連結](http://kaiching.org/pydoing/java-guide/JavaExample.zip)。
 
@@ -194,35 +194,35 @@ System.out.println(o.toString());
 - [第一堂課 認識 Java 程式語言：關鍵字、識別字、字面常數與運算子](http://kaiching.org/pydoing/java-lesson/java0105.html) ⇨ [YouTube 頁面連結](https://youtu.be/ogjVTa8z14A)
 
 ### 中英文術語對照表
-|英文|中文|
-|---|---|
-| Integrated Development Environment, IDE | 整合開發環境 |
-| Java Virtual Machine, JVM	Java | 虛擬機器 |
-| call | 呼叫 |
-| character | 字元 |
-| class	| 類別 |
-| comment	| 註解 |
-| constructor |	建構子 |
-| data type	| 資料型態 |
-| declare, declaration | 宣告 |
-| extension	| 副檔名 |
-| field	| 屬性 |
-| file | 檔案 |
-| identifier |識別字 |
-| keyword	| 關鍵字 |
-| method | 方法 |
-| modifier | 修飾子 |
-| object-oriented programming language | 物件導向程式語言 |
-| package	| 套件 |
-| parameter	| 參數 |
-| project	| 專案 |
-| reference	| 參考 |
-| reserved word	| 保留字 |
-| source code	| 原始程式碼 |
-| string | 字串 |
-| strong typing	| 強型態 |
-| text editor	| 文字編輯器 |
-| variable | 變數 |
+| 英文                                    | 中文             |
+|-----------------------------------------|----------------|
+| Integrated Development Environment, IDE | 整合開發環境     |
+| Java Virtual Machine, JVM	Java          | 虛擬機器         |
+| call                                    | 呼叫             |
+| character                               | 字元             |
+| class                                   | 類別             |
+| comment                                 | 註解             |
+| constructor                             | 建構子           |
+| data type                               | 資料型態         |
+| declare, declaration                    | 宣告             |
+| extension                               | 副檔名           |
+| field                                   | 屬性             |
+| file                                    | 檔案             |
+| identifier                              | 識別字           |
+| keyword                                 | 關鍵字           |
+| method                                  | 方法             |
+| modifier                                | 修飾子           |
+| object-oriented programming language    | 物件導向程式語言 |
+| package                                 | 套件             |
+| parameter                               | 參數             |
+| project                                 | 專案             |
+| reference                               | 參考             |
+| reserved word                           | 保留字           |
+| source code                             | 原始程式碼       |
+| string                                  | 字串             |
+| strong typing                           | 強型態           |
+| text editor                             | 文字編輯器       |
+| variable                                | 變數             |
 
 ### 重點整理
 1. Java 程式的副檔名為 .java 。
@@ -262,13 +262,13 @@ NetBeans 是開放原始碼的整合開發環境 (integrated development environ
 - [第一堂課 認識 Java 程式語言：利用 IntelliJ IDEA CE 建立 Java 專案](http://kaiching.org/pydoing/java-lesson/java0103.html) ⇨ [YouTube 頁面連結](https://youtu.be/fYy6D5Qttxw)
 
 ### 中英文術語對照表
-|英文|中文|
-|---|---|
+| 英文                                    | 中文         |
+|-----------------------------------------|------------|
 | Integrated Development Environment, IDE | 整合開發環境 |
-| primitive data type | 基本資料型態 |
-| project | 專案 |
-| programming | 程式設計 |
-| reference | 參考 |
+| primitive data type                     | 基本資料型態 |
+| project                                 | 專案         |
+| programming                             | 程式設計     |
+| reference                               | 參考         |
 
 ### 重點整理
 1. NetBeans 是寫 Java 程式的開放原始碼整合開發環境。
@@ -281,16 +281,16 @@ NetBeans 是開放原始碼的整合開發環境 (integrated development environ
 Java 中的變數 (variable) 有兩種，一種是基本資料型態 (primitive data type) ，另一種則是對物件 (object) 的參考 (reference)
 
 ### 基本資料型態共有八種，如下表
-| 型態類型 | 關鍵字 | 位元數 | 範圍 |
-|---------|-------|-------|-----|
-| 整數 | byte | 8 | -128 ～ 127 |
-| 整數 | short | 16 | -32768 ～ 32767 |
-| 整數 | int | 32 | -2147483648 ～ 2147483647 |
-| 整數 | long | 64 | -9223372036854775808 ～ 9223372036854775807 |
-| 浮點數 | float | 32 | 依據 IEEE 754 標準 |
-| 浮點數 | double | 64 | 依據 IEEE 754 標準 |
-| 布林值 | boolean | 1 | true, flase |
-| 字元 | char | 16 | '\u0000' - '\uffff' |
+| 型態類型 | 關鍵字  | 位元數 | 範圍                                       |
+|--------|---------|--------|--------------------------------------------|
+| 整數     | byte    | 8      | -128 ～ 127                                 |
+| 整數     | short   | 16     | -32768 ～ 32767                             |
+| 整數     | int     | 32     | -2147483648 ～ 2147483647                   |
+| 整數     | long    | 64     | -9223372036854775808 ～ 9223372036854775807 |
+| 浮點數   | float   | 32     | 依據 IEEE 754 標準                         |
+| 浮點數   | double  | 64     | 依據 IEEE 754 標準                         |
+| 布林值   | boolean | 1      | true, flase                                |
+| 字元     | char    | 16     | '\u0000' - '\uffff'                        |
 
 依資料所佔位元數的不同，
 整數有四種，
@@ -409,29 +409,29 @@ String r = "偷得浮生半日閒";
 - [第二堂課 基本資料型態與命名習慣：基本資料型態與參考](http://kaiching.org/pydoing/java-lesson/java0202.html) ⇨ [YouTube 頁面連結](https://youtu.be/7qqGpwCP7KQ)
 
 ### 中英文術語對照表
-|英文|中文|
-|---|---|
-| Boolean value | 布林值 |
-| character | 字元 |
-| class | 類別 |
-| constructor | 建構子 |
-| field | 屬性 |
-| floating-point number | 浮點數 |
-| garbage collector | 資源回收者 |
-| inherit, inheritance | 繼承 |
-| integer | 整數 |
-| keyword | 關鍵字 |
-| literal | 字面常數 |
-| method | 方法 |
-| object | 物件 |
+| 英文                                 | 中文             |
+|--------------------------------------|----------------|
+| Boolean value                        | 布林值           |
+| character                            | 字元             |
+| class                                | 類別             |
+| constructor                          | 建構子           |
+| field                                | 屬性             |
+| floating-point number                | 浮點數           |
+| garbage collector                    | 資源回收者       |
+| inherit, inheritance                 | 繼承             |
+| integer                              | 整數             |
+| keyword                              | 關鍵字           |
+| literal                              | 字面常數         |
+| method                               | 方法             |
+| object                               | 物件             |
 | object-oriented programming language | 物件導向程式語言 |
-| primitive data type | 基本資料型態 |
-| reference | 參考 |
-| string | 字串 |
-| subclass | 子類別 |
-| superclass | 父類別 |
-| value | 數值 |
-| variable | 變數 |
+| primitive data type                  | 基本資料型態     |
+| reference                            | 參考             |
+| string                               | 字串             |
+| subclass                             | 子類別           |
+| superclass                           | 父類別           |
+| value                                | 數值             |
+| variable                             | 變數             |
 
 ### 重點整理
 1. Java 的資料型態分成兩大類型，基本資料型態與參考。

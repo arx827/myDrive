@@ -201,14 +201,14 @@
   ![image_02](./image/image_2.png)
 
 ## 特殊字符表
-  |符號  |名稱         |說明               |
-  |:---:|-------------|------------------|
-  | { } |打開/關閉大括號|表示一個包含語句的塊。|
-  | ( ) |打開/關閉括弧  |主要與方法一起使用。  |
-  | [ ] |打開/關閉方括號|表示一個陣列。       |
-  | //  |雙斜線        |在註釋行之前。       |
-  | " " |打開/關閉引號  |附上一個字符串。     |
-  | ;   |分號          |標記語句的結束。     |
+| 符號 | 名稱            | 說明                  |
+|:----:|---------------|---------------------|
+| { }  | 打開/關閉大括號 | 表示一個包含語句的塊。 |
+| ( )  | 打開/關閉括弧   | 主要與方法一起使用。   |
+| [ ]  | 打開/關閉方括號 | 表示一個陣列。         |
+|  //  | 雙斜線          | 在註釋行之前。         |
+| " "  | 打開/關閉引號   | 附上一個字符串。       |
+|  ;   | 分號            | 標記語句的結束。       |
 
 ## Bugs
   - `Bugs` 是計算機程序或系統中的錯誤、瑕疵、故障或缺失，會產生不正確或意外的結果，或者以意想不到的方式出現。
@@ -229,3 +229,11 @@
     - 例如，[Google Java Style](https://google.github.io/styleguide/javaguide.html)。
   - 特別是，我們使用縮進來增強 視覺結構關係。
   - 在整個編程中保持一致！
+
+## 相關連結
+  - [計算機科學地圖](https://www.youtube.com/watch?v=SzJ46YA_RaA), 科學領域
+  - 技術樹：https://roadmap.sh/
+  - DeepMind：[AlphaGo](https://www.youtube.com/watch?v=WXuK6gekU1Y&ab_channel=DeepMind)，2017
+  - 關於計算機科學（或 AI）的電影：[這裡](https://www.csie.ntu.edu.tw/~d00922011/java/cs_films.pdf)
+  - 現代人工智能服務現已推出：[Lawerence Lin, 2023 AI 工具大集合 — 50+ 個人智慧軟件應用整合](https://limitpress.com/posts/2023-ai-%E5%B7%A5%E5%85%B7%E5%A4%A7%E9%9B%86%E5%90%88-%E8%B6%85%E9%81%8E-50-%E5%80%8B%E4%BA%BA%E5%B7%A5%E6%99%BA%E6%85%A7%E8%BB%9F%E9%AB%94%E6%87%89%E7%94%A8%E6%95%B4%E7%90%86/), 2023.1.29
+  - [孩子們編碼](https://www.google.com/doodles/celebrating-50-years-of-kids-coding?hl=zh-TW)
