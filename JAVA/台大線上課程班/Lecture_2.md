@@ -1,4 +1,4 @@
-# Lecture_2 數據類型、變數和運算符
+# Lecture_2: 數據類型、變數和運算符
   ```java
   class Lecture2 {
     "Data types, Variables, and Operators"
@@ -30,7 +30,7 @@
 
     這裡我們使用了兩種原始數據類型：`int`、`double`。
 
-    ![image_03](./image/image_3.png)
+    ![image_2-1](./image/image_2-1.png)
 
 ## 變數宣告
   - 首先，我們將變數命名為 `x`。
@@ -50,7 +50,7 @@
   - 這些規則也適用於 方法(methods)、類別(classes)...等。
 
 ## 保留字 (JDK8)
-  ![image_04](./image/image_4.png)
+  ![image_2-2](./image/image_2-2.png)
   - 本課程 覆蓋率：44 / 50 = 88%。
 
 ## 變數宣告 背後做的事情
@@ -62,7 +62,7 @@
   - 例如：1 個 int 值 分配 32 bits (or 4 byts)
 
 ## 變數 在 記憶體位置中的別名
-  ![image_05](./image/image_5.pㄒng)
+  ![image_2-3](./image/image_2-3.png)
   - 記憶體位置 是以 0x 文字開頭的 十六進制 (hex) 整數。
   - 十六進制數被廣泛用於表示，比如：內存地址和顏色。
 
@@ -76,7 +76,7 @@
   - 我們現在繼續介紹兩類數據型態：`primitive types` ( 原始型態 ) 和 `reference types` ( 參考型別 )。
 
 ## Primitive Types ( 原始型態 )
-  ![image_06](./image/image_6.png)
+  ![image_2-4](./image/image_2-4.png)
 
   原始型態 共 9 種型態：
   - `void`
@@ -166,7 +166,7 @@
   - 指數 E 通過 a（可能為負）對值進行加權2的冪。
 
 ## 示意圖
-  ![image_07](./image/image_7.png)
+  ![image_2-5](./image/image_2-5.png)
   
   - 這就是我們稱之為雙精度值的原因。
   - 雙精度值至少有16 位有效數字！
@@ -265,7 +265,7 @@
   - 作為類比，分子（String）由原子（characters）組成。
 
 ## ASCII (7-bit version)
-  ![image_08](./image/image_8.png)
+  ![image_2-6](./image/image_2-6.png)
 
 ## 範例
   ```java
@@ -433,7 +433,7 @@
     > y = x;
 
 ## 運算符優先級
-  ![image_9](./image/image_9.png)
+  ![image_2-7](./image/image_2-7.png)
 
   - 帶有賦值運算的 通通都是最後執行
 
@@ -475,14 +475,14 @@
   - 由此看來，記憶包含人類數據，也包含了 `參考(reference)`（即記憶體位址）。
 
 ## 簡化內存模型
-  ![image_10](./image/image_10.png)
+  ![image_2-8](./image/image_2-8.png)
 
   - `new` 動作的時候 才會 在 `heap` 出現。
   - 而 `input` 儲存的 只是 記憶體位置。
 
   - [Java面試 - JVM 的 Stack 和 Heap 差異](https://blog.marklee.tw/java-interview-jvm-stack-heap/)
 
-## 掃描儀提供的方法
+## Scanner 提供的方法
   | 方法         | 說明                                         |
   |:-------------|:-------------------------------------------|
   | nextByte()   | 讀取 Byte type 的整數。                       |
@@ -526,7 +526,7 @@
   編寫一個程序，將 3 個數字作為用戶輸入，併計算平均值和標準差。
 
   - 請注意，這三項的標準差由下式給出
-    ![image_11](./image/image_11.png)
+    ![image_2-9](./image/image_2-9.png)
 
   - 下面列出了兩種數學方法：
     - Math.pow(double x , double y) for xy。

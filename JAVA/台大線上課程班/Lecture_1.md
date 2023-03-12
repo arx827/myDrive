@@ -1,4 +1,4 @@
-# Lecture_1 介紹
+# Lecture_1: 介紹
 ## 預備知識
   - 假設大家都沒有學過的情況下
   - 課堂中的範例，基本上都是高中數學
@@ -155,7 +155,7 @@
   - 沒有用戶程序可以使主機崩潰。
 
 ## 編譯 與 運行 Java 程式
-  ![image_01](./image/image_1.png)
+  ![image_1-1](./image/image_1-1.png)
 
 ## 安裝軟體
   - 首先，需要安裝 Java Development Kit 8 ([JDK 8](https://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html))
@@ -198,7 +198,7 @@
   - 一個文件中最多只能有一個 `public class`。
 
 ## 如何運行一個 Java 程式
-  ![image_02](./image/image_2.png)
+  ![image_1-2](./image/image_1-2.png)
 
 ## 特殊字符表
 | 符號 | 名稱            | 說明                  |
