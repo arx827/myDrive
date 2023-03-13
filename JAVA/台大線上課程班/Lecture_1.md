@@ -236,4 +236,4 @@
   - DeepMind：[AlphaGo](https://www.youtube.com/watch?v=WXuK6gekU1Y&ab_channel=DeepMind)，2017
   - 關於計算機科學（或 AI）的電影：[這裡](https://www.csie.ntu.edu.tw/~d00922011/java/cs_films.pdf)
   - 現代人工智能服務現已推出：[Lawerence Lin, 2023 AI 工具大集合 — 50+ 個人智慧軟件應用整合](https://limitpress.com/posts/2023-ai-%E5%B7%A5%E5%85%B7%E5%A4%A7%E9%9B%86%E5%90%88-%E8%B6%85%E9%81%8E-50-%E5%80%8B%E4%BA%BA%E5%B7%A5%E6%99%BA%E6%85%A7%E8%BB%9F%E9%AB%94%E6%87%89%E7%94%A8%E6%95%B4%E7%90%86/), 2023.1.29
-  - [孩子們編碼](https://www.google.com/doodles/celebrating-50-years-of-kids-coding?hl=zh-TW)
+  - [kids coding](https://www.google.com/doodles/celebrating-50-years-of-kids-coding?hl=zh-TW)
