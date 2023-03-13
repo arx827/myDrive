@@ -326,4 +326,158 @@
   ```
 
 ## 跳轉語句
+  語句 break 和 continue 通常用於重複結構中以提供額外的控制。
+  - 循環在執行break 語句後立即終止。
+  - 循環在執行continue 語句後立即跳過本次迭代。
+  - 在實踐中，跳轉語句應該是有條件的。
 
+## 範例：素數測試
+  編寫一個程序，判斷輸入的整數是否為質數。
+
+  - 令 x > 1 為任何自然數。
+  - 如果 x 沒有正約數，則 x 是素數大於 1 和它自己。
+  - 將 x 除以所有更小的自然數很簡單比 x。
+  - 為了加速，您可以僅將 x 除以小於√X。 （為什麼？）
+
+  ```java
+  ...
+    Scanner input = new Scanner(System.in);
+    System.out.println("Enter x > 2?");
+    int x = input.nextInt();
+    boolean isPrime = true;
+    input.close();
+
+    for (int y = 2; y <= Math.sqrt(x); y++) {
+      if (x % y == 0) {
+        isPrime = false;
+        break;
+      }
+    }
+    if (isPrime) {
+      System.out.println("Prime");
+    } else {
+      System.out.println("Composite");
+    }
+  ...
+  ```
+
+## 練習
+  - 通過擴展上一頁中的程序，編寫一個程序列出所有小於 100000 的素數。
+    - 有 9592 個小於 100000 的素數。
+    - 9592 個素數中最大的一個是 99991。
+  - 通過檢查是否有素數來改進素數測試整數 m 從 2 到√n名詞
+    - 如何存儲已知的素數？
+  - 通過使用簡單的 6k ± 1 改進素數測試優化，比測試所有 m.8 快 3 倍
+
+## 另一個例子：收銀員問題（重訪）
+  - 使用帶有 break 語句的無限循環重做收銀員問題。
+
+  ```java
+  ...
+    while (true) {
+      System.out.println("Enter price?");
+      price = input.nextInt();
+      if (price <= 0) break; // Stop criteria.
+      total += price;
+    }
+    System.out.println("Total = " + total);
+  ...
+  ```
+
+## 等價：while 和 for 循環
+  如果預先知道重複次數，則可以使用 for 循環；否則，最好使用 while 循環。
+  - 人們總是可以將 for 循環轉換為 while 循環，反之亦然。
+
+## 示例：複利
+  編寫一個程序來確定投資價值翻倍的持有年限。
+
+  - 令balance 為當前金額，goal 為本次投資的目標，r 為年利率(%)。
+  - 我們可以使用複合公式
+      balance = balance × (1 + r / 100.0)。
+  - 然後輸出持有年份n 和最終餘額。
+
+  ```java
+  ...
+    int r = 18; // In percentage. int balance = 100;
+    int goal = 200;
+
+    int years = 0;
+    while (balance < goal) {
+      balance *= (1 + r / 100.0);
+      years++;
+    }
+    System.out.println("Holding years = " + years);
+    System.out.println("Balance = " + balance);
+  ...
+  ```
+
+  - 如果按月支付利息，您可以堅持幾個月才能達到目標？
+
+  ```java
+  ...
+    int years = 0; // Should be declared here; scope issue.
+    for (; balance < goal; years++) {
+      balance *= (1 + r / 100.0);
+    }
+  ...
+  ```
+
+  ```java
+  ...
+    int years = 1; // Why?
+    for (; ; years++) {
+      balance *= (1 + r / 100.0);
+      if (balance > goal) break;
+    }
+  ...
+  ```
+
+  - 將條件（中間語句）留空假定為真。
+
+## 嵌套循環示例
+  編寫一個程序來顯示一個 9 × 9 乘法表。
+
+  |1 |2 |3 |4 |5 |6 |7 |8 |9|
+  |--|--|--|--|--|--|--|--|--|
+  |2 |4 |6 |8 |10 |12 |14 |16 |18|
+  |3 |6 |9 |12 |15 |18 |21 |24 |27|
+  |4 |8 |12 |16 |20 |24 |28 |32 |36|
+  |5 |10 |15 |20 |25 |30 |35 |40 |45|
+  |6 |12 |18 |24 |30 |36 |42 |48 |54|
+  |7 |14 |21 |28 |35 |42 |49 |56 |63|
+  |8 |16 |24 |32 |40 |48 |56 |64 |72|
+  |9 |18 |27 |36 |45 |54 |63 |72 |81|
+
+  ```java
+  ...
+    public static void main(String[] args) {
+      for (int i = 1; i <= 9; ++i) {
+        
+        // In row i, output each j.
+        for (int j = 1; j <= 9; ++j) {
+          System.out.printf("%3d", i * j);
+        }
+        System.out.println();
+      }
+    }
+  ...
+  ```
+
+  - Foreach，內部循環從j=1 到j=9。
+  - 作為模擬，i 就像時鐘的時針，而 j
+  就像時鐘的分針一樣。
+
+## 題外話：輸出格式
+  - 使用System.out.printf() 顯示格式化輸出。
+  - 例如，
+
+    ```java
+    ...
+      System.out.printf("Pi = %4.2f", 3.1415926);
+      // Output 3.14.
+    ...
+    ```
+
+    ![image_4-8](./image/image_4-8.png)
+
+  - 不指定寬度，只顯示小數點後6位。
