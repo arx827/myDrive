@@ -94,7 +94,7 @@
   - 實際上，循環步驟（迭代）的數量是未知的，直到給出輸入數據。
 
 ## Loops 故障
-  很容易形成無限循環。
+  很容易形成 無窮迴圈。
 
   ```java
   ...
@@ -102,12 +102,12 @@
   ...
   ```
 
-  ### 循環的常見錯誤如下：
-  - 沒有 start;
-  - 沒有 stop;
-  - 不完整；
-  - 超過預期的迭代次數；
-  - （越來越多。）
+  - ### 循環的常見錯誤如下：
+    - 永遠沒有 start;
+    - 永遠沒有 stop;
+    - 不完整；
+    - 超過預期的迭代次數；
+    - （越來越多。）
 
 ## 範例（重新訪問）
   編寫一個程序，允許用戶重複輸入兩個隨機整數之和的新答案，直到正確為止。
@@ -122,15 +122,15 @@
   ...
   ```
 
-## 循環設計策略
-  - 確定需要重複的語句。
-  - 用適當的循環包裝這些語句。
-  - 設置 `繼續` 條件。
+## loop 設計策略
+  - 找出 需要重複的語句。
+  - 用適當的 loop 包裝這些語句 (while、for)。
+  - 設置 `繼續` 的條件。
 
-## 哨兵控制的循環
-  另一種控制循環的常用技術是在讀取和處理一組值時指定一個特殊值。
+## 哨兵控制的 loops
+  另一種控制 loop 的常用技術是在讀取和處理一組值時指定一個 `特殊值`。
 
-  - 這個特殊的輸入值稱為標記值，表示循環結束。
+  - 這個特殊的輸入值稱為 `標記值`，表示循環結束。
   - 例如，操作系統和GUI 應用程序。
 
 ## 範例：收銀員問題
@@ -141,12 +141,14 @@
     int total = 0, price = 0;
     Scanner input = new Scanner(System.in);
 
-    System.out.println("Enter price?"); price = input.nextInt();
+    System.out.println("Enter price?");
+    price = input.nextInt();
     while (price > 0) {
       total += price;
       System.out.println("Enter price?");
       price = input.nextInt();
-      // These two lines above repeat Line 5 and 6?!
+      // 上面這兩行重複了？
+      // 因為無論如何都必須讓他先詢問一次
     }
 
     System.out.println("Total = " + total);
@@ -155,7 +157,7 @@
   ```
 
 ## `do-while` Loops
-  do-while 循環類似於 while 循環，不同之處在於它首先執行循環體，然後檢查循環條件。
+  `do-while` Loop 類似於 `while` Loop，不同之處在於`do-while` 首先執行 Loop body，然後才檢查loop條件。
 
   ```java
   ...
@@ -165,8 +167,8 @@
   ...
   ```
 
-  - 不要錯過do-while 循環末尾的分號。
-  - do-while 循環也稱為後測試循環，與 while 循環相反，while 循環是前測試循環。
+  - 不要忘了 `do-while` loop結尾的分號。
+  - `do-while` loop 也稱為 `後測試循環`，與 while loop 相反，`while` loop是 `前測試循環`。
 
   ![image_4-2](./image/image_4-2.png)
 
@@ -190,7 +192,7 @@
   ```
 
 ## `for` Loops
-  for 循環使用整數計數器來控制主體執行的次數。
+  for loop 使用整數計數器來控制主體執行的次數。
 
   ```java
   ...
@@ -200,9 +202,9 @@
   ...
   ```
 
-  - `init 動作`：聲明並初始化一個計數器。
-  - `條件`：循環繼續。
-  - `增量`：每次迭代後計數器如何變化。
+  - `init action (初始化動作)`：聲明並初始化一個計數器。
+  - `condition (條件)`：loop繼續。
+  - `increment (增量)`：每次迭代後計數器如何變化。
 
 ## 範例
   編寫一個從 1 到 100 求和的程序。
@@ -226,8 +228,8 @@
   ...
   ```
 
-  - 請注意，左側列表第 3 行中的第一個循環語句僅執行一次。
-  - 確保您清楚for 循環的執行過程！
+  - 請注意，while loop 中的 `int i = 1`，僅執行一次。
+  - 確保您清楚for loop 的執行過程！
 
   ![image_4-3](./image/image_4-3.png)
 
@@ -237,8 +239,8 @@
     
     ```java
     ...
-      for (int i = 1; i <= 100; i++) {
-        // Good? if (i % 2 == 0) System.out.println(i);
+      for (int i = 1; i <= 100; i++) { // Good?
+        if (i % 2 == 0) System.out.println(i);
       }
     ...
     ```
@@ -247,38 +249,112 @@
     
     ```java
     ...
-      for (int i = 2; i <= 100; i += 2) {
-        // Which is better? System.out.println(i);
+      for (int i = 2; i <= 100; i += 2) { // Which is better?
+        System.out.println(i);
       }
     ...
     ```
 
+    以效率來看的話，i += 2 較快，因為只要執行 50 次。
+    但是一般性來說，i ++ 的做法，可以處理未知的陣列，而不是已知的 1 到 100。
+
 ## 更多練習
-  - 編寫一個程序來計算 N ≥ 0 的階乘
-    - 例如，10！ = 3628800。
-  - 編寫程序計算xn，其中 xⁿ 是雙精度值，n 是整數。
+  - 編寫一個程序來計算 N ≥ 0 的[階乘](https://en.wikipedia.org/wiki/Factorial)
+    - 例如，10！ = 3628800。 (10 * 9 * 8 *.... * 2 * 1)
+    ```java
+    // 自行練習
+    Scanner input = new Scanner(System.in);
+  
+    System.out.println("Enter factorial num?");
+    int factorialNum = input.nextInt(), total = factorialNum;
+    input.close();
+    for(int i = factorialNum - 1; i > 0; i--) {
+      total *= i;
+    }
+    System.out.println("Total = " + total);
+    ```
+
+    ```java
+    // 老師解答
+    int s1 = 1;
+    for(int i = 1; i<= 10; i++){
+      s1 = s1 * i;
+    }
+    System.out.println("10! = " + s1);
+    ```
+  
+  - 編寫程序計算xⁿ，其中 xⁿ 是雙精度值，n 是整數。
     - 例如，2.0¹⁰ = 1024.0。
+    ```java
+    // 自行練習
+    Scanner input = new Scanner(System.in);
+  
+    System.out.println("Enter X ?");
+    double x = input.nextInt();
+    System.out.println("Enter n 次方 ?");
+    int n = input.nextInt();
+    input.close();
+    double total = x;
+    for(int i = n - 1; i > 0; i--) {
+      total *= x;
+    }
+    System.out.println("Total = " + total);
+    ```
+
+    ```java
+    // 老師解答
+    int s2 = 1;
+    for(int i = 1; i<= 10; i++){
+      s2 = s2 * 2;
+    }
+    System.out.println("2^10 = " + s2);
+    ```
+  
   - 編寫一個程序來計算
     ![image_4-4](./image/image_4-4.png)
 
     - 例如，程序輸出3.141492，N = 10000。
-    - Inmath,p → π as N → ∞。
+    - 在數學中, p → π as N → ∞。
     - 與數學交朋友。
 
+    ```java
+    // 自行練習
+    Scanner input = new Scanner(System.in);
+		  
+    System.out.println("Enter N");
+    int N = input.nextInt();
+    input.close();
+    double total = 0;
+    for(int i = 0; i <= N; i++) {
+      int numPow = (int) Math.pow(-1, i);
+      total += (double) numPow / (2 * i + 1);
+    }
+    System.out.println("Total = " + (4 * total));
+    ```
+
+    ```java
+    // 老師解答
+    double s3 = 0;
+    for(int i = 0; i<= 10000; i++){
+      s3 = s3 + Math.pow(-1, i) / (2 * i + 1);
+    }
+    s3 = s3 * 4;
+    System.out.println("pi ~ " + s3);
+    ```
+
 ## 數值 範例：蒙特卡羅模擬
-  - 令n 為樣本點總數，m 為落在四分之一圓內的樣本點數（如下頁所示）。
+  - let n 為樣本點總數，m 為落在四分之一圓內的樣本點數（如下頁所示）。
     - 只需使用 `Math.random()` 繪製一個點。
   - 編寫程序通過計算來估計 π
     ![image_4-5](./image/image_4-5.png)
 
-    根據大數定律 (LLN)，其中 π^ → π 為 n → ∞。
+    根據大數定律 (LLN)，其中 π^ → π as n → ∞。
 
     ![image_4-6](./image/image_4-6.png)
 
     ```java
     ...
       public class MonteCarloDemo {
-
         public static void main(String[] args) {
           int N = 100000;
           int m = 0;
@@ -286,20 +362,24 @@
           for(int i=1; i <= N; i++){
             double x = Math.random();
             double y = Math.random();
+            // 落在 1/4 圓內
             if (x * x + y * y < 1) m++;
           }
 
           System.out.println("pi = " + 4.0 * m / N);
           // Why 4.0 but not 4?
+          // 因為結果 需要 double型態，避免轉型
         }
       }
     ...
     ```
+    - [蒙地卡羅方法](https://zh.wikipedia.org/wiki/%E8%92%99%E5%9C%B0%E5%8D%A1%E7%BE%85%E6%96%B9%E6%B3%95)
+    - [AlphaGo Zero 中的蒙特卡羅樹搜索 (MCTS)](https://jonathan-hui.medium.com/monte-carlo-tree-search-mcts-in-alphago-zero-8a403588276a)
 
 ## 數值 範例：二分法求根
   - 考慮多項式 x³ − x − 2。
-  - 現在我們繼續尋找根x′ 使得x′³ −x′ −2 = 0。
-  - 首先選擇 a = 1 和 b = 2 作為初始猜測。5
+  - 現在我們繼續尋找根x′ 使得 x′³ − x′ − 2 = 0。
+  - 首先選擇 a = 1 和 b = 2 作為初始猜測。
   - 利用二分法，將搜索區間反复劃分為兩個子區間，並決定下一個搜索區間是哪個子區間。
   - 由於浮點數的精度有限，我們通過設置誤差容限（例如ε = 1e − 9）提前終止算法，以在效率和準確性之間取得平衡。
 
@@ -307,11 +387,12 @@
 
   ```java
   ...
-    double a=1,b=2,c=0,eps=1e−9; 3
+    double a = 1, b = 2, c = 0, eps = 1e−9;
     while(b − a > eps){
       c = (a + b) / 2; // Find the middle point.
       double fa = a * a * a − a − 2;
       double fc = c * c * c − c − 2;
+      // c 是否跟 a 同邊，不是的情況下，b = c，再繼續算
       if (fa * fc < 0) {
         b = c;
       } else {
@@ -326,18 +407,19 @@
   ```
 
 ## 跳轉語句
-  語句 break 和 continue 通常用於重複結構中以提供額外的控制。
-  - 循環在執行break 語句後立即終止。
-  - 循環在執行continue 語句後立即跳過本次迭代。
-  - 在實踐中，跳轉語句應該是有條件的。
+  語句 `break` 和 `continue` 通常用於重複結構中以提供額外的控制。
+  - loop 在執行 `break` 語句後，立即終止。
+  - loop 在執行 `continue` 語句後，立即跳過本次迭代。
+  - 在實踐中，`跳轉語句` 應該是有條件的。
 
-## 範例：素數測試
-  編寫一個程序，判斷輸入的整數是否為質數。
+## 範例：質數測試
+  編寫一個程序，判斷輸入的整數是否為 `質數`。
 
   - 令 x > 1 為任何自然數。
-  - 如果 x 沒有正約數，則 x 是素數大於 1 和它自己。
+  - 如果 x 沒有正約數，則 x 是質數大於 1 和它自己。
   - 將 x 除以所有更小的自然數很簡單比 x。
   - 為了加速，您可以僅將 x 除以小於√X。 （為什麼？）
+    - 只要檢查半邊就好了，有約數的時候，會是√X以下的數 乘上 √X以上的數字。如 21 = 3 * 7。
 
   ```java
   ...
@@ -362,15 +444,15 @@
   ```
 
 ## 練習
-  - 通過擴展上一頁中的程序，編寫一個程序列出所有小於 100000 的素數。
-    - 有 9592 個小於 100000 的素數。
-    - 9592 個素數中最大的一個是 99991。
-  - 通過檢查是否有素數來改進素數測試整數 m 從 2 到√n名詞
-    - 如何存儲已知的素數？
-  - 通過使用簡單的 6k ± 1 改進素數測試優化，比測試所有 m.8 快 3 倍
+  - 通過擴展上一頁中的程序，編寫一個程序列出所有小於 100000 的質數。
+    - 有 9592 個小於 100000 的質數。
+    - 9592 個質數中最大的一個是 99991。
+  - 通過檢查是否有質數來改進質數測試整數 m 從 2 到√n
+    - 如何存儲已知的質數？
+  - 通過使用簡單的 6k ± 1 改進質數測試優化，比測試所有 m 快 3 倍
 
 ## 另一個例子：收銀員問題（重訪）
-  - 使用帶有 break 語句的無限循環重做收銀員問題。
+  - 使用帶有 `break` 語句的 `無窮迴圈` 重做收銀員問題。
 
   ```java
   ...
@@ -384,21 +466,25 @@
   ...
   ```
 
-## 等價：while 和 for 循環
-  如果預先知道重複次數，則可以使用 for 循環；否則，最好使用 while 循環。
-  - 人們總是可以將 for 循環轉換為 while 循環，反之亦然。
+## 等價：while 和 for loop
+  如果預先知道 重複 `次數`，則可以使用 `for loop`；
+  否則，最好使用 `while loop`。
+  - 人們總是可以將 `for loop` 轉換為 `while loop`，反之亦然。
 
 ## 示例：複利
   編寫一個程序來確定投資價值翻倍的持有年限。
 
-  - 令balance 為當前金額，goal 為本次投資的目標，r 為年利率(%)。
+  - 令 `balance` 為當前金額，
+  `goal` 為本次投資的目標，
+  `r` 為年利率(%)。
   - 我們可以使用複合公式
-      balance = balance × (1 + r / 100.0)。
-  - 然後輸出持有年份n 和最終餘額。
+      `balance = balance × (1 + r / 100.0)`。
+  - 然後輸出 `持有年份 n` 和 `最終餘額`。
 
   ```java
   ...
-    int r = 18; // In percentage. int balance = 100;
+    int r = 18; // 百分比.
+    int balance = 100;
     int goal = 200;
 
     int years = 0;
@@ -413,9 +499,19 @@
 
   - 如果按月支付利息，您可以堅持幾個月才能達到目標？
 
+  以下使用 for loop 實作
   ```java
+  // 錯誤用法
+    for (int years = 0; balance < goal; years++) {
+      balance *= (1 + r / 100.0);
+    }
+    ...
+    // scope issue. years 是 for 的區域變數
+    System.out.println("Holding years = " + years);
+
+  // 應該將 years 改寫成
   ...
-    int years = 0; // Should be declared here; scope issue.
+    int years = 0; // years 應該在這宣告; 
     for (; balance < goal; years++) {
       balance *= (1 + r / 100.0);
     }
@@ -432,7 +528,7 @@
   ...
   ```
 
-  - 將條件（中間語句）留空假定為真。
+  - 將條件（中間語句）留空假定為 true。
 
 ## 嵌套循環示例
   編寫一個程序來顯示一個 9 × 9 乘法表。
