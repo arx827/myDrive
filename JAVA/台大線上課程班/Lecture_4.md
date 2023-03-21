@@ -620,21 +620,49 @@
   ```java
   ...
     // Case (a)
-    for(inti=1;i<=5;i++){
+    System.out.println("CASE (A)");
+    for(int i=1; i<=5; i++){
       for (int j = 1; j <= i; j++) {
-        System.out.printf("*")
+        System.out.printf("*");
       }
       System.out.println();
     }
 
     // Case (b)
     // Your work here.
+    System.out.println("CASE (B)");
+    for(int i=5; i>=1; i--){
+      for (int j = 1; j <= i; j++) {
+        System.out.printf("*");
+      }
+      System.out.println();
+    }
 
     // Case (c)
     // Your work here.
+    System.out.println("CASE (C)");
+    for(int i=1; i<=5; i++){
+      for (int j = 1; j <= 5 - i; j++) {
+        System.out.printf(" ");
+      }
+      for (int j = 1; j <= i; j++) {
+        System.out.printf("*");
+      }
+      System.out.println();
+    }
 
     // Case (d)
     // Your work here.
+    System.out.println("CASE (D)");
+    for(int i=5; i>=1; i--){
+      for (int j = 1; j <= 5 - i; j++) {
+        System.out.printf(" ");
+      }
+      for (int j = 1; j <= i; j++) {
+        System.out.printf("*");
+      }
+      System.out.println();
+    }
   ...
   ```
 
@@ -656,28 +684,28 @@
   ...
   ```
 
-## 算法分析
+## 演算法分析
   - 同一個問題可能存在多種算法。
   - 然後我們通過測量它們的效率來比較這些算法。
   - 為此，我們根據輸入大小 n 估計運行時間的增長率。
-  - 我們繼續介紹時間複雜度的概念。
-  - 與時間複雜度類似，我們稍後會轉向空間複雜度的概念。
+  - 我們繼續介紹 `時間複雜度` 的概念。
+  - 與 `時間複雜度` 類似，我們稍後會轉向 `空間複雜度` 的概念。
 
 ## 範例：總和
   ```java
   ...
-    int sum = 0, i = 1; // Assign −> 2.
-    while (i <= n) {    // Compare −> n + 1.
-      sum=sum+i;        //Add and assign −> 2n.
-      ++i;              // Increase by 1 −> n.
+    int sum = 0, i = 1;     // Assign −> 2.
+    while (i <= n) {        // Compare −> n + 1. (1為loop停止的次數)
+      sum = sum + i;        // Add and assign −> 2n.
+      ++i;                  // Increase by 1 −> n.
     }
   ...
   ```
 
-  - 令n 為任何正數。
+  - 令 n 為任何正數。
   - 回想一下，所有的聲明都是在編譯時完成的。
   - 因此我們不計算它們。
-  - 總操作數為 4n + 3。
+  - 總操作數為 `4n + 3` ∈ `O(n)`。
 
 ## 練習：三角形
   ```java
@@ -690,26 +718,27 @@
   ...
   ```
 
-  - 我想，在算之前，可能是cn2+···加上一些c。
-  - 操作次數是多少？ （嘗試。）
+  - 我想，在算之前，可能是 cn²+···加上一些c。
+  - 操作次數是多少？ （嘗試。） ∈ `O(n²)`
 
 ## Big-O 表示法
   - 我們定義
-      f (n) ∈ O(g(n)) 當 n → ∞
+      f(n) ∈ O(g(n)) 當 n → ∞
     如果存在常數 c > 0 和一些 n0 使得
       f(n)≤c×g(n) ∀n≥n0.
-  - 請注意，f (n) ∈ O(g(n)) 等同於說f (n) 是O(g(n)) 的一個實例。
+  - 請注意，f(n) ∈ O(g(n)) 等同於說 f(n) 是 O(g(n)) 的一個實例。
 
   ![image_4-11](./image/image_4-11.png)
 
-  - f (n) ∈ O(g(n)) 表示f (n) 的漸近上界。
-  - 換句話說，big-O 描述了該算法的最壞情況。
+  - f(n) ∈ O(g(n)) 表示 f(n) 的漸近上界。
+  - 換句話說，`big-O` 描述了該算法的最壞情況。
 
 ## 討論（1/3)
   - 例如，考慮 8n² − 3n + 4。
-  - 對於足夠大的n，忽略最後兩項。 （為什麼？）
+  - 對於足夠大的 n，忽略最後兩項。 （為什麼？）
+    - 不足以影響
   - 很容易找到一個常數 c > 0，比如 c = 9。
-  - 所以我們有 8n² − 3n + 4 ∈ O(n²)。
+  - 所以我們有 8n² − 3n + 4 ∈ `O(n²)`。
   - 確定時間複雜度順序的快捷方式如下：
     - 只保留前導詞。
     - 降低係數。
@@ -719,7 +748,7 @@
   - 你能確定前兩個例子的時間複雜度順序嗎？
     - 總和：O(n)。
     - 三角形：O(n²)。
-  - 作為經驗法則，k 級循環的運行時間為 O(nᴷ)。
+  - 作為經驗法則，`k 級loop` 的運行時間為 `O(nᴷ)`。
 
 ## 你會選擇哪種算法
   基準
@@ -729,7 +758,7 @@
   | 10   | 10c₁  | 100c₂   | 1000c₃    |
   | 100  | 100c₁ | 10000c₂ | 1000000c₃ |
 
-  - 理論上，階數越小，算法越快。
+  - 理論上，`階數越小，算法越快`。
 
 ## 討論（3/3)
   - 值得注意的是
@@ -742,34 +771,56 @@
   ![image_4-12](./image/image_4-12.png)
 
 ## Table of Big-O
-| 生長順序    | 說明      | 範例              |
-|------------|----------|-------------------|
-| O (1)      | 獨立的 n  | x=y+z             |
-| O(log n)   | 分成兩半  | 二進制 搜尋       |
-| O(n)       | 一層 loop | 尋找 最大值       |
-| O(n log n) | 分而治之  | 合併 排序         |
-| O(n2)      | 兩層 loop | 檢查所有的 點     |
-| O(n3)      | 三層 loop | 檢查所有的 三元組 |
-| O(2n)      | 詳盡搜尋  | 檢查所有的 子集   |
+| 生長順序   | 說明                 | 範例              |
+|------------|--------------------|-------------------|
+| O(1)       | 跟 n 無關            | x=y+z             |
+| O(log n)   | 分成兩半             | 二進制 搜尋       |
+| O(n)       | 一層 loop            | 尋找 最大值       |
+| O(n log n) | 分而治之             | 合併 排序         |
+| O(n²)      | 兩層 loop            | 檢查所有的 點     |
+| O(n³)      | 三層 loop            | 檢查所有的 三元組 |
+| O(2ⁿ)      | 指數演算法, 詳盡搜尋 | 檢查所有的 子集   |
 
 ## 恆定時間算法
-  - 基本指令在 O(1) 時間內運行。 （為什麼？）
+  - 基本指令在 O(1) 時間內運行。（為什麼？）
+    - `+ - * /`， 因為 int size 都是相同的
   - 然而，並非每個語句都在 O(1) 時間內運行。
     - 例如，調用 Arrays.sort() 並不意味著排序很便宜。
-  - 一些算法的運行時間也是O(1)，例如算術公式。 （為什麼？）
+    - 排序 在底層 也有調用迴圈方式。
+  - 一些算法的運行時間也是 O(1)，例如算術公式。 （為什麼？）
+    - 例如：((上底 + 下底) ＊ 高) / 2
   - 然而，天下沒有免費的午餐。
-  - 應在通用性和效率之間進行權衡來取得平衡。
+  - 應在 `通用性 (一般性)` 和 `效率` 之間進行權衡來取得平衡。
+    - 做了假設 就沒 `通用性`
+    - 有了 `通用性`，再來追求 `效率`
 
-## 指數時間算法和可計算性
+## 指數時間演算法 和 可計算性
   - 我們實際上被許多棘手的問題壓得喘不過氣來。
-    - 例如，旅行商問題 (TSP)。
+    - 例如，旅行銷售員問題 (TSP)。
+    - `n! >> 2ⁿ` (n階 遠大於 2ⁿ)
   - 玩好遊戲更難。
-    - 查看 AlphaGo 和 AlphaStar.
+    - 查看 AlphaGo (圍棋) 和 AlphaStar.
   - 此外，還存在計算機無法解決的問題。
-    - Turing (1936) 證明了第一個無法解決的問題，稱為停機問題。
+    - Turing (1936) 證明了第一個 電腦無法解決的問題，稱為停機問題。
 
-## 對數時間算法
-  - 我們已經學習了一種對數時間算法。 （哪個？）
+## 對數時間演算法
+  - 我們已經學習了一種對數時間算法。（哪個？）
+    - 二分演算法
+    - 例如：
+      ```java
+      double a = 1, b = 2, c = 0, eps = 1e−9;
+      while(b − a > eps){
+        c = (a + b) / 2; // Find the middle point.
+        double fa = a * a * a − a − 2;
+        double fc = c * c * c − c − 2;
+        // c 是否跟 a 同邊，不是的情況下，b = c，再繼續算
+        if (fa * fc < 0) {
+          b = c;
+        } else {
+          a = c;
+        }
+      }
+      ```
 
 ## 突出的理論問題
   ![image_4-13](./image/image_4-13.png)
@@ -782,3 +833,6 @@
   - 我們還沒有任何嚴格的證據。
   - 這也是千年獎難題之一。
   
+## 相關連結
+  - [對數演算法](chrome-extension://efaidnbmnnnibpcajpcglclefindmkaj/https://www.csie.ntu.edu.tw/~d00922011/java/log-time_algorithm.pdf)
+  - [資料結構演算法](chrome-extension://efaidnbmnnnibpcajpcglclefindmkaj/https://algs4.cs.princeton.edu/lectures/keynote/14AnalysisOfAlgorithms.pdf)

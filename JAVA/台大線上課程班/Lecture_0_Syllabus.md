@@ -2,6 +2,8 @@
 
 [課程網址](https://www.csie.ntu.edu.tw/~d00922011/java.html)
 
+[課程檔案 - Sample Code](https://www.csie.ntu.edu.tw/~d00922011/java/379/code/)
+
 課程目標：
   - Java Programming (編程)
   - Computational thinking (計算思維)
