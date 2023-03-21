@@ -834,5 +834,5 @@
   - 這也是千年獎難題之一。
   
 ## 相關連結
-  - [對數演算法](chrome-extension://efaidnbmnnnibpcajpcglclefindmkaj/https://www.csie.ntu.edu.tw/~d00922011/java/log-time_algorithm.pdf)
-  - [資料結構演算法](chrome-extension://efaidnbmnnnibpcajpcglclefindmkaj/https://algs4.cs.princeton.edu/lectures/keynote/14AnalysisOfAlgorithms.pdf)
+  - [對數演算法](https://www.csie.ntu.edu.tw/~d00922011/java/log-time_algorithm.pdf)
+  - [資料結構演算法](https://algs4.cs.princeton.edu/lectures/keynote/14AnalysisOfAlgorithms.pdf)
