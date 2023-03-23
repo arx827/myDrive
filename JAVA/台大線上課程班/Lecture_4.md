@@ -400,7 +400,7 @@
       c = (a + b) / 2; // Find the middle point.
       double fa = a * a * a − a − 2;
       double fc = c * c * c − c − 2;
-      // c 是否跟 a 同邊，不是的情況下，b = c，再繼續算
+      // c 是否跟 a 不同邊，不是的情況下，表示值 在 c 與 a 中間，所以 將 b 點 移動到 c 上
       if (fa * fc < 0) {
         b = c;
       } else {
@@ -803,6 +803,23 @@
   - 此外，還存在計算機無法解決的問題。
     - Turing (1936) 證明了第一個 電腦無法解決的問題，稱為停機問題。
 
+## 來説說 `對數` 演算
+  ### 舉例說明：
+  ![image_4-14](./image/image_4-14.png)
+  - #### 線性時間搜尋法
+    一個一個查找，可從左開始 或 右邊開始找。
+  - #### 二元搜尋法
+    以二分法方式 搜尋。
+    以題目為例，5/32，需要切 `5` 次，
+    5(次數) = log₂ 32
+    32 = 2⁵，所以切 `5` 次。
+
+  ### 二元搜尋法求根
+  ![image_4-15](./image/image_4-15.png)
+
+  ### 當 ε = 10⁻¹⁰
+  ![image_4-16](./image/image_4-16.png)
+
 ## 對數時間演算法
   - 我們已經學習了一種對數時間算法。（哪個？）
     - 二分演算法
@@ -825,14 +842,20 @@
 ## 突出的理論問題
   ![image_4-13](./image/image_4-13.png)
   
-  - 通俗地說，P就是“在多項式時間內求解和驗證”的問題集。
-  - NP 是“在多項式時間內被驗證但在指數時間內求解”的問題集。
+  - 通俗地說，`P` 就是 “在多項式時間內 求解 和 驗證” 的問題集 
+    - 簡單的問題
+    - `O(nᴷ)`。
+  - `NP` 是“在多項式時間內被 驗證 但在 指數時間 內求解”的問題集。
+    - 困難的問題
+    - 驗證的時候是很快的
+    - 求解時 是 指數時間計算
   - 例如，身份驗證比破解帳戶更容易。
-  - 可以說P 比NP 更容易。
-  - P=？ NPisaskingifNPissolvedbyP.
+  - 可以說 `P` 比 `NP` 更容易。
+  - `P` =？ `NP` 是在問 `NP` 問題 是否由 `P` 解決。
   - 我們還沒有任何嚴格的證據。
   - 這也是千年獎難題之一。
   
 ## 相關連結
-  - [對數演算法](https://www.csie.ntu.edu.tw/~d00922011/java/log-time_algorithm.pdf)
-  - [資料結構演算法](https://algs4.cs.princeton.edu/lectures/keynote/14AnalysisOfAlgorithms.pdf)
+  - [對數演算法](https://www.csie.ntu.edu.tw/~d00922011/java/log-time_algorithm.pdf)、[本地檔案](./data/log-time_algorithm.pdf)
+  - [資料結構演算法](https://algs4.cs.princeton.edu/lectures/keynote/14AnalysisOfAlgorithms.pdf)、[本地檔案](./data/14AnalysisOfAlgorithms.pdf)
+
