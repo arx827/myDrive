@@ -162,7 +162,10 @@
       A[j] = tmp;       // 回填
     }
   ```
-  - 然而，這個樸素的算法被打破了！https://blog.codinghorror.com/the-danger-of-naivete/
+  - [然而，這個樸素的算法被打破了！](https://blog.codinghorror.com/the-danger-of-naivete/)
+    - 必須解決重複排列的問題 (有些交換過後，又重複交換)。
+    - 例如 123，必須像 3! = 6，而不是 3 * 3 * 3 = 27種。
+    - 必須改為 不重複排列(取後不放回)
   - 如何使用 異或（即∧）交換？
 
 ## 練習
@@ -172,227 +175,277 @@
   - 只需用0,1,...,51 標記 52 張卡片。
   - 隨機 洗牌 這些數字！
 
-```java
-  String[] suits = {"Club", "Diamond", "Heart", "Spade"};
-  String[] ranks = {"3", "4", "5", "6", "7", "8", "9","10", "J", "Q", "K", "A", "2"};
+  ```java
+    String[] suits = {"Club", "Diamond", "Heart", "Spade"};
+    String[] ranks = {"3", "4", "5", "6", "7", "8", "9","10", "J", "Q", "K", "A", "2"};
 
-  int size = 52;
-  int[] deck = new int[size];
-  for (int i = 0; i < deck.length; i++)
-    deck[i] = i;
+    int size = 52;
+    int[] deck = new int[size];
+    for (int i = 0; i < deck.length; i++)
+      deck[i] = i;
 
-  // 洗牌算法：正確版本。
-  for(int i = 0; i < size − 1; i++){
-    int j = (int) (Math.random() * (size − i)) + i;
-    int z = deck[i];
-    deck[i] = deck[j];
-    deck[j] = z;
+    // 洗牌算法：正確版本。
+    for(int i = 0; i < size − 1; i++){
+      int j = (int) (Math.random() * (size − i)) + i;
+      int z = deck[i];
+      deck[i] = deck[j];
+      deck[j] = z;
+    }
+    for(int i = 0; i < 5; i++) {
+      String suit = suits[deck[i] / 13];
+      String rank = ranks[deck[i] % 13];
+      System.out.printf("%−3s%8s\n", rank, suit);
+    }
+    ...
+  ```
+
+  - #### 累加的方法
+  ```java
+    // 從 0 開始到 size - 1，累加
+    for(int i = 0; i < size − 1; i++){
+      int j = (int) (Math.random() * (size − i)) + i;
+      // `random()*(size - i)` 縮小範圍後，再加上 `i` 做平移。
+      int z = deck[i];
+      deck[i] = deck[j];
+      deck[j] = z;
+    }
+  ```
+
+  - #### 遞減的方法
+  ```java
+  // 從 size - 1 開始到 0，遞減
+  for (int i = cards.Length - 1; i > 0; i--){
+    int n = rand.Next(i + 1);
+    // `random()*(size + i)` 縮小範圍。
+    Swap(ref cards[i], ref cards[n]);
   }
-  for(int i = 0; i < 5; i++) {
-    String suit = suits[deck[i] / 13];
-    String rank = ranks[deck[i] % 13];
-    System.out.printf("%−3s%8s\n", rank, suit);
-  }
-  ...
-```
+  ```
 
 ## 排序問題
-• 在計算機科學中，排序算法是一種將列表元素按特定順序排列的算法。 5
-• 例如，
-```java
-import java.util.Arrays; ...
-            int[] A = {5, 2, 8}; Arrays.sort(A); // Becomes 2 5 8.
-String[] B = {"www", "csie", "ntu", "edu", "tw"}; Arrays.sort(B); // Result?
-                    ...
-```
-- 事物的自然順序是什麼？
-
-## 練習：冒泡排序
-```java
- // Bubble sort: O(n ˆ 2).
-boolean swapped; do {
-swapped = false;
-for (int i = 0; i < A.length − 1; i++) {
-if (A[i] > A[i + 1]) { int tmp = A[i];
-A[i] = A[i + 1]; A[i + 1] = tmp; swapped = true;
-} }
-} while (swapped);
-```
-- 嘗試實現選擇排序和插入排序。
-See https://visualgo.net/en/sorting.
-
-## 搜索問題
-  為了找到給定鍵的位置，線性搜索按順序將鍵與所有元素進行比較。
+  - 在計算機科學中，排序算法是一種將列表元素按特定順序排列的算法。
+  - 例如，
+  
   ```java
-  // Linear search: O(n).
-int[] A = {...};
-int founds = 0;
-for (int i = 0; i < A.length; i++) {
-if (A[i] == key) { System.out.printf("%d ", i); founds++;
-} }
-System.out.println("\nFounds: " + founds);
-  ```
-  我們能做得更好嗎？
+    import java.util.Arrays;
+    ...
+      int[] A = {5, 2, 8};
+      Arrays.sort(A); // Becomes 2 5 8.
 
-## 備選方案：二進制搜索（重新訪問）
+      String[] B = {"www", "csie", "ntu", "edu", "tw"};
+      Arrays.sort(B); // Result? 會按照字典順序做排序
+    ...
+  ```
+
+## 練習：冒泡排序 (Bubble Sort)
+  ```java
+  ...
+    // Bubble sort: O(nˆ2).
+    boolean swapped;
+    do {
+      swapped = false;
+      for (int i = 0; i < A.length − 1; i++) {
+        if (A[i] > A[i + 1]) {
+          int tmp = A[i];
+          A[i] = A[i + 1];
+          A[i + 1] = tmp;
+          swapped = true;
+        }
+      }
+    } while (swapped);
+
+    // 一開始 swapped 設為 false，當有執行交換動作時，表示尚未排序完成，
+    // swapped 改為 true，會再執行 while 迴圈。
+  ```
+  <!-- TODO: -->
+  - 嘗試實現 選擇排序(SELECTION SORT) 和 插入排序(INSERTION SORT)
+  - [ 參考 ](https://visualgo.net/en/sorting)
+
+## 搜尋問題
+  - 為了找到給定鍵的位置，`線性搜索` 按順序將鍵與所有元素進行比較。
+
+  ```java
+  ...
+    // Linear search: O(n).
+    int[] A = {...};
+    int founds = 0;
+    for (int i = 0; i < A.length; i++) {
+      if (A[i] == key) {
+        System.out.printf("%d ", i);
+          founds++;
+      }
+    }
+    System.out.println("\nFounds: " + founds);
+  ```
+  - 我們能做得更好嗎？
+
+## 備選方案：二元搜尋法（重新訪問）
   ![image_5-2](./image/image_5-2.png)
 
   ```java
-  int idx = −1; // Why?
-int high = A.length − 1, low = 0, mid; while(high>low&&idx<0){
-mid = low + (high − low) / 2; // Why? if (A[mid] < key)
-low = mid + 1; else if (A[mid] > key)
-high = mid − 1;
-else
-idx = mid;
-}
-if (idx > −1)
-System.out.printf("%d: %d\n", key, idx);
-else
-System.out.printf("%d: not found\n", key);
+  ...
+    int idx = −1; // Why?
+    int high = A.length − 1,
+        low = 0,
+        mid;
+    while(high > low && idx < 0){
+      mid = low + (high − low) / 2; // Why?
+      if (A[mid] < key)
+        low = mid + 1;
+      else if (A[mid] > key)
+        high = mid − 1;
+      else
+        idx = mid;
+    }
+    if (idx > −1)
+      System.out.printf("%d: %d\n", key, idx);
+    else
+      System.out.printf("%d: not found\n", key);
+  ...
   ```
-
-
-但是，二分查找只有在數據排序後才起作用！
+  
+  - 但是，二分尋找 只有在 `數據排序後` 才起作用！
 
 ## 討論
+  - 如果數據是不可變動的(唯讀的)，對所有數據進行一次排序，然後進行二分查找。
+  - 如果數據可能一直在變化怎麼辦？
 
-• 如果數據是不可變的，對所有數據進行一次排序，然後進行二分查找。
-• 如果數據可能一直在變化怎麼辦？
+    | 場景/操作         |  插入   |   搜尋    |
+    |------------------|:------:|:--------:|
+    | 不可變的未排序數組  |  N/A   |   O(n)   |
+    | 不可變排序數組     |  N/A   | O(log n) |
+    | 可變未排序數組     | O (1)∗ |   O(n)   |
+    | 可變排序數組       |  O(n)  | O(log n) |
 
-| 場景/操作         |  插入   |   搜尋    |
-|------------------|:------:|:--------:|
-| 不可變的未排序數組  |  N/A   |   O(n)   |
-| 不可變排序數組     |  N/A   | O(log n) |
-| 可變未排序數組     | O (1)∗ |   O(n)   |
-| 可變排序數組       |  O(n)  | O(log n) |
+    ∗：通過附加在陣列後面插入。
 
-∗：通過附加在陣列後面插入。
-
-• 請注意，big-O 是累加的，只需保留最
-主導詞。
-• 例如，O(n) + O(log n) = O(n)。
+  - 請注意，big-O 是累加的，只需保留最 主導詞。
+  - 例如，O(n) + O(log n) = O(n)。
 
 ## 數據結構簡介
-• 數據結構是在程序中組織數據以使其高效執行的一種特殊方式。 7
-• 數據結構的選擇取決於應用程序。
-• 作為數組的替代品，鍊錶8 用於以不同於數組的方式存儲數據。
-• 未來您可能會看到大量數據結構。9 • 例如，優先級隊列、樹、圖形、表格。
-• 你也可以在 LeetCode.1 上找到很多關於數據結構的問題
+  - 數據結構 是在程序中組織數據，以使其高效執行的一種特殊方式，
+    [複雜度](http://bigocheatsheet.com/)。
+  - 數據結構的 選擇 取決於 應用程序。
+  - 作為 `Array` 的替代品，[linked lists](https://en.wikipedia.org/wiki/Linked_list) 用於以不同於數組的方式存儲數據。 
 
-7 請參閱 http://bigocheatsheet.com/。
-8 請參閱 https://en.wikipedia.org/wiki/Linked_list。
-9 請參閱 https://en.wikipedia.org/wiki/Java_collections_framework。
-10 請參閱 https://leetcode.com/。
+    ![image](./image/image_5-7.png)
 
-## 特刊：for-each 循環
+  - 未來您可能會看到 [大量數據結構](https://en.wikipedia.org/wiki/Java_collections_framework)。
+    - 例如，`priority queues`、`trees`、`graphs`、`table`。
+  -   [LeetCode](https://leetcode.com/) 上找到很多關於數據結構的問題
 
-• for-each 循環旨在以嚴格順序的方式從頭到尾迭代一組對象，例如數組和其他數據結構。
-```java
-T[] A = { ... };
-for (T element: A) {
-// Loop body.
-}
-```
+## 特刊：for-each Loops
+  - for-each loop 旨在以嚴格順序的方式從頭到尾 `迭代` 一組對象，
+  例如：Array 和 其他數據結構。
+
+  ```java
+    T[] A = { ... };
+    for (T element: A) {
+      // Loop body.
+    }
+  ```
 
 ## 範例
-```java
-int s = 0;
-for (int i = 0; i < A.length; ++i) {
-s += A[i];
-}
-```
+  ```java
+  int s = 0;
+  for (int i = 0; i < A.length; ++i) {
+    s += A[i];
+  }
+  ```
 
-```java
-int s = 0;
-for (int item: A) {
-s += item;
-}
-```
+  ```java
+  int s = 0;
+  for (int item: A) {
+    s += item;
+  }
+  ```
 
-
-• 簡短而甜美！
-• 迭代時可以考慮使用 for-each 循環
-在所有元素上，迭代順序無關緊要。
+  - 簡短而甜美！
+  - 當需要迭代 所有元素 且 迭代順序無關緊要，可以考慮使用 `for-each` loop。
 
 ## 鍛煉
-```java
-String[] letters = {"A", "B", "C", "D", "E"};
-for (String letter: letters) { System.out.printf("%s ", letter);
-}
-System.out.println();
-```
+  ```java
+  ...
+    String[] letters = {"A", "B", "C", "D", "E"};
+    for (String letter: letters) {
+      System.out.printf("%s ", letter);
+    }
+    System.out.println();
+  ...
+  ```
 
-## 特刊：克隆陣列
-• 在實踐中，人們可能出於某種目的複制一個數組。
-• 例如，
-```java
-int x = 1;
-int y = x; // You can say that y copies the value of x. x = 2;
-System.out.println(y); // Output 1.
-int[] A = {10, ...}; // Ignore the rest of elements. int[] B = A;
-A[0] = 100;
-System.out.println(B[0]); // Output?
-```
+## 特刊：Cloning 陣列
+  - 在實踐中，人們可能出於某種目的複制一個 Array。
+  - 例如，
+    ```java
+    ...
+      int x = 1;
+      int y = x; // You can say that y copies the value of x.
+      x = 2;
+      System.out.println(y); // Output 1.
 
-• 這稱為淺拷貝。
-• 如您所見，結果與我們的預期不同。
-（為什麼？）
+      int[] A = {10, ...}; // Ignore the rest of elements.
+      int[] B = A;
+      A[0] = 100;
+      System.out.println(B[0]); // Output? 100
+    ...
+    ```
 
-- 要克隆一個數組，您應該創建一個新數組並使用循環逐個複制每個元素。
-```java
-// Let A be an array to be copied.
-int[] B = new int[A.length];
-for (int i = 0; i < A.length; ++i) {
-B[i] = A[i];
-}
-```
+  - 這稱為 `淺拷貝`。
+  - 如您所見，結果與我們的預期不同。（為什麼？）
+    - B 複製的是 `heap 資料位置`。
 
-
-• 這稱為深拷貝。
+  - 要 Clone 一個數組，您應該創建一個新數組並使用循環逐個複制每個元素。
+    ```java
+    ...
+      // Let A be an array to be copied.
+      int[] B = new int[A.length];
+      for (int i = 0; i < A.length; ++i) {
+        B[i] = A[i];
+      }
+    ...
+    ```
+    - 這稱為 `深拷貝`。
 
 ## 超越一維數組
+  - 二維 或 更高維的陣列廣泛用於各種應用。
+    - 例如，RGB 圖像存儲為 3D 數組。
+  - 我們可以簡單地通過添加一個 [ ] 來創建二維 `T-type array`。
+  - 例如，
+    ```java
+    ...
+      int rows = 4; // Row size.
+      int cols = 3; // Column size.
+      T[][] M = new T[rows][cols];
+    ...
+    ```
 
-• 二維或更高維的陣列廣泛用於各種應用。
-• 例如，RGB 圖像存儲為 3D 數組。
-• 我們可以簡單地通過添加一個 [ ] 來創建二維 T 型數組
-它的大小。
-• 例如，
-
-```java
-int rows = 4; // Row size.
-int cols = 3; // Column size.
-T[][] M = new T[rows][cols];
-```
-
-![image_5-3](./image/image_5-3.png)
+    ![image_5-3](./image/image_5-3.png)
 
 ## 現實：二維數組的內存分配
-![image_5-4](./image/image_5-4.png)
+  ![image_5-4](./image/image_5-4.png)
 
-## 示例：二維數組和循環
-```java
-...
-int[][] A = {{10, 20, 30}, {40, 50}, {60}};
+## 範例：二維 Array 和 loop
+  ```java
+  ...
+    int[][] A = {{10, 20, 30}, {40, 50}, {60}};
 
-// Conventional for loop.
-for(inti=0;i<A.length;i++){
-for (int j = 0; j < A[i].length; j++)
+    // Conventional for loop.
+    for(int i = 0; i < A.length; i++){
+      for(int j = 0; j < A[i].length; j++)
         System.out.printf("%3d", A[i][j]);
-    System.out.println();
-}
+        System.out.println();
+    }
 
-// For−each loop.
-for (int[] row: A) { for (int item: row)
+    // For−each loop.
+    for (int[] row: A) {
+      for (int item: row)
         System.out.printf("%3d", item);
-    System.out.println();
-}
-```
-
-感謝 2016 年 1 月 31 日的熱烈討論。
+        System.out.println();
+    }
+  ```
 
 ## 練習：矩陣乘法
-令 Am×n 和 Bn×q 為兩個矩陣，其中 m, n, q ∈ N。編寫程序計算 C = A × B。
+  令 Am×n 和 Bn×q 為兩個矩陣，其中 m, n, q ∈ N。編寫程序計算 C = A × B。
 
 
 • 讓aik 和bkj 分別是A 和B 的元素。
@@ -447,3 +500,10 @@ A[j] = tmp;
 • 第二次嘗試在時間13 和空間上都更好。 • 它被稱為就地算法。
 
 實際上，第二次嘗試只用了第一次嘗試的一半時間。
+
+
+## 相關連結
+  - [正確的洗牌詳解](https://blog.codinghorror.com/the-danger-of-naivete/)
+  - [visualgo - 排序動畫演示](https://visualgo.net/en/sorting)
+  - [複雜度](http://bigocheatsheet.com/)
+  - [演算法 進階班](https://hackmd.io/@arthurzllu/SkZBc7GoI)
