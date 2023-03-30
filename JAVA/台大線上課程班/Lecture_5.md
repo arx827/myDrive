@@ -444,66 +444,91 @@
     }
   ```
 
-## 練習：矩陣乘法
+## 練習：矩陣相乘
   令 Am×n 和 Bn×q 為兩個矩陣，其中 m, n, q ∈ N。編寫程序計算 C = A × B。
+  - 讓aik 和bkj 分別是A 和B 的元素。
+  - 對於 k = 1,2,...,n，使用公式
+    ![image_5-5](./image/image_5-5.png)
+    對於 i = 1,2,...,m 和對於 j = 1,2,...,q。
+  - 它需要O(n3) 的時間。 （為什麼？）
 
+## (Native) Array vs.ArrayList
+  ```java
+  ...
+    // Native Array
+    int[] A = new int[3]; // The size should be preset.
+    A[0] = 100;
+    A[1] = 200;
+    A[2] = 300;
+    for (int item: A)
+      System.out.printf("%d ", item);
+      System.out.println();
+    
+    // ArrayList
+    ArrayList<Integer> B = new ArrayList<>(); // Size?
+    B.add(100);
+    B.add(200);
+    B.add(300);
+    System.out.println(B); // Short and sweet!
 
-• 讓aik 和bkj 分別是A 和B 的元素。
-• 對於 k = 1,2,...,n，使用公式
-![image_5-5](./image/image_5-5.png)
-對於 i = 1,2,...,m 和對於 j = 1,2,...,q。
-• 它需要O(n3) 的時間。 （為什麼？）
+    ArrayList<String> lang = new ArrayList<>();
+    lang.add("Java");
+    lang.add("C++");
+    lang.add("Python");
+    System.out.println(lang);
+  ...
+  ```
+  - Native Array 是最基本的數據結構，但不方便。
+  - 如何調整已滿數組的大小？
+  - 實際上，您應該使用 `ArrayList<E>`，其中 `E` 是用戶給定的型態。
 
-## (Native) 數組 vs.數組列表
-```java
- int[] A = new int[3]; // The size should be preset. A[0] = 100; A[1] = 200; A[2] = 300;
-for (int item: A) System.out.printf("%d ", item); System.out.println();
-ArrayList<Integer> B = new ArrayList<>(); // Size? B.add(100); B.add(200); B.add(300); System.out.println(B); // Short and sweet!
-```
-• 本機數組是最基本的數據結構，但不方便。
-• 如何調整已滿數組的大小？
-• 實際上，您應該使用 ArrayList<E>，其中 E 是
-用戶給定的類型。 12
+  這稱為泛型。請繼續關注 Java Programming 2。
 
-這稱為泛型。請繼續關注 Java Programming 2。
+## 案例研究：倒序陣列
+  - 編寫一個程序，將 Array 倒序排列。
+  - 令A 為 原始Array。
+  - 第一次嘗試是創建另一個具有相同大小的Array，並將每個元素從A 複製到B，這是對新Array的引用。
 
-## 案例研究：倒車陣列
-
-• 編寫一個程序，將數組倒序排列。
-• 令A 為原始數組。
-• 第一次嘗試是創建另一個具有相同大小的數組並將每個元素從A 複製到B，這是對新數組的引用。
-```java
-int[] A = {1, 2, 3, 4, 5};
-int[] B = new int[A.length];
-for (int i = 0; i < A.length; i++) {
-    B[A.length − 1 − i] = A[i];
-}
-A = B; // Why?
-```
+  ```java
+  ...
+  int[] A = {1, 2, 3, 4, 5};
+  int[] B = new int[A.length];
+  for (int i = 0; i < A.length; i++) {
+      B[A.length − 1 − i] = A[i];
+  }
+  A = B; // Why?
+  // 將B 回填A
+  ...
+  ```
 
 ## 另一個嘗試
-```java
-int[] A = {1, 2, 3, 4, 5};
-for (int i = 0; i < A.length / 2; i++) {
-int j = A.length − 1 − i; int tmp = A[i];
-A[i] = A[j];
-A[j] = tmp;
-}
-```
+  ```java
+  ...
+    int[] A = {1, 2, 3, 4, 5};
+    for (int i = 0; i < A.length / 2; i++) {
+      int j = A.length − 1 − i;
+      // 交換位置
+      int tmp = A[i];
+      A[i] = A[j];
+      A[j] = tmp;
+    }
+  ...
+  ```
+  ![image_5-8](./image/image_5-8.png)
 
-| 方法        | 時間複雜度   | 空間複雜度  |
-|------------|------------|------------|
-| First try  | O(n)       | O(n)       |
-| Second try | O(n)       | O (1)      |
+  | 方法        | 時間複雜度   | 空間複雜度  |
+  |------------|------------|------------|
+  | First try  | O(n)       | O(n)       |
+  | Second try | O(n)       | O (1)      |
 
-
-• 第二次嘗試在時間13 和空間上都更好。 • 它被稱為就地算法。
-
-實際上，第二次嘗試只用了第一次嘗試的一半時間。
-
+  - 第二次嘗試在 `時間 (實際上，第二次嘗試只用了第一次嘗試的一半時間)` 和 `空間` 上都更好。
+  - 它被稱為就 `(in-place algorithm) 原地算法`。
 
 ## 相關連結
   - [正確的洗牌詳解](https://blog.codinghorror.com/the-danger-of-naivete/)
   - [visualgo - 排序動畫演示](https://visualgo.net/en/sorting)
   - [複雜度](http://bigocheatsheet.com/)
+  - [linked lists](https://en.wikipedia.org/wiki/Linked_list)
+  - [大量數據結構](https://en.wikipedia.org/wiki/Java_collections_framework)
+  - [LeetCode](https://leetcode.com/)
   - [演算法 進階班](https://hackmd.io/@arthurzllu/SkZBc7GoI)
