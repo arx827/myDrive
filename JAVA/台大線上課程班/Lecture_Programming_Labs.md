@@ -161,6 +161,7 @@
 ---
 
 ## Lab 3 Performance Benchmark for Sorting Algorithms (排序算法的性能基準)
+  (Lecture_5)
   首先，實現課堂上提到的三種排序算法（`冒泡排序`、`選擇排序` 和 `插入排序`）。
   然後將這些排序算法的 `運行時間` 與 `Arrays.sort()` （[在此處](https://docs.oracle.com/javase/8/docs/api/java/util/Arrays.html#sort-int:A-) 查看其 API ）進行比較。
   由於這些基於比較的排序算法的性能對數據序列的順序很敏感，我建議你可以計算各種大小的 `平均運行時間` 並為這四種算法做一個基準（使用加倍假設），如下所示.
@@ -204,3 +205,31 @@
   <!-- TODO: -->
   - #### 實驗 3-5（可選）
     實現在 O(n log n) 時間內運行的快速排序算法。您可以參考維基百科中的 [快速排序](https://en.wikipedia.org/wiki/Quicksort)。
+
+## Lab 4 Fast Power Using Recursion (使用遞迴的快速功率)
+  (Lecture_6)
+  令 x 為任何實數，n 為任何非負整數。編寫一個程式，通過 `遞迴` 計算 x^n。
+  例如，2^10 = 1024。盡量讓你的程序在 `O(log n)` 時間內運行。
+  請注意，您不得在解決方案中使用 `Math.pow()` 和 `任何 loop`。
+
+  <!-- TODO: -->
+  - #### 練習
+
+  - #### 實驗 4-1（可選）
+    將您的解決方案與原始方法（在 O(n) 時間內運行）進行比較。報告加速。
+    ![image_programming_lab4_1](./image/image_programming_lab4_1.png)
+
+  - #### 實驗 4-2（可選）
+    如您所見，當 exp 超過 1000 時會發生雙重溢出。要計算正確的數字，您可以對任意數字使用 BigDecimal。
+
+  - #### 實驗 4-3（可選）
+    修改負 n 的解決方案。
+
+  - #### 實驗 4-4（可選）
+    將遞歸版本轉換為循環版本。
+
+  - #### 實驗 4-5（可選）
+    在您的解決方案中引入按位運算符 (&) 和移位運算符 (>>)。
+
+  - #### 實驗 4-6（可選）
+    令 M 為任何正整數值。編寫一個函數來計算 n = 10000000 的 x^n mod M。您可以使用多項式餘數定理（參見[此處](https://en.wikipedia.org/wiki/Polynomial_remainder_theorem)）。

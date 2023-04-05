@@ -532,3 +532,4 @@
   - [大量數據結構](https://en.wikipedia.org/wiki/Java_collections_framework)
   - [LeetCode](https://leetcode.com/)
   - [演算法 進階班](https://hackmd.io/@arthurzllu/SkZBc7GoI)
+  - 普林斯頓大學的[初等排序](https://algs4.cs.princeton.edu/lectures/keynote/21ElementarySorts.pdf)、[歸併排序](https://algs4.cs.princeton.edu/lectures/keynote/22Mergesort.pdf)和[快速排序](https://algs4.cs.princeton.edu/lectures/keynote/23Quicksort.pdf)
