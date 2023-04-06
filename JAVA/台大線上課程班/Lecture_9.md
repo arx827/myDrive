@@ -15,8 +15,8 @@
 非常有用的開始：Sun/Oracle Java 教程
   – http://docs.oracle.com/javase/tutorial/uiswing/index.html
 
-Mike Hoton 的幻燈片/示例代碼來自 CSE 331 Sp12（第 23 課，
-24 個更廣泛的小部件示例）
+Mike Hoton 的幻燈片/範例代碼來自 CSE 331 Sp12（第 23 課，
+24 個更廣泛的小部件範例）
   – http://courses.cs.washington.edu/courses/cse331/12sp/lectures/lect23-GUI.pdf
   – http://courses.cs.washington.edu/courses/cse331/12sp/lectures/lect24-Graphics.pdf
   – http://courses.cs.washington.edu/courses/cse331/12sp/lectures/lect23-GUI-code.zip
@@ -27,8 +27,8 @@ Mike Hoton 的幻燈片/示例代碼來自 CSE 331 Sp12（第 23 課，
 
 ## 為什麼要研究 GUI？
 • 呃，因為圖形用戶界面很常見（duh J）——而且很有趣！
-• 使用繼承來組織大型類庫的經典示例
-– OOP 優勢的最佳（？）示例
+• 使用繼承來組織大型類庫的經典範例
+– OOP 優勢的最佳（？）範例
 • 使用龐大的 API – 並學習如何（不）處理所有這些問題
 • 許多核心設計模式出現：回調、監聽器、事件驅動程序、裝飾器、外觀
 
@@ -67,10 +67,10 @@ Swing：較新的 GUI 庫，隨 Java 2 (1998) 引入
 
 ## 圖形用戶界面術語
 窗口：圖形桌面的一等公民——也稱為頂級容器
-– 示例：框架、對話框、小程序
+– 範例：框架、對話框、小程序
 組件：駐留在窗口中的 GUI 小部件——在許多其他語言中稱為控件
-– 示例：按鈕、文本框、標籤
-容器：承載（持有）組件的組件——示例：框架、小程序、面板、框
+– 範例：按鈕、文本框、標籤
+容器：承載（持有）組件的組件——範例：框架、小程序、面板、框
 
 ![image_9-1](./image/image_9-1.png)
 
@@ -90,7 +90,7 @@ Swing：較新的 GUI 庫，隨 Java 2 (1998) 引入
 
 ## 組件屬性
 
-數以億計。每個都有一個 get(oris)accessorandset 修飾符。示例：getColor、setFont、isVisible、...
+數以億計。每個都有一個 get(oris)accessorandset 修飾符。範例：getColor、setFont、isVisible、...
 
 
 | 名稱                                 | 類型      | 描述                                    |
@@ -310,7 +310,7 @@ Java GUI 事件由事件對象表示—
 
 事件對像作為參數傳遞給事件偵聽器方法
 
-## 示例：按鈕
+## 範例：按鈕
 創建一個 JButton 並將其添加到窗口
 創建一個實現 ActionListener 的對象
   – （包含一個actionPerformedmethod）
@@ -323,7 +323,7 @@ Java GUI 事件由事件對象表示—
   問：單個按鈕偵聽器對象通常會處理多個按鈕。如何判斷哪個按鈕產生了事件？
   
   A：ActionEvent 有一個 getActionCommand 方法，它返回（對於按鈕）“action command”字符串
-    – 默認為按鈕名稱（文本），但通常最好將其設置為某個字符串，即使 UI 更改或按鈕名稱已翻譯，該字符串也將在程序代碼中保持不變。請參見按鈕示例。
+    – 默認為按鈕名稱（文本），但通常最好將其設置為某個字符串，即使 UI 更改或按鈕名稱已翻譯，該字符串也將在程序代碼中保持不變。請參見按鈕範例。
 
   解碼其他事件的類似機制
 

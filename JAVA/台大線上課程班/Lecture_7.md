@@ -8,87 +8,89 @@
   ```
 
 ## Object & Class
-  • 對像在字段（屬性）中保存自己的狀態，並通過關聯的方法公開其行為。
-  • 為了創建這些對象，我們收集所有與函數關聯的屬性並將它們放在一個新類中。
-  • 類是創建實例（也稱為運行時對象）的藍圖。
-  • 類充當派生類型。
-  • 類是Java 中的構建塊。
+  - `Object` 在 `字段`（屬性）中保存 `自己的` 狀態，並通過關聯的 `方法` 公開其行為。
+  - 為了創建這些 Objects，我們收集所有與函數關聯的屬性並將它們放在一個 `new Class` 中。
+  - `Class 是創建實例（也稱為運行時 Objects）的藍圖。`
+  - Class 充當 `派生` 類型。
+  - Class 是 Java 中的構建塊。
 
-## 示例：點
-  • 我們定義一個新類如下：
-    • 給出一個首字母大寫的類名，通過
-    習俗;
-    • 在類主體中聲明數據和函數成員。
+## 範例：點
+  - 我們定義一個 new class 如下：
+    - 按照慣例，給一個首字母大寫的 class name；
+    - 在 class 主體中聲明 數據 和 函數 成員。
 
-  ```java
-  ...
-    public class Point {
-      // Data members.
-      double x, y;
-    }
-  ...
-  ```
-
-  - 現在我們使用這個類來創建一些點。
-
-  ```java
-  ...
-    public class PointDemo {
-      public static void main(String[] args) {
-        Point p1 = new Point(); p1.x = 1;
-        p1.y = 2;
-        Point p2 = new Point(); p2.x = 3;
-        p2.y = 4;
-        System.out.printf("(%.2f, %.2f)\n", p1.x, p1.y); System.out.printf("(%.2f, %.2f)\n", p2.x, p2.y);
+    ```java
+    ...
+      public class Point {
+        double x, y;      // Data members.
       }
-    }
-  ...
-  ```
-    你能畫出內存分配的當前狀態嗎？
+    ...
+    ```
+
+  - 現在我們使用這個 class 來創建一些點。
+    ```java
+    ...
+      public class PointDemo {
+        public static void main(String[] args) {
+          Point p1 = new Point();
+          p1.x = 1;
+          p1.y = 2;
+
+          Point p2 = new Point(); p2.x = 3;
+          p2.y = 4;
+
+          System.out.printf("(%.2f, %.2f)\n", p1.x, p1.y);
+          System.out.printf("(%.2f, %.2f)\n", p2.x, p2.y);
+        }
+      }
+    ...
+    ```
+  - 你能畫出內存分配的當前狀態嗎？
+    ![image_7-21](./image/image_7-21.png)
 
 ## 封裝
-• 每個成員都可以有一個訪問修飾符，比如public 和private。
-• public：所有類都可以訪問。
-• private：只能在它自己的類中訪問。
-• 在OOP 中，我們隱藏內部狀態並公開對這些字段執行操作的方法。
-• 因此所有字段都應聲明為私有。
-• 但是，此私有修飾符不保證任何信息安全。1
-• 什麼私有有利於可維護性和模塊化。2
-
-1 感謝 2017 年 1 月 23 日的熱烈討論。
-2 Read http://stackoverflow.com/questions/9201603/ are-private-members-really-more-secure-in-java.
+  - 每個成員都可以有一個訪問修飾符，比如 `public` 和 `private`。
+    - `public`：所有類都可以訪問。
+    - `private`：只能在它自己的類中訪問。
+  - 在 OOP 中，我們隱藏內部狀態並公開對這些字段執行操作的方法。
+  - 因此所有字段都應聲明為 `private` (私有)。
+  - 但是，此 `private` 修飾符 [不保證任何信息安全](http://stackoverflow.com/questions/9201603/)。
+    - 為什麼 私有 有利於 可維護性 和 模塊化。
 
 ## 函數成員
-• 如前所述，字段是隱藏的。
-• 因此，如有必要，我們為對象提供 getter 和 setter：
-• getter：返回對象的狀態。
-• setter：為對象的狀態設置一個值。
-• 例如，getX() 和getY() 是getter； setX() 和 setY() 是 Point 類中的設置器。
+  - 如前所述，字段是隱藏的。
+  - 因此，如有必要，我們為對象提供 `getter` 和 `setter`：
+    - `getter`：返回對象的狀態。
+    - `setter`：為對象的狀態設置一個值。
+  - 例如，getX() 和 getY() 是 getters；
+         setX() 和 setY() 是 Point 類中的 setters。
 
-## 示例：點（封裝）
-```java
-...
-public class Point {
-  // Data members: fields or attributes
-  private double x, y;
-  
-  // Function members: methods
-  public double getX() { return x; }
-  public double getY() { return y; }
-  public void setX(double a) { x = a; }
-  public void setY(double b) { y = b; }
-}
-...
-```
+## 範例：Point（封裝）
+  ```java
+  ...
+  public class Point {
+    // Data members: fields or attributes
+    private double x, y;
+    
+    // Function members: methods
+    public double getX() { return x; }
+    public double getY() { return y; }
+
+    public void setX(double a) { x = a; }
+    public void setY(double b) { y = b; }
+  }
+  ...
+  ```
 
 ## 構造函數
-• 構造函數跟在new 運算符之後，其作用與其他方法一樣。
-• 但是，它的名稱應該與類的名稱相同，並且沒有返回類型。
-• 如果需要，一個類可以有多個構造函數。 • 調用方法重載。
-• 注意構造函數屬於類而不是對象。
-• 換句話說，構造函數不能被任何對象調用。
-• 如果您沒有定義任何顯式構造函數，Java 會為您假定一個默認構造函數。
-• 此外，添加任何顯式構造函數都會禁用默認構造函數。
+  - 構造函數跟在 `new` 運算符之後，其作用與其他 方法 一樣。
+  - 但是，`它的名稱應該與 class 的名稱相同`，並且 `沒有回傳類型`。
+  - 如果需要，一個 class 可以有多個構造函數。
+    - 調用 函數 `多載`。
+  - 注意構造函數屬於 class 而不是 objects。
+    - 換句話說，構造函數不能被任何 object 調用。
+  - 如果您沒有定義任何顯式構造函數，Java 會為您假定一個 `默認構造函數`。
+    - 此外，添加任何顯式構造函數都會禁用默認構造函數。
 
 ## 參數化構造函數
 • 您可以在對象就緒時初始化該對象。
@@ -112,16 +114,14 @@ public class Point {
   ...
   ```
 
-## 自參考
-• 您可以使用this 在方法和構造函數中引用當前對象的任何（實例）成員。
-• 使用this 關鍵字的最常見原因是字段被方法參數遮蔽。
-• 回顧變量作用域。
-• 您也可以使用它來調用同一個構造函數中的另一個構造函數
-類，說這個（）。
+## 自我參考 (this)
+  - 您可以使用 this 在方法和構造函數中引用當前對象的任何（實例）成員。
+  - 使用 this 關鍵字的最常見原因是 字段 被 方法參數 `遮蔽` (有相同變數)。
+    - 回顧 變數作用域。
+  - 您還可以使用 `this() `來 `調用同一 class 中的另一個構造函數`，。
 
-## 示例：點（重新訪問）
-```java
-...
+## 範例：點（重新訪問）
+  ```java
   public class Point {
     ...
     public Point(double x, double y) {
@@ -130,149 +130,149 @@ public class Point {
     }
     ...
   }
-...
-```
-但是，不能在靜態方法中使用 this 運算符。
+  ```
+  但是，不能在 `static` methods 中使用 `this` 運算符。
 
 ## 實例成員
-• 請注意，在本講中數據成員和函數成員聲明為w/o static。
-• 它們被稱為實例成員，只有在創建一個對像後才可用。
-• 從語義上講，每個對像都有自己的狀態，這些狀態與應用的附屬方法相關聯。
-• 例如，可以在指定特定點對象時調用getX()。
+  - 請注意，在本講中 數據成員 和 函數成員 聲明為 `w/o static` (不加 static 的情況下)。
+    - 通常，加 `static`，是 共用的元素
+    - 通常，不加 `static`，是 各自擁有的元素
+  - 它們被稱為 `實例成員(instance members)`，只有在創建 `object` 後才可以使用。
+  - 從語義上講，每個 object 都有自己的狀態，這些狀態與應用的附屬方法相關聯。
+    - 例如，可以在指定特定點 Object時調用 getX()。
 
-## 示例：點之間的距離測量
-```java
-...
-  public class Point {
-    /* Ignore the previous part. */
-    public double getDistanceFrom(Point that) {
-      return Math.sqrt(Math.pow(this.x − that.x, 2) + Math.pow(this.y − that.y, 2));
+## 範例：點之間的距離測量
+  ```java
+    public class Point {
+      /* Ignore the previous part. */
+      public double getDistanceFrom(Point that) {
+        return Math.sqrt( Math.pow(this.x − that.x, 2)
+                        + Math.pow(this.y − that.y, 2) );
+      }
     }
-  }
-...
-```
-• 在 OOP 設計中，明確各種類型的對象之間的責任非常重要，即單一責任原則。 3
-• 高內聚、低耦合。
-• 好萊塢原則：不要打電話給我們，我們會打電話給你。
-
-Also see https://en.wikipedia.org/wiki/SOLID_(object-oriented_design).
+  ```
+  - 在 OOP 設計中，明確各種類型的對象之間的責任非常重要，即 [單一責任原則](https://en.wikipedia.org/wiki/SOLID_(object-oriented_design))。
+    - `高內聚、低耦合`。
+    - 好萊塢原則：不要打電話給我們，我們會打電話給你。
 
 ## 靜態成員
-• 一旦類被加載，靜態成員就準備好了。 • 例如，main()。
-• 您可以嘗試靜態初始化塊。4
-• 這些成員可以在沒有任何實例的情況下通過類名直接調用。
-• 例如，Math.PI。
-• 特別是，靜態方法執行算法。
-• 例如，Math.random() 和Arrays.sort()。
-• 請注意，靜態方法可以訪問其他靜態成員。
-（瑣碎的。）
-• 但是，靜態方法不能直接訪問實例成員。 （為什麼？）
+  - `一旦 class 被加載`，`static members (靜態成員)` 就準備好了。
+    - 例如，main()。
+    - 您可以嘗試[靜態初始化塊](https://docs.oracle.com/javase/tutorial/java/javaOO/initial.html)。
+  - 這些成員可以在沒有任何實例的情況下通過類名直接調用。
+    - 例如，Math.PI。
+  - 特別是，靜態方法執行算法。
+    - 例如，Math.random() 和Arrays.sort()。
+  - 請注意，靜態方法 可以 訪問其他靜態成員。（瑣碎的。）
+  - 但是，靜態方法 不能 直接訪問實例成員。（為什麼？）
 
-4 See https://docs.oracle.com/javase/tutorial/java/javaOO/initial.html.
-
-## 例子
-```java
-...
-  public class Point {
-    /* Ignore the previous part. */
-    public static double measure(Point first, Point second) {
-      // You cannot use this in static context.
-      return Math.sqrt(Math.pow(first.x − second.x, 2) + Math.pow(first.y − second.y, 2));
-    }
-  }
-...
-```
-
-```java
-...
-  public class PointDemo {
-    public static void main(String[] args) {
-      /* Ignore the previous part. */
-      System.out.println(Point.measure(p1, p2));
-    }
-  }
-...
-```
-
-## 另一個例子：單例模式
-• 單例模式是設計模式之一。5
-• 在某些情況下，您只需要一個此類對象
-系統。
-```java
-...
-  public class Singleton {
-    // Do not allow to invoke the constructor by others.
-    private Singleton() {}
-
-    // Will be ready as soon as the class is loaded.
-    private static Singleton instance = new Singleton();
-    
-    // Only way to obtain this singleton by the outside world.
-    public static Singleton getInstance() {
-      return instance;
-    }
-  }
-...
-```
-5設計模式是針對軟件設計中給定上下文中常見問題的高度可重用解決方案的集合。 “設計模式”一詞由 Erich Gamma、Richard Helm、Ralph Johnson 和 John Vlissides 命名，通常被稱為四人幫 (GoF)。
-
-## 對象消除：垃圾收集 (GC)6
-  • Java 通過GC 處理對象釋放。
-  • 時間：預設時間段或出現記憶壓力時。
-  • GC 是一個守護線程，它搜索那些未引用的對象。
-  • 當一個對像不再被程序的任何部分引用時，它就被取消引用。 （如何？）
-  • 要使對像不被引用，只需將null 分配給引用變量即可。
-  • 請注意，您可以調用System.gc() 來執行釋放過程。
-  • 然而，頻繁調用GC 非常耗時。
-
-  6 http://www.oracle.com/webfolder/technetwork/tutorials/obe/ java/gc01/index.html
-
-
-## 統一建模語言7
-• 統一建模語言 (UML) 是一種用於指定、可視化、構建和記錄軟件系統工件以及業務建模和其他非軟件系統的工具。
-• 免費軟件：
-• http://staruml.io/（適用於所有平台）
-7See http://www.tutorialspoint.com/uml/ and http://www.mitchellsoftwareengineering.com/IntroToUML.pdf.
-
-## 示例：Point 的類圖
-  ![image_7-1](./image/image_7-1.png)
-• + 指公共。
-• − 指私人。
-
-## HAS-A 關係
-• 關聯是一種弱關係，其中所有對像都有自己的生命週期並且沒有所有權。
-• 例如，老師↔ 學生；醫生↔病人。
-• 如果A 使用B，則它是一個集合，說明B 獨立於A 存在。
-• 例如，騎士↔ 劍；公司↔員工。
-• 如果 A 擁有 B，則它是一個組合，這意味著 B 在沒有 A 的系統中沒有任何意義或目的。（我們稍後會看到這一點。）
-• 例如，房子↔ 房間。
-
-## 示例：線（聚合）
-  ![image_7-2](./image/image_7-2.png)
-  • +2：在一個線對像中使用兩個點對象。
-
+## 範例
   ```java
   ...
-    public class Line {
-      private Point head, tail;
-      public Line(Point p1, Point p2) {
-        head = p1;
-        tail = p2;
-      }
-
-      /* Ignore some methods. */
-      public double getLength() {
-        return head.getDistanceFrom(tail);
+    public class Point {
+      /* Ignore the previous part. */
+      public static double measure(Point first, Point second) {
+        // You cannot use this in static context.
+        return Math.sqrt(Math.pow(first.x − second.x, 2) + Math.pow(first.y − second.y, 2));
       }
     }
   ...
   ```
 
+  ```java
+  ...
+    public class PointDemo {
+      public static void main(String[] args) {
+        /* Ignore the previous part. */
+        System.out.println(Point.measure(p1, p2));
+      }
+    }
+  ...
+  ```
+
+## 另一個範例：Singleton Pattern (單例模式)
+  - 單例模式 是設計模式之一 (23設計模式之一)。
+    - `Design patterns (設計模式)` 是針對軟件設計中給定上下文中常見問題的高度可重用解決方案的集合。
+    - "設計模式" 一詞由 Erich Gamma、Richard Helm、Ralph Johnson 和 John Vlissides 命名，通常被稱為四人幫 (GoF)。
+  - 在某些情況下，系統中只需要一個這種類型的對象。
+
+  - 步驟：
+    - 總量控制，private 將 建構子 藏起來。
+    - 自己實體化，只有自己能呼叫實體化。
+    - 再將 實體化過後的 物件，public 給外部。
+
+  ```java
+  ...
+    public class Singleton {
+      // Do not allow to invoke the constructor by others.
+      private Singleton() {}
+
+      // Will be ready as soon as the class is loaded.
+      private static Singleton instance = new Singleton();
+      
+      // Only way to obtain this singleton by the outside world.
+      public static Singleton getInstance() {
+        return instance;
+      }
+    }
+  ...
+  ```
+
+## 對象消除：[垃圾收集 (GC)](http://www.oracle.com/webfolder/technetwork/tutorials/obe/java/gc01/index.html)
+  - Java 通過GC 處理對象釋放。
+    - 時間：預設時間段或出現記憶壓力時。
+  - GC 是一個 `守護線程`，它搜索那些 `未引用` 的對象。
+    - 當一個 object 不再被程序的任何部分引用時，它就被取消引用。 （如何？）
+    - 要使 object 不被引用，只需將 `null` 分配給引用變數即可。
+  - 請注意，您可以調用 `System.gc()` 來執行釋放過程。
+    - 然而，頻繁調用GC `非常耗時`。
+
+## 統一建模語言
+  - 統一建模語言 (UML) 是一種用於指定、可視化、構建和記錄軟件系統工件以及業務建模和其他非軟件系統的工具。
+    - http://www.tutorialspoint.com/uml/
+    - http://www.mitchellsoftwareengineering.com/IntroToUML.pdf
+  - 免費軟件：
+    - http://staruml.io/ (適用於所有平台)
+
+## 範例：Point 的類圖
+  ![image_7-1](./image/image_7-1.png)
+  - 由上而下分別為，`class name`、`data name`、`function name`
+    - `+` 指公共。
+    - `−` 指私人。
+
+## HAS-A 關係
+  - 關聯是一種弱關係，其中所有對像都有自己的生命週期並且沒有從屬關係。
+    - 例如，老師 ↔ 學生；醫生 ↔ 病人。
+  - 如果 A 使用 B，則它是一個 `集合`，說明B 獨立於A 存在。
+    - 例如，騎士 ↔ 劍；公司 ↔ 員工。
+  - 如果 A 擁有 B，則它是一個 `組合`，這意味著 B 在沒有 A 的系統中沒有任何意義或目的。
+    - 例如，房子 ↔ 房間。
+
+## 範例：線（聚合）
+  ![image_7-2](./image/image_7-2.png)
+  - +2：在一個線對像中使用兩個點對象。
+
+  ```java
+  public class Line {
+    private Point head, tail;         // HAS-A 關係
+    public Line(Point p1, Point p2) {
+      head = p1;
+      tail = p2;
+    }
+
+    /* Ignore some methods. */
+    public double getLength() {
+      return head.getDistanceFrom(tail);
+    }
+  }
+  ```
+
+  ![image_7-22](./image/image_7-22.png)
+
 ## 練習：圓圈
-```java
-...
+  ```java
   public class Circle {
-    private Point center;
+    private Point center;            // HAS-A 關係
     private double radius;
 
     public Circle(Point c, double r) {
@@ -288,117 +288,101 @@ Also see https://en.wikipedia.org/wiki/SOLID_(object-oriented_design).
       return this.radius + that.radius > this.center.getDistanceFrom(that.center);
     }
   }
-...
-```
+  ```
 
-## 第一個 IS-A 關係：類繼承
-• 我們可以通過繼承預定義類（即原型）中常用的狀態和行為來定義新類。
-• 類是某個類的子類，通過使用extends 關鍵字稱為超類。
-• 例如，
-```java
-...
-  // Superclass (or parent class)
-  class A {
-    void doAction() {} // A can run doAction().
-  }
+## 第一個 IS-A 關係：類別繼承
+  - 我們可以通過 `繼承 (inheriting)` 預定義類（即原型）中常用的狀態和行為來定義新類。
+  - 類是某個類的 `子類 (subclass)`，通過使用 `extends` 關鍵字稱為 `超類 (superclass)`。
+  - 例如，
 
-  // Subclass (or child class)
-  class B extends A {} // B can also run doAction().
-...
-```
+    ```java
+      // Superclass (or parent class)
+      class A {
+        void doAction() {} // A can run doAction().
+      }
 
-## 示例：人與狗
-![image_7-3](./image/image_7-3.png)
+      // Subclass (or child class)
+      class B extends A {} // B can also run doAction().
+    ```
+
+## 範例：人與狗
+  ![image_7-3](./image/image_7-3.png)
 
 ## 使用繼承之前
-```java
-...
-  public class Human {
-    public void eat() {}
-    public void exercise() {}
-    public void writeCode() {}
-  }
-...
-```
+  ```java
+    public class Human {
+      public void eat() {}
+      public void exercise() {}
+      public void writeCode() {}
+    }
+  ```
 
-```java
-...
-public class Dog {
-  public void eat() {}
-  public void exercise() {}
-  public void wag() {}
-}
-...
-```
+  ```java
+    public class Dog {
+      public void eat() {}
+      public void exercise() {}
+      public void wag() {}
+    }
+  ```
 
 ## 使用繼承之後
-![image_7-4](./image/image_7-4.png)
-將 Human 和 Dog 之間的公共部分移動到另一個類，例如 Animal，作為超類。
+  ![image_7-4](./image/image_7-4.png)
+  將 `Human` 和 `Dog` 之間的公共部分移動到另一個類，例如 `Animal`，作為超類。
 
-```java
-...
-public class Animal { // extends Object; implicitly.
-  public void eat() {}
-  public void exercise() {}
-}
-...
-```
-```java
-...
-public class Human extends Animal {
-  public void writeCode() {}
-}
-...
-```
-```java
-...
-public class Dog extends Animal {
-  public void wag() {}
-}
-...
-```
+  ```java
+  public class Animal { // extends Object; implicitly.
+    public void eat() {}
+    public void exercise() {}
+  }
+  ```
 
-## 練習：將 Cat 添加到 Animal Hierarchy8
-![image_7-5](./image/image_7-5.png)
-8See https://petsmao.nownews.com/20170124-10587.
+  ```java
+  public class Human extends Animal {
+    public void writeCode() {}
+  }
+  ```
 
-![image_7-6](./image/image_7-6.png)
+  ```java
+  public class Dog extends Animal {
+    public void wag() {}
+  }
+  ```
 
-```java
-...
-public class Cat extends Animal {
-  public void stepping() {}
-}
-...
-```
-• 您可以通過擴展Animal 添加更多種類的動物！ • 同樣，代碼重用。
+## 練習：將 Cat 添加到 Animal Hierarchy
+  ![image_7-5](./image/image_7-5.png)
+  - [貓皇為什麼總是喜歡揉揉踏踏著奴才呢？](https://petsmao.nownews.com/20170124-10587)
+
+  ![image_7-6](./image/image_7-6.png)
+
+  ```java
+  public class Cat extends Animal {
+    public void stepping() {}
+  }
+  ```
+  - 您可以通過擴展 `Animal` 添加更多種類的動物！
+  - 同樣，代碼重用。
 
 ## 構造函數鏈
-
-• 一旦子類的構造函數被調用，JVM 將遞歸地調用其超類的構造函數。
-• 因此，您可能會認為將調用一整條構造函數鏈，一直返回到 Object 類的構造函數，這是 Java 中的最頂層類。
-• 在這個意義上，我們可以說每個類都是Object 的直接或遠距離子類。
+  - 一旦子類的構造函數被調用，JVM 將遞歸地調用其超類的構造函數。
+  - 因此，您可能會認為將調用一整條構造函數鏈，一直返回到 `Object` 類的構造函數，這是 Java 中的最頂層的class。
+  - 在這個意義上，我們可以說 `每個類都是 Object 的直接或遠距離子類`。
 
 ## 類層次結構的插圖9
-![image_7-7](./image/image_7-7.png)
-9參見第 3-1 頁的圖 3-1。埃文斯和弗拉納根的 113。
+  ![image_7-7](./image/image_7-7.png)
 
-## 超級運營商
+## super Operator
+  - 回想一下，`this` 用於引用對象本身。
+  - 您可以使用 `super` 來引用 superclass 的（非私有）成員。
+  - 請注意，`super()` 可用於調用其超類的構造函數，與 `this()` 類似。
 
-• 回想一下，this 用於引用對象本身。
-• 您可以使用 super 來引用（非私有）成員
-超類。
-• 請注意，super() 可用於調用其構造函數
-超類，類似於 this()。
-
-## 方法覆蓋
-• 子類應該重新實現從其超類繼承的方法。
-• 方法覆蓋要求如下：
-• 方法簽名與其超類之一相同；
-• 相同的返回類型；
-• 相對於其超類之一的可見度未降低。10
-• 請注意，您不能覆蓋靜態方法。
-• 您應該使用註釋11 @Override 來幫助您。
+## 函數覆蓋 (Method Overriding)
+  - 子類應該重新實現從其超類繼承的方法。
+  - 方法覆蓋要求如下：
+    - 方法簽名與其超類之一相同；
+    - 相同的返回類型；
+    - 相對於其超類之一的可見度未降低。10
+  - 請注意，您不能覆蓋靜態方法。
+  - 您應該使用註釋11 @Override 來幫助您。
 
 ```java
 ...
@@ -415,7 +399,7 @@ class B extends A {
 ## Example
 ![image_7-8](./image/image_7-8.png)
 
-## 示例：覆蓋 toString()
+## 範例：覆蓋 toString()
 
 • Object 提供了 toString() 方法，它被特意設計為由 System.out.println() 調用！
 • 默認情況下，它返回一個哈希碼。12
@@ -435,7 +419,7 @@ class B extends A {
 ```
 12See https://en.wikipedia.org/wiki/Java_hashCode().
 
-## 另一個例子：ArrayList（重訪）
+## 另一個範例：ArrayList（重訪）
 ```java
 ...
   import java.util.Arrays;
@@ -465,7 +449,7 @@ class B extends A {
 13GoF（1995 年）。最初的說法是“編程到接口，而不是實現”。
 14另請閱讀 http://www.javaworld.com/article/3033445/learn-java/java-101-polymorphism-in-java.html。
 
-## 示例：依賴減少（解耦）
+## 範例：依賴減少（解耦）
 ```java
 ...
 class HighSchoolStudent {
@@ -535,7 +519,7 @@ public class PolymorphismDemo {
 }
 ```
 
-• 這個例子說明了toString() 和println() 之間的機制。
+• 這個範例說明了toString() 和println() 之間的機制。
 
 ## 為什麼是 OOP？15
 
@@ -556,7 +540,7 @@ public class PolymorphismDemo {
 
 16See https://spring.io/.
 
-## 另一個例子
+## 另一個範例
 ```java
 class Animal {
   /* Ignore the previous part. */
@@ -625,7 +609,7 @@ U u3 = new T(); // 錯誤！為什麼？
 • 我們可以使用instanceof 來檢查引用的對像是否屬於
 運行時的目標類型。
 
-## 例子
+## 範例
 ![image_7-10](./image/image_7-10.png)
 - 類繼承可以用有向圖（directed graph）來表示。
 - 例如，D 是 A 和 B 的子類型，它們都可以從有向圖上的 D 到達。
@@ -665,7 +649,7 @@ public class InstanceofDemo {
 20 例如，抽象工廠模式。
 21 方法聲明時不帶大括號，後面跟一個分號。
 
-## 例子
+## 範例
 ![image_7-11](./image/image_7-11.png)
 • 在UML 中，抽象方法和類用斜體表示。
 • draw() 和 resize() 方法可以在以下情況下實現
@@ -823,7 +807,7 @@ public class InterfaceDemo {
 
 25GoF (1995);另請參閱 Bloch (2018) 中的第 18 項。
 
-## 示例：策略模式
+## 範例：策略模式
 • 此模式通過封裝每個算法並使它們可互換來定義一系列算法。
 • 它涉及以下OO 設計原則：
   • 封裝變化；
@@ -853,7 +837,7 @@ System.out.println(m == i); // Output false? System.out.println(m.equals(i)); //
 • 假設有一個存放不可變對象的池。
 • 首次創建值對像後，如果需要，將重用該值對象。
 • 這意味著當我們對不可變對象進行操作時會創建另一個對象。
-• 另一個例子是字符串對象。26
+• 另一個範例是字符串對象。26
 • 使用不可變對像是一種很好的做法
 並發編程.27
 
@@ -887,7 +871,7 @@ System.out.println(str1.intern() == str2); // True!!
 • 您可以使用靜態方法values() 來枚舉所有選項。
 • 這種機制增強了類型安全並使源代碼更具可讀性！
 
-## 示例：顏色
+## 範例：顏色
 ```java
 public enum Color {
   RED, BLUE, GREEN;
@@ -964,7 +948,7 @@ public class Action {
 | 繼承class   |    ✕    |     ✕     |     ✓     |   ✓    |
 | package外   |    ✕    |     ✕     |     ✕     |   ✓    |
 
-## 例子
+## 範例
 ```java
 package www.csie.ntu.edu.tw;
 
@@ -997,7 +981,7 @@ public class ImportDemo {
 • 請注意，受保護的成員在繼承下是可見的，
 即使分開在不同的包中。
 
-## 示例：有關導入的更多信息
+## 範例：有關導入的更多信息
 ```java
 import www.csie.ntu.edu.tw.*; // Import all classes.
 import static www.csie.ntu.edu.tw.Util.doAction4;
@@ -1024,7 +1008,7 @@ public class GreetingDemo {
 ## 嵌套類家族
   ![image_7-18](./image/image_7-18.png)
 
-## 示例：按鍊錶堆疊
+## 範例：按鍊錶堆疊
 ![image_7-19](./image/image_7-19.png)
 
 ```java
@@ -1113,7 +1097,7 @@ public class HouseDemo {
 • 如果您只需要一個實例，請使用匿名類
 內部類。
 
-## 示例：按鈕
+## 範例：按鈕
 ```java
 abstract class Button {
   abstract void onClicked();
@@ -1152,7 +1136,7 @@ public class AnonymousClassDemo2 {
 • 方法iterator() 應該返回一個由接口Iterator 定義的迭代器，它有兩個未實現的方法：hasNext() 和next()。
 • 現在您的數據結構可以與for-each 循環兼容！
 
-## 例子
+## 範例
 ```java
 import java.util.Iterator;
 class Box implements Iterable<String> {
@@ -1190,7 +1174,7 @@ public class IteratorDemo {
 • 作為靜態成員，它可以訪問其他靜態成員而無需實例化封閉類。
 • 特別是，可以直接實例化靜態嵌套類，而無需先實例化封閉類對象；它就像一個迷你包。
 
-## 例子
+## 範例
 ```java
 public class StaticClassDemo {
   public static class Greeting {
@@ -1204,3 +1188,7 @@ public class StaticClassDemo {
   }
 }
 ```
+
+## 相關連結
+
+- [對象和內存分配](https://web.stanford.edu/class/archive/cs/cs106a/cs106a.1152/lectures/Memory.pdf)、[本地檔案](./data/Memory.pdf)

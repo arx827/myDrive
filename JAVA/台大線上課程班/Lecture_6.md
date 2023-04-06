@@ -424,5 +424,5 @@
 
 ## 相關連結
   - [是什麼讓 OOP 變得“好”？](https://softwareengineering.stackexchange.com/questions/120019/whats-the-benefit-of-object-oriented-programming-over-procedural-programming)
-  - (FYR) 另見伊利諾伊大學香檳分校的[Recursion](https://courses.engr.illinois.edu/cs374/sp2018/A/notes/01-recursion.pdf)、[本地檔案](./data/log-time_algorithm.pdf)
+  - (FYR) 另見伊利諾伊大學香檳分校的 [Recursion](https://courses.engr.illinois.edu/cs374/sp2018/A/notes/01-recursion.pdf)、[本地檔案](./data/log-time_algorithm.pdf)
   - (FYR)之前的AP 計算機科學[考試](https://apcs.csie.ntnu.edu.tw/index.php/questionstypes/previousexam/)
