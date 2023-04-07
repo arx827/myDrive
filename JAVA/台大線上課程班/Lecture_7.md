@@ -93,10 +93,9 @@
     - 此外，添加任何顯式構造函數都會禁用默認構造函數。
 
 ## 參數化構造函數
-• 您可以在對象就緒時初始化該對象。
-• 例如，
-  ```java
-  ...
+  - 您可以在對象就緒時初始化該對象。
+  - 例如，
+    ```java
     public class Point {
       ...
       // Default constructor
@@ -111,8 +110,7 @@
       }
       ...
     }
-  ...
-  ```
+    ```
 
 ## 自我參考 (this)
   - 您可以使用 this 在方法和構造函數中引用當前對象的任何（實例）成員。
@@ -367,7 +365,7 @@
   - 因此，您可能會認為將調用一整條構造函數鏈，一直返回到 `Object` 類的構造函數，這是 Java 中的最頂層的class。
   - 在這個意義上，我們可以說 `每個類都是 Object 的直接或遠距離子類`。
 
-## 類層次結構的插圖9
+## 類層次結構的插圖
   ![image_7-7](./image/image_7-7.png)
 
 ## super Operator
@@ -376,402 +374,393 @@
   - 請注意，`super()` 可用於調用其超類的構造函數，與 `this()` 類似。
 
 ## 函數覆蓋 (Method Overriding)
-  - 子類應該重新實現從其超類繼承的方法。
-  - 方法覆蓋要求如下：
-    - 方法簽名與其超類之一相同；
+  > method overloading (多載)
+  > method overriding (覆寫)
+
+  - 子類應該 `重新實現` 從其超類繼承的方法。
+  - 函數覆蓋要求如下：
+    - 函數簽章與其超類相同；
     - 相同的返回類型；
-    - 相對於其超類之一的可見度未降低。10
-  - 請注意，您不能覆蓋靜態方法。
-  - 您應該使用註釋11 @Override 來幫助您。
+    - 相對於其超類的可見度未降低 (如：您不能將可見性從公共降低為私有)。
+  - 請注意，您不能覆蓋靜態函數。
+  - 您應該使用 註釋 [@Override](https://docs.oracle.com/en/java/javase/20/docs/api/java.base/java/lang/Override.html) 來幫助您。
+    > 函數聲明旨在覆蓋超類型中的函數聲明。如果使用此註釋類型對方法進行註釋，則要求編譯器生成錯誤消息
 
-```java
-...
-class B extends A {
-  @Override
-  void doAction() { /* New impl. w/o changing API. */ }
-}
-...
-```
-
-10例如，您不能將可見性從公共降低為私有。
-11 請參閱 https://docs.oracle.com/javase/tutorial/java/annotations/。
-
-## Example
-![image_7-8](./image/image_7-8.png)
-
-## 範例：覆蓋 toString()
-
-• Object 提供了 toString() 方法，它被特意設計為由 System.out.println() 調用！
-• 默認情況下，它返回一個哈希碼。12
-• 它可以被覆蓋，以便它返回一個信息字符串。
-
-```java
-...
-  public class Point {
-    ...
-    @Override
-    public String toString() {
-      return "(" + x + ", " + y + ")";
-    }
-    ...
+  ```java
+  class B extends A {
+    @Override   // annotation
+    void doAction() { /* New impl. w/o changing API. */ }
   }
-...
-```
-12See https://en.wikipedia.org/wiki/Java_hashCode().
+  ```
+
+## 範例
+  ![image_7-8](./image/image_7-8.png)
+
+## 範例：覆寫 toString()
+  - `Object` 提供了 toString() 方法，它被 `特意設計` 為由 `System`.out.println() 調用！
+  - 默認情況下，它返回一個 hash code。
+    ```java
+    // 一般來說，System.out.println(Object)，會回傳 hash code
+    System.out.println(p1);  // 印出 Point@15db9742
+    ```
+  - 它可以 `被覆蓋`，以便它返回一個信息字符串。
+    ```java
+      public class Point {
+        ...
+        @Override
+        public String toString() {
+          return "(" + x + ", " + y + ")";
+        }
+        ...
+      }
+    ```
+    ```java
+    System.out.printf("p1 = %s\n", p1);  // 印出 p1 = (10.0, 20.0)
+    ```
 
 ## 另一個範例：ArrayList（重訪）
-```java
-...
-  import java.util.Arrays;
-  import java.util.ArrayList;
-  
-  public class ArrayListDemo2 {
-    public static void main(String[] args) {
-      String[] fx1 = {"TWD", "CAD", "JPY"};
-      ArrayList<String> fx2 =
-                        new ArrayList<>(Arrays.asList(fx1));
-      System.out.println(fx2); // Output [TWD, CAD, JPY].
+  ```java
+    import java.util.Arrays;
+    import java.util.ArrayList;
+    
+    public class ArrayListDemo2 {
+      public static void main(String[] args) {
+        String[] fx1 = {"TWD", "CAD", "JPY"};
+        ArrayList<String> fx2 = new ArrayList<>(Arrays.asList(fx1));
+        System.out.println(fx2); // Output [TWD, CAD, JPY].
+      }
     }
-  }
-...
-```
+  ```
+  - 使用 `Arrays.asList()` 將數組轉換為 `ArrayList` 對象。
+  - 好多了！！！
 
-• 使用Arrays.asList() 將數組轉換為ArrayList 對象。
-• 好多了！！！
-
-## 亞型多態性14
-• 多態這個詞的字面意思是“多種形式”。
-• OOP 設計規則之一是將接口與實現和程序分離到抽象，而不是實現。 13
-• 子類型多態性滿足這條規則。
-• 如何為不同的實現創建一個“單一”接口？
-• 使用這些類型的超類作為佔位符。
-
-13GoF（1995 年）。最初的說法是“編程到接口，而不是實現”。
-14另請閱讀 http://www.javaworld.com/article/3033445/learn-java/java-101-polymorphism-in-java.html。
+## 子類型 [多型](http://www.javaworld.com/article/3033445/learn-java/java-101-polymorphism-in-java.html)
+  - `多型 (polymorphism)` 這個詞的字面意思是 "多種形式"。
+  - OOP 設計規則之一是 `將接口(操作介面)與實作分開` 和 `程式抽象`，而不是實現。
+    ![image_7-23](./image/image_7-23.png)
+    - (GoF（1995 年）。最初的說法是"編程到接口，而不是實現"。)
+  - 子類型 多型 滿足這條規則。
+  - 如何為不同的實現創建一個 "單一" 接口？
+    - 使用這些類型的 `超類` 作為 `佔位符`。
 
 ## 範例：依賴減少（解耦）
-```java
-...
-class HighSchoolStudent {
-  void doHomework() {}
-}
-class CollegeStudent {
-  void writeFinalReports() {}
-}
-...
-```
-• 現在讓這兩種學生去學習。
+  ```java
+  class HighSchoolStudent {
+    void doHomework() {}
+  }
+  class CollegeStudent {
+    void writeFinalReports() {}
+  }
+  ```
+  - 現在讓這兩種學生去學習。
 
-```java
-public class PolymorphismDemo {
-  public static void main(String[] args) {
-    HighSchoolStudent Emma = new HighSchoolStudent();
-    goStudy(Emma);
+  ```java
+  public class PolymorphismDemo {
+    public static void main(String[] args) {
+      HighSchoolStudent Emma = new HighSchoolStudent();
+      goStudy(Emma);
 
-    CollegeStudent Richard = new CollegeStudent();
-    goStudy(Richard);
+      CollegeStudent Richard = new CollegeStudent();
+      goStudy(Richard);
+    }
+
+    //------------ method overloading (函數多載) ------------//
+    public static void goStudy(HighSchoolStudent student) {
+      student.doHomework();
+    }
+
+    public static void goStudy(CollegeStudent student) {
+      student.writeFinalReports();
+    }
+
+    // What if the 3rd kind of students comes into the system?
+  }
+  ```
+
+## 使用繼承和子類型多型
+  ```java
+  class Student {
+    // 只是先定義好 函數名
+    void doMyJob() { /* Do not know the detail yet. */}
   }
 
-  public static void goStudy(HighSchoolStudent student) {
-    student.doHomework();
+  class HighSchoolStudent extends Student {
+    void doHomework() {}
+    @Override
+    void doMyJob() { doHomework(); }
   }
 
-  public static void goStudy(CollegeStudent student) {
-    student.writeFinalReports();
+  class CollegeStudent extends Student {
+    void writeFinalReports() {}
+    @Override
+    void doMyJob() { writeFinalReports(); }
   }
+  ```
 
-  // What if the 3rd kind of students comes into the system?
-}
-```
-
-## 使用繼承和子類型多態性
-```java
-class Student {
-  void doMyJob() { /* Do not know the detail yet. */}
-}
-
-class HighSchoolStudent extends Student {
-  void doHomework() {}
-  @Override
-  void doMyJob() { doHomework(); }
-}
-
-class CollegeStudent extends Student {
-  void writeFinalReports() {}
-  @Override
-  void doMyJob() { writeFinalReports(); }
-}
-```
-
-```java
-public class PolymorphismDemo {
-  public static void main(String[] args) {
-    Student Emma = new HighSchoolStudent();
-    goStudy(Emma);
-    
-    Student Richard = new CollegeStudent();
-    goStudy(Richard);
-  }
-  // We can handle all kinds of students in this way!!!
-  public static void goStudy(Student student) {
-    student.doMyJob();
-  }
-}
-```
-
-• 這個範例說明了toString() 和println() 之間的機制。
-
-## 為什麼是 OOP？15
-
-• OOP 是現代（大型）軟件設計的堅實基礎。
-• 特別是，偉大的重用機制和抽像是通過這三個概念實現的：
-• 封裝將內部（私有成員）與外部隔離，實現抽象並提供足夠的可訪問性（公共方法）；
-• 繼承提供方法重寫而不改變方法簽名；
-• 多態性利用超類作為佔位符來操縱實現（子類型對象）。
-• 我們使用PIE 作為這三個概念的簡寫。
-15See https://en.wikipedia.org/wiki/Programming_paradigm
-
-![image_7-9](./image/image_7-9.png)
-
-• 這導致了框架16 的產生，它實際上完成了大部分工作，讓（應用程序）程序員只需要用業務邏輯規則進行定制並提供掛鉤的工作。
-• 這大大減少了編程時間並使創建越來越大的系統成為可能。
-• 在模擬中，我們經常在抽象層次上操作對象；我們在使用它們時不需要知道細節。
-• 例如，使用電腦和手機、駕駛汽車等。
-
-16See https://spring.io/.
-
-## 另一個範例
-```java
-class Animal {
-  /* Ignore the previous part. */
-  void speak() {}
-}
-
-class Dog extends Animal {
-  @Override
-  void speak() { System.out.println("Woof! Woof!"); }
-}
-
-class Cat extends Animal {
-  @Override
-  void speak() { System.out.println("Meow ̃"); }
-}
-
-class Bird extends Animal {
-  @Override
-  void speak() { System.out.println("Tweet!"); }
-}
-```
-
-```java
-public class PolymorphismDemo2 {
-  public static void main(String[] args) {
-    Animal[] animals = {new Dog(), new Cat(), new Bird()};
-    for (Animal animal: animals) {
-      animal.speak();
+  ```java
+  public class PolymorphismDemo {
+    public static void main(String[] args) {
+      Student Emma = new HighSchoolStudent();
+      goStudy(Emma);
+      
+      Student Richard = new CollegeStudent();
+      goStudy(Richard);
+    }
+    // We can handle all kinds of students in this way!!!
+    public static void goStudy(Student student) {
+      student.doMyJob();
     }
   }
-}
-```
-• 同樣，Animal 是其三個子類型的佔位符。
+  ```
 
-## 里氏替換原則17
-• 為方便起見，設U 為T 的子類型。
-• 我們通過引用操作對象（右側）
-（左手邊）！
-• Liskov 指出，T 型對象可以用 U 型對象替換，而不會改變 T 的任何理想屬性（正確性、執行的任務等）。
-17 See https://en.wikipedia.org/wiki/Liskov_substitution_principle.
+• 這個範例說明了 `toString()` 和 `println()` 之間的機制。
+
+## [為什麼是 OOP？](https://en.wikipedia.org/wiki/Programming_paradigm)
+  - OOP 是現代（大型）軟件設計的堅實基礎。
+  - 特別是，偉大的 `重用機制` 和 `抽象` 是通過這三個概念實現的：
+    - `封裝 (encapsulation)` 將內部（私有成員）與外部隔離，實現抽象並提供足夠的可訪問性（公共方法）；
+    - `繼承 (inheritance)` 提供方法重寫而不改變方法簽名；
+    - `多型 (polymorphism)` 利用超類作為佔位符來操縱實現（子類型對象）。
+  - 我們使用 `PIE` 作為這三個概念的簡寫。
+
+  ![image_7-9](./image/image_7-9.png)
+
+  - 這導致了[框架](https://spring.io/) 的產生，它實際上完成了大部分工作，讓（應用程序）程序員只需要用 `業務邏輯規則` 進行定制並提供掛鉤的工作。
+  - 這大大減少了編程時間並使創建越來越大的系統成為可能。
+  - 在模擬中，我們經常在抽象層次上操作對象；我們在使用它們時不需要知道細節。
+    - 例如，使用電腦和手機、駕駛汽車等。
+
+## 另一個範例
+  ```java
+  class Animal {
+    /* Ignore the previous part. */
+    void speak() {}
+  }
+
+  class Dog extends Animal {
+    @Override
+    void speak() { System.out.println("Woof! Woof!"); }
+  }
+
+  class Cat extends Animal {
+    @Override
+    void speak() { System.out.println("Meow ̃"); }
+  }
+
+  class Bird extends Animal {
+    @Override
+    void speak() { System.out.println("Tweet!"); }
+  }
+  ```
+
+  ```java
+  public class PolymorphismDemo2 {
+    public static void main(String[] args) {
+      Animal[] animals = {new Dog(), new Cat(), new Bird()};
+      for (Animal animal: animals) {
+        animal.speak();   // 動態綁定 (執行當下才知道主體是誰)
+      }
+    }
+  }
+  ```
+  - 同樣，Animal 是其三個子類型的佔位符。
+
+## [里氏替換原則](https://en.wikipedia.org/wiki/Liskov_substitution_principle)
+  - 為方便起見，設 U 為 T 的子類型。
+  - `我們通過引用（左側）操作對象（右側）！` `T t = new U();`
+  - Liskov 指出，T 型對象可以用 U 型對象替換，而不會改變 T 的任何理想屬性（正確性、執行的任務等）。
 
 ## 鑄件
-• Upcasting18 是將U 對象/變量轉換為T 變量。
-```java
-U u1 = new U(); // Trivial.
-T t1 = u1; // OK.
-T t2 = new U(); // OK.
-```
-• Downcasting19 是將T 變量轉換為U 變量。
-```java
-U u2 = (U) t2; // 好的，但是很危險。為什麼？
-U u3 = new T(); // 錯誤！為什麼？
-```
-
-18 A加寬轉換；向後兼容性。
-19 A窄轉換；向前推進。
+  - Upcasting (向上轉型、加寬轉換；向後兼容性)18 是將U 對象/變數轉換為T 變數。
+    ```java
+    U u1 = new U(); // Trivial.
+    T t1 = u1; // OK.
+    T t2 = new U(); // OK.
+    ```
+  - Downcasting (向下轉型、窄轉換；向前推進) 是將T 變數轉換為U 變數。
+    ```java
+    U u2 = (U) t2; // 好的，但是很危險。為什麼？
+    U u3 = new T(); // 錯誤！為什麼？
+    ```
 
 ## 解決方案：instanceof
-• 需要並始終允許向上轉型。 （為什麼？）
-• 但是，向下轉型並不總是正確的，即使您使用轉型運算符也是如此。
-  • 事實上，如果使用任何轉換運算符，編譯時的類型檢查就會變得不可靠。 （為什麼？）
-• 更糟糕的是，一個T 型變量可以指向所有U 型變量。
-  • 回想一下，T 型變量用作佔位符。
-• 需要運行時類型信息 (RTTI) 來解析
-錯誤：ClassCastException。
-• 我們可以使用instanceof 來檢查引用的對像是否屬於
-運行時的目標類型。
+  - 需要並始終允許向上轉型。 （為什麼？）
+  - 但是，`向下轉型並不總是正確的，即使您使用轉型運算符也是如此`。
+    - 事實上，如果使用任何轉換運算符，編譯時的類型檢查就會變得不可靠。 （為什麼？）
+  - 更糟糕的是，一個 T 型變數可以指向所有 U 型變數。
+    - 回想一下，T 型變數用作佔位符。
+  - 需要運行時類型信息 (Run-time type information)(RTTI) 來解決錯誤：`ClassCastException`。
+  - 我們可以使用 `instanceof` 在 `運行時` 檢查引用的對像是否是目標類型。
+    ```java
+    // 先檢查 是否為 完形鍊關係，是的話 才做強制轉型
+    if(trista instanceof Human) {
+      ((Human) trista).writeCode();
+    }
+    ```
 
 ## 範例
-![image_7-10](./image/image_7-10.png)
-- 類繼承可以用有向圖（directed graph）來表示。
-- 例如，D 是 A 和 B 的子類型，它們都可以從有向圖上的 D 到達。
+  ![image_7-10](./image/image_7-10.png)
+  - 類繼承可以用 `有向圖`（directed graph）來表示。
+    (`子類` 指向 `父類`)
+    (可以順著箭頭方向 到達的 表示兩者有繼承關係)
+  - 例如，`D` 是 `A` 和 `B` 的子類型，它們都可以從有向圖上的 `D` 到達。
 
-```java
-class A {}
-class B extends A {}
-class C extends A {}
-class D extends B {}
-class E extends B {}
-class F extends D {}
+  ```java
+  class A {}
+  class B extends A {}
+  class C extends A {}
+  class D extends B {}
+  class E extends B {}
+  class F extends D {}
 
-public class InstanceofDemo {
-  public static void main(String[] args) {
-    Object o = new D();
-    System.out.println(o instanceof A); // Output true.
-    System.out.println(o instanceof B); // Output true.
-    System.out.println(o instanceof C); // Output false.
-    System.out.println(o instanceof D); // Output true.
-    System.out.println(o instanceof E); // Output false.
-    System.out.println(o instanceof F); // Output false.
+  public class InstanceofDemo {
+    public static void main(String[] args) {
+      Object o = new D();
+      System.out.println(o instanceof A); // Output true.
+      System.out.println(o instanceof B); // Output true.
+      System.out.println(o instanceof C); // Output false.
+      System.out.println(o instanceof D); // Output true.
+      System.out.println(o instanceof E); // Output false.
+      System.out.println(o instanceof F); // Output false.
+    }
   }
-}
+  ```
 
-```
-
-## 抽像類
-• 抽像類是聲明為抽象的類。
-• 通常，抽像類位於類層次結構的頂部，充當佔位符。 20
-• 抽像類可能有一些方法沒有實現21 並聲明為抽象。
-• 它們是抽象方法。
-• 如果一個類有一個或多個抽象方法，則該類
-本身必須聲明為抽象的。
-• 不能實例化所有抽像類。
-• 當繼承一個抽像類時，編輯器可以幫助您調用每一個抽象方法。
-
-20 例如，抽象工廠模式。
-21 方法聲明時不帶大括號，後面跟一個分號。
+## 抽象類
+  - `抽象`類是 聲明為`抽象`的類。
+  - 通常，`抽象`類 位於類層次結構的頂部，充當佔位符。(例如，抽象工廠模式)
+  - `抽象`類可能有一些方法`沒有實現`(方法聲明時不帶大括號，後面跟一個分號。) 並聲明為 `抽象`。
+    - 它們是 `抽象` 方法。
+    - 如果一個類有一個或多個 `抽象` 方法，那麼這個類本身必須被聲明為 `抽象` 的。
+  - 所有抽象類 都不能 實例化。
+  - 當繼承一個 `抽象` 類時，編輯器可以幫助您調用每一個 `抽象` 方法。
 
 ## 範例
-![image_7-11](./image/image_7-11.png)
-• 在UML 中，抽象方法和類用斜體表示。
-• draw() 和 resize() 方法可以在以下情況下實現
-具體形狀已知。
+  ![image_7-11](./image/image_7-11.png)
+  - 在 UML 中，`抽象` 方法和類用斜體表示。
+  - `draw()` 和 `resize()` 方法在 知道具體形狀的情況下 就 可以實現了 (兩者同屬抽象類)。
 
-## 最後的關鍵詞22
-• final 變量是可以初始化一次並且以後不能更改的變量。
-• 編譯器確保您只能執行一次。
-• final 變量通常使用 static 關鍵字聲明，並且
-被視為常量，例如 Math.PI。
-• final 方法是一種不能被子類覆蓋的方法。
-• 如果一個方法具有不應更改的實現並且它對對象的一致狀態至關重要，則您可能希望將其設為最終方法。
-• 不能繼承聲明為final 的類。 • 例如，數學。
+## final 關鍵詞 (在Java中，關鍵字const是保留的)
+  - `final` 變數，是可以初始化一次並且以後不能更改的變數。
+    - 編譯器確保您 `只能執行一次`。
+    - `final` 變數，通常使用 `static` 關鍵字聲明並被視為常數，例如 Math.PI。
+  - `final` 函數是一種 `不能被子類覆蓋的` 函數。
+    - 如果一個函數具有不應更改的實現並且它對 Object 的一致狀態至關重要，則您可能希望將其設為 `final` 函數。
+  - `final` class類，不能 被繼承。
+    - 例如，數學。
 
-22在Java中，關鍵字const是保留的。
+## 另一種 IS-A 關係：接口(Interface) 繼承 
+  - 不同類型的 Object 應該在 `沒有適當垂直關係的情況下` 一起工作。
+  - 例如，考慮從 Animal 繼承的 `Bird` 和從 Transportation 繼承的 `Airplane`。
+  - `Bird` 和 `Airplane` 都可以在天空中飛行，比如通過調用 `fly()` 方法。
+  - 在語義上，方法 fly() 不能在它們的 父類 中定義。 （為什麼？）
 
-## 另一種 IS-A 關係：接口繼承
-• 不同類型的對象應該在沒有適當垂直關係的情況下一起工作。
-• 例如，考慮從 Animal 繼承的 Bird 和從 Transportation 繼承的 Airplane。
-• Bird 和Airplane 都可以在天空中飛行，比如通過調用fly() 方法。
-• 在語義上，方法fly() 不能在它們的超類中定義。 （為什麼？）
+  - 我們希望那些可以飛行的物體通過調用一個API 來飛行，就像 `Student` 的方式一樣。
+  - 回想一下，`Object` 是一切的 superclass。
+  - 那麼，使用 `Object` 作為佔位符怎麼樣？
+    - 並不對。 （為什麼？）
+    - 共同父類為 Object，但是在 Object 上加 fly()，還是需要判斷 來源。
+    - 並非所有的 Object 都會 fly()
+  - 顯然，我們需要一種 `橫向` 關係：`interface`。
 
-• 我們希望那些可以飛行的物體通過調用一個API 來飛行，就像Student 的方式一樣。
-• 回想一下，Object 是一切的超類。
-• 那麼，使用對像作為佔位符怎麼樣？
-• 並不真地。 （為什麼？）
-• 顯然，我們需要一種橫向關係：界面。
-```java
-public interface Flyable {
-  void fly(); // Implicitly public and abstract.
-}
-```
+  ```java
+  public interface Flyable {
+    void fly(); // Implicitly public and abstract.
+    // 分號 表示 抽象方法
+  }
+  ```
 
-![image_7-12](./image/image_7-12.png)
+  ![image_7-12](./image/image_7-12.png)
 
-```java
-class Animal {}
-class Bird extends Animal implements Flyable {
-  void flyByFlappingWings() {
-    System.out.println("Flapping wings!");
+  使用 `implements` 去引用。
+
+  ```java
+  class Animal {}
+
+  class Bird extends Animal implements Flyable {
+    void flyByFlappingWings() {
+      System.out.println("Flapping wings!");
+    }
+
+    @Override
+    public void fly() { flyByFlappingWings(); }
   }
 
-  @Override
-  public void fly() { flyByFlappingWings(); }
-}
-class Transportation {}
-class Airplane extends Transportation implements Flyable {
-  void flyByCastingMagic() {
-    System.out.println("#$%@$ˆ@!#$!");
+  class Transportation {}
+
+  class Airplane extends Transportation implements Flyable {
+    void flyByCastingMagic() {
+      System.out.println("#$%@$ˆ@!#$!");
+    }
+    @Override
+    public void fly() { flyByCastingMagic();}
   }
-  @Override
-  public void fly() { flyByCastingMagic();}
-}
-```
+  ```
 
-![image_7-13](./image/image_7-13.png)
+  ![image_7-13](./image/image_7-13.png)
 
-```java
-public class InterfaceDemo {
-  public static void main(String[] args) {
-    Bird owl = new Bird();
-    goFly(owl);
+  ```java
+  public class InterfaceDemo {
+    public static void main(String[] args) {
+      Bird owl = new Bird();
+      goFly(owl);
 
-    Airplane a380 = new Airplane();
-    goFly(a380);
+      Airplane a380 = new Airplane();
+      goFly(a380);
+    }
+    public static void goFly(Flyable flyableObj) {
+      flyableObj.fly();
+    }
   }
-  public static void goFly(Flyable flyableObj) {
-    flyableObj.fly();
-  }
-}
-```
+  ```
 
-• 同樣，具有多種實現的統一接口！
+  - 同樣，統一的`接口(interface)` 具有多種`實現(implements)`！
 
-## 深入探討接口
-• 接口是對象和客戶端之間的契約。
-• 如圖所示，接口是一種引用類型，就像類一樣。
-• 與類不同，接口用於定義沒有實現的方法，因此它們不能（直接）實例化。
-• 此外，接口是無狀態的。
-• 一個類可以通過提供實現多個接口
-每個預定義簽名的方法體。
+## 深入探討接口(Interfaces) (接口定義規格)
+  - interface 是 object 和 client 端之間的 `契約`。
+  - 如圖所示，`interface 是一種引用類型(reference type)，就像類(class)一樣`。
+  - 與類(class)不同，接口(interface)用於定義沒有實現的方法，因此它們 `不能`（直接）實例化。(不能使用 new)
+  - 此外，接口(interface) 是 `無狀態的`。(不能宣告變數)
+  - 一個類可以通過為每個預定義的簽名提供方法體來實現 `多個接口`。
 
-• 請注意，一個接口可以擴展另一個接口！ • 在某種意義上，就像合同的集合。
-• 例如，Runnable、Callable23、Serializable24 和 Comparable。
-• 在JDK8 中，我們有如下新特性：
-  • 我們可以聲明final static 非空白字段和​​方法；
-  • 我們還可以定義已經存在的默認方法
-  實施的;
-  • Java 為廣泛使用的 lambda 定義了功能接口
-  在 Stream 框架中使用。 （敬請關注 Java Programming 2！）
+  - 請注意，一個接口可以擴展另一個接口！
+    - 在某種意義上，就像 `契約` 的集合。
+  - 例如，`Runnable`、`Callable` (兩者都與 Java 多線程有關)、`Serializable` (用於可以表示為字節序列的對象。這稱為對象序列化。) 和 `Comparable`。
+  - 在JDK8 中，我們有如下新特性：
+    - 我們可以聲明 `final static` 非空白字段和​​方法；
+    - 我們還可以定義已經實現的 `默認` 方法；
+    - Java 為 `Stream 框架` 中廣泛使用的 `lambdas` 定義了 `函數式接口`。 （敬請關注 Java Programming 2！）
 
-23兩者都與 Java 多線程有關。
-24 用於可以表示為字節序列的對象。這稱為對象序列化。
-
-## 接口和抽像類的時機
-• 如果你想考慮使用抽像類：
-  • 在幾個密切相關的類之間共享代碼，並且
-  • 聲明非靜態或非最終字段。
-• 考慮在以下任何情況下使用接口：
-  • 不相關的類將實現您的接口；
-  • 指定特定數據類型的行為，但不
-  關注誰實施其行為；
-  • 利用多重繼承。
+## 接口(Interfaces) 和 抽象類(Abstract Classes) 的時機
+  - 如果你想考慮使用抽象類(Abstract Classes)：
+    - 在幾個密切相關的類之間共享代碼，並且
+    - 聲明 `非靜態` 或 `非最終字段`。
+    
+  - 考慮在以下任何情況下使用接口(Interfaces)：
+    - 無關聯的class將實現您的接口(Interfaces)；
+    - 指定特定數據類型的行為，但不關心誰實現了它的行為；
+    - 利用 `多重繼承`。
 
 ## 練習：RPG
   ![image_7-14](./image/image_7-14.png)
 
-  • 首先，Wizard、SeaDragon 和Merchant 是三個角色。
-  • 特別是，Wizard 通過調用attack() 與SeaDragon 戰鬥。
-  • Wizard 通過調用buyAndSell() 與Merchant 買賣東西。
-  • 但是，SeaDragon 不能買賣東西；商人不能攻擊他人。
+  - 首先，`Wizard`、`SeaDragon` 和 `Merchant` 是三個角色。
+  - 特別是，`Wizard` 通過調用 `attack()` 與 `SeaDragon` 戰鬥。
+  - `Wizard` 通過調用 `buyAndSell()` 與 `Merchant` 買賣東西。
+  - 但是，`SeaDragon` 不能買賣東西；`Merchant` 不能攻擊他人。
 
   ![image_7-15](./image/image_7-15.png)
 
   ```java
   abstract public class Character {}
   ```
+
   ```java
   public interface Combat {
     void attack(Combat enemy);
   }
   ```
+
   ```java
   public interface Trade {
     void buyAndSell(Trade counterpart);
@@ -1192,3 +1181,5 @@ public class StaticClassDemo {
 ## 相關連結
 
 - [對象和內存分配](https://web.stanford.edu/class/archive/cs/cs106a/cs106a.1152/lectures/Memory.pdf)、[本地檔案](./data/Memory.pdf)
+- [物件導向編輯程序精華](https://www.csie.ntu.edu.tw/~htlin/course/oop13spring/doc/EssentialOOP)、[本地檔案](./data/EssentialOOP.pdf)
+- [繼承和多型](http://enos.itcollege.ee/~jpoial/java/naited/RelationBetweenClasses_slides.pdf)、[本地檔案](./data/RelationBetweenClasses_slides.pdf)

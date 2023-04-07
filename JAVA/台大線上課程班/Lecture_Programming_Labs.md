@@ -360,10 +360,12 @@
   - #### 練習
     ```java
     public class Lab4_FastPower {
+
       public static void main(String[] args) {
         double x = 2;
-        for (int i = 0; i <= 10; i++) {
-          System.out.println(pow1(x, i) == pow2(x, i));
+        for (int i = -10; i <= 10; i++) {
+          // System.out.println(pow1(x, i) == pow2(x, i));
+          System.out.printf("%.1f ^ %d = %f\n", x, i, pow2(x, i));
         }
       }
       
@@ -378,15 +380,15 @@
       
       // 遞迴 O(log n) time
       public static double pow2(double x, int n) {
-        if(n == 0) {
-          return 1;
+        if(n == 0) return 1;
+        int m = n >= 0 ? n : -n;
+        
+        double y = pow2(x, m / 2);
+        y = y * y;
+        if(m % 2 == 1) {
+          y *= x;
         }
-        double result = pow2(x, n / 2);
-        result = result * result;
-        if(n % 2 == 1) {
-          result *= x;
-        }
-        return result;
+        return n > 0 ? y : 1 / y;
       }
     }
     ```
@@ -409,3 +411,110 @@
 
   - #### 實驗 4-6（可選）
     令 M 為任何正整數值。編寫一個函數來計算 n = 10000000 的 x^n mod M。您可以使用多項式餘數定理（參見[此處](https://en.wikipedia.org/wiki/Polynomial_remainder_theorem)）。
+
+## Lab 5 Refactoring Number-Guessing Game by Using Proper Design Patterns (使用適當的設計模式重構猜數遊戲)
+  以 OOP 風格重寫 Lab 1 的程序。首先分析實驗 1 中的功能，然後根據需要定義任意數量的類。
+  例如，您可以創建兩個對象：一個對像用於`遊戲`過程，另一個對像用於`玩家`。
+  這樣，您應該定義一個協議，使遊戲對玩家的依賴性最小。
+  生成的 UML 如下所示。
+
+  ![image_programming_lab5_1](./image/image_programming_lab5_1.png)
+
+  - #### 練習
+    ```java
+    import java.util.Scanner;
+
+    public class Lab5_DesignPatterns {
+
+      public static void main(String[] args) {
+        new Game(new BinarySearchAI()).run();
+      }
+      
+      public static class Player {
+        Player() {}
+        public int next(int low, int high) { return 0; }
+      }
+      
+      public static class HumanPlayer extends Player {
+        private Scanner input = new Scanner(System.in);
+        HumanPlayer() { }
+        
+        @Override
+        public int next(int low, int high) {
+          return input.nextInt();
+        }
+      }
+      
+      public static class NaiveAI extends Player {
+        @Override
+        public int next(int low, int high) {
+          return (int) (Math.random() * (high - low + 1) + low);
+        }
+      }
+      
+      // 二元拆分法
+      public static class BinarySearchAI extends NaiveAI {
+        @Override
+        public int next(int low, int high) {
+          return (high + low) / 2;
+        }
+      }
+      
+      // 猜邊界
+      public static class SuperAI extends NaiveAI {
+        @Override
+        public int next(int low, int high) {
+          return low;
+        }
+      }
+      
+      public static class Game {
+        
+        private int low = 0, high = 99, s;
+        private Player player;
+        
+        Game(Player player) {
+          s = (int)(Math.random() * 100);
+          this.player = player;
+        }
+        
+        public void run() {
+          while(true){
+            // 目前範圍在？
+            System.out.printf("(%d, %d) ?", low, high);
+            int userInput = player.next(low, high);
+            System.out.printf(" %d\n", userInput);
+            
+            // 超出範圍，再來一次
+            if(userInput < low || userInput > high) {
+              System.out.println("Out of range. Try again?");
+              continue;
+            }
+            
+            // 正確答案
+            if(userInput == s) {
+              System.out.println("Bingo");
+              break;
+            }
+            else if(userInput < s){
+              low = userInput + 1;
+            }else {
+              high = userInput - 1;
+            }
+            
+            // 只剩下一個整數，失敗
+            if( low >= high) {
+              System.out.println("GG, answer is " + s);
+              break;
+            }
+          };
+        }
+      }
+
+    }
+
+    ```
+
+  - #### 實驗 5-1（可選）
+    為這個遊戲嘗試各種策略。例如，樸素策略是隨機猜測一個數字，二分搜索策略是返回可行範圍中間的數字。然後通過模擬這些策略 1e5 次來比較勝率。
+     ![image_programming_lab5_2](./image/image_programming_lab5_2.png)

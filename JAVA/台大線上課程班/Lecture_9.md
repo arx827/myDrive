@@ -129,7 +129,7 @@ Swing：較新的 GUI 庫，隨 Java 2 (1998) 引入
   – add(Component c): 添加組件到窗口
   – setVisible(boolean b)：使窗口可見或不可見
 
-## Example
+## 範例
   SimpleFrameMain.java
 
 ## JPanel——通用容器
@@ -170,7 +170,7 @@ FlowLayout 和 BorderLayout 現在應該足夠好了......
     – （根據需要遞歸）
   如果你的窗口看起來不對，你可能忘記了 pack()
 
-## Example
+## 範例
   SimpleLayoutMain.java
 
 ## 圖形和繪圖
@@ -186,7 +186,7 @@ FlowLayout 和 BorderLayout 現在應該足夠好了......
     paintComponent 並且可以覆蓋它來繪製東西
   注意：正如我們將看到的，我們覆蓋了 paintComponent 但我們沒有調用它
 
-## Example
+## 範例
   SimplePaintMain.java
 
 ## 圖形方法
@@ -224,7 +224,7 @@ FlowLayout 和 BorderLayout 現在應該足夠好了......
     – 窗口管理器在決定重繪時將調用 paintComponent（很快，但可能不會馬上）
     – 窗口管理器可以組合幾個快速重繪（）請求並只調用一次 paintComponent（）
 
-## Example
+## 範例
   FaceMain.java
 
 ## 重繪是如何發生的
@@ -344,10 +344,10 @@ ButtonDemo1.java 定義了一個只使用一次的類來為單個按鈕創建監
 
 警告：前方可怕的語法
 
-## Example
+## 範例
 ![image_9-7](./image/image_9-7.png)
 
-## Example
+## 範例
   ButtonDemo2.java
 
 ## 程序線程和UI線程
