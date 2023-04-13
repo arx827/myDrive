@@ -1179,7 +1179,6 @@ public class StaticClassDemo {
 ```
 
 ## 相關連結
-
 - [對象和內存分配](https://web.stanford.edu/class/archive/cs/cs106a/cs106a.1152/lectures/Memory.pdf)、[本地檔案](./data/Memory.pdf)
 - [物件導向編輯程序精華](https://www.csie.ntu.edu.tw/~htlin/course/oop13spring/doc/EssentialOOP)、[本地檔案](./data/EssentialOOP.pdf)
 - [繼承和多型](http://enos.itcollege.ee/~jpoial/java/naited/RelationBetweenClasses_slides.pdf)、[本地檔案](./data/RelationBetweenClasses_slides.pdf)
