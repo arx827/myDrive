@@ -99,12 +99,12 @@ import {
   FblFilters,
   FblOperator,
 } from "@/components/shared/filter-builder/models";
-import FblDataGrid from "@/components/shared/data-grid/FblDataGrid.vue";
 import FblFilterBuilder from "@/components/shared/filter-builder/FblFilterBuilder.vue";
 import FblLevelSelect from "@/components/shared/level-select/FblLevelSelect.vue";
 import ProductForm from "@/forms/ProductForm.vue";
 import { ProductFormModel } from "@/forms/ProductForm.vue";
 import { Vue, Component } from "vue-property-decorator";
+import FblDataGrid from "@/components/shared/data-grid/FblDataGrid.vue";
 import {
   EMPTY_PAGE,
   FblActionEvent,
@@ -122,6 +122,7 @@ import {
   ProductSpecDto,
   ProductSpecUpdates,
   ProductUpdates,
+  PageFiltersDto
 } from "@fubonlife/<%= code %>-api-axios-sdk";
 import { message, Modal } from "ant-design-vue";
 import { FblSubmitEvent } from "@/components/shared/form/models";
@@ -137,22 +138,22 @@ export default class ProductPage extends Vue {
   // loading
   public isLoading: boolean = false;
 
-  // filter
+  // filter 欄位定義
   public filterHolder: FblFilterHolder = {
-    filters: {
+    filters: {        //存放輸入的篩選條件
       filters: [],
     },
-    filterItems: [
+    filterItems: [    //定義可選擇的篩選條件欄位
       {
-        property: "name",
-        title: "名稱",
-        dataType: FblFilterDataType.STRING,
+        property: "name",                   //欄位ID
+        title: "名稱",                      //欄位顯示名稱
+        dataType: FblFilterDataType.STRING, //欄位型態
       },
       {
         property: "listPrice",
         title: "定價",
         dataType: FblFilterDataType.NUMBER,
-        min: 0,
+        min: 0,                              //數字檢核
         max: 1000,
         step: 1,
       },
@@ -173,28 +174,35 @@ export default class ProductPage extends Vue {
         property: "status",
         title: "狀態",
         dataType: FblFilterDataType.STRING,
-        enum: [ProductDtoStatusEnum.AVAILABLE, ProductDtoStatusEnum.SHORTAGE],
+        enum: [ProductDtoStatusEnum.Available, ProductDtoStatusEnum.Shortage], //顯示選項
       },
     ],
   };
 
-  // data grid
+  // data grid 欄位定義
   public masterGrid: FblPDataGridHolder<ProductDto> = {
+    //Key值欄位
     rowKey: "id",
+    //資料陣列
     data: [],
+    //分頁資訊物件
     pagination: {
+      //當前頁
       current: 1,
+      //每頁筆數
       pageSize: 20,
+      //總共筆數
       total: 0,
     },
+    //顯示欄位定義
     columns: [
       {
-        type: FblColumnType.PLAIN,
-        property: "name",
-        title: "名稱",
-        inspect: true,
-        sorter: true,
-        minWidth: 200,
+        type: FblColumnType.PLAIN,  //一般文字欄位
+        property: "name",           //欄位名稱，對應DTO欄位名稱
+        title: "名稱",              //顯示標題
+        inspect: true,              //是否連動事件
+        sorter: true,               //是否排序
+        minWidth: 200,              //最小寬度(px)
       },
       {
         type: FblColumnType.PLAIN,
@@ -217,20 +225,11 @@ export default class ProductPage extends Vue {
         width: 200,
       },
       {
-        type: FblColumnType.PLAIN,
-        property: "attribute",
-        title: "屬性(合併)",
-        width: 100,
-        rowSpanKey: (data) => {
-          return data.attribute; 
-        },
-      },
-      {
-        type: FblColumnType.TAG,
+        type: FblColumnType.TAG,             //狀態標籤型態欄位範例
         property: "status",
         title: "狀態 (Tag)",
         sorter: true,
-        formatter: (data: ProductDto) => {
+        formatter: (data: ProductDto) => {   //標籤型態欄位格式化
           switch (data.status) {
             case "AVAILABLE":
               return "Available";
@@ -242,11 +241,11 @@ export default class ProductPage extends Vue {
         },
       },
       {
-        type: FblColumnType.BADGE,
+        type: FblColumnType.BADGE,          //狀態圖標型態欄位
         property: "status",
         title: "狀態 (Badge)",
         sorter: true,
-        formatter: (data: ProductDto) => {
+        formatter: (data: ProductDto) => {  //圖標型態欄位字型格式化
           switch (data.status) {
             case "AVAILABLE":
               return "Available";
@@ -256,7 +255,7 @@ export default class ProductPage extends Vue {
               return null;
           }
         },
-        badgeColor: (data: ProductDto) => {
+        badgeColor: (data: ProductDto) => {  //圖標型態欄位顏色格式化
           switch (data.status) {
             case "AVAILABLE":
               return "green";
@@ -268,32 +267,29 @@ export default class ProductPage extends Vue {
         },
       },
       {
-        type: FblColumnType.TEMPLATE,
+        type: FblColumnType.TEMPLATE,       //客制化型態欄位
         title: "圖片",
-        template: "imgTemplate",
+        template: "imgTemplate",            //template名稱
         sorter: true,
         sortProperty: "name",
       },
       {
         type: FblColumnType.PLAIN,
         title: "負責人",
-        formatter: (data: ProductDto) => data.ownerAccount.employee.name,
+        //文字可自定義格式
+        formatter: (data: ProductDto) => (data.ownerAccount) ? data.ownerAccount.employee.name : "負責人A",
       },
       {
-        type: FblColumnType.ACTION,
+        type: FblColumnType.ACTION,              //Action按鈕型態定義
         title: "操作",
         actionButtonType: "primary",
-        actions: [
+        actions: [                               //個別按鈕定義
           {
-            name: "edit",
+            name: "edit",                        //按鈕名稱，以此判斷按哪個按鈕
             title: "編輯",
             disabled: (row) => {
-              return row.data.name == "iMac";
+              return row.data.name == "iMac";    //判斷disabled範例
             },
-          },
-          {
-            name: "edit1",
-            title: "編輯1",
           },
           {
             name: "detail",
@@ -370,11 +366,14 @@ export default class ProductPage extends Vue {
     this.filterHolder.filters = { filters: [] };
     this.reloadMaster();
   }
+  //data grid 事件方法
+  //點選排序或更改頁碼觸發事件
   onMasterPageChange(e: FblPageEvent) {
     this.masterGrid.pagination.current = e.pagination.current;
     this.masterGrid.sort = e.sort;
     this.reloadMaster();
   }
+  //點選Master資料觸發Detatil事件
   onMasterInspectClick(row: FblRow<ProductDto>) {
     message.info(`${row.data.name} Clicked`);
     this.masterInspected = row.data;
@@ -389,7 +388,7 @@ export default class ProductPage extends Vue {
     };
     this.reloadDetail();
   }
-
+  //點選Master資料列中Action按鈕觸發事件
   onMasterActionClick(e: FblActionEvent<ProductDto>) {
     const data = e.row.data;
     switch (e.action.name) {
@@ -401,9 +400,6 @@ export default class ProductPage extends Vue {
         break;
       case "edit":
         this.createEditModal(e.row.data);
-        break;
-      case "edit1":
-        e.row.data.name = "iMac";
         break;
     }
   }
@@ -461,7 +457,7 @@ export default class ProductPage extends Vue {
     }
   }
 
-  // methods
+  // 查詢methods
   reloadMaster() {
     const filter = this.filterHolder.filters
       ? JSON.stringify(this.filterHolder.filters)
@@ -469,18 +465,23 @@ export default class ProductPage extends Vue {
     const sort = this.masterGrid.sort
       ? JSON.stringify([this.masterGrid.sort])
       : undefined;
+    //送出查詢前，定義PageFilter物件，將filters物件傳入
+    const pageFilters: PageFiltersDto = {
+      page: this.masterGrid.pagination.current,
+      size: this.masterGrid.pagination.pageSize,
+      filters: this.filterHolder.filters,
+      sort: (this.masterGrid.sort) ? this.masterGrid.sort.selector : null,
+      order: (this.masterGrid.sort && this.masterGrid.sort.desc) ? "desc" : "asc"
+    }
     this.isLoading = true;
     this.$productApi
-      .paginateProductUsingGET(
-        this.masterGrid.pagination.current - 1,
-        this.masterGrid.pagination.pageSize,
-        filter,
-        sort
+      .paginateProductUsingPOST(
+        pageFilters
       )
       .then((resp) => {
         const p = { ...this.masterGrid.pagination };
-        p.total = parseInt(resp.data.totalElements);
-        this.masterGrid.data = resp.data.content;
+        p.total = parseInt(resp.data.data.totalElements);
+        this.masterGrid.data = resp.data.data.content;
         this.masterGrid.pagination = p;
       })
       .catch(console.error)
@@ -494,18 +495,22 @@ export default class ProductPage extends Vue {
     const sort = this.detailGrid.sort
       ? JSON.stringify([this.detailGrid.sort])
       : undefined;
+    const pageFilters: PageFiltersDto = {
+      page: this.detailGrid.pagination.current,
+      size: this.detailGrid.pagination.pageSize,
+      filters: this.filterHolder.filters,
+      sort: (this.detailGrid.sort) ? this.detailGrid.sort.selector : null,
+      order: (this.detailGrid.sort && this.detailGrid.sort.desc) ? "desc" : "asc"
+    }  
     this.isLoading = true;
     this.$productSpecApi
-      .paginateProductSpecUsingGET(
-        this.detailGrid.pagination.current - 1,
-        this.detailGrid.pagination.pageSize,
-        filter,
-        sort
+      .paginateProductSpecUsingPOST(
+          pageFilters
       )
       .then((resp) => {
         const p = { ...this.detailGrid.pagination };
-        p.total = parseInt(resp.data.totalElements);
-        this.detailGrid.data = resp.data.content;
+        p.total = parseInt(resp.data.data.totalElements);
+        this.detailGrid.data = resp.data.data.content;
         this.detailGrid.pagination = p;
       })
       .catch(console.error)

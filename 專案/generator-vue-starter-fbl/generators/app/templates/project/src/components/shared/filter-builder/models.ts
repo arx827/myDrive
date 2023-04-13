@@ -1,12 +1,14 @@
+import { FblFilter } from "@fubonlife/<%= code %>-api-axios-sdk";
+
 export interface FblFilters {
     filters: FblFilter[]
 }
-export interface FblFilter {
-    property: string;                       //  backend proprty
-    operator: FblOperator;
-    operand: Array<string | number | Date>;  // value
+// export interface FblFilter {
+//     property: string;                       //  backend proprty
+//     operator: FblOperator;
+//     operand: Array<string | number | Date>;  // value
     
-}
+// }
 
 export interface FblFilterItem {
     property: string,   // backend proprty
@@ -109,6 +111,6 @@ export const OPERATOR_TITLE_MAP = {
 }
 
 export interface FblFilterHolder {
-    filters: FblFilters;
+    filters: FblFilters,
     filterItems: FblFilterItem[]
 }

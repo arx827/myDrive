@@ -1,5 +1,3 @@
-import { ScopedSlot } from "vue/types/vnode";
-
 export enum FblColumnType {
     PLAIN = "PLAIN",
     TEMPLATE = "TEMPLATE",
@@ -33,8 +31,6 @@ export interface FblColumn<T> {
     formatter?: (data: T) => string;
     badgeColor?: (data: T) => string | string;
     tagColor?: (data: T) => string | string;
-    rowSpanKey?: (data: T) => string;
-    customRender?: ((data: T, record: T, index: number, column: any) => any) | ScopedSlot;
 }
 
 export interface FblRow<T> {

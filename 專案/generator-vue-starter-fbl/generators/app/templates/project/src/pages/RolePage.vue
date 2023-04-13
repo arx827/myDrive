@@ -72,7 +72,7 @@ import {
   FblPDataGridHolder,
   FblRow,
 } from "@/components/shared/data-grid/models";
-import { RoleDto, RoleUpdates } from "@fubonlife/<%= code %>-api-axios-sdk";
+import { RoleDto, RoleUpdates, PageFiltersDto } from "@fubonlife/<%= code %>-api-axios-sdk";
 import { message, Modal } from "ant-design-vue";
 import { FblSubmitEvent } from "@/components/shared/form/models";
 import RoleForm from "@/forms/RoleForm.vue";
@@ -177,17 +177,22 @@ export default class RolePage extends Vue {
     const filter = this.filterHolder.filters
       ? JSON.stringify(this.filterHolder.filters)
       : JSON.stringify({ filters: [] });
+    const pageFilters: PageFiltersDto = {
+      page: this.grid.pagination.current,
+      size: this.grid.pagination.pageSize,
+      filters: this.filterHolder.filters,
+      sort: (this.grid.sort) ? this.grid.sort.selector : null,
+      order: (this.grid.sort && this.grid.sort.desc) ? "desc" : "asc"
+    }      
     this.isLoading = true;
     this.$roleApi
-      .paginateRolesUsingGET(
-        this.grid.pagination.current - 1,
-        this.grid.pagination.pageSize,
-        filter
+      .paginateRolesUsingPOST(
+        pageFilters
       )
       .then((resp) => {
         const p = { ...this.grid.pagination };
-        p.total = parseInt(resp.data.totalElements);
-        this.grid.data = resp.data.content;
+        p.total = parseInt(resp.data.data.totalElements);
+        this.grid.data = resp.data.data.content;
         this.grid.pagination = p;
       })
       .catch(console.error)

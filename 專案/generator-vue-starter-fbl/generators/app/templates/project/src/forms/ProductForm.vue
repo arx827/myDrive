@@ -50,6 +50,7 @@ import { Subject } from "rxjs";
 import {
   ProductDto,
   ProductDtoStatusEnum,
+  PageFiltersDto
 } from "@fubonlife/<%= code %>-api-axios-sdk";
 import { takeUntil } from "rxjs/operators";
 import { ValidationRule } from "ant-design-vue/types/form-model/form";
@@ -91,21 +92,29 @@ export default class ProductForm extends Vue {
       { required: true, message: "請選擇負責人", trigger: "blur" },
     ],
   };
-
+  //級聯下拉選單資料及屬性定義
   ownerAccountSelect: FblLevelSelectHolder = {
     selected: {},
     levels: [
       {
         // title: "部門",
-        property: "departmentId",
-        placeholder: "請選擇部門",
+        property: "departmentId",          //欄位名稱
+        placeholder: "請選擇部門",          //顯示提示
         multiple: false,
         allowClear: true,
-        showSearch: true,
-        load: async (prev: FblLevelState) => {
+        showSearch: true,                  //輸入值是否進行清單搜尋
+        load: async (prev: FblLevelState) => {    //讀取清單資料的方法
+          const pageFilters: PageFiltersDto = {
+            page: 1,
+            size: 9999,
+            filters: null,
+            sort: "id",
+            order: "asc"
+          };
           return (
-            await this.$departmentApi.paginateDepartmentUsingGET(0, 9999)
-          ).data.content.map((department) => {
+            //呼叫後端API取得資料，並組合成物件陣列
+            await this.$departmentApi.paginateDepartmentUsingPOST(pageFilters)
+          ).data.data.content.map((department) => {
             return {
               label: department.name,
               value: department.id,
@@ -120,8 +129,8 @@ export default class ProductForm extends Vue {
         multiple: false,
         allowClear: true,
         showSearch: true,
-        load: async (prev: FblLevelState) => {
-          const filter: FblFilters = {
+        load: async (prev: FblLevelState) => { 
+          const filter: FblFilters = {   //子選單需要根據前一個選單的value顯示，將前一個選單值組成filter傳到後端
             filters: [
               {
                 property: "employee.departmentId",
@@ -130,13 +139,18 @@ export default class ProductForm extends Vue {
               },
             ],
           };
+          const pageFilters: PageFiltersDto = {
+            page: 1,
+            size: 9999,
+            filters: filter,
+            sort: "id",
+            order: "asc"
+          };
           return (
-            await this.$accountApi.paginateAccountUsingGET(
-              0,
-              9999,
-              JSON.stringify(filter)
+            await this.$accountApi.paginateAccountUsingPOST( //後端需對應filter來進行處理
+              pageFilters
             )
-          ).data.content.map((account) => {
+          ).data.data.content.map((account) => {  //組合回傳資料物件陣列
             return {
               label: account.employee.name,
               value: account.id,
@@ -159,7 +173,8 @@ export default class ProductForm extends Vue {
   onInitDataChanged(): void {
     this.reset();
   }
-
+  
+  //監看欄位選擇資料，同步到form要送出的欄位中
   @Watch("ownerAccountSelect.selected")
   onOwnerAccountSelectChanged(newValue, oldValue){
     this.form.ownerAccountId = newValue ? newValue.accountId : null;
@@ -178,7 +193,7 @@ export default class ProductForm extends Vue {
         listPrice: 0,
         unitCost: 0,
         attribute: "",
-        status: ProductDtoStatusEnum.AVAILABLE,
+        status: ProductDtoStatusEnum.Available,
         ownerAccountId: null,
       };
       this.ownerAccountSelect.selected = {};

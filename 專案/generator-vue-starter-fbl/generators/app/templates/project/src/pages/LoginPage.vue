@@ -89,8 +89,7 @@ export default class LoginPage extends Vue {
     };
     this.isLoading = true;
     this.$authApi
-      //.loginUsingPOST(body) // 後端版本較舊時使用
-      .crowdLoginUsingPOST(body)
+      .loginUsingPOST(body)
       .then((resp) => {
         console.log("Login Resp", resp);
         this.$user.signIn(resp.data.jwtTokenPair.accessToken);
@@ -111,4 +110,11 @@ export default class LoginPage extends Vue {
 </script>
 
 <style>
+  @font-face {
+    font-family: "FubonLifeKAIU";
+    src: url("../assets/font/FubonLifeKAIU.woff") format("woff"), 
+         url("../assets/font/FubonLifeKAIU.woff2") format("woff2");
+  }
+
+  /* body { font-family: "FubonLifeKAIU", serif } */
 </style>

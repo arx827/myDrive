@@ -1,6 +1,8 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router'
-import { Row, Col, Button, Layout, Menu, Icon, PageHeader, Avatar, Dropdown, Modal, Spin, Form, FormModel, Input, Select, InputNumber, Tag, DatePicker, Table, Divider, Badge, message, Tree } from 'ant-design-vue';
+import { Row, Col, Button, Layout, Menu, Icon, PageHeader, Avatar, Dropdown, 
+  Modal, Spin, Form, FormModel, Input, Select, InputNumber, Tag, DatePicker, 
+  Table, Divider, Badge, message, Tree, Switch, TreeSelect } from 'ant-design-vue';
 import Space from 'ant-design-vue/lib/space';
 import 'ant-design-vue/lib/space/style';
 import App from './App.vue'
@@ -50,11 +52,10 @@ Vue.component(Table.Column.name, Table.Column);
 Vue.component(Divider.name, Divider);
 Vue.component(Badge.name, Badge);
 Vue.component(Tree.name, Tree);
-
-
+Vue.component(Switch.name, Switch);
+Vue.component(TreeSelect.name, TreeSelect);
 
 Vue.config.productionTip = false
-
 
 new Vue({
   router,

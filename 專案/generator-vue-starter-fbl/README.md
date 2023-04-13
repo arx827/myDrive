@@ -14,7 +14,7 @@
 
 3. 透過 npm 安裝 VueCLI: `npm install -g @vue/cli@4.5.8`
 4. 透過 npm 安裝 [Yeoman](http://yeoman.io/): `npm install -g yo`
-5. 透過 npm 安裝 vue-starter-fbl 產生器: `npm install -g @fubonlife/generator-vue-starter-fbl@1.0.15`
+5. 透過 npm 安裝 vue-starter-fbl 產生器: `npm install -g @fubonlife/generator-vue-starter-fbl@1.0.13`
 
 ### 使用產生器生成一個新專案
 ```bash

@@ -27,18 +27,22 @@
   </div>
 </template>
 <script>
+//import FblSubMenu元件
 import subMenu from "./FblSubMenu";
 import { beforeEnter$ } from "@/router";
 import { Subject } from "rxjs";
 import { from } from "rxjs";
 import { takeUntil } from "rxjs/operators";
 export default {
+  //定義components
   components: {
     "sub-menu": subMenu,
   },
+  //定義傳遞參數
   props: {
     items: Array,
   },
+  //定義menu資料
   data() {
     return {
       renderItems: [],

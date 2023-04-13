@@ -209,13 +209,14 @@ import {
   DEFAULT_DATE_OPERATORS,
   DEFAULT_NUMBER_OPERATORS,
   DEFAULT_STRING_OPERATORS,
-  FblFilter,
+ // FblFilter,
   FblFilterDataType,
   FblFilterItem,
   FblFilters,
   FblOperator,
   OPERATOR_TITLE_MAP,
 } from "@/components/shared/filter-builder/models";
+import { FblFilter } from "@fubonlife/<%= code %>-api-axios-sdk";
 
 const DEFAULT_FILTER_ITEM: FblFilterItem = {
   property: "",

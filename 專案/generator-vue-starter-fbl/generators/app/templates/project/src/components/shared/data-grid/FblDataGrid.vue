@@ -20,7 +20,6 @@
         :sorter="col.sorter"
         :width="widthOf(col)"
         :fixed="col.fixed"
-        :custom-render="customRenderOf(col)"
       >
         <template slot-scope="record">
           <div v-if="col.type === 'TEMPLATE'">
@@ -89,6 +88,7 @@
 </template>
 
 <script lang="ts">
+/* import 引用其他組件區塊 */
 import { Pagination } from "ant-design-vue";
 import { Column } from "ant-design-vue/types/table/column";
 import { Vue, Component, Watch, Prop } from "vue-property-decorator";
@@ -100,9 +100,15 @@ import {
   FblRow,
   SortItem,
 } from "./models";
+/* import 引用其他組件區塊 */
 
+/* 定義 Template 用到的 Component */
+/* 使用TypeScript Class方法，定義組件FblDataGrid<T>，並以泛型傳入資料型別 */
 @Component
 export default class FblDataGrid<T> extends Vue {
+  /* data定義區塊，定義Template用到雙向資料綁定的變數 */
+  
+  //使用@Prop定義父元件傳到此元件的參數
   @Prop({ default: "key" })
   rowKey!: string;
 
@@ -133,7 +139,10 @@ export default class FblDataGrid<T> extends Vue {
 
   @Prop()
   countersign: boolean;
+  /* data定義區塊，定義Template用到雙向資料綁定的變數 */
 
+  /* Vue 生命週期 Hooks function 區塊 */
+  //Vue Watch 變數呼叫方法
   @Watch("columns")
   onColumnsChanged() {
     this.renderColumns = this.columns.filter((c) => !c.hidden);
@@ -156,8 +165,16 @@ export default class FblDataGrid<T> extends Vue {
       // console.log("nt", this.$refs.nativeTable);
     });
   }
-
+  //組件初始化方法，將一些初始化資料，呼叫在此方法中實作
+  created() {
+    this.onColumnsChanged();
+  }
+  /* Vue 生命週期 Hooks function 區塊 */
+ 
+  /* 自訂義方法區塊 */
+  //觸發資料列中Action button時的方法
   handleActionClick(data: T, action: FblAction<T>) {
+    //執行呼叫元件綁定的actionClick的事件
     this.$emit("actionClick", {
       row: {
         data,
@@ -165,18 +182,19 @@ export default class FblDataGrid<T> extends Vue {
       action,
     });
   }
-
+  //觸發資料列中"更多Action"時的方法
   handleMoreActionClick(e, data, actions: Array<FblAction<T>>) {
     const action = actions.filter((a) => a.name === e.key)[0];
     this.handleActionClick(data, action);
   }
-
+  //資料列中觸發點擊資料列的方法
   handleInspectClick(data: T) {
+    //執行呼叫元件綁定的inspectClick的事件
     this.$emit("inspectClick", {
       data,
     });
   }
-
+  //觸發資料表中排序或分頁按鈕的方法
   handleTableChange(pagination, filters, sort) {
     // this.pageSize = size;
     console.log(sort);
@@ -192,26 +210,28 @@ export default class FblDataGrid<T> extends Vue {
             desc: sort.order === "descend",
           }
         : undefined;
+    //執行呼叫元件綁定的tableChange的事件
     this.$emit("tableChange", { pagination, sort: s });
   }
-
+  //點擊列事件
   handleRowClick(data: T) {
     this.$emit("rowClick", {
       data,
     });
   }
-
+  //判斷不是"更多"Action
   exposedActionsOf(actions: FblAction<T>[]): FblAction<T>[] {
     return actions.filter((a) => !a.more);
   }
-
+  //判斷是否為"更多"Action
   moreActionsOf(actions: FblAction<T>[]): FblAction<T>[] {
     return actions.filter((a) => a.more);
   }
-
+  //處理width
   widthOf(column: FblColumn<T>) {
     return column.width + "px";
   }
+  //處理plainText格式
   plainTextOf(data: T, column: FblColumn<T>): string {
     if (column.formatter) {
       return column.formatter(data);
@@ -227,6 +247,7 @@ export default class FblDataGrid<T> extends Vue {
     });
     return retVal;
   }
+  //處理圖標型態顏色
   badgeColorOf(data: T, column: FblColumn<T>): string {
     if (!column.badgeColor) {
       return null;
@@ -236,6 +257,7 @@ export default class FblDataGrid<T> extends Vue {
     }
     return column.badgeColor;
   }
+  //處理tag型態顏色
   tagColorOf(data: T, column: FblColumn<T>): string {
     if (!column.tagColor) {
       return null;
@@ -245,49 +267,7 @@ export default class FblDataGrid<T> extends Vue {
     }
     return column.tagColor;
   }
-  customRenderOf(column: FblColumn<T>): (data, record, index, _column) => any {
-    if (column.rowSpanKey) {
-      return (data, record, index, _column) => {
-        const idx = this.data.indexOf(data);
-        const key = column.rowSpanKey(data);
-        const text = this.plainTextOf(data, column);
-
-        if (idx > 0) {
-          const prevIdx = idx - 1;
-          const prevData = this.data[prevIdx];
-          const prevKey = column.rowSpanKey(prevData);
-          if (prevKey == key) {
-            return {
-              children: text,
-              attrs: {
-                rowSpan: 0,
-              },
-            };
-          }
-        }
-        let span = 1;
-        for (let i = idx + 1; i < this.data.length; i++) {
-          const succIdx = i;
-          const succData = this.data[succIdx];
-          const succKey = column.rowSpanKey(succData);
-          if (succKey == key) {
-            span++;
-          } else {
-            break;
-          }
-        }
-        return {
-          children: text,
-          attrs: {
-            rowSpan: span,
-          },
-        };
-      };
-    } else if(column.customRender) {
-      return column.customRender;
-    }
-    return undefined;
-  }
+  //處理Action按鈕是否可用
   shouldDisableAction(
     data: T,
     action: FblAction<T>,
@@ -299,12 +279,11 @@ export default class FblDataGrid<T> extends Vue {
     }
     return action.disabled as boolean;
   }
+  
   uuid() {
     return uuid.v4();
   }
-  created() {
-    this.onColumnsChanged();
-  }
+  
 }
 </script>
 

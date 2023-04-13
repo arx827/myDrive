@@ -88,6 +88,7 @@ import {
   ProductSpecCreation,
   ProductSpecDto,
   ProductSpecUpdates,
+  PageFiltersDto
 } from "@fubonlife/<%= code %>-api-axios-sdk";
 import { message, Modal } from "ant-design-vue";
 import { FblSubmitEvent } from "@/components/shared/form/models";
@@ -247,18 +248,22 @@ export default class ProductSpecPage extends Vue {
       ? JSON.stringify(this.filterHolder.filters)
       : JSON.stringify({ filters: [] });
     const sort = this.grid.sort ? JSON.stringify([this.grid.sort]) : undefined;
+    const pageFilters: PageFiltersDto = {
+      page: this.grid.pagination.current,
+      size: this.grid.pagination.pageSize,
+      filters: this.filterHolder.filters,
+      sort: (this.grid.sort) ? this.grid.sort.selector : null,
+      order: (this.grid.sort && this.grid.sort.desc) ? "desc" : "asc"
+    }    
     this.isLoading = true;
     this.$productSpecApi
-      .paginateProductSpecUsingGET(
-        this.grid.pagination.current - 1,
-        this.grid.pagination.pageSize,
-        filter,
-        sort
+      .paginateProductSpecUsingPOST(
+        pageFilters
       )
       .then((resp) => {
         const p = { ...this.grid.pagination };
-        p.total = parseInt(resp.data.totalElements);
-        this.grid.data = resp.data.content;
+        p.total = parseInt(resp.data.data.totalElements);
+        this.grid.data = resp.data.data.content;
         this.grid.pagination = p;
       })
       .catch(console.error)

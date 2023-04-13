@@ -8,10 +8,10 @@
     "build:dev": "vue-cli-service build --mode development",
     "build:uat": "vue-cli-service build --mode uat",
     "build:prod": "vue-cli-service build --mode production",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint --fix"
   },
   "dependencies": {
-    "@fubonlife/<%= code %>-api-axios-sdk": "1.1.5-BETA",
+    "@fubonlife/<%= code %>-api-axios-sdk": "1.0.8-BETA",
     "ant-design-vue": "^1.7.2",
     "babel-plugin-import": "^1.13.1",
     "core-js": "^3.7.0",
@@ -38,26 +38,12 @@
     "eslint-plugin-vue": "^6.2.2",
     "less": "^3.12.2",
     "less-loader": "^7.1.0",
+    "sass": "~1.32.12",
+    "sass-loader": "^10.2.0",
+    "replace-in-file-webpack-plugin": "1.0.6",
     "terser-webpack-plugin": "^4.2.3",
     "typescript": "^3.9.7",
     "vue-template-compiler": "^2.6.12"
-  },
-  "eslintConfig": {
-    "root": true,
-    "env": {
-      "node": true
-    },
-    "extends": [
-      "plugin:vue/essential",
-      "eslint:recommended",
-      "@vue/typescript"
-    ],
-    "parserOptions": {
-      "parser": "@typescript-eslint/parser"
-    },
-    "rules": {
-      "no-unused-vars": "off"
-    }
   },
   "browserslist": [
     "> 1%",

@@ -41,6 +41,7 @@
     "node_modules"
   ],
   "files": [
-    "src/shims-vue.d.ts"
+    "src/shims-vue.d.ts",
+    "src/shims-tsx.d.ts",
   ]
 }

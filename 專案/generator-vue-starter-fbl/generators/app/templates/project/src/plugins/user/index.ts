@@ -6,6 +6,7 @@ import jwt from 'jsonwebtoken';
 import { Message } from 'ant-design-vue/types/message';
 import Vue, { PluginFunction, PluginObject } from 'vue';
 import VueRouter from 'vue-router';
+import { message } from 'ant-design-vue';
 // Specify a file with the types you want to augment
 // Vue has the constructor type in types/vue.d.ts
 declare module 'vue/types/vue' {
@@ -107,6 +108,7 @@ export class UserService implements PluginObject<UserSerivceOption> {
         return Math.floor(now / 1000) > decoded.exp;
 
     }
+      
     public install(Vue, options: UserSerivceOption) {
         console.log('user installed');
         // this.vue = vue;
@@ -128,16 +130,44 @@ export class UserService implements PluginObject<UserSerivceOption> {
         axios.interceptors.response.use((response) => {
             // Any status code that lie within the range of 2xx cause this function to trigger
             // Do something with response data
+            if (response && response.data) {
+                if (response.data.success === false) {
+                    alert(response.data.message);
+                    return Promise.reject(response);
+                }
+            }
             return response;
         }, (error) => {
             // Any status codes that falls outside the range of 2xx cause this function to trigger
             // Do something with response error
-            if (error.response.status === 401 || error.response.status === 401) {
-                this.signOut();
-                options.router.replace({ path: '/login' });
-                options.message.error('權限不足');
-
-
+            if (error && error.response) {
+                switch (error.response.status) {
+                  case 401:
+                    alert("權限不足");
+                    this.signOut();
+                    options.router.replace({ path: '/login' });
+                    // options.message.error('權限不足');
+                    break;
+                  case 403:
+                    alert("未登入或登入階段已過期，請重新登入");
+                    this.signOut();
+                    options.router.replace({ path: '/login' });
+                    break;
+                  case 404:
+                    alert("找不到該頁面");
+                    break;
+                  case 500:
+                    alert("伺服器出錯");
+                    break;
+                  case 503:
+                    alert("服務失效");
+                    break;
+                  default:
+                    alert(`連接錯誤:${error}};}`);
+                }
+            }
+            else {
+                alert(`未知錯誤:${error}};}`);
             }
             return Promise.reject(error);
         });
