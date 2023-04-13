@@ -4,6 +4,16 @@ import Components from 'unplugin-vue-components/vite'
 import { AntDesignVueResolver } from 'unplugin-vue-components/resolvers'
 import { createHtmlPlugin } from 'vite-plugin-html'
 import svgLoader from 'vite-svg-loader'
+import filterReplace from 'vite-plugin-filter-replace';
+
+interface stringReplaceType {
+  options: {
+    search: string,
+    replace: string
+  }[]
+}
+
+const stringReplace: stringReplaceType = require('./src/plugins/filterReplace/stringReplace.json');
 
 import { resolve } from 'path'
 
@@ -74,6 +84,30 @@ export default defineConfig(({ mode }) => {
         defaultImport: 'component',
       }),
       splitVendorChunkPlugin(),
+      filterReplace([
+        {
+          filter: /\.js$/,
+          replace : [
+            // 套用 stringReplace.json 裡面的 替換列表
+            ...stringReplace.options.map((i) => ({
+              from: new RegExp(i.search, 'ig'),
+              to: i.replace,
+            })),
+
+            // ----- 若想使用 全局替代的話 可以改用以下語法 ------ //
+            // 針對 版本號 替換
+            // {
+            //   from: /(\w+)@((\d\.)+\d)/ig,
+            //   to: '$1_$2',
+            // },
+            // // 針對 Email 替換
+            // {
+            //   from: /(\w+)@(([\da-z.-]+)\.com)/ig,
+            //   to: '$1_$2',
+            // },
+          ]
+        }
+      ]),
     ],
     resolve: {
       alias: {

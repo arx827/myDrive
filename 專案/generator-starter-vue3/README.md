@@ -1,6 +1,6 @@
 # Generator-Starter-Vue3 前端框架產生器
 
-#### version : 1.0.40 
+#### version : 1.0.41 
   - ##### [jFrog - Artifacts - npm 位置](http://10.42.70.218/ui/repos/tree/General/npm-local%2F@fubonlife%2Fgenerator-starter-vue3%2F-%2F@fubonlife)
 
 ## 使用產生器
@@ -51,3 +51,4 @@
 ## 版本更新紀錄
   - 1.0.39，針對vue3教學檔案調整一版，2023/03/21
   - 1.0.40，Ant design vue 凍結表格上的 popConfirm 跑版調修，2023/03/23
+  - 1.0.41，增加 vite-plugin-filter-replace 套件及設定 ，2023/04/13
