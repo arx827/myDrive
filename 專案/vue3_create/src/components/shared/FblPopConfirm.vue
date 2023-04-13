@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ExclamationCircleFilled } from '@ant-design/icons-vue'
-defineProps({
+const $props = defineProps({
   title: {
     type: String,
     default: '確認刪除？',
@@ -9,9 +9,25 @@ defineProps({
     type: Boolean,
     default: false,
   },
+  popupContainer: {
+    type: String,
+  },
 })
 
 const $emit = defineEmits(['confirm'])
+
+const getPopupContainer = triggerNode => {
+  if (triggerNode) {
+    // 有自定義 popupContainer 時，以自定義為主
+    if ($props.popupContainer) {
+      return document.querySelector($props.popupContainer)
+    } else {
+      return triggerNode?.parentNode
+    }
+  } else {
+    return document.body
+  }
+}
 
 /**
  * Event
@@ -28,13 +44,14 @@ const onHandleDelete = () => {
     cancel-text="取消"
     icon=" "
     overlay-class-name="customPopConfirm"
-    :disabled="disabled"
+    :disabled="$props.disabled"
+    :getPopupContainer="getPopupContainer"
     @confirm="onHandleDelete"
   >
     <template #title>
       <div class="d-inline-flex justify-content-start">
         <ExclamationCircleFilled />
-        <span class="custom__popConfirm__title">{{ title }}</span>
+        <span class="custom__popConfirm__title">{{ $props.title }}</span>
       </div>
       <slot name="content" />
     </template>

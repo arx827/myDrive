@@ -11,7 +11,15 @@ const tableGrid = ref({
   rowKey: 'key',
   bordered: true,
   scroll: { x: true },
-  pagination: false,
+  pagination: {
+    size: 'small',
+    current: 1,
+    pageSize: 10,
+    total: 0,
+    pageSizeOptions: ['10', '25', '50'],
+    showSizeChanger: true,
+    showTotal: (total, range) => `顯示${range[0]}-${range[1]}筆 共${total}筆`,
+  },
   dataSource: [
     {
       key: '1',
@@ -85,7 +93,15 @@ const tableGrid = ref({
   rowKey: 'key',
   bordered: true,
   scroll: { x: true },
-  pagination: false,
+  pagination: {
+    size: 'small',
+    current: 1,
+    pageSize: 10,
+    total: 0,
+    pageSizeOptions: ['10', '25', '50'],
+    showSizeChanger: true,
+    showTotal: (total, range) => \`顯示\${range[0]}-\${range[1]}筆 共\${total}筆\`,
+  },
   dataSource: [
     {
       key: '1',
@@ -170,8 +186,6 @@ const RowSelection = ref({
   isSelect: true,
 })
 const rowSelectionTempDemo = `
-const selectorValue = ref<string[]>([])
-
 <FblDataGrid
   ...
   v-bind="RowSelection"
@@ -182,6 +196,8 @@ const selectorValue = ref<string[]>([])
 ...
 </FblDataGrid>`
 const rowSelectionJsDemo = `
+const selectorValue = ref<string[]>([])
+
 const handleTableSelect = selectedRows => {
   console.log('父層變數：', selectorValue.value)
   console.log('emit上來的 勾選事項：', selectedRows)
@@ -191,7 +207,7 @@ const handleTableSelect = selectedRows => {
   console.log('emit上來的 勾選事項：', selectedRows)
 }
 
-// ----------- 自定義 Template ----------- //
+// ----------- 自定義 columns ----------- //
 const customTempGrid = ref({
   rowKey: 'key',
   bordered: true,
@@ -207,24 +223,24 @@ const customTempGrid = ref({
     },
     {
       key: '2',
+      title: 'inspect',
+      caption: '是否轉換為 連結字串',
+      type: 'boolean',
+      default: 'false',
+    },
+    {
+      key: '3',
       title: 'headerCellTemp',
       caption: '標頭Template 對應 slot name',
       type: 'string',
       default: '-',
     },
     {
-      key: '3',
+      key: '4',
       title: 'bodyCellTemp',
       caption: '內容Template slot name',
       type: 'string',
       default: '-',
-    },
-    {
-      key: '4',
-      title: 'inspect',
-      caption: '是否轉換為 連結字串',
-      type: 'boolean',
-      default: 'false',
     },
   ],
   columns: [
@@ -392,11 +408,17 @@ const workContent = record => {
 <template>
   <div class="page__container flex-fill gap-3">
     <div class="container__wrap">
-      <h5 class="d-flex align-items-center text-primary">表格Component元件 (Ant Design Vue)</h5>
+      <h5 class="d-flex align-items-center text-primary">表格 Component 元件</h5>
       <ul class="doc__tool-ul">
         <li class="doc__tool-li">
           <h5 class="d-flex align-items-center">檔案位置</h5>
           src/components/shared/data-grid/FblDataGrid.vue
+        </li>
+        <li class="doc__tool-li">
+          <h5 class="d-flex align-items-center">
+            <span>相關參數，請參考 </span>
+            <a href="https://2x.antdv.com/components/table-cn" target="_blank">Ant Design Vue - Table</a>
+          </h5>
         </li>
         <li class="doc__tool-li">
           <h5 class="d-flex align-items-center">圖示</h5>
@@ -427,7 +449,7 @@ const workContent = record => {
     </div>
 
     <div class="container__wrap">
-      <h5 class="d-flex align-items-center text-primary">RowSelection 屬性</h5>
+      <h5 class="d-flex align-items-center text-primary">RowSelection 屬性 (checkbox)</h5>
       <FblDataGrid
         class="ant-table-striped"
         v-bind="RowSelection"
@@ -451,7 +473,7 @@ const workContent = record => {
     </div>
 
     <div class="container__wrap">
-      <h5 class="d-flex align-items-center text-primary">自定義 Template</h5>
+      <h5 class="d-flex align-items-center text-primary">自定義 columns</h5>
 
       <ul class="doc__tool-ul">
         <li class="doc__tool-li">

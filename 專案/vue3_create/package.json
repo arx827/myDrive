@@ -1,5 +1,5 @@
 {
-  "name": "vue3_create",
+  "name": "vue3_create-web",
   "version": "1.0.0",
   "scripts": {
     "dev": "vite --mode development --port 8200",

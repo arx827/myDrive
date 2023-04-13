@@ -21,7 +21,8 @@
           <p>若SDK同名，可直接執行 install 最新 SDK</p>
           <p>
             <small
-              >指令中 {{ `<% old Project SDK Name %>` }}、{{ `<% new Project SDK Name %>` }} 請替換為 原SDK 名稱</small
+              >指令中 {{ `<% old Project SDK Name %>` }}、{{ `<% new Project SDK Name %>` }} 請替換為 原SDK、新SDK
+              名稱</small
             >
           </p>
           <PreCode type="bash" class="mt-3">

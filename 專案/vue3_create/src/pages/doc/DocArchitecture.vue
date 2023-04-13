@@ -82,7 +82,7 @@ const treeData = ref<tree[]>([
           },
           {
             title: 'index.html',
-            key: 'development...index',
+            key: 'development_index',
             description: 'development 打包編譯完成檔 index.html',
           },
         ],
@@ -231,8 +231,8 @@ const treeData = ref<tree[]>([
                 description: 'components 相關 / 共用 相關 / 彈窗modal 相關',
                 children: [
                   {
-                    title: 'ComfirmModal.vue',
-                    key: 'ComfirmModal.vue',
+                    title: 'ConfirmModal.vue',
+                    key: 'ConfirmModal.vue',
                     description: 'components 相關 / 共用 相關 / 彈窗modal 相關 / 有 確認 & 取消按鈕 的 彈窗',
                   },
                   {
@@ -263,7 +263,7 @@ const treeData = ref<tree[]>([
             children: [
               {
                 title: 'CompForm.vue',
-                key: 'ComfirmModal.vue',
+                key: 'CompForm.vue',
                 description: '各功能頁面 相關 / 元件介紹頁 / 表單元件',
               },
               {
@@ -376,7 +376,7 @@ const treeData = ref<tree[]>([
             children: [
               {
                 title: 'index.ts',
-                key: 'index.ts',
+                key: 'api_index.ts',
                 description: 'plugins功能 相關 / api 相關 / index',
               },
             ],
@@ -405,8 +405,8 @@ const treeData = ref<tree[]>([
             children: [
               {
                 title: 'index.ts',
-                key: 'index.ts',
-                description: 'plugins功能 相關 / message 相關 / 入口檔',
+                key: 'message_index.ts',
+                description: 'plugins功能 相關 / message 相關 / index',
               },
             ],
           },
@@ -418,7 +418,7 @@ const treeData = ref<tree[]>([
               {
                 title: 'index.ts',
                 key: 'index.ts',
-                description: 'plugins功能 相關 / modal 相關 / 入口檔',
+                description: 'plugins功能 相關 / modal 相關 / index',
               },
             ],
           },
@@ -429,8 +429,8 @@ const treeData = ref<tree[]>([
             children: [
               {
                 title: 'index.ts',
-                key: 'index.ts',
-                description: 'plugins功能 相關 / notification 相關 / 入口檔',
+                key: 'notification_index.ts',
+                description: 'plugins功能 相關 / notification 相關 / index',
               },
             ],
           },
@@ -441,8 +441,8 @@ const treeData = ref<tree[]>([
             children: [
               {
                 title: 'index.ts',
-                key: 'index.ts',
-                description: 'plugins功能 相關 / uploadFile 相關 / 入口檔',
+                key: 'upload_index.ts',
+                description: 'plugins功能 相關 / uploadFile 相關 / index',
               },
             ],
           },
@@ -454,7 +454,7 @@ const treeData = ref<tree[]>([
               {
                 title: 'index.ts',
                 key: 'user_index.ts',
-                description: 'plugins功能 相關 / user 相關 / 入口檔',
+                description: 'plugins功能 相關 / user 相關 / index',
               },
               {
                 title: 'model.ts',
@@ -500,11 +500,11 @@ const treeData = ref<tree[]>([
           {
             title: 'importVue.ts',
             key: 'importVue.ts',
-            description: 'router 相關 / import Component 集中處',
+            description: 'router 相關 / Component import 的集中處',
           },
           {
             title: 'index.ts',
-            key: 'index.ts',
+            key: 'router_index.ts',
             description: 'router 相關 / router 設定',
           },
         ],
@@ -516,8 +516,8 @@ const treeData = ref<tree[]>([
         children: [
           {
             title: 'index.ts',
-            key: 'index.ts',
-            description: 'stores / 全域狀態管理 入口檔',
+            key: 'stores_index.ts',
+            description: 'stores / 全域狀態管理 index',
           },
           {
             title: 'pinia.ts',
@@ -616,7 +616,7 @@ const treeData = ref<tree[]>([
   {
     title: 'package-lock.json',
     key: 'package-lock.json',
-    description: '套件版號 鎖定檔 (自動產生)',
+    description: '專案套件的詳細資訊 (自動產生)',
   },
   {
     title: 'package.json',
@@ -789,7 +789,7 @@ const description = computed(() => {
             <a-descriptions-item label="~"
               >只鎖定 主版號 及 次版號，如：~1.3.2，大於等於 1.3.2 小於 1.4.0</a-descriptions-item
             >
-            <a-descriptions-item label="^">只鎖定 主版號，如：~1.3.2，&gt;= 1.3.2 &lt; 2.0.0</a-descriptions-item>
+            <a-descriptions-item label="^">只鎖定 主版號，如：^1.3.2，&gt;= 1.3.2 &lt; 2.0.0</a-descriptions-item>
             <a-descriptions-item label="x">不固定的版本號，如：1.3.x</a-descriptions-item>
             <a-descriptions-item label=">">大於某個版本號，如：&gt; 1.3.2</a-descriptions-item>
             <a-descriptions-item label=">=">大於等於某個版本號，如：&gt;= 1.3.2</a-descriptions-item>

@@ -52,7 +52,7 @@ const customModal = ref({
 <template>
   <div class="page__container flex-fill gap-3">
     <div class="container__wrap">
-      <h5 class="d-flex align-items-center text-primary mb-3">Vue3基礎知識 簡報與影片</h5>
+      <h5 class="d-flex align-items-center text-primary mb-3">Vue3基礎知識</h5>
       <ul>
         <li>
           請前往
@@ -81,61 +81,55 @@ const customModal = ref({
 
       <!-- 請在此處 實作功能 -->
       <p class="mt-5">請依下方說明，在此處 串接 ToDoList component 功能</p>
-      <p>此頁檔案位置：<span class="c-red">/pages/doc/DocVue3.vue</span></p>
-      <p>{{`<ToDoList />`}}檔案位置：<span class="c-red">/components/practice/ToDoList.vue</span></p>
-      <ol>
-        <li>嵌入 {{`<ToDoList />`}} component (已使用 Unplugin-vue-components (自動import component)，不須import)</li>
-        <li>使用 prop 方式，從此頁面更改 標題 與 傳遞 task 列表</li>
+      <p>此頁檔案位置：<span class="c-red">/src/pages/vue3/DocVue3.vue</span></p>
+      <p>{{`<ToDoList />`}}檔案位置：<span class="c-red">/src/components/practice/ToDoList.vue</span></p>
+      <h5 class="d-flex align-items-center text-primary mb-3">1. 嵌入 {{`<ToDoList />`}} component</h5>
+      <p>(已使用 Unplugin-vue-components (自動import component)，不須import)</p>
+      <h5 class="d-flex align-items-center text-primary mb-3">
+        2. 使用 prop 方式，從此頁面更改 標題 與 傳遞 task 列表
+      </h5>
+      <h5 class="d-flex align-items-center text-primary mb-3">3. 新增 Task 功能</h5>
+      <ul>
+        <li>點選『新增』按鈕，新增 task 列表</li>
+        <li>在 Component 中，使用 emit 方式更新 此頁面 列表資訊</li>
+        <li>新增完 task 後，清空輸入欄位</li>
+      </ul>
+      <h5 class="d-flex align-items-center text-primary mb-3">4. 刪除 Task 功能</h5>
+      <ul>
         <li>
-          新增 Task 功能
-          <ul>
-            <li>點選『新增』按鈕，新增 task 列表</li>
-            <li>在 Component 中，使用 emit 方式更新 此頁面 列表資訊</li>
-            <li>新增完 task 後，清空輸入欄位</li>
-          </ul>
+          點選 task 列表中，單筆資訊 右方的 『
+          <span class="inline__icon d-inline-block c-red"><DeleteFilled /></span> 』 按鈕
+        </li>
+        <li>串接子層中 {{`<FblPopConfirm />`}}，重複確認是否真的要刪除，在此Tag串接 @confirm 事件</li>
+        <li>從子層 emit 刪除事件，刪除 此頁面 列表資訊</li>
+      </ul>
+      <h5 class="d-flex align-items-center text-primary mb-3">5. 編輯 Task 功能</h5>
+      <ul>
+        <li>
+          點選 task 列表中，單筆資訊 右方的 『
+          <span class="inline__icon d-inline-block c-green"><FormOutlined /></span> 』 按鈕
+        </li>
+        <li>開啟彈窗 {{`<CustomModal />`}}，彈窗會抓取該筆資料文字，並顯示於輸入框中，可進行編輯</li>
+        <li>修改後，會將資訊儲存回 列表中，更新資料，並關閉修改彈窗</li>
+      </ul>
+      <h5 class="d-flex align-items-center text-primary mb-3">6. 進階優化：更完善的 工作列表</h5>
+      <ul>
+        <li>
+          製作 todo 勾選按鈕，勾選後將該筆資料的 status 改為 'complete'『
+          <span class="inline__icon d-inline-block"><CheckSquareOutlined /></span> 』，再次勾選則改回 'todo'『
+          <span class="inline__icon d-inline-block"><BorderOutlined /></span> 』
         </li>
         <li>
-          刪除 Task 功能
-          <ul>
-            <li>
-              點選 task 列表中，單筆資訊 右方的 『
-              <span class="inline__icon d-inline-block c-red"><DeleteFilled /></span> 』 按鈕
-            </li>
-            <li>串接子層中 {{`<FblPopConfirm />`}}，重複確認是否真的要刪除，在此Tag串接 @confirm 事件</li>
-            <li>從子層 emit 刪除事件，刪除 此頁面 列表資訊</li>
-          </ul>
+          complete 狀態時，可在文字上增加刪除線 及 顏色變淡，並隱藏 編輯『
+          <span class="inline__icon d-inline-block c-green"><FormOutlined /></span> 』與刪除『
+          <span class="inline__icon d-inline-block c-red"><DeleteFilled /></span> 』按鈕
         </li>
-        <li>
-          編輯 Task 功能
-          <ul>
-            <li>
-              點選 task 列表中，單筆資訊 右方的 『
-              <span class="inline__icon d-inline-block c-green"><FormOutlined /></span> 』 按鈕
-            </li>
-            <li>開啟彈窗 {{`<CustomModal />`}}，彈窗會抓取該筆資料文字，並顯示於輸入框中，可進行編輯</li>
-            <li>修改後，會將資訊儲存回 列表中，更新資料，並關閉修改彈窗</li>
-          </ul>
-        </li>
-        <li class="mt-5">
-          進階優化：更完善的 工作列表
-          <ul>
-            <li>
-              製作 todo 勾選按鈕，勾選後將該筆資料的 status 改為 'complete'『
-              <span class="inline__icon d-inline-block"><CheckSquareOutlined /></span> 』，再次勾選則改回 'todo'『
-              <span class="inline__icon d-inline-block"><BorderOutlined /></span> 』
-            </li>
-            <li>
-              complete 狀態時，可在文字上增加刪除線 及 顏色變淡，並隱藏 編輯『
-              <span class="inline__icon d-inline-block c-green"><FormOutlined /></span> 』與刪除『
-              <span class="inline__icon d-inline-block c-red"><DeleteFilled /></span> 』按鈕
-            </li>
-            <li>點選Tabs 可切換顯示內容，依照『All』、『Todo』、『Complete』切換Tab顯示</li>
-            <li>在Tab 旁顯示 count，如：Todo (3)</li>
-          </ul>
-        </li>
-
-        <li class="mt-5"><RouterLink to="/vue3/doc-vue3-answer">[解]_ToDoList 小作業</RouterLink></li>
-      </ol>
+        <li>點選Tabs 可切換顯示內容，依照『All』、『Todo』、『Complete』切換Tab顯示</li>
+        <li>在Tab 旁顯示 count，如：Todo (3)</li>
+      </ul>
+      <h6 class="d-flex align-items-center text-primary justify-content-end mb-3">
+        <RouterLink to="/vue3/doc-vue3-answer">[解]_ToDoList 小作業</RouterLink>
+      </h6>
     </div>
   </div>
   <CustomModal

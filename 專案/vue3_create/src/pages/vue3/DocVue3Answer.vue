@@ -92,8 +92,8 @@ const emitControl = ({ type, data }) => {
   <div class="page__container flex-fill gap-3">
     <div class="container__wrap">
       <h5 class="d-flex align-items-center text-primary">[解]_ToDoList 小作業</h5>
-      <p>此頁檔案位置：<span class="c-red">/pages/doc/DocVue3Answer.vue</span></p>
-      <p>{{`<ToDoList />`}}檔案位置：<span class="c-red">/components/practice/ToDoListAnswer.vue</span></p>
+      <p>此頁檔案位置：<span class="c-red">/src/pages/vue3/DocVue3Answer.vue</span></p>
+      <p>{{`<ToDoList />`}}檔案位置：<span class="c-red">/src/components/practice/ToDoListAnswer.vue</span></p>
       <div class="w-100">
         <!-- 請在此處引用 todoList component -->
         <ToDoListAnswer title="工作列表" :task-arr="taskArr" @emitControl="emitControl" />

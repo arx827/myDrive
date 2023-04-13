@@ -37,13 +37,16 @@ import Img_unpluginComponents from '@img/unpluginComponents.png'
             </li>
             <li class="doc__tool-li">
               針對 UI組件庫，設定自動載入，以 Ant design Vue 為例，其他UI庫請查找
-              <a href="https://github.com/antfu/unplugin-vue-components" target="_blank">unplugin-vue-components</a>
+              <a href="https://github.com/antfu/unplugin-vue-components#importing-from-ui-libraries" target="_blank"
+                >unplugin-vue-components</a
+              >
             </li>
           </ul>
-          <PreCode type="vue" class="mt-3">
+          <PreCode type="ts" class="mt-3">
             <template #code>
               {{
-                `import { defineConfig } from 'vite'
+                `// vite.config.ts
+import { defineConfig } from 'vite'
 import Components from 'unplugin-vue-components/vite'
 import { AntDesignVueResolver } from 'unplugin-vue-components/resolvers'
 

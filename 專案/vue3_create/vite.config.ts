@@ -18,9 +18,12 @@ export default defineConfig(({ mode }) => {
   const IS_PROD = ['production', 'prod', 'uat'].includes(mode)
 
   return {
+    base: env.VITE_BASE_URL ? env.VITE_BASE_URL : '/',
     build: {
-      outDir: `dist/${mode}`,
+      outDir: `dist`,
       assetsDir: 'static',
+      // sourcemap: !IS_PROD,
+      // copyPublicDir: true,
       rollupOptions: {
         output: {
           assetFileNames: assetInfo => {
@@ -124,7 +127,7 @@ export default defineConfig(({ mode }) => {
       },
       devSourcemap: true,
     },
-    // 代理服務 https://cn.vitejs.dev/config/server-options.html
+    // 代理服務設定 https://cn.vitejs.dev/config/server-options.html
     server: {
       proxy: {
         '^/api': {
