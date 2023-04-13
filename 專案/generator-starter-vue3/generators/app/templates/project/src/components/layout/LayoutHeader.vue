@@ -3,7 +3,6 @@ import { ref, getCurrentInstance } from 'vue'
 import { useRouter } from 'vue-router'
 import logoSvg from '@/assets/img/image_logo.svg?component'
 
-
 const router = useRouter()
 
 const isLogin = ref(true)
@@ -17,6 +16,7 @@ const {
  */
 // 登出
 function logout() {
+  console.log('logout')
   $user.signOut()
   router.replace({ path: '/login' })
 }

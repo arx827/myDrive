@@ -11,10 +11,10 @@ const sideMenuState = ref({
   openKeys: [],
   preOpenKeys: [],
   selectedKeys: [],
-  mod: 'vertical',
+  mode: 'vertical',
 })
 
-// TEST: 測試用 側邊選單
+// TEST: 測試用 側邊選單 假資料
 const apiMenuItems = ref([
   {
     item: {
@@ -135,7 +135,7 @@ const apiMenuItems = ref([
           uri: 'https://www.google.com/',
           enabled: true,
           menuSort: 1,
-          parentId: '',
+          parentId: null,
           caseCount: 0,
         },
         children: [],
@@ -285,7 +285,7 @@ function toggleCollapsed() {
 /**
  * 監聽
  */
- watch(
+watch(
   () => $route,
   () => {
     autoActionMenu()

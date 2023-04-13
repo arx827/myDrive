@@ -63,9 +63,9 @@ export class NumberService {
     }
     return `${c}`
   }
+
   // 數字 移除千分位
   /**
-   *
    * @param {number | string} data 輸入口
    * @returns {number}
    */

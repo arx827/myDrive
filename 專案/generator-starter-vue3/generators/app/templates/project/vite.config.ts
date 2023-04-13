@@ -115,6 +115,11 @@ export default defineConfig(({ mode }) => {
             'menu-dark-submenu-bg': '#02829B',
             'menu-dark-inline-submenu-bg': 'transparent',
             'menu-dark-item-active-bg': '#02829B',
+
+            // table
+            'table-header-sort-bg': '#02829B',
+            'table-body-selected-sort-bg': '#02829B',
+            'table-header-bg-sm': '#23C4A8',
           },
           javascriptEnabled: true,
         },

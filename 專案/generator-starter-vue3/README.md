@@ -1,5 +1,8 @@
 # Generator-Starter-Vue3 前端框架產生器
 
+#### version : 1.0.40 
+  - ##### [jFrog - Artifacts - npm 位置](http://10.42.70.218/ui/repos/tree/General/npm-local%2F@fubonlife%2Fgenerator-starter-vue3%2F-%2F@fubonlife)
+
 ## 使用產生器
   - ### 確認開發環境
     1. 首先須確認電腦已經安裝了 [node.js](https://nodejs.org/) 14.18+ 、 16+ (LTS：長期支援版)
@@ -44,3 +47,7 @@
       - 登入Artifactory: `npm login`
       - 開始發布: `npm publish`
   7. 移除臨時 link: `npm unlink`
+
+## 版本更新紀錄
+  - 1.0.39，針對vue3教學檔案調整一版，2023/03/21
+  - 1.0.40，Ant design vue 凍結表格上的 popConfirm 跑版調修，2023/03/23

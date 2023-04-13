@@ -5,7 +5,7 @@
     "SimonSiefke.prettier-vscode",
     "dbaeumer.vscode-eslint",
     "oderwat.indent-rainbow",
-    "formulahendry.auto-close-tag",
+    "formulahendry.auto-close-tag",    
     "formulahendry.auto-rename-tag",
     "eamodio.gitlens",
     "trabpukcip.vscode-npm-scripts",
@@ -14,6 +14,6 @@
     "gruntfuggly.todo-tree",
     "redhat.vscode-yaml",
     "wix.vscode-import-cost",
-    "sdras.vue-vscode-snippets"
+    "sdras.vue-vscode-snippets",
   ]
 }

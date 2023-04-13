@@ -1,5 +1,4 @@
 <script setup lang="ts">
-
 interface menuInfo {
   menuId?: string
   title?: string

@@ -51,12 +51,11 @@ const grid = ref({
     {
       type: 'PLAIN',
       title: '交易編號',
-      property: 'txCode',
       dataIndex: 'txCode',
       key: 'txCode',
       inspect: true,
-      headerTemp: 'customTitle',
-      bodyTemp: 'txCode',
+      headerCellTemp: 'customTitle',
+      bodyCellTemp: 'txCode',
       fixed: 'left',
       formatter: data => data.txCode,
     },
@@ -65,7 +64,7 @@ const grid = ref({
       title: '交易確認狀態',
       dataIndex: 'cfStatus',
       key: 'cfStatus',
-      width: '500px',
+      width: '110',
       bodyTemp: 'cfStatus',
     },
     {
@@ -77,6 +76,7 @@ const grid = ref({
     {
       type: 'PLAIN',
       title: '測試文字刪節符',
+      width: '150',
       key: 'ellipsisTest',
       dataIndex: 'ellipsisTest',
       ellipsis: true,
@@ -96,9 +96,9 @@ const grid = ref({
     {
       type: 'TEMPLATE',
       title: '操控',
-      width: '300px',
+      width: '100',
       fixed: 'right',
-      bodyTemp: 'action',
+      bodyCellTemp: 'action',
     },
   ],
 })
@@ -127,7 +127,7 @@ const rulesRef = ref({
 
 const { validate, validateInfos, resetFields } = useForm(form, rulesRef)
 
-const testValue = ref<string[]>([])
+const selectorValue = ref<string[]>([])
 
 interface ModalState {
   infoModal: {
@@ -150,7 +150,7 @@ const modalState = ref<ModalState>({
 const addData = () => {
   modalState.value.infoModal.title = 'Add - 新增'
   modalState.value.infoModal.visible = true
-  // console.log('新增', txCode)
+  console.log('新增')
 }
 // 編輯
 const editData = txCode => {
@@ -176,8 +176,8 @@ const handleTableSelect = selectedRows => {
 }
 
 const multipleControl = () => {
-  if (testValue.value.length > 0) {
-    console.log('多筆操作 =>', testValue.value)
+  if (selectorValue.value.length > 0) {
+    console.log('多筆操作 =>', selectorValue.value)
   }
 }
 
@@ -214,12 +214,12 @@ onMounted(() => {})
 <template>
   <div class="page__container flex-fill">
     <div class="d-flex justify-content-end mb-2 gap-2">
-      <a-button class="btn__secondary" @click="multipleControl" :disabled="!testValue.length">多筆操作</a-button>
-      <a-button class="btn__danger" @click="multipleControl" :disabled="!testValue.length">多筆刪除</a-button>
+      <a-button class="btn__secondary" @click="multipleControl" :disabled="!selectorValue.length">多筆操作</a-button>
+      <a-button class="btn__danger" @click="multipleControl" :disabled="!selectorValue.length">多筆刪除</a-button>
       <button class="table__btn text-nowrap btn__primary" @click="addData">新增</button>
     </div>
     <FblDataGrid
-      class="ant-table-striped"
+      class="ant-table-striped popupContainerElement"
       bordered
       :dataSource="grid.data"
       :columns="grid.columns"
@@ -230,7 +230,7 @@ onMounted(() => {})
       @inspectClick="workContent"
       @tableChange="handleTableChange"
       @onSelect="handleTableSelect"
-      v-model:test="testValue"
+      v-model:selector="selectorValue"
     >
       <template #customTitle>
         <span class="d-flex align-items-center"> <smile-outlined /> 交易編號(自定義temp標題) </span>
@@ -245,10 +245,13 @@ onMounted(() => {})
           :text="$cfEnum.getObject('cfStatusEnum', text).label"
         ></a-badge>
       </template>
-      <template #action="{ scope: { text } }">
+      <template #action="{ scope: { text, column } }">
         <div class="d-md-flex align-items-center justify-content-center flex-wrap gap-2">
           <button class="table__btn text-nowrap btn__secondary" @click="editData(text)">編輯</button>
-          <FblPopConfirm @confirm="deleteData(text)">
+          <FblPopConfirm
+            @confirm="deleteData(text)"
+            :popupContainer="!!column.fixed ? '.popupContainerElement .ant-table' : null"
+          >
             <template #content>
               <div>其他說明文字</div>
             </template>
@@ -262,7 +265,7 @@ onMounted(() => {})
     </FblDataGrid>
   </div>
 
-  <ComfirmModal
+  <ConfirmModal
     :title="modalState.infoModal.title"
     :width="544"
     padding-size="normal"
@@ -296,7 +299,7 @@ onMounted(() => {})
         <button class="modal-btn modal-btn__primary" @click="handleConfirm">確認</button>
       </div>
     </template>
-  </ComfirmModal>
+  </ConfirmModal>
   <!-- <InfoModal title="匯出系統代碼" v-model:visible="modalState.infoModal.visible" /> -->
 </template>
 
