@@ -1,18 +1,19 @@
 # 第一章 SpringBoot2 核心技術
 
 ## 第二節 SpringBoot2 核心功能
-### 04. 配置文件
+### 04、 配置文件
   `SpringBoot` 的配置文件可以在 `properites`，也可寫在 `yaml`。
-  - #### 文件類型
-    - ##### properites
+  - #### 1、 文件類型
+    - ##### 1.1、 properites
       同 以前的 properties。
-    - ##### yaml
-      - ###### 簡介
+    - ##### 1.2、 yaml
+      - ###### 1.2.1、 簡介
         `YAML` 是 "YAML Ain't Markup Language" (YAML 不是一種標記語言) 的遞歸縮寫。
         在開發這種語言時，YAML 的意思其實是： "Yet Another Markup Language" (仍是一種標記語言)。
 
         非常適合用來做以數據為中心的配置文件。
-      - ###### 基本語法
+
+      - ###### 1.2.2、 基本語法
         - key: value; k v之間有空格。
         - 大小寫敏感。
         - 使用 `縮進`表 示層級關係。
@@ -21,7 +22,7 @@
         - `#` 表示註釋。
         - 字符串無需加引號，如果要加，`"` 與 `'` 表示字符串內容 會被 轉譯/不轉譯。
       
-      - ###### 數據類型
+      - ###### 1.2.3、 數據類型
         - 字面量：單個的、不可再分的值。 `data`、`boolean`、`string`、`number`、`null`
           ```YAML
           k: v
@@ -51,7 +52,7 @@
            - v3
           ```
 
-      - ###### 範例
+      - ###### 1.2.4、 範例
         ```java
         /* --- /bean/Person --- */
         @ConfigurationProperties(prefix = "person")
@@ -111,7 +112,7 @@
             health: [{name: mario,weight: 47}]
         ```
 
-  - #### 配置提示
+  - #### 2、 配置提示
     自定義的類和配置文件綁定一般沒有提示。
 
     增加 `spring-boot-configuration-processor` dependency 到 `pom.xml`
@@ -142,31 +143,29 @@
     </build>
     ```
 
-### 05. Web開發
-  - #### 1. SpringMVC 自動配置概覽
+### 05、 Web開發
+  - #### 1、 SpringMVC 自動配置概覽
     [Features](https://docs.spring.io/spring-boot/docs/2.7.10/reference/html/features.html#features)
 
     `Spring Boot` 為 `Spring MVC` 提供自動配置，適用於大多數應用程序。( **大多數場景我們都不需要自定義配置** )
 
     自動配置在 Spring 的默認值之上添加了以下功能：
       - `內容協商視圖解析器 (ContentNegotiatingViewResolver)` 和 `BeanName (BeanNameViewResolver beans) 視圖解析器`
-      - 支持提供靜態資源，包括對 WebJars 的支持。
-      - 自動註冊 Converter，GenericConverter，Formatter。
-      - 支持 HttpMessageConverters（以後我們配搭內容協議解析原理）。
-      - 自動註冊 MessageCodesResolver （國際化用)。
+      - 支持提供靜態資源，包括對 `WebJars` 的支持。
+      - 自動註冊 `Converter`、`GenericConverter`、`Formatter`。
+      - 支持 `HttpMessageConverters`（以後我們配搭內容協議解析原理）。
+      - 自動註冊 `MessageCodesResolver` （國際化用)。
       - 支持 靜態 index.html 頁面
       - 支持 自定義 Favicon 圖標
       - 自動使用 ConfigurableWebBindingInitializer ，（ DataBinder 負責將請求數據綁定到 JavaBean 上 ）
 
-    如果您想保留那些 Spring Boot MVC 自定義並進行更多 MVC 自定義（攔截器、格式化程序、視圖控制器和其他功能），您可以添加自己的 WebMvcConfigurer 類型的 @Configuration 類，但不添加 @EnableWebMvc。
+    > 如果您想保留那些 Spring Boot MVC 自定義並進行更多 MVC 自定義（攔截器、格式化程序、視圖控制器和其他功能），您可以添加自己的 WebMvcConfigurer 類型的 @Configuration 類，但不添加 @EnableWebMvc。
     不使用 @EnableWebMvc 註解。使用 @Configuration + WebMvcConfigurer 自定義規則。
 
-
-    如果您想提供 RequestMappingHandlerMapping、RequestMappingHandlerAdapter 或 ExceptionHandlerExceptionResolver 的自定義實例，並且仍然保留 Spring Boot MVC 自定義，您可以聲明一個 WebMvcRegistrations 類型的 bean 並使用它來提供這些組件的自定義實例。
+    > 如果您想提供 RequestMappingHandlerMapping、RequestMappingHandlerAdapter 或 ExceptionHandlerExceptionResolver 的自定義實例，並且仍然保留 Spring Boot MVC 自定義，您可以聲明一個 WebMvcRegistrations 類型的 bean 並使用它來提供這些組件的自定義實例。
     聲明 WebMvcRegistrations 修改默認認知層組件
 
-
-    如果你想完全控制 Spring MVC，你可以添加你自己的帶有 @EnableWebMvc 註釋的@Configuration，或者添加你自己的帶有 @Configuration 註釋的DelegatingWebMvcConfiguration，如 @EnableWebMvc 的Javadoc 中所述。
+    > 如果你想完全控制 Spring MVC，你可以添加你自己的帶有 @EnableWebMvc 註釋的@Configuration，或者添加你自己的帶有 @Configuration 註釋的DelegatingWebMvcConfiguration，如 @EnableWebMvc 的Javadoc 中所述。
     使用 @EnableWebMvc + @Configuration + DelegatingWebMvcConfiguration 全面接管SpringMVC
 
   - #### 2、 簡單功能分析
@@ -185,7 +184,6 @@
             or `resources/META-INF/resources`
           )
         訪問：當前項目根路徑/ + 靜態資源名稱，如：`localhost:8080/zhifubao.png`。
-
 
         原理：靜態投影 `/**`。
         請求進來，
@@ -282,7 +280,7 @@
         `WebMvcProperties == spring.mvc`、
         `ResourceProperties == spring.resources`
 
-      - 1、 配置類只有一個有參構造器
+      - ###### 1、 配置類只有一個有參構造器
         ```java
         // 有參構造器所有參數的值，都會從容器中確定
         // ResourceProperties resourceProperties：獲取和 spring.resources 綁定的所有的值的對象
@@ -311,7 +309,7 @@
             }
         ```
       
-      - 2、 資源處理的默認規則
+      - ###### 2、 資源處理的默認規則
         ```java
         @Override
         public void addResourceHandlers(ResourceHandlerRegistry registry) {
@@ -364,7 +362,7 @@
           private String[] staticLocations = CLASSPATH_RESOURCE_LOCATIONS;
         ```
 
-      - 3、 歡迎頁的處理規則
+      - ###### 3、 歡迎頁的處理規則
         ```java
         	// HandlerMapping：處理器鏡像。保存了每個Handler能處理哪些請求
 
@@ -394,7 +392,7 @@
           }
         ```
 
-      - 4、 favicon
+      - ###### 4、 favicon
         `/favicon`，是瀏覽器的默認行為。與 Spring 較無關係。
 
   - #### 3、 請求參數處理
@@ -498,7 +496,7 @@
                 enabled: true     # 啟動頁面表單的 Rest功能
         ```
 
-      - ###### 2、請求映射原理
+      - ###### 2、 請求映射原理
         ![spring_image_5-1](./spring_image_5-1.png)
 
         SpringMVC 功能分析都從 org.springframework.web.servlet.DispatcherServlet-》doDispatch（）
@@ -558,236 +556,383 @@
 
     - ##### 1、 普通參數與基礎註解
       - ###### 1.1、 註解
-        @PathVariable、@RequestHeader、@ModelAttribute、@RequestParam、@MatrixVariable、@CookieValue、@RequestBody
+        `@PathVariable` (路徑變數)、
+        `@RequestHeader` (獲取請求頭)、
+        `@RequestParam` (獲取請求參數)、
+        `@CookieValue` (獲取 cookie 值)、
+        `@RequestBody` (獲取 請求體 [Post])
+        `@RequestAttribute` (獲取 request 域屬性)、
+        `@MatrixVariable` (矩陣變數)、
 
         ```java
         @RestController
         public class ParameterTestController {
-            //  car/2/owner/zhangsan
-            @GetMapping("/car/{id}/owner/{username}")
-            public Map<String,Object> getCar(@PathVariable("id") Integer id,
-                                            @PathVariable("username") String name,
-                                            @PathVariable Map<String,String> pv,
-                                            @RequestHeader("User-Agent") String userAgent,
-                                            @RequestHeader Map<String,String> header,
-                                            @RequestParam("age") Integer age,
-                                            @RequestParam("inters") List<String> inters,
-                                            @RequestParam Map<String,String> params,
-                                            @CookieValue("_ga") String _ga,
-                                            @CookieValue("_ga") Cookie cookie){
+          // 如： car/2/owner/zhangsan
+          @GetMapping("/car/{id}/owner/{username}")
+          public Map<String,Object> getCar(
+            // ---------- 獲取路徑變數 ---------- //
+              @PathVariable("id") Integer id,
+                // {id: 2}
+              @PathVariable("username") String name,
+                // {name: zhangsan}
+              @PathVariable Map<String,String> pv,
+                // {pv: {id: 2, username: zhangsan}}
+
+            // ---------- 獲取請求頭 ---------- //
+              @RequestHeader("User-Agent") String userAgent,
+                // 只提取 User-Agent 資訊
+              @RequestHeader Map<String,String> header,
+                // 提取 所有 Header 資訊
 
 
-                Map<String,Object> map = new HashMap<>();
+            // ---------- 獲取請求參數 ---------- //
+              // 如：car/2/owner/zhangsan?age=18&inters=basketball
+              @RequestParam("age") Integer age,
+              @RequestParam("inters") List<String> inters,
+              @RequestParam Map<String,String> params,
+
+            // ---------- 獲取 cookie 值 ---------- //
+              @CookieValue("_ga") String _ga,
+              @CookieValue("_ga") Cookie cookie
+          ){
+            Map<String,Object> map = new HashMap<>();
 
         //        map.put("id",id);
         //        map.put("name",name);
         //        map.put("pv",pv);
         //        map.put("userAgent",userAgent);
         //        map.put("headers",header);
-                map.put("age",age);
-                map.put("inters",inters);
-                map.put("params",params);
-                map.put("_ga",_ga);
-                System.out.println(cookie.getName()+"===>"+cookie.getValue());
-                return map;
-            }
+            map.put("age",age);
+            map.put("inters",inters);
+            map.put("params",params);
+            map.put("_ga",_ga);
+            System.out.println(cookie.getName()+"===>"+cookie.getValue());
+            return map;
+          }
 
-
-            @PostMapping("/save")
-            public Map postMethod(@RequestBody String content){
-                Map<String,Object> map = new HashMap<>();
-                map.put("content",content);
-                return map;
-            }
-
-
-            //1、语法： 请求路径：/cars/sell;low=34;brand=byd,audi,yd
-            //2、SpringBoot默认是禁用了矩阵变量的功能
-            //      手动开启：原理。对于路径的处理。UrlPathHelper进行解析。
-            //              removeSemicolonContent（移除分号内容）支持矩阵变量的
-            //3、矩阵变量必须有url路径变量才能被解析
-            @GetMapping("/cars/{path}")
-            public Map carsSell(@MatrixVariable("low") Integer low,
-                                @MatrixVariable("brand") List<String> brand,
-                                @PathVariable("path") String path){
-                Map<String,Object> map = new HashMap<>();
-
-                map.put("low",low);
-                map.put("brand",brand);
-                map.put("path",path);
-                return map;
-            }
-
-            // /boss/1;age=20/2;age=10
-
-            @GetMapping("/boss/{bossId}/{empId}")
-            public Map boss(@MatrixVariable(value = "age",pathVar = "bossId") Integer bossAge,
-                            @MatrixVariable(value = "age",pathVar = "empId") Integer empAge){
-                Map<String,Object> map = new HashMap<>();
-                map.put("bossAge",bossAge);
-                map.put("empAge",empAge);
-                return map;
-            }
+          // ---------- 獲取 Request Body ---------- //
+          @PostMapping("/save")
+          public Map postMethod(@RequestBody String content){
+            Map<String,Object> map = new HashMap<>();
+            map.put("content",content);
+            return map;
+          }
         }
         ```
 
-      - ###### 1.2、 Servlet API：
-        WebRequest、ServletRequest、MultipartRequest、 HttpSession、javax.servlet.http.PushBuilder、Principal、InputStream、Reader、HttpMethod、Locale、TimeZone、ZoneId
+        - `@RequestAttribute`
+        ```java
+        // controller/RequestController
 
-        ServletRequestMethodArgumentResolver  以上的部分参数
+        import org.springframework.web.bind.annotation.RequestAttribute;
+        import org.springframework.web.bind.annotation.ResponseBody;
+
+        import javax.servlet.http.HttpServletRequest;
+
+        @Controller
+        public class RequestController {
+
+          @GetMapping("/goto")
+          public String goToPage(HttpServletRequest request) {
+            request.setAttribute("msg", "成功了...");
+            request.setAttribute("code", 200);
+
+            return "forward:/success";    // 轉發到 /success 請求
+          }
+
+          @ResponseBody
+          @GetMapping("/success")
+          public Map success(
+            @RequestAttribute("msg") String msg,
+            @RequestAttribute("code") Integer code,
+            HttpServletRequest request
+          ) {
+            Object msg1 = request.getAttribute("msg");
+
+            Map<String, Object> map = new HashMap<>();
+
+            map.put("reqMethod_msg", msg1);
+            map.put("annotation_msg", msg);
+            return map;
+          }
+        }
+        ```
+
+        - `MatrixVariable` 矩陣變數
+          - 「 /cars/{path}?xxx=xx&aaa=aa 」：稱為 `queryString` 查詢字符串，使用 `@RequestParam` 來獲取。
+          - 「 /cars/{path;low=34;brand=byd,audi,yd} 」：稱為 `矩陣變數`。
+            - 頁面開發時，若 `cookie` 被禁用了，要怎麼獲取 session 裡面的內容？
+              - 使用 session.set(a, b) 時，每個 session 都有個 jsessionid，會被保存在 cookie 中，而 cookie 會在每次發請求時攜帶。
+              - 當 cookie 無法攜帶 jsessionid 時，可以使用 矩陣變數 方式來攜帶。
+              - 如：/abc;jsessionid=xxx，稱為 `url 重寫`。
+              - 把 cookie 的值，使用矩陣變數的方式進行傳遞。
+
+          ```java
+          // ---------- 獲取 矩陣變數 ---------- //
+          // 矩陣變數需要在 SpringBoot 中手動開啟
+          // 根據 RFC3986 的規範，矩陣變數應當綁定在路徑變數中！
+          // 若是有多個矩陣變數，應當使用英文符號;進行分隔。
+          // 若是一個矩陣變數有多個值，應當使用英文符號,進行分隔，或之命名多個重複的key 即可。
+          // 如： /cars/sell;low=34;brand=byd,audi,yd
+
+          // 1、語法： 請求路徑：/cars/sell;low=34;brand=byd,audi,yd
+          // 2、SpringBoot 默認禁用了矩陣變數的功能 
+          //      手動開啟：原理。對於路徑的處理。UrlPathHelper 進行解析。
+          //              removeSemicolonContent（移去分號內容）支持矩陣變數的
+          // 3、矩陣變數必須有 url路徑變數 才能被解析
+          
+          @GetMapping("/cars/{path}")
+          public Map carsSell(@MatrixVariable("low") Integer low,
+                              @MatrixVariable("brand") List<String> brand,
+                              @PathVariable("path") String path){
+              Map<String,Object> map = new HashMap<>();
+
+              map.put("low",low);
+              map.put("brand",brand);
+              map.put("path",path);
+              return map;
+          }
+
+          // /boss/1;age=20/2;age=10
+          // 可使用 pathVar 來設定 要取得哪個路徑下的值
+          // 沒區分的情況下，age 只會取到 第一個值 20
+          // 分號左邊是訪問路徑，分後右邊是矩陣變數
+          @GetMapping("/boss/{bossId}/{empId}")
+          public Map boss(
+            @MatrixVariable(value = "age",pathVar = "bossId") Integer bossAge,
+            @MatrixVariable(value = "age",pathVar = "empId") Integer empAge
+          ){
+            Map<String,Object> map = new HashMap<>();
+            map.put("bossAge",bossAge);
+            map.put("empAge",empAge);
+            return map;
+          }
+          ```
+
+          開啟 矩陣變數 功能方式：
+          ```java
+          // ----- 方法一 ----- //
+          // 1. 讓 WebConfig implements(實現) WebMvcConfigurer
+          // 2. 複寫 configurePathMatch
+          // 3. new UrlPathHelper，並設定屬性 setRemoveSemicolonContent 為 false
+          // 4. 將設定餵給 configurer
+
+          // config/ WebConfig
+          package com.atguigu.boot.config;
+
+          import org.springframework.context.annotation.Bean;
+          import org.springframework.context.annotation.Configuration;
+          import org.springframework.web.filter.HiddenHttpMethodFilter;
+          import org.springframework.web.servlet.config.annotation.PathMatchConfigurer;
+          import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+          import org.springframework.web.util.UrlPathHelper;
+
+          @Configuration(proxyBeanMethods = false)
+          public class WebConfig implements WebMvcConfigurer {
+            @Bean
+            public HiddenHttpMethodFilter hiddenHttpMethodFilter(){
+              HiddenHttpMethodFilter methodFilter = new HiddenHttpMethodFilter();
+              methodFilter.setMethodParam("_m");
+              return methodFilter;
+            }
+
+            // 方法一
+            @Override
+            public void configurePathMatch(PathMatchConfigurer configurer) {
+              UrlPathHelper urlPathHelper = new UrlPathHelper();
+              // 默認會將分號後面的內容移除，需要將這個關掉，矩陣變數功能才能正常運作
+              urlPathHelper.setRemoveSemicolonContent(false); 
+              configurer.setUrlPathHelper(urlPathHelper)
+            }
+
+            // 方法二
+            @Bean
+            public WebMvcConfigurer webMvcConfigurer(){
+              return new WebMvcConfigurer() {
+                @Override
+                public void configurePathMatch(PathMatchConfigurer configurer) {
+                  UrlPathHelper urlPathHelper = new UrlPathHelper();
+                  urlPathHelper.setRemoveSemicolonContent(false); 
+                  configurer.setUrlPathHelper(urlPathHelper)
+                }
+              }
+            }
+            }
+          ```
+
+      - ###### 1.2、 Servlet API：
+        `WebRequest`、
+        `ServletRequest`、
+        `MultipartRequest`、
+        `HttpSession`、
+        `javax.servlet.http.PushBuilder`、
+        `Principal`、
+        `InputStream`、
+        `Reader`、
+        `HttpMethod`、
+        `Locale`、
+        `TimeZone`、
+        `ZoneId`
+
+        ServletRequestMethodArgumentResolver  以上的部分參數
 
         ```java
         @Override
         public boolean supportsParameter(MethodParameter parameter) {
           Class<?> paramType = parameter.getParameterType();
-          return (WebRequest.class.isAssignableFrom(paramType) ||
-              ServletRequest.class.isAssignableFrom(paramType) ||
-              MultipartRequest.class.isAssignableFrom(paramType) ||
-              HttpSession.class.isAssignableFrom(paramType) ||
-              (pushBuilder != null && pushBuilder.isAssignableFrom(paramType)) ||
-              Principal.class.isAssignableFrom(paramType) ||
-              InputStream.class.isAssignableFrom(paramType) ||
-              Reader.class.isAssignableFrom(paramType) ||
-              HttpMethod.class == paramType ||
-              Locale.class == paramType ||
-              TimeZone.class == paramType ||
-              ZoneId.class == paramType);
+          return (
+            WebRequest.class.isAssignableFrom(paramType) ||
+            ServletRequest.class.isAssignableFrom(paramType) ||
+            MultipartRequest.class.isAssignableFrom(paramType) ||
+            HttpSession.class.isAssignableFrom(paramType) ||
+            (pushBuilder != null && pushBuilder.isAssignableFrom(paramType)) ||
+            Principal.class.isAssignableFrom(paramType) ||
+            InputStream.class.isAssignableFrom(paramType) ||
+            Reader.class.isAssignableFrom(paramType) ||
+            HttpMethod.class == paramType ||
+            Locale.class == paramType ||
+            TimeZone.class == paramType ||
+            ZoneId.class == paramType
+          );
         }
         ```
 
-      - ###### 1.3、复杂参数：
-        Map、Model（map、model里面的数据会被放在request的请求域  request.setAttribute）、Errors/BindingResult、RedirectAttributes（ 重定向携带数据）、ServletResponse（response）、SessionStatus、UriComponentsBuilder、ServletUriComponentsBuilder
+      - ###### 1.3、複雜參數：
+        `Map`、`Model`（map、model 裡面的數據會被放在 request 的請求域  request.setAttribute）、
+        `Errors/BindingResult`、
+        `RedirectAttributes`（ 重定向攜帶數據 ）、
+        `ServletResponse`（response）、
+        `SessionStatus`、
+        `UriComponentsBuilder`、
+        `ServletUriComponentsBuilder`
 
         ```java
-        Map<String,Object> map,  Model model, HttpServletRequest request 都是可以给request域中放数据，
+        Map<String,Object> map,
+        Model model,
+        HttpServletRequest request
+        // 都是可以給 request 域中 放數據，
         request.getAttribute();
         ```
-
         
-        Map、Model类型的参数，会返回 `mavContainer.getModel（）`；---> BindingAwareModelMap 是Model 也是Map
-        mavContainer.getModel(); 获取到值的
+        `Map`、`Model` 類型的參數，會返回 `mavContainer.getModel（）`；
+        ---> `BindingAwareModelMap` 是 `Model` 也是 `Map`
+        `mavContainer.getModel()`; 獲得到值的
 
         ![spring_image_5-4](./spring_image_5-4.png)
         ![spring_image_5-5](./spring_image_5-5.png)
         ![spring_image_5-6](./spring_image_5-6.png)
 
-      - ###### 1.4、 自定义对象参数：
-        可以自动类型转换与格式化，可以级联封装。
+      - ###### 1.4、 自定義對象參數：
+        可以自動類型轉換與格式化，可以級聯封裝。
 
         ```java
         /**
         *     姓名： <input name="userName"/> <br/>
-        *     年龄： <input name="age"/> <br/>
+        *     年齡： <input name="age"/> <br/>
         *     生日： <input name="birth"/> <br/>
-        *     宠物姓名：<input name="pet.name"/><br/>
-        *     宠物年龄：<input name="pet.age"/>
+        *     寵物姓名：<input name="pet.name"/><br/>
+        *     寵物年齡：<input name="pet.age"/>
         */
         @Data
         public class Person {
-            
-            private String userName;
-            private Integer age;
-            private Date birth;
-            private Pet pet;
-            
+          private String userName;
+          private Integer age;
+          private Date birth;
+          private Pet pet;
         }
 
         @Data
         public class Pet {
-
-            private String name;
-            private String age;
-
+          private String name;
+          private String age;
         }
-
-        result
         ```
 
-    - ##### 2、 POJO封装过程
+    - ##### 2、 POJO 封裝過程 (自定義對象參數 封裝過程)
       - ###### ServletModelAttributeMethodProcessor
 
-    - ##### 3、 参数处理原理
-      - HandlerMapping中找到能处理请求的Handler（Controller.method()）
-      - 为当前Handler 找一个适配器 HandlerAdapter； RequestMappingHandlerAdapter
-      - 适配器执行目标方法并确定方法参数的每一个值
+    - ##### 3、 參數處理原理
+      - `HandlerMapping` 中找到能處理請求的 `Handler(Controller.method())`
+      - 為當前 `Handler` 找一個適配器 `HandlerAdapter`； `RequestMappingHandlerAdapter`
+      - 適配器執行目標方法並確定方法參數的每一個值
 
-      - ###### 1、 HandlerAdapter
+      - ###### 1、 HandlerAdapter (處理器的適配器)
         ![spring_image_5-7](./spring_image_5-7.png)
 
-        0 - 支持方法上标注@RequestMapping 
-        1 - 支持函数式编程的
+        最常用的兩種：
+        0 = {RequestMappingHandlerAdapter} - 支持方法上標註 `@RequestMapping` 
+        1 = {HandlerFunctionAdapter} - 支持函數式編程的
         xxxxxx
 
-      - ###### 2、 执行目标方法
+      - ###### 2、 執行目標方法
         ```java
         // Actually invoke the handler.
-        //DispatcherServlet -- doDispatch
+        // DispatcherServlet -- doDispatch
         mv = ha.handle(processedRequest, response, mappedHandler.getHandler());
         ```
 
         ```java
-        mav = invokeHandlerMethod(request, response, handlerMethod); //执行目标方法
+        // 執行目標方法
+        mav = invokeHandlerMethod(request, response, handlerMethod);
 
-        //ServletInvocableHandlerMethod
+        // ServletInvocableHandlerMethod
         Object returnValue = invokeForRequest(webRequest, mavContainer, providedArgs);
-        //获取方法的参数值
+        // 獲取方法的參數值
         Object[] args = getMethodArgumentValues(request, mavContainer, providedArgs);
         ```
 
-      - ###### 3、 参数解析器-HandlerMethodArgumentResolver
-        确定将要执行的目标方法的每一个参数的值是什么;
-        SpringMVC目标方法能写多少种参数类型。取决于参数解析器。
+      - ###### 3、 參數解析器 - HandlerMethodArgumentResolver
+        確定將要執行的目標方法的每一個參數的值是什麼;
+        `SpringMVC` 目標方法能寫多少種參數類型，取決於參數解析器。
 
         ![spring_image_5-8](./spring_image_5-8.png)
         ![spring_image_5-9](./spring_image_5-9.png)
+        
+        - 當前解析器 是否支持 解析 這種參數
+        - 支持就調用 `resolveArgument`
 
-        ● 当前解析器是否支持解析这种参数
-        ● 支持就调用 resolveArgument
-
-      - ###### 4、 返回值处理器
+      - ###### 4、 返回值處理器
         ![spring_image_5-10](./spring_image_5-10.png)
 
-      - ###### 5、 如何确定目标方法每一个参数的值
+      - ###### 5、 如何確定目標方法的每一個參數的值
         ```java
-        ============InvocableHandlerMethod==========================
-        protected Object[] getMethodArgumentValues(NativeWebRequest request, @Nullable ModelAndViewContainer mavContainer,
-              Object... providedArgs) throws Exception {
-
-            MethodParameter[] parameters = getMethodParameters();
-            if (ObjectUtils.isEmpty(parameters)) {
-              return EMPTY_ARGS;
-            }
-
-            Object[] args = new Object[parameters.length];
-            for (int i = 0; i < parameters.length; i++) {
-              MethodParameter parameter = parameters[i];
-              parameter.initParameterNameDiscovery(this.parameterNameDiscoverer);
-              args[i] = findProvidedArgument(parameter, providedArgs);
-              if (args[i] != null) {
-                continue;
-              }
-              if (!this.resolvers.supportsParameter(parameter)) {
-                throw new IllegalStateException(formatArgumentError(parameter, "No suitable resolver"));
-              }
-              try {
-                args[i] = this.resolvers.resolveArgument(parameter, mavContainer, request, this.dataBinderFactory);
-              }
-              catch (Exception ex) {
-                // Leave stack trace for later, exception may actually be resolved and handled...
-                if (logger.isDebugEnabled()) {
-                  String exMsg = ex.getMessage();
-                  if (exMsg != null && !exMsg.contains(parameter.getExecutable().toGenericString())) {
-                    logger.debug(formatArgumentError(parameter, exMsg));
-                  }
-                }
-                throw ex;
-              }
-            }
-            return args;
+        // ============ InvocableHandlerMethod ============
+        protected Object[] getMethodArgumentValues(NativeWebRequest request, @Nullable ModelAndViewContainer mavContainer, Object... providedArgs) throws Exception {
+          MethodParameter[] parameters = getMethodParameters();
+          if (ObjectUtils.isEmpty(parameters)) {
+            return EMPTY_ARGS;
           }
+
+          Object[] args = new Object[parameters.length];
+          for (int i = 0; i < parameters.length; i++) {
+            MethodParameter parameter = parameters[i];
+            parameter.initParameterNameDiscovery(this.parameterNameDiscoverer);
+            args[i] = findProvidedArgument(parameter, providedArgs);
+            if (args[i] != null) {
+              continue;
+            }
+            if (!this.resolvers.supportsParameter(parameter)) {
+              throw new IllegalStateException(formatArgumentError(parameter, "No suitable resolver"));
+            }
+            try {
+              args[i] = this.resolvers.resolveArgument(parameter, mavContainer, request, this.dataBinderFactory);
+            }
+            catch (Exception ex) {
+              // Leave stack trace for later, exception may actually be resolved and handled...
+              if (logger.isDebugEnabled()) {
+                String exMsg = ex.getMessage();
+                if (exMsg != null && !exMsg.contains(parameter.getExecutable().toGenericString())) {
+                  logger.debug(formatArgumentError(parameter, exMsg));
+                }
+              }
+              throw ex;
+            }
+          }
+          return args;
+        }
         ```
 
-        - ###### 5.1、挨个判断所有参数解析器那个支持解析这个参数
+        - ###### 5.1、判斷 所有參數解析器中，哪個支持解析這個參數
           ```java
           @Nullable
           private HandlerMethodArgumentResolver getArgumentResolver(MethodParameter parameter) {
@@ -805,13 +950,11 @@
           }
           ```
 
-        - ###### 5.2、解析这个参数的值
-          ```java
-          调用各自 HandlerMethodArgumentResolver 的 resolveArgument 方法即可
-          ```
+        - ###### 5.2、解析這個參數的值
+          調用各自 `HandlerMethodArgumentResolver` 的 resolveArgument 方法即可
         
-        - ###### 5.3、自定义类型参数 封装POJO
-          ServletModelAttributeMethodProcessor  这个参数处理器支持是否为简单类型。
+        - ###### 5.3、自定義類型參數 封裝 POJO
+          `ServletModelAttributeMethodProcessor` 這個參數處理器支持 是否為 簡單類型。
 
           ```java
           public static boolean isSimpleValueType(Class<?> type) {
@@ -897,69 +1040,76 @@
           }
           ```
 
-          WebDataBinder binder = binderFactory.createBinder(webRequest, attribute, name);
-          WebDataBinder :web数据绑定器，将请求参数的值绑定到指定的JavaBean里面
-          WebDataBinder 利用它里面的 Converters 将请求数据转成指定的数据类型。再次封装到JavaBean中
+          `WebDataBinder binder` = binderFactory.createBinder(webRequest, attribute, name);
+          `WebDataBinder`：web數據綁定器，將請求參數的值綁定到指定的 `JavaBean` 裡面
+          `WebDataBinder` 利用它裡面的 `Converters` 將請求數據轉成指定的數據類型。再次封裝到 `JavaBean` 中
 
-          GenericConversionService：在设置每一个值的时候，找它里面的所有converter那个可以将这个数据类型（request带来参数的字符串）转换到指定的类型（JavaBean -- Integer）
-          byte -- > file
-
+          `GenericConversionService`：在設置每一個值的時候，找它裡面的所有 `converter` 那個可以將這個數據類型（request帶來參數的字符串）轉換到指定的類型（JavaBean -- Integer）
+          如：byte -- > file
+          
+          ```java
           @FunctionalInterfacepublic interface Converter<S, T>
+          ```
 
           ![spring_image_5-11](./spring_image_5-11.png)
           ![spring_image_5-12](./spring_image_5-12.png)
 
-          未来我们可以给WebDataBinder里面放自己的Converter；
-          private static final class StringToNumber<T extends Number> implements Converter<String, T>
-
-          自定义 Converter
-
+          未來我們可以給 `WebDataBinder` 裡面放自己的 `Converter`；
           ```java
-              //1、WebMvcConfigurer定制化SpringMVC的功能
+          private static final class StringToNumber<T extends Number> implements Converter<String, T>
+          ```
+
+          自定義 Converter
+          ```java
+          // 1、WebMvcConfigurer定制化SpringMVC的功能
           @Bean
           public WebMvcConfigurer webMvcConfigurer(){
-              return new WebMvcConfigurer() {
-                  @Override
-                  public void configurePathMatch(PathMatchConfigurer configurer) {
-                      UrlPathHelper urlPathHelper = new UrlPathHelper();
-                      // 不移除；后面的内容。矩阵变量功能就可以生效
-                      urlPathHelper.setRemoveSemicolonContent(false);
-                      configurer.setUrlPathHelper(urlPathHelper);
-                  }
+            return new WebMvcConfigurer() {
+              @Override
+              public void configurePathMatch(PathMatchConfigurer configurer) {
+                UrlPathHelper urlPathHelper = new UrlPathHelper();
+                // 不移除；後面的內容。矩陣變量功能就可以生效
+                urlPathHelper.setRemoveSemicolonContent(false);
+                configurer.setUrlPathHelper(urlPathHelper);
+              }
 
+              @Override
+              public void addFormatters(FormatterRegistry registry) {
+                registry.addConverter(new Converter<String, Pet>() {
                   @Override
-                  public void addFormatters(FormatterRegistry registry) {
-                      registry.addConverter(new Converter<String, Pet>() {
-
-                          @Override
-                          public Pet convert(String source) {
-                              // 啊猫,3
-                              if(!StringUtils.isEmpty(source)){
-                                  Pet pet = new Pet();
-                                  String[] split = source.split(",");
-                                  pet.setName(split[0]);
-                                  pet.setAge(Integer.parseInt(split[1]));
-                                  return pet;
-                              }
-                              return null;
-                          }
-                      });
+                  public Pet convert(String source) {
+                    // 啊猫,3 (Key, value)
+                    if(!StringUtils.isEmpty(source)){
+                      Pet pet = new Pet();
+                      String[] split = source.split(",");
+                      pet.setName(split[0]);
+                      pet.setAge(Integer.parseInt(split[1]));
+                      return pet;
+                    }
+                    return null;
                   }
-              };
+                });
+              }
+            };
           }
           ```
 
-      - ###### 6、 目标方法执行完成
-        将所有的数据都放在 ModelAndViewContainer；包含要去的页面地址View。还包含Model数据。
+      - ###### 6、 目標方法執行完成
+        將所有的數據都放在 ModelAndViewContainer；
+        包含要去的頁面地址 View。
+        還包含Model數據。
 
         ![spring_image_5-13](./spring_image_5-13.png)
 
-      - ###### 7、 处理派发结果
+      - ###### 7、 處理派發結果
+        ```java
         processDispatchResult(processedRequest, response, mappedHandler, mv, dispatchException);
+
         renderMergedOutputModel(mergedModel, getRequestToExpose(request), response);
+        ```
 
         ```java
-        InternalResourceView：
+        // InternalResourceView：
         @Override
           protected void renderMergedOutputModel(
               Map<String, Object> model, HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -1000,16 +1150,16 @@
         ```
 
         ```java
-        暴露模型作为请求域属性
+        // 暴露模型作為請求域屬性
         // Expose the model object as request attributes.
-            exposeModelAsRequestAttributes(model, request);
+          exposeModelAsRequestAttributes(model, request);
         ```
 
         ```java
           protected void exposeModelAsRequestAttributes(Map<String, Object> model,
             HttpServletRequest request) throws Exception {
 
-          //model中的所有数据遍历挨个放在请求域中
+          // model中的所有數據 遍歷 挨個放在請求域中
           model.forEach((name, value) -> {
             if (value != null) {
               request.setAttribute(name, value);
