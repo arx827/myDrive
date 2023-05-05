@@ -1,12 +1,30 @@
 const UglifyJsPlugin = require("terser-webpack-plugin");
+
+const resolve = (dir) => path.join(__dirname, dir);
+
+const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
+
+const path = require('path');
 const ReplaceInFileWebpackPlugin = require('replace-in-file-webpack-plugin');
+const stringReplace = require('./stringReplace.json');
 
 const IS_PROD = ['production', 'prod'].includes(process.env.NODE_ENV);
 const IS_UAT = ['uat', 'ut'].includes(process.env.NODE_ENV);
 
 module.exports = {
-  runtimeCompiler: true,
   publicPath: process.env.PUBLIC_PATH !== undefined ? process.env.PUBLIC_PATH : '/',
+  lintOnSave: true,
+  runtimeCompiler: true,
+  chainWebpack: (config) => {
+    config.resolve.alias
+      .set('@', resolve('src'))
+      .set('@assets', resolve('src/assets'))
+      .set('@imges', resolve('src/assets/images'))
+      .set('@compononts', resolve('src/components'))
+      .set('@shared', resolve('src/components/shared'))
+      .set('@less', resolve('src/assets/less'))
+      .set('@scss', resolve('src/assets/scss'));
+  },
   configureWebpack: config => {
     // enable source-map
     config.devtool = 'source-map';
@@ -14,9 +32,54 @@ module.exports = {
     config.output.filename = 'js/[name].[hash:8].js';
     config.output.chunkFilename = 'js/[name].[hash:8].js';
 
-    // enable uglify
+    const plugins = [];
+
+    // ---------------- 調整包版記憶體 釋放 ---------------- //
+    const existingForkTsChecker = config.plugins.filter(
+      (p) => p instanceof ForkTsCheckerWebpackPlugin,
+    )[0];
+
+    config.plugins = config.plugins.filter(
+      (p) => !(p instanceof ForkTsCheckerWebpackPlugin),
+    );
+
+    const forkTsCheckerOptions = existingForkTsChecker.options;
+    forkTsCheckerOptions.workers = 4;
+    forkTsCheckerOptions.memoryLimit = 8192;
+
+    plugins.push(new ForkTsCheckerWebpackPlugin(forkTsCheckerOptions));
+
+    // ---------------- 文字替代 ---------------- //
     if (IS_PROD || IS_UAT) {
-      const plugins = [];
+      plugins.push(new ReplaceInFileWebpackPlugin([
+        {
+          dir: 'dist/js',
+          test: [/\.js$/, /\.js\.map$/],
+          rules: [
+            // 套用 stringReplace.json 裡面的 替換列表
+            ...stringReplace.options.map((i) => ({
+              search: new RegExp(i.search, 'ig'),
+              replace: i.replace,
+            })),
+  
+            // ----- 若想使用 全局替代的話 可以改用以下語法 ------ //
+            // // 針對 版本號 替換
+            // {
+            //   search: /(\w+)@((\d\.)+\d)/ig,
+            //   replace: '$1_$2',
+            // },
+            // // 針對 Email 替換
+            // {
+            //   search: /(\w+)@(([\da-z.-]+)\.com)/ig,
+            //   replace: '$1_$2',
+            // },
+          ],
+        },
+      ]));
+    }
+
+    // ---------------- uglify ---------------- //
+    if (IS_PROD || IS_UAT) {
       plugins.push(
         new UglifyJsPlugin({
           terserOptions: {
@@ -33,35 +96,9 @@ module.exports = {
           parallel: true
         })
       );
-
-      plugins.push(new ReplaceInFileWebpackPlugin([
-        {
-          dir: 'dist/js',
-          test: [/\.js$/, /\.js\.map$/],
-          rules: [
-            // 套用 stringReplace.json 裡面的 替換列表
-            ...stringReplace.options.map((i) => ({
-              search: new RegExp(i.search, 'ig'),
-              replace: i.replace,
-            })),
-
-            // ----- 若想使用 全局替代的話 可以改用以下語法 ------ //
-            // // 針對 版本號 替換
-            // {
-            //   search: /(\w+)@((\d\.)+\d)/ig,
-            //   replace: '$1_$2',
-            // },
-            // // 針對 Email 替換
-            // {
-            //   search: /(\w+)@(([\da-z.-]+)\.com)/ig,
-            //   replace: '$1_$2',
-            // },
-          ],
-        },
-      ]));
-      config.plugins = [...config.plugins, ...plugins];
     }
 
+    config.plugins = [...config.plugins, ...plugins];
   },
   css: {
     loaderOptions: {
