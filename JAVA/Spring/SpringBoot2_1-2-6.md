@@ -1,7 +1,7 @@
 # 06. 數據訪問
   - ## 1、SQL
-    - ### 1、数据源的自动配置-HikariDataSource
-      - #### 1、导入JDBC场景
+    - ### 1、數據源的自動配置 - `HikariDataSource`
+      - #### 1、導入 `JDBC` 場景
         ```xml
         <dependency>
           <groupId>org.springframework.boot</groupId>
@@ -10,51 +10,54 @@
         ```
         ![spring_image_1-2-6-1-1](./spring_image_1-2-6-1-1.png)
 
-        数据库驱动？
-        为什么导入JDBC场景，官方不导入驱动？官方不知道我们接下要操作什么数据库。
-        数据库版本和驱动版本对应
+        數據庫驅動？
+        為什麼導入JDBC場景，官方不導入驅動？官方不知道我們接下來要操作什麼數據庫。
+        注意：`數據庫版本 (本地端電腦)` 要跟 `驅動版本對應`
 
         ```xml
-        默认版本：<mysql.version>8.0.22</mysql.version>
+        默認版本：<mysql.version>8.0.22</mysql.version>
 
         <dependency>
-            <groupId>mysql</groupId>
-            <artifactId>mysql-connector-java</artifactId>
-            <!--            <version>5.1.49</version>-->
-                    </dependency>
-            想要修改版本
-            1、直接依赖引入具体版本（maven的就近依赖原则）
-            2、重新声明版本（maven的属性的就近优先原则）
-                <properties>
-                    <java.version>1.8</java.version>
-                    <mysql.version>5.1.49</mysql.version>
-                </properties>
+          <groupId>mysql</groupId>
+          <artifactId>mysql-connector-java</artifactId>
+          <!-- <version>5.1.49</version> -->
+        </dependency>
+        <!-- 
+          想要修改版本
+          1、直接依賴引入具體版本（maven的就近依賴原則）
+          2、重新聲明版本（maven的屬性的就近優先原則，在 <properties>）
+        -->
+        <properties>
+          <java.version>1.8</java.version>
+          <mysql.version>5.1.49</mysql.version>
+        </properties>
         ```
 
-      - #### 2、分析自动配置
-        - ##### 1、自动配置的类
-          - DataSourceAutoConfiguration ： 数据源的自动配置
-            ○ 修改数据源相关的配置：spring.datasource
-            ○ 数据库连接池的配置，是自己容器中没有DataSource才自动配置的
-            ○ 底层配置好的连接池是：HikariDataSource
+      - #### 2、分析自動配置
+        - ##### 1、自動配置的類
+          - `DataSourceAutoConfiguration`： 數據源的自動配置
+            - 修改數據源相關的配置：`spring.datasource`
+            - 數據庫連接池的配置，是自己容器中沒有 `DataSource` 才自動配置的
+            - 底層配置好的連接池是：HikariDataSource
 
             ```java
             	@Configuration(proxyBeanMethods = false)
               @Conditional(PooledDataSourceCondition.class)
               @ConditionalOnMissingBean({ DataSource.class, XADataSource.class })
               @Import({ DataSourceConfiguration.Hikari.class, DataSourceConfiguration.Tomcat.class,
-                  DataSourceConfiguration.Dbcp2.class, DataSourceConfiguration.OracleUcp.class,
-                  DataSourceConfiguration.Generic.class, DataSourceJmxConfiguration.class })
+                DataSourceConfiguration.Dbcp2.class, DataSourceConfiguration.OracleUcp.class,
+                DataSourceConfiguration.Generic.class, DataSourceJmxConfiguration.class })
               protected static class PooledDataSourceConfiguration
             ```
-          ● DataSourceTransactionManagerAutoConfiguration： 事务管理器的自动配置
-          ● JdbcTemplateAutoConfiguration： JdbcTemplate的自动配置，可以来对数据库进行crud
-            ○ 可以修改这个配置项@ConfigurationProperties(prefix = "spring.jdbc") 来修改JdbcTemplate
-            ○ @Bean@Primary    JdbcTemplate；容器中有这个组件
-          ● JndiDataSourceAutoConfiguration： jndi的自动配置
-          ● XADataSourceAutoConfiguration： 分布式事务相关的
+          
+          - `DataSourceTransactionManagerAutoConfiguration`： 事務管理器的自動配置
+          - `JdbcTemplateAutoConfiguration`： `JdbcTemplate` 的自動配置，可以來對數據庫進行crud
+            - 可以修改這個配置項 `@ConfigurationProperties(prefix = "spring.jdbc")` 來修改 `JdbcTemplate`
+            - `@Bean@Primary`： JdbcTemplate；容器中有這個組件
+          - `JndiDataSourceAutoConfiguration`： jndi的自動配置
+          - `XADataSourceAutoConfiguration`： 分佈式事務相關的
 
-      - #### 3、修改配置项
+      - #### 3、修改配置項
         ```yaml
         spring:
         datasource:
@@ -64,67 +67,62 @@
           driver-class-name: com.mysql.jdbc.Driver
         ```
 
-      - #### 4、测试
+      - #### 4、測試
         ```java
         @Slf4j
         @SpringBootTest
         class Boot05WebAdminApplicationTests {
 
-            @Autowired
-            JdbcTemplate jdbcTemplate;
+          @Autowired
+          JdbcTemplate jdbcTemplate;
 
-
-            @Test
-            void contextLoads() {
-
-        //        jdbcTemplate.queryForObject("select * from account_tbl")
-        //        jdbcTemplate.queryForList("select * from account_tbl",)
-                Long aLong = jdbcTemplate.queryForObject("select count(*) from account_tbl", Long.class);
-                log.info("记录总数：{}",aLong);
-            }
-
+          @Test
+          void contextLoads() {
+            //        jdbcTemplate.queryForObject("select * from account_tbl")
+            //        jdbcTemplate.queryForList("select * from account_tbl",)
+            Long aLong = jdbcTemplate.queryForObject("select count(*) from account_tbl", Long.class);
+            log.info("记录总数：{}",aLong);
+          }
         }
         ```
     
-    - ### 2、使用Druid数据源
-      - #### 1、druid官方github地址
-        https://github.com/alibaba/druid
-        整合第三方技术的两种方式
-        ● 自定义
-        ● 找starter
+    - ### 2、使用 `Druid` 數據源
+      - #### 1、[druid 官方 github 地址](https://github.com/alibaba/druid)
+        整合第三方技術的兩種方式：
+        - 自定義
+        - 找 `starter`
 
-      - #### 2、自定义方式
-        - ##### 1、创建数据源
+      - #### 2、自定義方式
+        - ##### 1、創建數據源
           ```xml
-                  <dependency>
-                        <groupId>com.alibaba</groupId>
-                        <artifactId>druid</artifactId>
-                        <version>1.1.17</version>
-                    </dependency>
+          <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>druid</artifactId>
+            <version>1.1.17</version>
+          </dependency>
 
-            <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource"
-                destroy-method="close">
-                <property name="url" value="${jdbc.url}" />
-                <property name="username" value="${jdbc.username}" />
-                <property name="password" value="${jdbc.password}" />
-                <property name="maxActive" value="20" />
-                <property name="initialSize" value="1" />
-                <property name="maxWait" value="60000" />
-                <property name="minIdle" value="1" />
-                <property name="timeBetweenEvictionRunsMillis" value="60000" />
-                <property name="minEvictableIdleTimeMillis" value="300000" />
-                <property name="testWhileIdle" value="true" />
-                <property name="testOnBorrow" value="false" />
-                <property name="testOnReturn" value="false" />
-                <property name="poolPreparedStatements" value="true" />
-                <property name="maxOpenPreparedStatements" value="20" />
-
+          <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource"
+              destroy-method="close">
+            <property name="url" value="${jdbc.url}" />
+            <property name="username" value="${jdbc.username}" />
+            <property name="password" value="${jdbc.password}" />
+            <property name="maxActive" value="20" />
+            <property name="initialSize" value="1" />
+            <property name="maxWait" value="60000" />
+            <property name="minIdle" value="1" />
+            <property name="timeBetweenEvictionRunsMillis" value="60000" />
+            <property name="minEvictableIdleTimeMillis" value="300000" />
+            <property name="testWhileIdle" value="true" />
+            <property name="testOnBorrow" value="false" />
+            <property name="testOnReturn" value="false" />
+            <property name="poolPreparedStatements" value="true" />
+            <property name="maxOpenPreparedStatements" value="20" />
           ```
         
         - ##### 2、StatViewServlet
           > StatViewServlet的用途包括：
-          > ● 提供监控信息展示的html页面
-          > ● 提供监控信息的JSON API
+          > - 提供監控信息展示的html頁面
+          > - 提供監控信息的JSON API
 
           ```xml
           	<servlet>
@@ -169,33 +167,33 @@
           使用 slowSqlMillis 定义慢SQL的时长
           ```
 
-      - #### 3、使用官方starter方式
+      - #### 3、使用官方 starter 方式
         - ##### 1、引入druid-starter
           ```xml
-                  <dependency>
-            <groupId>com.alibaba</groupId>
-            <artifactId>druid-spring-boot-starter</artifactId>
-            <version>1.1.17</version>
-          </dependency>
+            <dependency>
+              <groupId>com.alibaba</groupId>
+              <artifactId>druid-spring-boot-starter</artifactId>
+              <version>1.1.17</version>
+            </dependency>
           ```
 
-        - ##### 2、分析自动配置
-          ● 扩展配置项 spring.datasource.druid
-          ● DruidSpringAopConfiguration.class,   监控SpringBean的；配置项：spring.datasource.druid.aop-patterns
-          ● DruidStatViewServletConfiguration.class, 监控页的配置：spring.datasource.druid.stat-view-servlet；默认开启
-          ●  DruidWebStatFilterConfiguration.class, web监控配置；spring.datasource.druid.web-stat-filter；默认开启
-          ● DruidFilterConfiguration.class}) 所有Druid自己filter的配置
-
-          ```java
-            private static final String FILTER_STAT_PREFIX = "spring.datasource.druid.filter.stat";
-            private static final String FILTER_CONFIG_PREFIX = "spring.datasource.druid.filter.config";
-            private static final String FILTER_ENCODING_PREFIX = "spring.datasource.druid.filter.encoding";
-            private static final String FILTER_SLF4J_PREFIX = "spring.datasource.druid.filter.slf4j";
-            private static final String FILTER_LOG4J_PREFIX = "spring.datasource.druid.filter.log4j";
-            private static final String FILTER_LOG4J2_PREFIX = "spring.datasource.druid.filter.log4j2";
-            private static final String FILTER_COMMONS_LOG_PREFIX = "spring.datasource.druid.filter.commons-log";
-            private static final String FILTER_WALL_PREFIX = "spring.datasource.druid.filter.wall";
-          ```
+        - ##### 2、分析自動配置
+          - 擴展配置項 `spring.datasource.druid`
+          - `DruidSpringAopConfiguration.class`，是用來 監控 `SpringBean` 的；
+            配置項：`spring.datasource.druid.aop-patterns`
+          - `DruidStatViewServletConfiguration.class`, 監控頁的配置：`spring.datasource.druid.stat-view-servlet`；默認開啟
+          -  `DruidWebStatFilterConfiguration.class`, web監控配置；`spring.datasource.druid.web-stat-filter`；默認開啟
+          - `DruidFilterConfiguration.class` 所有 `Druid` 自己 `filter` 的配置
+            ```java
+              aprivate static final String FILTER_STAT_PREFIX = "spring.datasource.druid.filter.stat";
+              private static final String FILTER_CONFIG_PREFIX = "spring.datasource.druid.filter.config";
+              private static final String FILTER_ENCODING_PREFIX = "spring.datasource.druid.filter.encoding";
+              private static final String FILTER_SLF4J_PREFIX = "spring.datasource.druid.filter.slf4j";
+              private static final String FILTER_LOG4J_PREFIX = "spring.datasource.druid.filter.log4j";
+              private static final String FILTER_LOG4J2_PREFIX = "spring.datasource.druid.filter.log4j2";
+              private static final String FILTER_COMMONS_LOG_PREFIX = "spring.datasource.druid.filter.commons-log";
+              private static final String FILTER_WALL_PREFIX = "spring.datasource.druid.filter.wall";
+            ```
 
         - ##### 3、配置示例
           ```yaml
@@ -207,23 +205,22 @@
             driver-class-name: com.mysql.jdbc.Driver
 
             druid:
-              aop-patterns: com.atguigu.admin.*  #监控SpringBean
-              filters: stat,wall     # 底层开启功能，stat（sql监控），wall（防火墙）
+              aop-patterns: com.atguigu.admin.*  # 監控 SpringBean
+              filters: stat, wall     # 底層開啟功能，stat（sql監控），wall（防火牆）
 
-              stat-view-servlet:   # 配置监控页功能
+              stat-view-servlet:   # 配置監控頁功能
                 enabled: true
                 login-username: admin
                 login-password: admin
                 resetEnable: false
 
-              web-stat-filter:  # 监控web
+              web-stat-filter:  # 監控 web
                 enabled: true
                 urlPattern: /*
                 exclusions: '*.js,*.gif,*.jpg,*.png,*.css,*.ico,/druid/*'
 
-
               filter:
-                stat:    # 对上面filters里面的stat的详细配置
+                stat:    # 對上面 filters 裡面的 stat 的詳細配置
                   slow-sql-millis: 1000
                   logSlowSql: true
                   enabled: true
@@ -231,39 +228,38 @@
                   enabled: true
                   config:
                     drop-table-allow: false
-
           ```
 
-          SpringBoot配置示例
-          https://github.com/alibaba/druid/tree/master/druid-spring-boot-starter
+        - [SpringBoot配置示例](https://github.com/alibaba/druid/tree/master/druid-spring-boot-starter)
+        
+        - [配置项列表](https://github.com/alibaba/druid/wiki/DruidDataSource%E9%85%8D%E7%BD%AE%E5%B1%9E%E6%80%A7%E5%88%97%E8%A1%A8)
 
-          配置项列表https://github.com/alibaba/druid/wiki/DruidDataSource%E9%85%8D%E7%BD%AE%E5%B1%9E%E6%80%A7%E5%88%97%E8%A1%A8
-
-    - ### 3、整合MyBatis操作
-      https://github.com/mybatis
-      starter
-      SpringBoot官方的Starter：spring-boot-starter-*
-      第三方的： *-spring-boot-starter
+    - ### 3、整合 `MyBatis` 操作
+      - [官方Github](https://github.com/mybatis)
+      - starter
+        - `SpringBoot官方的Starter`：spring-boot-starter-*
+        - `第三方的`： *-spring-boot-starter
 
       ```xml
-              <dependency>
-            <groupId>org.mybatis.spring.boot</groupId>
-            <artifactId>mybatis-spring-boot-starter</artifactId>
-            <version>2.1.4</version>
-        </dependency>
+      <dependency>
+        <groupId>org.mybatis.spring.boot</groupId>
+        <artifactId>mybatis-spring-boot-starter</artifactId>
+        <version>2.1.4</version>
+      </dependency>
       ```
 
+      `MyBatis` 引入的套件：
       ![spring_image_1-2-6-1-2](./spring_image_1-2-6-1-2.png)
 
       - #### 1、配置模式
-        ● 全局配置文件
-        ● SqlSessionFactory: 自动配置好了
-        ● SqlSession：自动配置了 SqlSessionTemplate 组合了SqlSession
-        ● @Import(AutoConfiguredMapperScannerRegistrar.class）；
-        ● Mapper： 只要我们写的操作MyBatis的接口标准了 @Mapper 就会被自动扫描进来
+        - 全局配置文件
+        - `SqlSessionFactory`: 自動配置好了
+        - `SqlSession`：自動配置了 `SqlSessionTemplate` 組合了 `SqlSession`
+        - `@Import(AutoConfiguredMapperScannerRegistrar.class);`
+        - `Mapper`： 只要我們寫的操作 `MyBatis` 的接口標準了 `@Mapper` 就會被自動掃描進來
 
         ```java
-        @EnableConfigurationProperties(MybatisProperties.class) ： MyBatis配置项绑定类。
+        @EnableConfigurationProperties(MybatisProperties.class) ： MyBatis配置項綁定類。
         @AutoConfigureAfter({ DataSourceAutoConfiguration.class, MybatisLanguageDriverAutoConfiguration.class })
         public class MybatisAutoConfiguration{}
 
@@ -271,103 +267,102 @@
         public class MybatisProperties
         ```
 
-        可以修改配置文件中 mybatis 开始的所有；
+        可以修改配置文件中 mybatis 開始的所有；
 
         ```yaml
-        # 配置mybatis规则
-        mybatis:
-          config-location: classpath:mybatis/mybatis-config.xml  #全局配置文件位置
-          mapper-locations: classpath:mybatis/mapper/*.xml  #sql映射文件位置
-          
-        Mapper接口--->绑定Xml
-        <?xml version="1.0" encoding="UTF-8" ?>
-        <!DOCTYPE mapper
-                PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-                "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-        <mapper namespace="com.atguigu.admin.mapper.AccountMapper">
-        <!--    public Account getAcct(Long id); -->
-            <select id="getAcct" resultType="com.atguigu.admin.bean.Account">
-                select * from  account_tbl where  id=#{id}
-            </select>
-        </mapper>
+          # 配置mybatis規則
+          mybatis:
+            config-location: classpath:mybatis/mybatis-config.xml  # 全局配置文件位置
+            mapper-locations: classpath:mybatis/mapper/*.xml  # sql 映射文件位置
         ```
 
-        配置 private Configuration configuration; mybatis.configuration下面的所有，就是相当于改mybatis全局配置文件中的值
+        ```xml
+          <!-- mybatis/mapper/AccountMapper.xml -->
+          <?xml version="1.0" encoding="UTF-8" ?>
+          <!DOCTYPE mapper
+              PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+              "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+            <!-- Mapper 接口 綁定 Xml => namespace -->
+            <mapper namespace="com.atguigu.admin.mapper.AccountMapper">
+            <!--    public Account getAcct(Long id); -->
+              <select id="getAcct" resultType="com.atguigu.admin.bean.Account">
+                select * from  account_tbl where  id=#{id}
+              </select>
+            </mapper>
+        ```
+
+        配置 `private Configuration configuration;`
+        `mybatis.configuration` 下面的所有，
+        就是相當於改 `mybatis` 全局配置文件中的值
 
         ```yaml
-        # 配置mybatis规则
-        mybatis:
-        #  config-location: classpath:mybatis/mybatis-config.xml
+          # 配置 mybatis 規則
+          mybatis:
+          #  與底下的 configuration 屬性，只能二擇一，不能同時存在
+          #  config-location: classpath:mybatis/mybatis-config.xml
           mapper-locations: classpath:mybatis/mapper/*.xml
-          configuration:
+          configuration:    # 指定 mybatis 全局配置文件中的相關配置項
             map-underscore-to-camel-case: true
             
-        可以不写全局；配置文件，所有全局配置文件的配置都放在configuration配置项中即可
+        # 可以不寫全局；配置文件，所有全局配置文件的配置都放在configuration配置項中即可
         ```
 
-        ● 导入mybatis官方starter
-        ● 编写mapper接口。标准@Mapper注解
-        ● 编写sql映射文件并绑定mapper接口
-        ● 在application.yaml中指定Mapper配置文件的位置，以及指定全局配置文件的信息 （建议；配置在mybatis.configuration）
+        - 導入 `mybatis` 官方 `starter`
+        - 編寫 `mapper` 接口。標準 `@Mapper` 註解
+        - 編寫 `sql映射文件` 並綁定 `mapper` 接口
+        - 在 `application.yaml` 中指定 `Mapper` 配置文件的位置，以及指定全局配置文件的信息 （建議；配置在`mybatis.configuration`）
 
-      - #### 2、注解模式
+      - #### 2、註解模式
         ```java
         @Mapper
         public interface CityMapper {
-
-            @Select("select * from city where id=#{id}")
-            public City getById(Long id);
-
-            public void insert(City city);
-
+          @Select("select * from city where id=#{id}")
+          public City getById(Long id);
+          public void insert(City city);
         }
         ```
 
       - #### 3、混合模式
         ```java
         @Mapper
-          public interface CityMapper {
-
-              @Select("select * from city where id=#{id}")
-              public City getById(Long id);
-
-              public void insert(City city);
-
-          }
-
+        public interface CityMapper {
+          @Select("select * from city where id=#{id}")
+          public City getById(Long id);
+          public void insert(City city);
+        }
         ```
 
-        最佳实战：
-          ● 引入mybatis-starter
-          ● 配置application.yaml中，指定mapper-location位置即可
-          ● 编写Mapper接口并标注@Mapper注解
-          ● 简单方法直接注解方式
-          ● 复杂方法编写mapper.xml进行绑定映射
-          ● @MapperScan("com.atguigu.admin.mapper") 简化，其他的接口就可以不用标注@Mapper注解
+        最佳實戰：
+          - 引入 `mybatis-starter`
+          - 配置 `application.yaml` 中，指定 `mapper-location` 位置即可
+          - 編寫 `Mapper` 接口並標註 `@Mapper` 註解
+          - 簡單方法直接註解方式
+          - 複雜方法編寫 `mapper.xml` 進行綁定映射
+          - `@MapperScan("com.atguigu.admin.mapper")` 簡化，會掃描這個資料夾下的所有檔案，進行 `mapper` 註解，其他的接口就可以不用標註 `@Mapper` 註解
 
-    - ### 4、整合 MyBatis-Plus 完成CRUD
-      - #### 1、什么是MyBatis-Plus
-        MyBatis-Plus（简称 MP）是一个 MyBatis 的增强工具，在 MyBatis 的基础上只做增强不做改变，为简化开发、提高效率而生。
-        mybatis plus 官网
-        建议安装 MybatisX 插件 
+    - ### 4、整合 `MyBatis-Plus` 完成 CRUD
+      - #### 1、什麼是MyBatis-Plus
+        [MyBatis-Plus](https://github.com/baomidou/mybatis-plus)（簡稱 MP）是一個 [MyBatis](https://mybatis.org/mybatis-3/zh/index.html) 的增強工具，在 `MyBatis` 的基礎上只做增強不做改變，為簡化開發、提高效率而生。
+        [mybatis plus 官網](https://baomidou.com/)
+        建議安裝 `MybatisX` [插件](https://baomidou.com/pages/ba5b24/)
 
-      - #### 2、整合MyBatis-Plus
+      - #### 2、整合 MyBatis-Plus
         ```xml
-                <dependency>
-            <groupId>com.baomidou</groupId>
-            <artifactId>mybatis-plus-boot-starter</artifactId>
-            <version>3.4.1</version>
+        <dependency>
+          <groupId>com.baomidou</groupId>
+          <artifactId>mybatis-plus-boot-starter</artifactId>
+          <version>3.4.1</version>
         </dependency>
         ```
-        自动配置
-        ● MybatisPlusAutoConfiguration 配置类，MybatisPlusProperties 配置项绑定。mybatis-plus：xxx 就是对mybatis-plus的定制
-        ● SqlSessionFactory 自动配置好。底层是容器中默认的数据源
-        ● mapperLocations 自动配置好的。有默认值。classpath*:/mapper/**/*.xml；任意包的类路径下的所有mapper文件夹下任意路径下的所有xml都是sql映射文件。  建议以后sql映射文件，放在 mapper下
-        ● 容器中也自动配置好了 SqlSessionTemplate
-        ● @Mapper 标注的接口也会被自动扫描；建议直接 @MapperScan("com.atguigu.admin.mapper") 批量扫描就行
+        自動配置
+        - `MybatisPlusAutoConfiguration` 配置類，`MybatisPlusProperties` 配置項綁定。 `mybatis-plus`：xxx 就是對 `mybatis-plus` 的定制
+        - `SqlSessionFactory` 已經自動配置好。底層是容器中默認的數據源
+        - `mapperLocations` 自動配置好的。有默認值。 `classpath*:/mapper/**/*.xml`；任意包的類路徑下的所有 `mapper` 文件夾下任意路徑下的所有 `xml` 都是 `sql` 映射文件。建議以後 `sql` 映射文件，放在 `mapper` 下
+        - 容器中也自動配置好了 `SqlSessionTemplate`
+        - `@Mapper` 標註的接口也會被自動掃描；建議直接 `@MapperScan("com.atguigu.admin.mapper")` 批量掃描就行
 
-        优点：
-        ●  只需要我们的Mapper继承 BaseMapper 就可以拥有crud能力
+        優點：
+        - 只需要我們的 `Mapper` 繼承 `BaseMapper` 就可以擁有 `crud` 能力
 
       - #### 3、CRUD功能
         ```java
@@ -382,10 +377,9 @@
                 return "redirect:/dynamic_table";
             }
 
-
             @GetMapping("/dynamic_table")
             public String dynamic_table(@RequestParam(value="pn",defaultValue = "1") Integer pn,Model model){
-                //表格内容的遍历
+                // 表格內容的遍歷
         //        response.sendError
         //     List<User> users = Arrays.asList(new User("zhangsan", "123456"),
         //                new User("lisi", "123444"),
@@ -396,29 +390,26 @@
         //        if(users.size()>3){
         //            throw new UserTooManyException();
         //        }
-                //从数据库中查出user表中的用户进行展示
+                // 從數據庫中查出user表中的用戶進行展示
 
-                //构造分页参数
+                // 構造分頁參數
                 Page<User> page = new Page<>(pn, 2);
-                //调用page进行分页
+                // 調用 page 進行分頁
                 Page<User> userPage = userService.page(page, null);
-
 
         //        userPage.getRecords()
         //        userPage.getCurrent()
         //        userPage.getPages()
 
+              model.addAttribute("users",userPage);
 
-                model.addAttribute("users",userPage);
-
-                return "table/dynamic_table";
+              return "table/dynamic_table";
             }
         ```
 
         ```java
         @Service
         public class UserServiceImpl extends ServiceImpl<UserMapper,User> implements UserService {
-
 
         }
 
@@ -428,68 +419,68 @@
         ```
 
   - ## 2、NoSQL
-    Redis 是一个开源（BSD许可）的，内存中的数据结构存储系统，它可以用作数据库、缓存和消息中间件。 它支持多种类型的数据结构，如 字符串（strings）， 散列（hashes）， 列表（lists）， 集合（sets）， 有序集合（sorted sets） 与范围查询， bitmaps， hyperloglogs 和 地理空间（geospatial） 索引半径查询。 Redis 内置了 复制（replication），LUA脚本（Lua scripting）， LRU驱动事件（LRU eviction），事务（transactions） 和不同级别的 磁盘持久化（persistence）， 并通过 Redis哨兵（Sentinel）和自动 分区（Cluster）提供高可用性（high availability）。
+    `Redis` 是一個開源（BSD許可）的，內存中的數據結構存儲系統，它可以用作 `數據庫` 、 `緩存` 和 `消息中間件`。它支持多種類型的數據結構，如 `字符串（strings`）， `散列（hashes）`， `列表（lists）`， `集合（sets）`， `有序集合（sorted sets）` 與範圍查詢， `bitmaps`， `hyperloglogs` 和 `地理空間（geospatial）` 索引半徑查詢。 Redis 內置了 `複製（replication）`，`LUA腳本（Lua scripting）`， `LRU驅動事件（LRU eviction）`，`事務（transactions）` 和不同級別的 `磁盤持久化（persistence）`， 並通過 `Redis哨兵（Sentinel）` 和自動 `分區（Cluster）` 提供高可用性（high availability）。
 
-    - ### 1、Redis自动配置
+    - ### 1、Redis 自動配置
       ```xml
-              <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-data-redis</artifactId>
-        </dependency>
+      <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-data-redis</artifactId>
+      </dependency>
       ```
 
       ![spring_image_1-2-6-2-1](./spring_image_1-2-6-2-1.png)
 
-      自动配置：
-      ● RedisAutoConfiguration 自动配置类。RedisProperties 属性类 --> spring.redis.xxx是对redis的配置
-      ● 连接工厂是准备好的。LettuceConnectionConfiguration、JedisConnectionConfiguration
-      ● 自动注入了RedisTemplate<Object, Object> ： xxxTemplate；
-      ● 自动注入了StringRedisTemplate；k：v都是String
-      ● key：value
-      ● 底层只要我们使用 StringRedisTemplate、RedisTemplate就可以操作redis
+      自動配置：
+      - `RedisAutoConfiguration` 自動配置類。 `RedisProperties` 屬性類 --> `spring.redis.xxx` 是對 `redis` 的配置
+      - 連接工廠是準備好的。 `LettuceConnectionConfiguration`、`JedisConnectionConfiguration`
+      - 自動注入了 `RedisTemplate<Object, Object> ： xxxTemplate`；
+      - 自動注入了 `StringRedisTemplate`； key：value 都是 `String`
+      - key：value
+      - 底層只要我們使用 `StringRedisTemplate`、`RedisTemplate` 就可以操作 `redis`
 
 
-      redis环境搭建
-      1、阿里云按量付费redis。经典网络
-      2、申请redis的公网连接地址
-      3、修改白名单  允许0.0.0.0/0 访问
+      `redis` 環境搭建
+        - 1、阿里雲按量付費 `redis`。經典網絡
+        - 2、申請 `redis` 的公網連接地址
+        - 3、修改白名單，允許 `0.0.0.0/0` 訪問
 
-    - ### 2、RedisTemplate与Lettuce
+    - ### 2、RedisTemplate與Lettuce
       ```java
-          @Test
-        void testRedis(){
-            ValueOperations<String, String> operations = redisTemplate.opsForValue();
+      @Test
+      void testRedis(){
+        ValueOperations<String, String> operations = redisTemplate.opsForValue();
 
-            operations.set("hello","world");
+        operations.set("hello","world");
 
-            String hello = operations.get("hello");
-            System.out.println(hello);
-        }
+        String hello = operations.get("hello");
+        System.out.println(hello);
+      }
       ```
 
-    - ### 3、切换至jedis
+    - ### 3、切換至 jedis
       ```xml
-              <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-data-redis</artifactId>
-        </dependency>
+      <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-data-redis</artifactId>
+      </dependency>
 
-<!--        导入jedis-->
-        <dependency>
-            <groupId>redis.clients</groupId>
-            <artifactId>jedis</artifactId>
-        </dependency>
+      <!-- 導入 jedis-->
+      <dependency>
+        <groupId>redis.clients</groupId>
+        <artifactId>jedis</artifactId>
+      </dependency>
       ```
 
       ```yaml
       spring:
-  redis:
-      host: r-bp1nc7reqesxisgxpipd.redis.rds.aliyuncs.com
-      port: 6379
-      password: lfy:Lfy123456
-      client-type: jedis
-      jedis:
-        pool:
-          max-active: 10
+        redis:
+          host: r-bp1nc7reqesxisgxpipd.redis.rds.aliyuncs.com
+          port: 6379
+          password: lfy:Lfy123456
+          client-type: jedis        # 設定要使用 jedis 還是 lettuce
+          jedis:
+            pool:
+              max-active: 10
       ```
 
