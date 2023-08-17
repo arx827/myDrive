@@ -145,3 +145,55 @@
     | `L` | 本地貨幣符號  |
     | `.` | 小樹點       |
     | `,` | 千位符       |
+
+## 通用函數
+  這些函數 `適用於任何數據類型，同時也適用於空值`
+  - `NVL (expr1, expr2)`
+  - `NVL2 (expr1, expr2, expr3)`
+  - `NULLIF (expr1, expr2)`
+  - `COALESCE (expr1, expr2, ..., exprn)`
+
+  - ### NVL 函數
+    將空值轉換成一個已知的值：
+    - 可以使用的數據類型有日期、字符、數字。
+    - 函數的一般型式：
+      - `NVL(commission_pct, 0)`
+      - `NVL(hire_date, '01-JAN-97')`
+      - `NVL(job_id, 'No Job Yet')`
+
+    > 練習1：求公司員工的年薪(含commission_pct)
+      - 原始
+        ```sql
+        SELECT employee_id, last_name, salary*12*(1 + commission_pct)
+        from employees
+        ```
+
+      - 將 commission_pct 為 null 的值，改為 0
+        ```sql
+        SELECT employee_id, last_name, salary*12*(1 + NVL(commission_pct, 0)) "annual sal"
+        from employees
+        ```
+
+    > 練習2：輸出 last_name, department，當 department_id 為 null 時，顯示 `沒有部門`。
+      - 原始
+        ```sql
+        SELECT last_name, department_id
+        from employees
+        ```
+
+      - 將 department_id 為 null 的值，先轉成文字，再改為 `沒有部門`
+        ```sql
+        SELECT last_name, NVL(to_char(department_id, '999999'), '沒有部門')
+        from employees
+        ```
+
+  - ### 使用 NVL2 函數
+    `NVL2 (expr1, expr2, expr3)`：`expr1` 不為 `NULL`，返回 `expr2`，為 `NULL`，返回 `expr3`。
+
+    ```sql
+    SELECT last_name, salary, commission_pct, NVL2(commission_pct, 'SAL+COMM', 'SAL') income
+    FROM employee
+    WHERE department_id IN (50, 80);
+    ```
+
+    > 練習：查詢員工的獎金率，若為空，返回 `0.01`，若不為空，返回實際獎金率 + 0.015
