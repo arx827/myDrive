@@ -192,8 +192,100 @@
 
     ```sql
     SELECT last_name, salary, commission_pct, NVL2(commission_pct, 'SAL+COMM', 'SAL') income
-    FROM employee
+    FROM employees
     WHERE department_id IN (50, 80);
     ```
 
     > 練習：查詢員工的獎金率，若為空，返回 `0.01`，若不為空，返回實際獎金率 + 0.015
+      ```sql
+      SELECT last_name, commission_pct, NVL2(commission_pct, commission_pct + 0.015, 0.01)
+      FROM employees
+      ```
+
+  - ### 使用 NULLIF 函數
+    NULLIF (expr1, expr2)：相等返回 `NULL`，不等返回expr1
+    ```sql
+    SELECT first_name, LENGTH(first_name) "expr1",
+           last_name, LENGTH(last_name) "expr2",
+           NULLIF(LENGTH(first_name), LENGTH(last_name)) result
+    FROM employees
+    ```
+
+  - ### 使用 COALESCE 函數
+    - `COALESCE` 與 `NVL` 相比的優點在於，`COALESCE` 可以同時處理交替的多個值。
+    - 如果第一個表達式為空，則返回下一個表達式，依此類推，對其他的參數進行 `COALESCE`。
+
+    ```sql
+    SELECT last_name, COALESCE(commission_pct, salary, 10) comm
+    FROM employees
+    ORDER BY commission_pct;
+    ```
+
+## 條件表達式
+  - 在 SQL 語句中使用 `IF-THEN-ELSE` 邏輯
+  - 使用兩種方法：
+    - `CASE` 表達式
+    - `DECODE` 函數
+
+  - ### CASE 表達式
+    在需要使用 `IF-THEN-ELSE` 邏輯時：
+    ```sql
+    CASE expr WHEN comparison_expr1 THEN return_expr1
+            [WHEN comparison_expr2 THEN return_expr2
+            WHEN comparison_exprn THEN return exprn
+            ELSE else_expr]
+    END
+    ```
+
+    > 練習：查詢部門號 為 10、20、30 的員工信息，若部門號為 10，則打印其工資的 1.1倍，20 號部門，則打印其工資的 1.2 倍，30號部門打印其工資的 1.3 倍數。
+      ```sql
+      SELECT employee_id, last_name, department_id,
+        CASE department_id
+          WHEN 10 THEN salary * 1.1
+          WHEN 20 THEN salary * 1.2
+          ELSE salary * 1.3
+        END new_sal
+      FROM employees
+      WHERE department_id in (10, 20, 30)
+      ```
+
+  - ### DECODE 函數
+    在需要使用 `IF-THEN-ELSE` 邏輯時：
+    ```sql
+    DECODE(collexprssion, search1, result1,
+      [, search2, result2,...,]
+      [, default])
+    ```
+    ```sql
+    SELECT last_name, job_id, salary,
+      DECODE(job_id, 'IT_PROG', 1.10*salary,
+                     'ST_CLERK', 1.15*salary,
+                     'SA_REP') REVISED_SALARY
+    FROM employees;
+    ```
+
+    ```sql
+    SELECT employee_id, last_name, department_id,
+          DECODE(department_id, 10, salary * 1.1,
+                                20, salary * 1.2,
+                                salary) new_sal
+    FROM employees
+    WHERE department_id in (10, 20, 30)
+    ```
+
+## 嵌套函數
+  - 單行函數可以嵌套。
+  - 嵌套函數的執行順序是由內到外
+    ```java
+    F3(F2(F1(col, arg1), arg2), arg3)
+    ```
+
+## 總結
+  通過本章學習，應該學會：
+  - 使用函數對數據進行計算
+  - 使用函數修改數據
+  - 使用函數控制一組數據的輸出格式
+  - 使用函數改變日期的顯示格式
+  - 使用 `轉換函數` 改變數據類型
+  - 使用 `NVL函數`
+  - 使用 `IF-THEN-ELSE`
