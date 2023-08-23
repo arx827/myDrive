@@ -92,7 +92,7 @@
       - 日期之間用逗號隔開
     
     ```SQL
-    SELECT TO_CHAR(sysdate, 'yyyy-mm-dd hh:mm:ss') FROM dual;
+    SELECT TO_CHAR(sysdate, 'yyyy-mm-dd hh:mi:ss') FROM dual;
     ```
 
   - ###  日期格式的元素
@@ -288,4 +288,143 @@
   - 使用函數改變日期的顯示格式
   - 使用 `轉換函數` 改變數據類型
   - 使用 `NVL函數`
-  - 使用 `IF-THEN-ELSE`
+  - 使用 `IF-THEN-ELSE` 邏輯
+
+## 測試
+  - ### 1. 顯示系統時間 (注： 日期 + 時間)
+    - 練習
+      ```SQL
+      SELECT to_char(sysdate, 'yyyy-mm-dd hh:mi:ss')
+      FROM dual
+      ```
+
+  - ### 2. 查詢員工號、姓名、工資，以及工資提高百分之 20 %後的結果 (new salary)
+    - 練習
+      ```SQL
+      SELECT employee_id, last_name, salary, salary * 1.2 "new salary"
+      FROM employees
+      ```
+
+  - ### 3. 將員工的姓名，按 `首字母` 排序，並寫出姓名的長度(length)
+    - 練習
+      ```SQL
+      SELECT last_name, length(last_name)
+      FROM employees
+      ORDER BY last_name ASC
+      ```
+
+  - ### 4. 查詢各員工的姓名，並顯示出各員工在公司工作的月份數(worked_month)
+    - 練習
+      ```SQL
+      SELECT last_name, hire_date, round(months_between(sysdate, hire_date), 1) worded_month
+      FROM employees
+      ```
+
+  - ### 5. 查詢員工的姓名，以及在公司工作的月份數 (worked_month)，並按月份數降序排列
+    - 練習
+      ```SQL
+      SELECT last_name, hire_date, round(months_between(sysdate, hire_date), 1) worded_month
+      FROM employees
+      ORDER BY workded_month desc
+      ```
+
+  - ### 6. 做一個查詢，產生下面的結果
+    `<last_name> earns <salary>monthly but wants <salary * 3>`
+    |Dream Salary|
+    |---|
+    |King earns $24000 monthly but wants $72000
+    - 練習
+      ```SQL
+      SELECT last_name || ' earns ' || to_char(salary, '$999999') || ' monthly, but wants ' || to_char(3 * salary, '$999999') "Dream Salary"
+      FROM employees
+      ```
+
+   - ### 7. 使用 decode 函數，按照下面的條件：
+      | job      | grade |
+      |----------|:-----:|
+      | AD_PRES  |   A   |
+      | ST_MAN   |   B   |
+      | IT_PROG  |   C   |
+      | SA_PEP   |   D   |
+      | ST_CLERK |   E   |
+
+      - 產生下面的結果
+        | Last_name | Job_id  | Grade |
+        |-----------|---------|:-----:|
+        | king      | AD_PRES |   A   |
+
+      - 練習
+        ```SQL
+        SELECT last_namel "Last_name", job_id "Job_id", decode(job_id, 'AD_PRES', 'A',
+                                                  'ST_MAN', 'B',
+                                                  'IT_PROG', 'C',
+                                                  'SA_PEP', 'D',
+                                                  'ST_CLERK', 'E') "Grade"
+        FROM employees                                          
+        ```
+
+    - ### 8. 將第 7 題的查詢，用 case 函數再寫一遍。
+      - 練習
+        ```SQL
+        SELECT last_namel "Last_name", job_id "Job_id", CASE job_id WHEN 'AD_PRES' THEN 'A',
+                                                                    WHEN 'ST_MAN' THEN 'B',
+                                                                    WHEN 'IT_PROG' THEN'C',
+                                                                    WHEN 'SA_PEP' THEN'D',
+                                                                    WHEN 'ST_CLERK' THEN 'E'
+                                                        END "Grade"
+        FROM employees
+        ```
+
+## 測試
+  - ### 1. 顯示所有員工的姓名、部門號、部門名稱
+    - 練習：方法一
+      ```SQL
+      SELECT last_name, e.department_id, department_name
+      FROM employees e, departments d
+      WHERE e.department_id = d.department_id(+)
+      ```
+    - 練習：方法二
+      ```SQL
+      SELECT last_name, e.department_id, department_name
+      FROM employees e LEFT OUTER JOIN departments d
+      ON e.department_id = d.department_id
+      ```
+
+  - ### 2. 查詢 90 號部門員工的 `job_id` 和 90 號部門的 `location_id`
+    - 練習
+      ```SQL
+      SELECT DISTINCT job_id, location_id
+      FROM employees e JOIN departments d
+      ON e.department_id = d.department_id
+      WHERE de.department_id = 90
+      ```
+
+  - ### 3. 選擇所有有獎金的員工的 `last_name`、`department_name`、`location_id`、`city`
+    - 練習
+      ```SQL
+      SELECT last_name, department_name, location_id, city
+      FROM employees e JOIN departments d
+      ON e.department_id = d.department_id
+      JOIN locations l
+      ON d.location_id = l.location_id
+      WHERE e.commission_pct is not null
+      ```
+
+  - ### 4. 選擇 `city` 在 `Toronto` 工作的員工的 `last_name`、`job_id`、`department_id`、`department_name`
+    - 練習
+      ```SQL
+      SELECT last_name, job_id, department_id, department_name
+      FROM employees e, departments d,locations l
+      WHERE e.department_id = d.department_id and l.city = 'Toronto' and d.location_id = l.location_id
+      ```
+
+  - ### 5. 選擇指定員工的姓名、員工號，以及他的管理者的姓名和員工號，結果類似於下面的格式
+    | employees | Emp# | manager | Mgr# |
+    |-----------|:----:|---------|:----:|
+    | kochhar   | 101  | king    | 100  |
+    - 練習
+      ```SQL
+      SELECT e1.last_name "employees", e1.employee_id "Emp#", e2.last_name "manager", e2.employee_id "Mgr#"
+      FROM employees e1, employees e2
+      where e1.manager_id = e2.employee_id(+)
+      ```

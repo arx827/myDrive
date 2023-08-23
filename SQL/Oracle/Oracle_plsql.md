@@ -1,3 +1,3 @@
-# Oracle 資料庫的安裝與配置
+# Oracle PL/SQL輕量版
 
   

@@ -135,6 +135,193 @@
       - 格式：
         `ORDER BY 一級排序列 ASC/DESC, 二級排序列 ASC/DESC;`
 
+## 第 3 章 單行函數
+  - ### 18. 打印出 "2009年10月14日 9:25:40" 格式的當前系統的日期和時間。
+    ```sql
+    SELECT to_char(sysdate, 'YYYY"年"MM"月"DD"日 HH:MI:SS')
+    FROM dual
+    ```
+    - 注意：使用雙引號，向日期中，添加字符
+
+  - ### 19. 格式化數字：1234567.89 為 1,234,567.89
+    ```sql
+    SELECT to_char(1234567.89, '999,999,999.99')
+    FROM dual
+    ```
+
+  - ### 20. 字符串轉為數字時
+    - #### 1. 若字符串中沒有特殊字符，可以進行隱式轉換：
+      ```sql
+      SELECT '1234567.89' + 100
+      FROM dual
+      ```
+
+    - #### 2. 若字符串中有特殊字符，例如 '1,234,567.89'，則無法進行隱式轉換，需要使用 `to_number()` 來完成
+      ```sql
+      SELECT to_number('1,234,567.89', '999,999,999.99') + 100
+      FROM dual
+      ```
+
+  - ### 21. 對於把日期作為查詢條件的查詢，一般都使用 `to_date()`，把一個字符串轉為日期，這樣可以不必關注日期格式
+    ```sql
+    SELECT last_name, hire_date
+    FROM employees
+    WHERE hire_date = to_date('1998-5-23', 'yyyy-mm-dd')
+    -- WHERE to_char(hire_date, 'yyyy-mm-dd') = '1998-5-23'
+    ```
+
+  - ### 22. 轉換函數
+    - #### to_char()
+    - #### to_number()
+    - #### to_date()
+
+  - ### 23. 查詢每個倒數第 2 天入職的員工的信息
+    ```sql
+    SELECT last_name, hire_date
+    FROM employees
+    WHERE hire_date = last_day(hire_date) - 1
+    ```
+
+  - ### 24. 計算公司員工的年薪
+    ```sql
+    -- 錯誤寫法：因為空值計算的結果還是空值
+    SELECT last_name, salary * 12 * (1 + commission_pct) year_sal
+    FROM employees
+
+    -- 正確寫法
+    SELECT last_name, salary * 12 * (1 + nvl(commission_pct)) year_sal
+    FROM employees
+    ```
+
+  - ### 25. 查詢部門號為 10, 20, 30 的員工信息，若部門號為 10，則打印其工資的 1.1 倍，20 號部門，則打印其工資的 1.2 倍，30 號部門，則打印其工資的 1.3 倍。
+    ```sql
+    -- 使用 case-when-than-else-end
+    SELECT last_name, department_id, salary,
+      CASE department_id WHEN 10 THEN salary * 1.1
+                         WHEN 20 THEN salary * 1.2
+                         WHEN 30 THEN salary * 1.3
+      END new_sal
+    FROM employees
+    WHERE department_id in (10, 20, 30)
+
+    -- 使用 decode
+    SELECT last_name, department_id, salary, decode(department_id, 10, salary * 1.1,
+                                                                   20, salary * 1.2,
+                                                                   30, salary * 1.3
+                                                    ) new_sal
+    FROM eployees
+    WHERE department_id in (10, 20, 30)
+    ```
+
+## 第 4 章 多表查詢
+  - ### 26. 多表連接查詢時，若兩個表有同名的列，必須使用表的別名進行引用，否則出錯！
+
+  - ### 27. 查詢出公司員工的 `last_name`、`department_name`、`city`
+    ```sql
+    SELECT last_name, department_name, city
+    FROM departments d, employees e, locations l
+    WHERE d.department_id = e.department_id and d.location_id = l.location_id
+    ```
+  
+  - ### 28. 查詢出 last_name 為 'Chen' 的 manager 的信息。(員工的 manager_id 是某員工的 employee_id)
+    - 0. 例如：老張的員工號為："1001"，我的員工號為 "1002"，我的 manager_id 為 "1001" --- 我的 manager 是 "老張"。
+    - 1. 通過兩條 sql 查詢：
+      ```sql
+      SELECT manager_id
+      FROM employees
+      WHERE lower(last_name) = "chen"   -- 返回的結果為 108
+
+      SELECT *
+      FROM employees
+      WHERE employee_id = 108
+      ```
+    - 2. 通過一條 SQL 查詢 (自連接)：
+      ```sql
+      SELECT m.*
+      FROM employees e, employees m
+      WHERE e.manager_id = m.employee_id and e.last_name = 'Chen'
+      ```
+    - 3. 通過一條 SQL 查詢 (子查詢)：
+      ```sql
+      SELECT *
+      FROM employees
+      WHERE employee_id = (
+        SELECT manager_id
+        FROM employees
+        WHERE last_name = 'Chen'
+      )
+      ```
+  
+  - ### 29. 查詢每個員工的 last_name 和 GRADE_LEVEL(在 JOB_GRADES 表中)， ---- 非等值連接
+    ```sql
+    SELECT last_name, salary, grade_level, lowest_sal, highest_sal
+    FROM employees e, job_grades j
+    WHERE e.salary >= j.lowest_sal and e.salary <= j.highest_sal
+    ```
+
+  - ### 30. 左外連接和右外連接
+    ```sql
+    SELECT last_name, e.department_id, department_name
+    FROM employees e, departments d
+    WHERE e.department_id = d.depㄇ ㄍ 嗎跟artment_id(+)
+
+    SELECT last_name, d.department_id, department_name
+    FROM employees e, departments d
+    WHERE e.department_id(+) = d.department_id
+    ```
+    - 理解 `(+)` 的位置：
+      以左外連接為例，因為左表需要返回更多的紀錄，右表就需要 `加上` 更多的紀錄，所以在右表的鏈接條件上加上 `(+)`
+
+    - 注意：
+      - 1. 兩邊都加上 `(+)` 符號，會發生語法錯誤！
+      - 2. 這種語法為 `Oracle` 所獨有，不能在其他數據庫中使用。
+
+  - ### 31. SQL 99 連接 Employees 表和 Departments 表
+    - 1. 
+      ```sql
+      SELECT *
+      FROM employees join departments
+      using(department_id)
+      ```
+      缺點：要求兩個表中，必須有一樣的列名。
+
+    - 2.
+      ```sql
+      SELECT *
+      FROM employees e join departmeents d
+      on e.department_id = d.department_id
+      ```
+
+    - 3. 多表連接
+      ```sql
+      SELECT e.last_name, d.department_name, l.city
+      FROM employees e join departments d
+      on e.department_id = d.department_id
+      join locations l
+      on d.location_id = l.location_id
+      ```
+
+  - ### 32. SQL 99 的 左外連接、右外連接、滿外連接
+    - 1. 左外連接
+      ```sql
+      SELECT last_name, department_name
+      from employees e left outer join departments d
+      on e.department_id = d.department_id
+      ```
+    - 2. 右外連接
+      ```sql
+      SELECT last_name, department_name
+      FROM employees e right join departments d
+      on e.department_id = d.department_id;
+      ```
+
+    - 3. 滿外連接
+      ```sql
+      SELECT last_name, department_name
+      FROM employees e full join departments d
+      on e.department_id = d.dartment_id;
+      ```
+
 ## 第 7 章 創建和管理表
   - ### 51. 利用子查詢創建表 myemp，該表中包含 employees 表的 employee_id(id), last_name(name), email 字段
     - 1. 創建表的同時複製 `employees` 對應的紀錄
