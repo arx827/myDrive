@@ -322,6 +322,72 @@
       on e.department_id = d.dartment_id;
       ```
 
+## 第 5 章 分組函數
+  - ### 33. 查詢 employees 表中有多少個部門
+    ```sql
+    SELECT COUNT(DISTINCT department_id)
+    FROM employees
+    ```
+
+  - ### 34. 查詢全公司獎金基數的平均值 (沒有獎金的人按 0 計算)
+    ```sql
+    SELECT AVG(NVL(commission_pct, 0))
+    FROM employees
+    ```
+
+  - ### 35. 查詢各個部門的平均工資
+    ```sql
+    -- 錯誤：AVG(salarfg) 返回公司平均工資，只有一個值；而 department_id 有多個值，無法匹配返回
+
+    select department_id, AVG(salary)
+    FROM employees
+
+    ** 在 SELECT 列表中所有未包含在組函數中的列都應該包含在 `GROUP BY` 子句中
+
+    -- 正確：按 department_id 進行分組
+    SELECT department_id, AVG(salary)
+    FROM employees
+    GROUP BY department_id
+    ```
+
+  - ### 36. Toronto 這個城市的員工的平均工資
+    ```sql
+    SELECT AVG(salary)
+    FROM employees e JOIN departments d
+    ON e.department_id = d.department_id
+    JOIN locations l
+    ON d.location_id = l.location_id
+    WHERE city = 'Toronto'
+    ```
+
+  - ### 37.(有員工的城市)各個城市的平均工資
+    ```sql
+    SELECT city, avg(salary)
+    FROM employees e JOIN departments d
+    ON e.department_id = d.department_id
+    JOIN location_id = l.location_id
+    GROUP BY city
+    ```
+
+  - ### 38. 查詢平均工資高於 8000 的 部門 id 和 它的平均工資
+    ```sql
+    SELECT department_id, AVG(salary)
+    FROM employees e
+    GROUP BY department_id
+    HAVING AVG(salary) > 8000
+    ```
+
+  - ### 39. 查詢平均工資高於 6000 的 job_title 有哪些
+    ```sql
+    SELECT job_title, AVG(salary)
+    FROM employees e join jobs j
+    ON e.job_id = j.job_id
+    GROUP BY job_title
+    HAVING AVG(salary) > 6000
+    ```
+
+## 第 6 章 子查詢
+
 ## 第 7 章 創建和管理表
   - ### 51. 利用子查詢創建表 myemp，該表中包含 employees 表的 employee_id(id), last_name(name), email 字段
     - 1. 創建表的同時複製 `employees` 對應的紀錄

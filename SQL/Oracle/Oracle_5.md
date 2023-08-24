@@ -42,8 +42,8 @@
   ```
 
   |MIN(hire_date)|MAX(hire_date)|
-  |---:|---:|
-  |||
+  |---|---|
+  |17-JUN-87|29-JAN-00|
 
 ## COUNT (計數) 函数
   `COUNT(*)` 返回表中記錄總數，適用於 `任意數據類型`。
@@ -156,3 +156,130 @@
   ```
 
   `GROUP BY` 子句中缺少列
+
+  - 不能在 `WHERE` 子句中，使用組函數
+  - 可以在 `HAVING` 子句中，使用組函數
+
+  ```sql
+  SELECT department_idm, AVG(salary)
+  FROM employees
+  WHERE AVG(salary) > 8000
+  GROUP BY department.id;
+  ```
+
+  ```sql
+  WHERE AVG(salary) > 8000
+        *
+  ERROR at line 3:
+  ORA-00934; group function is not allowed here
+  ```
+
+  `WHERE` 子句中，不能使用組函數。
+
+## 過濾分組
+  ![image_Oracle_5-5](./image_Oracle_5-5.png)
+
+## 過濾分組：HAVING 子句
+  使用 `HAVING` 過濾分組：
+  - 1. 行已經被分組
+  - 2. 使用了組函數
+  - 3. 滿足 `HAVING` 子句中，條件的分組將被顯示。
+
+  ![image_Oracle_5-6](./image_Oracle_5-6.png)
+
+## HAVING 子句
+  ```sql
+  SELECT   department_id, MAX(salary)
+  FROM     employees
+  GROUP BY department_id
+  HAVING   MAX(salary)>10000 ;
+  ```
+
+  ![image_Oracle_5-7](./image_Oracle_5-7.png)
+
+## 嵌套組函數
+  顯示各部門平均工資的最大值
+
+  ```sql
+  SELECT MAX(AVG(salary))
+  FROM employees
+  GROUP BY department_id
+  ```
+
+  |MAX(AVG(salary))|
+  |---:|
+  |19333.3333333333|
+
+## 總結
+  通過本章學習，您已經學會
+  - 使用組函數：`AVG()`、`SUM()`、`MAX()`、`MIN()`、`COUNT()`
+  - 在查詢中使用 `GROUP BY` 子句。
+  - 在查詢中使用 `HAVING` 子句。
+
+  ![image_Oracle_5-6](./image_Oracle_5-6.png)
+
+## 測試
+  - ### 1. 組函數處理多行返回一行嗎？
+    是
+  - ### 2. 組函數不計算空值嗎？
+    是
+  - ### 3. WHERE 子句 可否使用組函數進行過濾？
+    不可以，用 HAVING 替代
+  - ### 4. 查詢公司員工工資的最大值、最小值、平均值、總和
+    ```sql
+    SELECT MAX(salary), MIN(salary), AVG(salary), SUM(salary)
+    FROM employees
+    ```
+
+  - ### 5. 查詢各 job_id 的員工工資的最大值、最小值、平均值、總和
+    ```sql
+    SELECT job_id, MAX(salary), MIN(salary), AVG(salary), SUM(salary)
+    FROM employees
+    GROUP BY job_id
+    ```
+
+  - ### 6. 選擇具有各個 job_id 的員工人數
+    ```sql
+    SELECT job_id, COUNT(employee_id)
+    FROM employees
+    GROUP BY job_id
+    ```
+
+  - ### 7. 查詢員工最高工資和最低工資的差距 (DIFFERENCE)
+    ```sql
+    SELECT MAX(salary), MIN(salary), MAX(salary) - MIN(salary) "DIFFERENCE"
+    FROM employees
+    ```
+
+  - ### 8. 查詢各個管理者手下員工的最低工資，其中最低工資不能低於 6000，沒有管理者的員工不計算在內。
+    ```sql
+    SELECT manager_id, MIN(salary)
+    FROM employees
+    -- WHERE manager_id IS NOT NULL
+    GROUP BY manager_id
+    HAVING MIN(salary) >= 6000 AND manger_id IS NOT NULL
+    ```
+
+  - ### 9. 查詢所有部門的名字、location_id、員工數量和工資平均值。
+    ```sql
+    SELECT department_name, location_id, COUNT(employee_id), AVG(salary)
+    FROM employees e right outer join departments d
+    ON e.department_id = d.department_id
+    GROUP BY department_name, location_id;
+    ```
+
+  - ### 10. 查詢公司在 1995 - 1998 年之間，每年雇用的人數，結果類似下面的格式
+    | total | 1995 | 1996 | 1997 | 1998 |
+    |-------|------|------|------|------|
+    | 20    | 3    | 4    | 6    | 7    |
+
+
+    ```sql
+    SELECT COUNT(*) "total",
+            COUNT(decode(to_char(hire_date, 'yyyy'), '1995', 1, null)) '1995',
+            COUNT(decode(to_char(hire_date, 'yyyy'), '1996', 1, null)) '1996',
+            COUNT(decode(to_char(hire_date, 'yyyy'), '1997', 1, null)) '1997',
+            COUNT(decode(to_char(hire_date, 'yyyy'), '1998', 1, null)) '1998',
+    FROM employees
+    WHERE to_char(hire_date, 'yyyy') in ('1995', '1996', '1997', '1998');
+    ```
