@@ -1,3 +1,6 @@
+[youtube](https://www.youtube.com/playlist?list=PLmOn9nNkQxJGPPyhBicozfkuNWiSX1deD)
+[微笑带你去 - 博客筆記](https://www.cnblogs.com/wxdnq/category/2067023.html)
+
 # Oracle 資料庫的安裝與配置
   - mac 安裝方式
     - [官網下載網址](https://www.oracle.com/tw/database/technologies/oracle-database-software-downloads.html)
