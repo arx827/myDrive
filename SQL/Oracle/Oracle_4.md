@@ -174,3 +174,48 @@
         - 滿外連接的結果= 左右表匹配的數據+ 左表沒有匹配到的數據+ 右表沒有匹配到的數據。
         - SQL99是支持滿外連接的。使用FULL JOIN 或FULL OUTER JOIN來實現。
         - 需要注意的是，MySQL不支持FULL JOIN，但是可以用LEFT JOIN UNION RIGHT join代替。
+
+## 測試
+  - ### 1. 顯示所有員工的姓名、部門號、部門名稱
+    - 練習：方法一
+      ```SQL
+      SELECT last_name, e.department_id, department_name
+      FROM employees e, departments d
+      WHERE e.department_id = d.department_id(+)
+      ```
+    - 練習：方法二
+      ```SQL
+      SELECT last_name, e.department_id, department_name
+      FROM employees e LEFT OUTER JOIN departments d
+      ON e.department_id = d.department_id
+      ```
+
+  - ### 2. 查詢 90 號部門員工的 `job_id` 和 90 號部門的 `location_id`
+    - 練習
+      ```SQL
+      SELECT DISTINCT job_id, location_id
+      FROM employees e JOIN departments d
+      ON e.department_id = d.department_id
+      WHERE de.department_id = 90
+      ```
+
+  - ### 3. 選擇所有有獎金的員工的 `last_name`、`department_name`、`location_id`、`city`
+    - 練習
+      ```SQL
+      SELECT last_name, department_name, location_id, city
+      FROM employees e JOIN departments d
+      ON e.department_id = d.department_id
+      JOIN locations l
+      ON d.location_id = l.location_id
+      WHERE e.commission_pct is not null
+      ```
+
+  - ### 4. 選擇 `city` 在 `Toronto` 工作的員工的 `last_name`、`job_id`、`department_id`、`department_name`
+    - 練習
+      ```SQL
+      SELECT last_name, job_id, department_id, department_name
+      FROM employees e, departments d,locations l
+      WHERE e.department_id = d.department_id and l.city = 'Toronto' and d.location_id = l.location_id
+      ```
+
+  - ### 5. 選擇指定員工的姓名、員工號，以及他的管理者的姓名和員工號，結果類似於下面的格式
