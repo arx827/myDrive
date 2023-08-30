@@ -387,6 +387,176 @@
     ```
 
 ## 第 6 章 子查詢
+  - ### 40. 誰的工資比 Abel 高？
+    - 1. 寫兩條 SQL 語句
+      ```SQL
+      SELECT salary
+      FROM employees
+      WHERE last_name = 'Abel'
+
+      -- 返回值為 11000
+
+      SELECT last_name, salary
+      FROM employees
+      WHERE salary > 11000
+      ```
+    - 2. 使用子查詢 -- 一條SQL語句
+      ```SQL
+      SELECT last_name, salary
+      FROM employees
+      WHERE salary > (
+        SELECT salary
+        FROM employees
+        WHERE last_name = 'Abel'
+      )
+      ```
+    - 子查詢注意：
+      - 1. 子查詢要包含在括號內
+      - 2. 將子查詢放在比較條件的內側
+
+  - ### 41. 查詢工資最低的員工信息：last_name、salary
+    ```SQL
+    SELECT last_name, salary
+    FROM employees
+    WHERE salary = (SELECT min(salary)
+                    FROM employees)
+    ```
+
+  - ### 42. 查詢平均工資最低的部門信息
+    - #### 拆解
+      - 1. 查詢公司中各部門的平均工資是多少
+      - 2. 查詢公司中各部門的平均工資中最少
+      - 3. 哪個部門的平均工資 = 2. 的結果
+      - 4. 查詢此部門的部門信息
+        ```SQL
+        SELECT *
+        FROM departments
+        WHERE department_id = (
+              SELECT department_id
+              FROM employees
+              HAVING AVG(salary) = (SELECT MIN(AVG(salary))
+                                  FROM employees
+                                  GROUP BY department_id)
+              GROUP BY department_id
+        )
+        ```
+
+  - ### 43. 查詢平均工資最低的部門信息和該部門的平均工資
+    ```SQL
+    SELECT *, (SELECT AVG(salary) FROM employees WHERE department_id = d.department_id) 
+    FROM departments d
+    WHERE department_id = (
+          SELECT department_id
+          FROM employees
+          HAVING AVG(salary) = (SELECT MIN(AVG(salary))
+                              FROM employees
+                              GROUP BY department_id)
+          GROUP BY department_id
+    )
+    ```
+
+  - ### 44. 查詢平均工資最高的 job 信息
+    - #### 拆解
+      - 1. 按 job 來分組，查詢最高的平均工資是多少
+      - 2. 查詢得到哪個 job_id 的平均工資等於 1. 得到的值
+      - 3. 從 jobs 表中返回 job_id 的對應項的信息
+      ```SQL
+      SELECT *
+      FROM jobs
+      WHERE job_id in (
+        SELECT job_id
+        FROM employees
+        HAVING AVG(salary) = (
+          SELECT MAX(AVG(salary))
+          FROM employees
+          GROUP BY job_id
+        )
+        GROUP BY job_id
+      )
+      ```
+
+  - ### 45. 查詢平均工資高於公司平均工資的部門有哪些？
+    ```SQL
+    SELECT department_id, AVG(salary)
+    FROM employees
+    GROUP BY department_id
+    HAVING AVG(salary) > (
+      SELECT AVG(salary)
+      FROM employees
+    )
+    ```
+
+  - ### 46. 查詢出公司中所有 manager 的詳細信息
+    ```SQL
+    SELECT *
+    FROM employees
+    WHERE employee_id in (
+      SELECT manager_id
+      FROM employees
+    )
+    ```
+
+  - ### 47. 各個部門中，最高工資中最低的那個部門的 最低工資是多少
+    ```SQL
+    SELECT MIN(salary)
+    FROM employees
+    WHERE department_id = (
+      SELECT department_id
+      FROM employees
+      HAVING MAX(salary) = (
+        SELECT MIN(MAX(salary))
+        FROM employees
+        GROUP BY department_id
+      )
+      GROUP BY department_id
+    )
+    ```
+
+  - ### 48. 查詢平均工資最高的部門的 manager 的詳細信息：last_name、department_id、email、salary
+    ```SQL
+    SELECT last_name, department_id, email, salary
+    FROM employees
+    WHERE employee_id in (
+      SELECT distinct manager_id
+      FROM employees
+      WHERE department_id = (
+        SELECT department_id
+        FROM employees
+        GROUP BY department_id
+        HAVING AVG(salary) = (
+          SELECT MAX(AVG(salary))
+          FROM employees
+          GROUP BY department_id
+        )
+      )
+    )
+    ```
+
+  - ### 49. 查詢 1999 年來公司的員工中的最高工資的那個員工的信息
+    ```SQL
+    SELECT *
+    FROM employees
+    WHERE salary = (
+      SELECT MAX(salary)
+      FROM employees
+      WHERE to_char(hire_date, 'yyyy') = '1999'
+    )
+    AND to_char(hire_date, 'yyyy') = '1999'
+    ```
+
+  - ### 50. 多行子查詢 any 和 all
+    ```SQL
+    SELECT department_id
+    FROM employees
+    GROUP BY department_id
+    HAVing AVG(salary) >= any(
+      -- 所有部門的平均工資
+      SELECT AVG(salary)
+      FROM employees
+      GROUP BY department_id
+    )
+    ```
+    > `ANY` 和 任意一個值比較，所以其條件最為寬鬆，所以實際上只需和平均工資最低的比較，返回所有值，而 `ALL` 是和全部的值比較，條件最為苛刻，所以實際上返回的只需和平均工資最高的比較，所以返回平均工資最高的 `department_id`。
 
 ## 第 7 章 創建和管理表
   - ### 51. 利用子查詢創建表 myemp，該表中包含 employees 表的 employee_id(id), last_name(name), email 字段
@@ -454,3 +624,6 @@
       FROM employees
       WHERE department_id = 80;
       ```
+
+## 第 8 章 數據處理
+  - ### 55. 更改 108 員工的信息：使其工資變為所在部門中的最高工資，job 變為公司中平均工資最低的 job

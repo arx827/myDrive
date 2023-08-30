@@ -210,3 +210,77 @@
     WHERE expr operator (SELECT select_list
                          FROM table);
     ```
+
+## 測試
+  - ### 1. 查詢和 Zlotkey 相同部門的員工姓名和雇用日期
+    - 練習
+      ```SQL
+      SELECT last_name, hire_date
+      FROM employees
+      WHERE department_id = (
+        SELECT department_id
+        FROM employees
+        WHERE last_name = 'Zlotkey'
+      )
+      AND last_name <> 'Zlotkey'
+      ```
+
+  - ### 2. 查詢工資比公司平均工資高的員工的員工號、姓名、工資
+    - 練習
+      ```SQL
+      SELECT last_name, employee_id, salary
+      FROM salary > (
+        SELECT AVG(salary)
+        FROM employees
+      )
+      ```
+    
+  - ### 3. 查詢各部門中工資比本部門平均工資高的員工的員工號、姓名和工資
+    - 練習
+      ```SQL
+      SELECT employee_id, last_name, salary
+      FROM employees e1
+      WHERE salary > (
+        SELECT AVG(salary)
+        FROM employees e2
+        WHERE e1.department_id = e2.department_id
+        GROUP BY department_id
+      )
+      ```
+    
+  - ### 4. 查詢和姓名中包含 字母u 的員工在相同部門的員工的員工號和姓名
+    - 練習
+      ```SQL
+      SELECT employee_id, last_name
+      FROM employees
+      WHERE department_id in (
+        SELECT department_id
+        FROM employees
+        WHERE last_name like '%u%'
+      )
+      AND last_name not like '%u%'
+      ```
+
+  - ### 5. 查詢在部門的 location_id 為 1700 的部門工作的員工的員工號
+    - 練習
+      ```SQL
+      SELECT employee_id
+      FROM employees
+      WHERE department_id in (
+        SELECT employee_id
+        FROM employees
+        WHERE location_id = 1700
+      )
+      ```
+
+  - ### 6. 查詢管理者是 King 的員工姓名和工資
+    - 練習
+      ```SQL
+      SELECT last_name, salary
+      FROM employees
+      WHERE manager_id in (
+        SELECT employee_id
+        FROM employees
+        WHERE last_name = 'King'
+      )
+      ```
