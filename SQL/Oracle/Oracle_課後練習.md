@@ -627,3 +627,77 @@
 
 ## 第 8 章 數據處理
   - ### 55. 更改 108 員工的信息：使其工資變為所在部門中的最高工資，job 變為公司中平均工資最低的 job
+    - 1. 搭建骨架
+      ```SQL
+      UPDATE employees
+      set salary = (), job_id = ()
+      WHERE employee_id = 108;
+      ```
+
+    - 2. 所在部門中的最高工資
+      ```SQL
+      SELECT MAX(salary)
+      FROM employees
+      WHERE department_id = (SELECT department_id
+                             FROM employees
+                             WHERE employee_id = 108)
+      ```
+
+    - 3. 公司中平均工資最低的 job
+      ```SQL
+      SELECT job_id
+      FROM employees
+      GROUP BY job_id
+      HAVING AVG(salary) = (SELECT AVG(salary)
+                            FROM empoloyees
+                            GROUP BY job_id )
+      ```
+
+    - 4. 填充
+      ```SQL
+      UPDATE employees e
+      set salary = (
+        SELECT MAX(salary)
+        FROM employees
+        WHERE department_id = e.department_id
+      ), job_id = (
+        SELECT job_id
+        FROM employees
+        GROUP BY job_id
+        HAVING AVG(salary) = (SELECT AVG(salary)
+                              FROM empoloyees
+                              GROUP BY job_id )
+      )
+      WHERE employee_id = 108;
+      ```
+
+  - ### 56. 刪除 108 號員工所在部門中，工資最低的那個員工。
+    - 1. 查詢 108 員工所在的部門 id
+      ```SQL
+      SELECT department_id
+      FROM employees
+      WHERE employee_id = 108;
+      ```
+
+    - 2. 查詢 1. 部門中的最低工資：
+      ```SQL
+      SELECT MIN(salary)
+      FROM employees
+      WHERE department_id = (SELECT department_id
+                             FROM employees
+                             WHERE employee_id = 108)
+      ```
+
+    - 3. 刪除 1. 部門中工資為 2. 的員工信息：
+      ```SQL
+      DELETE FROM employees e
+      WHERE department_id = (SELECT department_id
+                             FROM employees e
+                             WHERE employee_id = 108)
+            AND salary = (SELECT MIN(salary)
+                          FROM employees
+                          WHERE department_id = e.department_id)
+      ```
+
+## 第 9 章 約束
+  - ### 57. 定義非空約束
