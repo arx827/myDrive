@@ -701,3 +701,158 @@
 
 ## 第 9 章 約束
   - ### 57. 定義非空約束
+    - 1. 非空約束只能定義在列級。
+    - 2. 不指定約束名
+      ```SQL
+      CREATE TABLE emp2 (
+        name VARCHAR2(30) NOT NULL,
+        age NUMBER(3)
+      );
+      ```
+    - 3. 指定約束名
+      ```SQL
+      CREATE TABLE emp3 (
+        name VARCHAR2(30) CONSTRAINT name_not_null NOT NULL,
+        age NUMBER(3)
+      );
+      ```
+  
+  - ### 58. 唯一約束
+    - 1. 列級定義
+      - 1. 不指定約束名
+        ```SQL
+        CREATE TABLE emp2 (
+          name VARCHAR2(30) UNIQUE,
+          age NUMBER(3)
+        );
+        ```
+      - 2. 指定約束名
+        ```SQL
+        CREATE TABLE emp3 (
+          name VARCHAR2(30) CONSTRAINT name_up UNIQUE,
+          age NUMBER(3)
+        );
+        ```
+
+    - 2. 表級定義：必須指定約束名
+      - 1. 指定約束名
+        ```SQL
+        CREATE TABLE emp3 (
+          name VARCHAR2(30),
+          age NUMBER(3),
+          CONSTRAINT name_uq UNIQUE(name)
+        );
+        ```
+
+  - ### 58.1 主鍵約束：唯一確定一行紀錄。表明此屬性：非空，唯一
+
+  - ### 59. 外鍵約束
+    - 1. 列級定義
+      - 1. 不指定約束名
+        ```SQL
+        CREATE TABLE emp2 (
+          emp_id NUMBER(6),
+          name VARCHAR2(25),
+          dept_id NUMBER(4) REFERENCES dept2(dept_id);
+        )
+        ```
+
+      - 2. 指定約束名
+        ```SQL
+        CREATE TABLE emp3 (
+          emp_id NUMBER(6),
+          name VARCHAR2(25),
+          dept_id NUMBER(4) CONSTRAINT dept_fk3 REFERENCES dept2(dept_id);
+        )
+        ```
+      
+    - 2. 表級定義：必須指定約束名
+      - 1. 指定約束名
+        ```SQL
+        CREATE TABLE emp4 (
+          emp_id NUMBER(6),
+          name VARCHAR2(25),
+          dept_id NUMBER(4),
+          CONSTRAINT dept_fk2 FOREIGN KEY(dept_id) REFERENCES dept2(dept_id)
+        )
+        ```
+
+  - ### 60. 約束需要注意的地方
+    - 1. ** 非空約束 (`NOT NULL`) 只能定義在列級。
+    - 2. ** 唯一約束 (`UNIQUE`) 的列值可以為空。
+    - 3. ** 外鍵 (`FOREIGN KEY`) 引用的列，起碼要有一個唯一約束。
+
+  - ### 61. 建立外鍵約束時的級聯刪除問題
+    - 1. 級聯刪除
+      ```SQL
+      CREATE TABLE emp2 (
+        id NUMBER(3) PRIMARY KEY,
+        name VARCHAR2(25) UNIQUE,
+        dept_id NUMBER(3) REFERENCES dept2(dept_id) ON DELETE CASCADE
+      )
+      ```
+    
+    - 2. 級聯置空
+      ```SQL
+      CREATE TABLE emp3 (
+        id NUMBER(3) PRIMARY KEY,
+        name VARCHAR2(25) UNIQUE,
+        dept_id NUMBER(3) REFERENCES dept2(dept_id) ON DELETE SET NULL
+      )
+      ```
+
+## 第 10 章 視圖
+  - ### 62. 查詢員工表中 salary 前 10 的員工信息。
+    ```SQL
+    SELECT last_name, salary
+    FROM (
+      SELECT last_name, salary
+      FROM employees
+      ORDER BY salary DESC
+    )
+    WHERE ROWNUM <= 10;
+    ```
+
+    說明：`ROWNUM 偽列`，數據表本身並沒有這樣的列，是 `Oracle` 數據庫為每個數據表 `加上的` 列，可以標識行號，默認情況下 `ROWNUM` 按主索引來排序，若沒有主索引則自然排序。
+
+    注意：對 `ROWNUM` 只能使用 `<` 或 `<=`，而用 `=`、`>`， `>=` 都將不能返回任何數據。
+
+  - ### 63. 查詢員工表中 salary 10-20 的員工信息
+    ```SQL
+    SELECT *
+    FROM (
+      SELECT ROWNUM rn, temp.*
+      FROM (
+        SELECT last_name, salary
+        FROM employees e
+        ORDER BY salary DESC
+      ) temp
+    )
+    WHERE rn > 10 AND rn < 21;
+    ```
+
+  - ### 64. 對 oracle 數據庫中紀錄，進行分頁：每頁顯示 10 條紀錄，查詢第 5 頁的數據
+    ```SQL
+    SELECT employee_id, last_name, salary
+    FROM (
+      SELECT ROWNUM rn, employee_id, last_name, salary
+      FROM employees
+    ) e
+    WHERE e.rn <= 50 AND e.rn > 40;
+    ```
+    注意：對 `Oracle` 分頁必須使用 `ROWNUM 偽列`。
+
+    ```SQL
+    SELECT employee_id, last_name, salary
+    FROM (
+      SELECT ROWNUM rn, employee_id, last_name, salary
+      FROM employees
+    ) e
+    WHERE e.rn <= pageNo * pageSize AND e.rn > (pageNo - 1) * pageSize
+    ```
+
+## 第 11 章 其他數據庫對象
+  - ### 65.
+    ```SQL
+
+    ```
