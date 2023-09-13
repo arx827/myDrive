@@ -852,7 +852,25 @@
     ```
 
 ## 第 11 章 其他數據庫對象
-  - ### 65.
-    ```SQL
+  - ### 65. 創建序列：
+    - 1. 
+      ```SQL
+      CREATE SEQUENCE hs
+      INCREMENT BY 10
+      START WITH 10
+      ```
+    - 2. `NEXTVAL` 應在 `CURRVAL` 之前指定，二者應同時有效
 
+  - ### 66. 序列通常用來生成主鍵
+    ```SQL
+    INSERT INTO emp2 VALUES (emp2_seq.nextval, 'xx', ...)
     ```
+
+  - ### 總結
+    |                | WHAT | WHY | HOW |
+    |----------------|------|-----|-----|
+    | 表 Table        |      |     |     |
+    | 視圖 View       |      |     |     |
+    | 序列 Sequence   |      |     |     |
+    | 索引 Index      |      |     |     |
+    | 同義詞 Synonym  |      |     |     |
