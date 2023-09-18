@@ -160,10 +160,10 @@
     DECLARE
       -- 定義一個紀錄類型
       type emp_record is record(
-        v_sal employees.salary#type,
-        v_emp_id employees.employee_id#type,
-        v_email employees.email#type,
-        v_hiredate employees.hire_date#type
+        v_sal employees.salary%type,
+        v_emp_id employees.employee_id%type,
+        v_email employees.email%type,
+        v_hiredate employees.hire_date%type
       );
 
       -- 聲明自定義紀錄類型的變量
@@ -178,11 +178,11 @@
     END
     ```
 
-  ### 3. 整列資料
+  - ### 3. 整列資料
     ```SQL
     DECLARE
       -- 聲明自定義紀錄類型的變量
-      v_emp_record employees#rowtype;
+      v_emp_record employees%rowtype;
     BEGIN
       -- 程序的執行部分
       select * into v_emp_record
@@ -215,9 +215,9 @@
   declare
     -- 聲明一個紀錄類型
     type emp_record is record(
-      v_sal employees.salary#type,
-      v_email employees.email#type,
-      v_hire_date employees.date#type
+      v_sal employees.salary%type,
+      v_email employees.email%type,
+      v_hire_date employees.date%type
     );
     -- 定義一個紀錄類型的成員變量
     v_emp_record emp_rocord;
@@ -233,8 +233,14 @@
 
 ## 複習 - 紀錄類型2
 ## 流程控制
+
 ## 游標的使用1
+  對於 `處理多行紀錄` 的事務，經常使用 `游標` 來實現。
+
 ## 游標的使用2
+
 ## 異常處理機制
+
 ## 存儲函數 & 存儲過程
+
 ## 觸發器

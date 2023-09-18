@@ -874,3 +874,249 @@
     | 序列 Sequence   |      |     |     |
     | 索引 Index      |      |     |     |
     | 同義詞 Synonym  |      |     |     |
+
+## PL/SQL
+  ```SQL
+  DECLARE
+    v_emp_id employees.employee_id%type;
+  BEGIN
+    v_emp_id := 109;
+    DELETE
+    FROM employees
+    WHERE employee_id = v_emp_id;
+  END;
+  ```
+
+
+  ### 流程控制
+  - #### 條件判斷
+    - ##### 7. 使用 IF ... THEN ... ELSIF ... THEN ... ELSE ... END IF;
+      要求：查詢出 150 號員工的工資，若其工資大於或等於 10000，則打印 'salary > = 10000';
+      若在 5000 到 10000 之間，則打印 '5000 <= salary < 10000'; 否則打印 'salary < 5000';
+        ```SQL
+        DECLARE
+          v_salary employees.salary%type;
+          v_temp VARCHAR2(30);
+        BEGIN
+          -- 通過 select ... into ... 語句為變量賦值
+          SELECT salary into v_salary
+          FROM employees
+          WHERE employee_id = 150;
+
+          -- 打印變量的值
+          dbms_output.put_line('salary: ' || v_salary);
+          
+          IF v_salary >= 10000
+          THEN v_temp := 'salary >= 10000';
+          ELSIF v_salary >= 5000
+          THEN v_temp := '5000 <= salary < 10000';
+          ELSE v_temp := 'salary < 5000';
+          END IF;
+
+          dbms_output.put_line(v_salary || ',' || v_temp)
+        END;
+        ```
+
+    - ##### 7+. 使用 CASE ... WHEN ... THEN ... ELSE ... END
+      ```SQL
+      DECLARE
+        v_salary employees.salary%type;
+        v_msg VARCHAR2(30);
+      BEGIN
+        -- 通過 select ... into ... 語句為變量賦值
+        SELECT salary into v_salary
+        FROM employees
+        WHERE employee_id = 150;
+
+        -- 打印變量的值
+        dbms_output.put_line('salary: ' || v_salary);
+
+        v_temp := CASE trunc(v_salary / 5000)
+          WHEN 0
+            THEN 'salary < 5000'
+          WHEN 1
+            THEN '5000 <= salary < 10000'
+          ELSE 'salary >= 10000'
+
+        dbms_output.put_line(v_salary || ',' || v_msg)
+      END;
+      ```
+
+    - ##### 8. 使用 CASE ... WHEN ... THEN ... ELSE ... END;
+      要求：查詢出 122 號員工的 JOB_ID，若其值為 'IT_PROG'，則打印 'GRADE：A';
+                                            'AC_MGT'，則打印 'GRADE：B';
+                                            'AC_ACCOUNT'，則打印 'GRADE：C';
+                                            否則打印 'GRADE D';
+      ```SQL
+      DECLARE
+        -- 聲明變量
+        v_grade char(1);
+        v_job_id employees.job_id%type;
+      BEGIN
+        SELECT job_id into v_job_id
+        FROM employees
+        WHERE employee_id = 122;
+
+        -- 打印變量的值
+        dbms_output.put_line('job_id: ' || v_job_id);
+
+        -- 根據 v_job_id 的取值，利用 CASE 字句為 v_grade 賦值
+        v_grade :=
+          CASE v_job_id WHEN 'IT_PROG' THEN 'A'
+                        WHEN 'AC_MGT' THEN 'B'
+                        WHEN 'AC_ACCOUNT' THEN 'C'
+                        ELSE 'D'
+          END;
+        dbms_output.put_line(v_job_id || ',' || v_grade);
+      END;
+      ```
+
+  - #### 循環結構
+    - ##### 9. 使用循環語句打印 1 - 100. (三種方式)
+      - 1. LOOP ... EXIT WHEN ... END LOOP
+        ```SQL
+        DECLARE
+          -- 初始化條件
+          v_i number(3) := 1;
+        BEGIN
+          Loop
+            -- 循環體
+            dbms_output.put_line(v_i);
+            -- 迭代條件
+            v_i := v_i + 1;
+            -- 循環條件
+            EXIT WHEN v_i = 100;
+          END LOOP;
+        END;
+        ```
+
+      - 2. WHILE ... LOOP ... END LOOP
+        ```SQL
+        DECLARE
+          -- 初始化條件
+          v_i number(3) := 1;
+        BEGIN
+          WHILE v_i <= 100 LOOP
+            dbms_output.put_line(v_i);
+            v_i := v_i + 1;
+          END LOOP;
+        END;
+        ```
+
+      - 3. FOR i in ... LOOP ... END LOOP
+        ```SQL
+        DECLARE
+          -- 初始化條件
+          v_i number(3) := 1;
+        BEGIN
+          FOR c in 1..100 LOOP
+            dbms_output.put_line(c);
+          END LOOP;
+        END;
+        ```
+
+        ```SQL
+        DECLARE
+          -- 初始化條件
+          v_i number(3) := 1;
+        BEGIN
+          -- 加上 reverse 可從 100 - 1 打印
+          FOR c in reverse 1..100 LOOP
+            dbms_output.put_line(c);
+          END LOOP;
+        END;
+        ```
+
+    - ##### 輸出 2 - 100 之間的質數
+      ```SQL
+      DECLARE
+        v_i number(3) := 2;
+        v_j number(3) := 2;
+        v_flag number(1) := 1;
+      BEGIN
+        WHILE v_i <= 100 LOOP
+          WHILE v_j <= sqrt(v_i) LOOP
+            IF mod(v_i, v_j) = 0
+              THEN v_flag := 0;
+            END IF;
+            v_j := v_j + 1;
+          END LOOP;
+
+          IF v_flag = 1
+            THEN dbms_output.put_line(v_i);
+          END IF;
+          v_j := 2;
+          v_i := v_i + 1;
+          v_flag := 1; 
+        END LOOP;
+      END;
+      ```
+
+    - ##### 11. 使用 GOTO
+      ```SQL
+      DECLARE
+        -- 標記值，若為 1，則是質數，否則不是
+        v_flag number(1) := 0;
+      BEGIN
+        FOR i in 2 .. 100 LOOP
+          v_flag := 1;
+
+          FOR j in 2 .. sqrt(i) LOOP
+            IF i mod j = 0
+              THEN v_flag := 0;
+              GOTO label;
+            END IF;
+          END LOOP;
+
+          <<label>>
+          IF v_flag = 1
+            THEN dbms_output.put_line(v_i);
+          END IF;
+        END LOOP;
+      END;
+      ```
+
+    - ##### 11+. 打印 1 - 100的自然數，當打印到50時，跳出循環，輸出“打印結束”
+      - 方法一：
+        ```SQL
+        BEGIN
+          FOR i in 1..100 LOOP
+            dbms_output.put_line(i);
+            IF(i = 50)
+              THEN GOTO label;
+            END IF;
+          END LOOP;
+          <<label>>
+          dbms_output.put_line('打印結束');
+        END
+        ```
+
+      - 方法二：
+        ```SQL
+        BEGIN
+          FOR i in 1..100 LOOP
+            dbms_output.put_line(i);
+            IF (i mod 50 = 0)
+              THEN dbms_output.put_line('打印結束');
+              EXIT;
+            END IF;
+          END LOOP;
+        END;
+        ```
+
+  - #### 游標的使用
+    - ##### 12.1 使用游標
+      要求：打印出 80 部門的所有的員工的工資：salary:xxx
+      ```SQL
+      DECLARE
+        -- 1. 定義游標
+        cursor salary_cursor is
+          SELECT salary
+          FROM employees
+          WHERE department_id = 80;
+
+        v_salary employees.salary%type;
+      BEGIN
+        -- 2. 打開游標
+      END;
+      ```
