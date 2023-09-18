@@ -234,13 +234,947 @@
 ## 複習 - 紀錄類型2
 ## 流程控制
 
-## 游標的使用1
-  對於 `處理多行紀錄` 的事務，經常使用 `游標` 來實現。
+## 游標的使用
+  在 PL/SQL 程序中，對於 `處理多行紀錄` 的事務，經常使用游標來實現。
 
-## 游標的使用2
+  游標是一個指向上下文的句柄 (handle) 或指針。
+
+  - ### 顯式游標處理
+    顯式游標處理需四個 PL/SQL 步驟：
+    - #### 定義游標：
+      定義游標名，以及與其相對應的 `SELECT 語句`。
+      - 格式：
+        `CURSOR cursor_name[(parameter[, parameter]...)] IS select_statement;`
+      - 在指定數據類型時，不能使用長度約束。如： `NUMBER(4)、CHAR(10)` 等都是錯誤的。
+
+    - #### 打開游標：
+      就是執行游標所對應的 SELECT 語句，將其查詢結果放入工作區，並且指針指向工作區的首部，標識游標結果集合。
+      - 格式：
+        `OPEN cursor_name[([parameter =>] value[, [parameter =>] value]...)];`
+      - PL/SQL 程序，不能用 OPEN 語句，重複打開一個游標。
+
+    - #### 提取游標數據
+      就是檢索結果集合中的數據行，放入指定的輸出變量中。
+      - 格式：
+        `FETCH cursor_name INTO {variable_list | record_variable};`
+
+    - #### 關閉游標
+      當提取和處理完游標結果集合數據後，應即時關閉游標，以釋放該游標所佔用的系統資源。
+      - 格式：
+        `CLOSE cursor_name`;
+      - 定義的游標不能有 `INTO` 子句。
+
+
+
+    要求：打印出 80 部門的所有的員工的工資：salary:xxx
+    ```SQL
+    DECLARE
+      -- 1. 定義游標
+      cursor salary_cursor is
+        SELECT
+        FROM employees
+        WHERE department_id = 80;
+
+      v_salary employees.salary%type;
+    BEGIN
+      -- 2. 打開游標
+      open salary_cursor;
+
+      -- 3. 提取游標
+      FETCH salary_cursor into v_salary;
+
+      -- 4. 對游標進行循環操作：判斷游標中是否有下一條紀錄
+      WHILE salary_cursor%found LOOP
+        dbms_output.put_line('salary: ' || v_salary);
+        FETCH salary_cursor into v_salary;
+      END LOOP;
+
+      -- 5. 關閉游標
+      CLOSE salary_cursor;
+    END
+    ```
+
+
+    ```SQL
+    DECLARE
+      -- 聲明一個紀錄類型
+      type emp_record is record(
+        v_sal employees.salary%type,
+        v_empid employees.employee_id%type
+      )
+
+      -- 聲明一個紀錄類型的變量
+      v_emp_record emp_record;
+
+      -- 定義游標
+      cursor emp_sal_cursor is
+        SELECT salary, employee_id
+        FROM employees
+        WHERE department_id = 80;
+    BEGIN
+      -- 打開游標
+      open emp_sal_cursor;
+
+      -- 提取游標
+      FETCH emp_sal_cursor into v_emp_record;
+
+      WHILE emp_sal_cursor%found LOOP
+        dbms_output.put_line('empid:' || v_emp_record.v_empid || ' salary:' || v_emp_record.v_sal);
+        FETCH emp_sal_cursor into v_emp_record;
+      END LOOP;
+
+      -- 關閉游標
+      CLOSE emp_sal_cursour;
+
+    END;
+    ```
+
+  - #### 游標屬性
+    | %FOUND    | 布爾型屬性，當最近一次讀紀錄時成功返回，則值為 TRUE |
+    |-----------|---------------------------------------------|
+    | %NOTFOUND | 布爾型屬性，與%FOUND相反                       |
+    | %ISOPEN   | 布爾型屬性，當游標已打開時返回 TRUE              |
+    | %ROWCOUNT | 數字型屬性，返回已從游標中讀取的紀錄數             |
+
+  - #### 游標的 FOR 循環
+    PL/SQL 語言提供了游標 FOR 循環語句，自動執行游標的 `OPEN`、`FETCH`、`CLOSE` 語句和 `循環` 語句的功能；
+    當進入循環時，游標 FOR 循環語句 `自動` 打開游標，並提取第一行游標數據，當程序處理完當前所提取的數據而進入下一次循環時，游標 FOR 循環語句自動提取下一行數據供程序處理，當提取完結果集合中的所有數據行後結束循環，並自動關閉游標。
+
+    - 格式：
+      ```SQL
+      FOR index_variable IN cursor_name[value[, value]...] LOOP
+        -- 游標數據處理代碼
+      END LOOP;
+      ```
+    
+    - 範例：
+      ```SQL
+      DECLARE|
+        -- 1. 定義游標
+        cursor emp_sal_cursor is
+          SELECT salary, employee_id, hire_date
+          FROM employees
+          WHERE department_id = 80;
+
+      BEGIN
+        FOR c in emp_sal_cursor LOOP
+          dbms_output.put_line('empid:' || c.salary || ' salary:' || c.employee_id || ' hire_date:' ||c.hire_date);
+        END LOOP;
+      END;
+      ```
 
 ## 異常處理機制
+  異常情況處理(EXCEPTION) 是用來處理正常執行過程中，未預料的事件，程序塊的異常處理 預定義的錯誤 和 自定義錯誤，由於 PL/SQL 程序塊一但產生異常而沒有指出如何處理時，程序就會自動終止整個程序運行。
+
+  有三種類型的異常錯誤：
+  - 1. 預定義 (Predefined) 錯誤： 
+    Oracle 預定義襶異常情況大約有 24 個。對這種異常情況的處理，無需在程序中定義，`由 Oracle 自動將其引發`。
+  - 2. 非預定義 (Predefined) 錯誤： 
+    即其他標準的 Oracle 錯誤。對這種異常情況的處理，需要用戶在程序中定義，然後由 Oracle 自動將其引發。
+  - 3. 用戶定義 (User_define) 錯誤： 
+    程序執行過程中，出現編程人員認為的非正常情況。對這種異常情況的處理，`需要用戶在程序中定義，然後顯式地在程序中將其引發`。
+
+  異常處理部分一般放在 PL/SQL 程序體的後半部，結構為：
+  ```SQL
+  EXCEPTION
+    WHEN first_exception THEN <code to handle first exception>
+    WHEN second_exception THEN <code to handle second exception>
+    WHEN OTHERS THEN <code to handle others exception>
+  END;
+
+  異常處理可以按任意次序排列，但 OTHERS 必須放在最後。
+  ```
+
+  - ### 預定義的異常處理
+    | 錯誤號    | 異常錯誤信息名稱           | 說明                                                                         |
+    |----------|-------------------------|------------------------------------------------------------------------------|
+    | ORA-0001 | Dup_val_on_index        | 試圖破壞一個唯一性限制                                                           |
+    | ORA-0051 | Timeout-on-resource     | 在等待資源時發生超時                                                            |
+    | ORA-0061 | Transaction-backed-out  | 由於發生死鎖事務被撤銷                                                          |
+    | ORA-1001 | Invalid-CURSOR          | 試圖使用一個無效的游標                                                          |
+    | ORA-1012 | Not-logged-on           | 沒有連接到 Oracle                                                             |
+    | ORA-1017 | Login-denied            | 無效的用戶名/口令                                                              |
+    | ORA-1403 | No_data_found           | SELECT INTO 沒有找到數據                                                      |
+    | ORA-1422 | Too_many_rows           | SELECT INTO 返回多行                                                          |
+    | ORA-1476 | Zero-divide             | 試圖被零除                                                                    |
+    | ORA-1722 | Invalid-NUMBER          | 轉換一個數字失敗                                                               |
+    | ORA-6500 | Storage-error           | 內存不夠引發的內部錯誤                                                          |
+    | ORA-6501 | Program-error           | 內存錯誤                                                                      |
+    | ORA-6502 | Value-error             | 轉換或截斷錯誤                                                                 |
+    | ORA-6504 | Rowtype-mismatch        | 宿主游標變量與PL/SQL變量有不兼容行類型                                            |
+    | ORA-6511 | CURSOR-already-OPEN     | 試圖打開一個已存在的游標                                                        |
+    | ORA-6530 | Access-INTO-null        | 試圖為null對象的屬性賦值                                                        |
+    | ORA-6531 | Collection-is-null      | 試圖將 Exists 以外的集合(collection)方法應用於一個null pl/sql 表上或 varray 上     |
+    | ORA-6532 | Subscript-outside-limit | 對嵌套或 varray 索引得引用超出聲明範圍以外                                        |
+    | ORA-6533 | Subscript-beyond-count  | 對嵌套或 varray 索引得引用大於集合中元素的個數                                     |
+
+
+    
 
 ## 存儲函數 & 存儲過程
+  Oracle 提供可以把 PL/SQL 程序存儲在數據庫中，並可以在任何地方來運行它。這樣就叫存儲過程或函數。
+  過程和函數統稱為 PL/SQL 子程序，他們是被命名的 PL/SQL 塊，均存儲在數據庫中，並通過輸入、輸出參數或輸入/輸出參數與其調用者交換信息。
+  過程和函數的唯一區別是函數總向調用者返回數據，而過程則不返回數據。
+
+  - ### 創建函數
+    - 1. 建立內嵌函數
+      語法如下：
+        ```SQL
+        CREATE [OR REPLACE] FUNCTION function_name
+          [(argment[{IN | IN OUT}] Type,
+            argment[{IN | OUT | IN OUT}] Type)]
+          [AUTHID DEFINER | CURRENT_USER]
+          RETURN return_type
+
+        {IS | AS}
+          <類型.變量的說明>
+        BEGIN
+          FUNCTION_body
+        EXCEPTION
+        
+        END;
+        ```
+
+        ```SQL
+        CREATE OR REPLACE FUNCTION function_name(dept_id number, salary number)
+          RETURN number
+        IS
+          -- 函數使用過程中，需要聲明的變量、紀錄類型、cursor
+        BEGIN
+          -- 函數的執行體
+        EXCEPTION
+          -- 處理函數執行過程中的異常
+        END;
+        ```
 
 ## 觸發器
+  觸發器在數據庫裡以獨立的對象存儲，它與存儲過程不同的是，存儲過程通過其他程序來啟動運行或直接啟動運行，而觸發器是由一個事件來啟動運行。
+  即觸發器是當某個事件發生時，自動地隱式運行。並且，觸發器不能接收參數。
+
+  - ### 觸發器組成
+    - `觸發事件`：即在何種情況下觸發 `TRIGGER`；例如：`INSERT`、`UPDATE`、`DELETE`。
+    - `觸發時間`：即該 `TRIGGER` 是在觸發事件發生之前 (`BEFORE`) 還是之後 (`AFTER`) 觸發，也就是觸發事件和該 `TRIGGER` 的操作順序。 
+    - `觸發器本身`：即該 `TRIGGER` 被觸發之後的目的和意圖，正是觸發器本身要做的事情。例如：PL/SQL 塊。
+    - `觸發頻率`：說明觸發器內定義的動作被執行的次數。即語句級(`STATEMENT`)觸發器和行級(`ROW`)觸發器。
+      - 語句級(`STATEMENT`)觸發器：是指當某觸發事件發生時，該觸發器只執行一次。
+      - 行級(`ROW`)觸發器：是指當某觸發事件發生時，對受到該操作影響的每一行數據，觸發器都單獨執行一次。
+
+  - ### 創建觸發器
+    ```SQL
+    CREATE [OR REPLACE] TRIGGER trigger_name
+      {BEFORE | AFTER}
+      {INSERT | DELETE | UPDATE [OF column [, column ...]]}
+      ON [schema.] table_name
+      [FOR EACH ROW]
+      [WHEN condition]
+      trigger_body;
+    ```
+
+
+## 測驗
+
+## 游標的使用
+  - ### 13. 使用游標的練習：
+    打印出 manager_id 為 100 的員工的 last_name, email, salary 信息 (使用游標，紀錄類型)
+
+    - 方法一：
+      ```SQL
+      DECLARE
+        -- 聲明游標
+        cursor emp_cursor is
+          SELECT last_name, email, salary
+          FROM employees
+          WHERE manager_id = 100;
+
+        -- 聲明紀錄類型
+        type emp_record is record(
+          name employees.last_name%type,
+          email employees.email%type,
+          salary employees.salary%type
+        );
+
+        -- 聲明紀錄類型的變量
+        v_emp_record emp_record;
+
+      BEGIN
+        -- 打開游標
+        open emp_cursor;
+
+        -- 提取游標
+        FETCH emp_cursor into v_emp_record;
+
+        -- 對游標進行循環操作
+        WHILE emp_cursor%found LOOP
+          dbms_output.put_line(v_emp_record.name || ', ' || v_emp_record.email || ', ' || v_emp_record.salary)
+          FETCH emp_cursor into v_emp_record;
+        END LOOP;
+
+        -- 關閉游標
+        CLOSE emp_cursor;
+      END;
+      ```
+
+    - 方法二：使用 FOR 循環
+      ```SQL
+      DECLARE
+        cursor emp_cursor is
+          SELECT last_name, email, salary
+          FROM employees
+          WHERE manager_id = 100;
+      BEGIN
+        FOR v_emp_record in emp_cursor LOOP
+          dbms_output.put_line(v_emp_record.last_name || ', ' || v_emp_record.email || ', ' || v_emp_record.salary);
+        END LOOP;
+      END;
+      ```
+
+  - ### 14. 利用游標，調整公司中員工的工資：
+    | 工資範圍        | 調整基數  |
+    |---------------|---------:|
+    | 0 - 5000      |       5% |
+    | 5000 - 10000  |       3% |
+    | 10000 - 15000 |       2% |
+    | 15000 -       |       1% |
+
+    ```SQL
+    DECLARE
+      -- 定義游標
+      cursor emp_sal_cursor is
+        SELECT salary, employee_id
+        FROM employees;
+
+      -- 定義基數變量
+      v_temp number(4, 2);
+
+      v_empid employees.employee_id%type;
+      v_sal employees.salary%type;
+    BEGIN
+      open emp_sal_cursor;
+      FETCH emp_sal_cursor into v_empid, v_sal;
+
+      WHILE emp_sal_cursor%found LOOP
+        IF v_dal < 5000 THEN v_temp := 0.05;
+        ELSIF v_sal < 10000 THEN v_temp := 0.03;
+        ELSIF v_sal < 15000 THEN v_temp := 0.02;
+        ELSE v_temp := 0.01;
+        END IF;
+
+        dbms_output.put_line(v_sal);
+
+        UPDATE employees
+        SET salary = salary * (1 + v_temp)
+        WHERE employee_id = v_empid;
+
+        FETCH emp_sal_cursor into v_empid, v_sal;
+      END LOOP;
+
+      -- 關閉游標
+      close emp_sal_cursor;
+    END
+    ```
+
+    使用 SQL 中的 decode 函數
+    ```SQL
+    UPDATE employees
+    SET salary = salary * (1 + (decode(trunc(salary / 5000), 0, 0.05,
+                                                                1, 0.03,
+                                                                2, 0.02,
+                                                                0.01)))
+    ```
+
+  - #### 15. 利用游標 FOR 循環完成 14.
+    ```SQL
+    DECLARE
+      -- 定義游標
+      cursor emp_sal_cursor is
+        SELECT salary, employee_id id
+        FROM EMPLOYEES;
+
+      -- 定義基數變量
+      temp number(4, 2);
+    BEGIN
+      -- 處理游標的循環操作
+      FOR c in emp_sal_cursor LOOP
+        -- 判斷員工的工資，執行 UPDATE 操作
+        IF c.salary <= 5000 THEN
+          temp := 0.05;
+        ELSIF c.salary <= 10000 THEN
+          temp := 0.03;
+        ELSIF c.salary <= 15000 THEN
+          temp := 0.02;
+        ELSE
+          temp := 0.01;
+        END IF;
+
+        -- dbms_output.put_line(v_id || ': ' || v_sal || ', ' || temp);
+        UPDATE employees
+        SET salary = salary * (1 + temp)
+        WHERE employee_id = c.id;
+      END LOOP;
+    END
+    ```
+
+  - #### 16. 帶參數的游標
+    ```SQL
+    DECLARE
+      -- 定義游標
+      cursor emp_sal_cursor(dept_id number, sal number) is
+        SELECT salary + 1000 sal, employee_id id
+        FROM employees
+        WHERE department_id = dept_id AND salary > sal;
+
+      -- 定義基數變量
+      temp number(4, 2);
+    BEGIN
+      -- 處理游標的循環操作
+      FOR c in emp_dal_cursor(sal => 4000, dept_id => 80) LOOP
+        -- 判斷員工的工資，執行 UPDATE 操作
+        -- dbms_output.put_line(c_id || ': ' || s_sal);
+
+        IF c.sal <= 5000 THEN
+          temp := 0.05;
+        ELSIF c.sal <= 10000 THEN
+          temp := 0.03;
+        ELSIF c.sal <= 15000 THEN
+          temp := 0.02;
+        ELSE
+          temp := 0.01;
+        END IF;
+
+        dbms_output.put_line(c.sal || '： ' || c.id || ', ' || temp);
+        -- UPDATE employees SET salary = salary * (1 + temp) WHERE employee_id = c.id;
+      END LOOP;
+    END;
+    ```
+    
+  - #### 17. 隱式游標：更新指定員工 salary(漲工資 10)，如果該員工沒有找到，則打印 “查無此人” 信息
+    ```SQL
+    BEGIN
+      UPDATE employees
+      SET salary = salary + 10;
+      WHERE employee_id = 1001;
+
+      IF sql%notfound THEN
+        dbms_output.put_line('查無此人');
+      END IF;
+    END;
+    ```
+
+## 異常處理
+  - ### 預定義異常
+    ```SQL
+    DECLARE
+      v_sal employees.salary%type;
+    BEGIN
+      SELECT salary into v_sal
+      FROM employees
+      WHERE employee_id > 100;
+
+      dbms_output.put_line(v_sal);
+
+    EXCEPTION
+      WHEN Too_many_rows THEN dbms_output.put_line('輸出底行數太多了');
+    END;
+    ```
+
+  - ### 非預定義異常
+    ```SQL
+    DECLARE
+      v_sal employees.salary%type;
+      -- 聲明一個異常
+      delete_mgr_excep exception;
+      -- 把自定義的異常和oracle的錯誤關聯起來
+      PRAGMA EXCEPTION_INIT(delete_mgr_excep, -2292);
+    BEGIN
+      DELETE
+      FROM employees
+      WHERE employee_id = 100;
+
+      SELECT salary into v_sal
+      FROM employees
+      WHERE employee_id > 100;
+
+      dbms_output.put_line(v_sal);
+
+    EXCEPTION
+      WHEN Too_many_rows THEN dbms_output.put_line('輸出底行數太多了');
+      WHEN delete_mgr_excep THEN dbms_output.put_line('Manager不能直接被刪除');
+    END;
+    ```
+
+  - ### 用戶自定義異常
+    ```SQL
+    DECLARE
+      v_sal employees.salary%type;
+      -- 聲明一個異常
+      delete_mgr_excep exception;
+      -- 把字定義的異常和 oracle 的錯誤關聯起來
+      PRAGMA EXCEPTION_INIT(delete_mgr_excep, -2292);
+
+      -- 聲明一個異常
+      too_high_sal exception;
+    BEGIN
+      SELECT salary into v_sal
+      FROM employees
+      WHERE employee_id = 100;
+
+      IF v_sal > 1000 THEN
+        raise too_high_sal;
+      END IF;
+
+      DELETE
+      FROM employees
+      WHERE employee_id = 100;
+
+      dbms_output.put_line(v_sal);
+    EXCEPTION
+      WHEN Too_many_rows THEN dbms_output.put_line('輸出底行數太多了');
+      WHEN delete_mgr_excep THEN dbms_output.put_line('Manager不能直接被刪除');
+      -- 處理異常
+      WHEN too_high_sal THEN dbms_output.put_line('工資過高了');
+    END;
+    ```
+
+  - ### 18. 異常的基本程序：
+    通過 SELECT ... into ... 查詢某人的工資，若沒有查詢到，則輸出 "未找到數據"
+
+    ```SQL
+    DECLARE
+      -- 定義一個變量
+      v_sal employees.salary%type;
+    BEGIN
+      -- 使用 SELECT ... into ... 為 v_sal 賦值
+      SELECT salary into v_sal
+      FROM employees
+      WHERE employee_id = 1000;
+
+      dbms_output.put_line('salary: ' || v_sal);
+
+    EXCEPTION
+      WHEN No_data_found THEN
+        dbms_output.put_line('未找到數據');
+      WHEN Too_many_rows THEN
+        dbms_output.put_line('數據過多！');
+    END
+    ```
+
+  - ### 19. 更新指定員工工資，如工資小於 300，則加 100；對 NO_DATA_FOUND 異常， TOO_MANY_ROWS 進行處理。
+    ```SQL
+    DECLARE
+      v_sal employees.salary%type;
+    BEGIN
+      SELECT salary into v_sal
+      FROM employees
+      WHERE employee_id = 100;
+
+      IF(v_sal < 300) THEN
+        UPDATE employees
+        SET salary = salary + 100
+        WHERE employee_id = 100;
+      ELSE dbms_output.put_line('工資大於 300');
+      END IF;
+    EXCEPTION
+      WHEN No_data_found THEN
+        dbms_output.put_line('未找到數據');
+      WHEN Too_many_rows THEN
+        dbms_output.put_line('輸出的行數太多了！');
+    END
+    ```
+
+  - ### 20. 處理非預定義襶異常處理："違反完整約束條件"
+    ```SQL
+    DECLARE
+      -- 1. 定義異常
+      temp_exception exception;
+
+      -- 2. 將其定義好的異常情況，與標準的 Oracle 錯誤聯繫起來，使用 EXCEPTION_INIT 語句
+      PRAGMA EXCEPTION_INIT(temp_exception, -2292);
+    BEGIN
+      delete FROM employees WHERE employee_id = 100;
+    EXCEPTION
+      -- 3. 處理異常
+      WHEN temp_exception THEN
+        dbms_output.put_line('違反完整性約束！');
+    END;
+    ```
+
+  - ### 21. 自定義異常：更新指定員工工資，增加 100；若該員工不存在，則拋出用戶自定義異常：no_result
+    ```SQL
+    DECLARE
+      -- 自定義異常
+      no_result exception;
+    BEGIN
+      UPDATE employees
+      SET salary = salary + 100
+      WHERE employee_id = 1001;
+
+      -- 使用隱式游標，拋出自定義異常
+      IF sql%notfound THEN
+        raise no_result;
+      END IF;
+    EXCEPTION
+      -- 處理程序拋出的異常
+      WHEN no_result THEN
+        dbms_output.put_line('更新失敗');
+    END;
+    ```
+
+## 存儲函數和過程
+[存儲函數：有返回值，創建完成後，通過 select function() from dual; 執行]
+[存儲過程：由於沒有返回值，創建完成後，不能使用 select 語句，只能使用 pl/sql 塊執行]
+  [格式]
+  ```SQL
+  -- 函數的聲明(有參數的寫在小括號裡)
+  CREATE OR REPLACE function func_name(v_param varchar2)
+    -- 返回值類型
+    return varchar2
+  IS
+    -- PL/SQL 塊變量，紀錄類型、游標的聲明(類似於前面的 declare 的部分)
+  BEGIN
+    -- 函數體 (可以實現增刪改查等操作，返回值需要 return)
+    return 'helloworld' || v_logo;
+  END;
+  ```
+
+  - ### 22.1 函數的 helloworld：返回一個 "helloworld" 的字符串
+    ```SQL
+    CREATE OR REPLACE FUNCTION hello_func
+      return varchar2
+    IS
+    BEGIN
+      return 'helloworld';
+    END;
+    ```
+
+    執行函數
+    ```SQL
+    BEGIN
+      dbms_output.put_line(hello_func());
+    END;
+    ```
+
+    或者：
+    ```SQL
+    SELECT hello_func()
+    FROM dual;
+    ```
+
+  - ### 22.2 返回一個 "helloworld: atguigu" 的字符串，其他 atguigu 由執行函數時輸入。
+    ```SQL
+    -- 函數的聲明 (有參數的寫在小括號裡)
+    CREATE OR REPLACE FUNCTION hello_func(v_logo varchar2)
+
+    -- 返回值類型
+    return varchar2
+
+    is
+    -- PL/SQL 塊變量的聲明
+
+    BEGIN
+    -- 函數體
+      return 'helloworld' || v_logo;
+
+    END;
+    ```
+
+  - ### 22.3 創建一個存儲函數，返回當前的系統時間
+    ```SQL
+    CREATE OR REPLACE FUNCTION func1
+      return date
+
+    is
+      -- 定義變量
+      v_date date;
+    
+    BEGIN
+      -- 函數體
+      -- v_date := sysdate;
+      SELECT sysdate into v_date
+      FROM dual;
+      dbms_output.put_line('我是函數喔');
+
+      return v_date;
+
+    END;
+    ```
+
+    - 執行法1
+      ```SQL
+      SELECT func1 FROM dual;
+      ```
+    - 執行法2
+      ```SQL
+      DECLARE
+        v_date date;
+      BEGIN
+        v_date := func1;
+        dbms_output.put_line(v_date);
+      END;
+      ```
+
+  - ### 23. 定義帶參數的函數：兩個數相加
+    ```SQL
+    CREATE OR REPLACE FUNCTION add_func(a number, b number)
+      return number
+    IS
+    BEGIN
+      return (a + b);
+    END;
+    ```
+    執行函數：
+    ```SQL
+    BEGIN
+      dbms_output.put_line(add_func(12, 13));
+    END;
+    ```
+    或者：
+    ```SQL
+    SELECT add_func(12, 13) FROM dual;
+    ```
+
+  - ### 24. 定義一個函數：獲取給定部門的工資總和，要求：部門號定義為參數，工資總額定義為返回值。
+    ```SQL
+    CREATE OR REPLACE FUNCTION sum_sal(dept_id number)
+      return number
+
+      is
+
+      cursor sal_cursor is
+        SELECT salary
+        FROM employees
+        WHERE department_id = dept_id;
+      
+      v_sum_sal number(8) := 0;
+
+    BEGIN
+      FOR c in sal_cursor LOOP
+        v_sum_sal := v_sum_sal + c.salary;
+      END LOOP;
+
+      -- dbms_output.put_line('sum salary: ' || v_sum_sal);
+      return v_sum_sal;
+    
+    END;
+    ```
+
+    執行函數：
+    ```SQL
+    BEGIN
+      dbms_output.put_line(sum_sal(80));
+    END;
+    ```
+
+  - ### 25. 關於 OUT 型的參數：因為函數只能有一個返回值，PL/SQL 程序可以通過 OUT 型的參數實現有多個返回值
+    要求：定義一個函數：獲取給定部門的工資總和 和 該部門的員工總數(定義為 OUT 類型的參數)。
+    要求：部門號定義為參數，工資總額定義為返回值。
+
+    ```SQL
+    CREATE OR REPLACE FUNCTION sum_sal(dept_id number, total_count out number)
+      return number
+      is
+
+      cursor sal_cursor is
+        SELECT salary
+        FROM employees
+        WHERE department_id = dept_id;
+      v_sum_sal number(8) := 0;
+    
+    BEGIN
+      total_count := 0;
+
+      FOR c in sal_cursor LOOP
+        v_sum_sal := v_sum_sal + c.salary;
+        total_count := total_count + 1;
+      END LOOP;
+
+      -- dbms_output.put_line('sum salary: ' || v_sum_sal);
+      return v_sum_sal
+    END;
+    ```
+
+    執行函數：
+    ```SQL
+    DECLARE
+      v_total number(3) := 0;
+    BEGIN
+      dbms_output.put_line(sum_sal(80, v_total));
+      dbms_output.put_line(v_total);
+    END;
+    ```
+
+  - ### 26. 定義一個存儲過程：獲取給定部門的工資總和(通過 out 參數)，要求：部門號和工資總額定義為參數
+    ```SQL
+    CREATE OR REPLACE procedure sum_sal_procedure(dept_id number, v_sum_sal out number)
+      is
+
+      cursor sal_cursor is
+        SELECT salary
+        FROM employees
+        WHERE department_id = dept_id;
+    
+    BEGIN
+      v_sum_sal := 0;
+
+      FOR c in sal_cursor LOOP
+        -- dbms_output.put_line(c.salary);
+        v_sum_sal := v_sum_sal + c.salary;
+      END LOOP;
+
+      dbms_output.put_line('sum salary: ' || v_sum_sal);
+    END;
+    ```
+
+    執行函數：
+    ```SQL
+    DECLARE
+      v_sum_sal number(10) := 0;
+    BEGIN
+      sum_sal_procedure(80, v_sum_sal);
+    END;
+    ```
+
+  - ### 27. 自定義一個存儲過程完成以下操作：
+    對給定部門(作為輸入參數)的員工進行加薪操作，若其到公司的時間在 (?, 95) 期間，為其加薪 5%
+                                                         (95, 98)             3%
+                                                         (98, ?)              1%
+    得到以下返回結果：為此次加薪公司每月需要額外付出多少成本(定義一個 OUT 型的輸出參數)。
+
+    ```SQL
+    CREATE OR REPLACE procedure add_sal_procedure(dept_id number, v_sum_sal out number)
+      is
+
+      cursor sal_cursor is
+        SELECT employee_id id, hire_date hd, salary sal
+        FROM employees
+        WHERE department_id = dept_id;
+    
+      a number(4, 2) := 0;
+    BEGIN
+      v_sum_sal := 0;
+
+      FOR c in sal_cursor LOOP
+        IF to_char(c.hire_date, 'yyyy') <= '1995' THEN v_1 := 0.05;
+        ELSIF to_char(c.hire_date, 'yyyy') < '1998' THEN v_1 := 0.03;
+        ELSE v_1 := 0.01;
+        END IF;
+
+        -- 1. 更新工資
+        UPDATE employees
+        SET salary = salary * (1 + v_i)
+        WHERE employee_id = c.employee_id;
+
+        -- 2. 付出的成本
+        v_sum_sal := v_sum_sal + c.salary * v_i;
+      END LOOP;
+
+      dbms_output.put_line(v_sum_sal)
+    END;
+    ```
+
+    執行函數：
+    ```SQL
+    DECLARE
+      v_sum_sal number(10) := 0;
+    BEGIN
+      add_sal_procedure(80, v_sum_sal);
+    END;
+    ```
+
+## 觸發器
+  一個 helloworld 級別的觸發器
+  ```SQL
+  CREATE OR REPLACE TRIGGER hello_trigger
+    AFTER
+    
+    UPDATE ON employees
+    -- for each row
+
+  BEGIN
+    dbms_output.put_line('hello...');
+    -- dbms_output.put_line('old.salary:' || :OLD.salary || ', new.salary' || :NEW.salary);
+  
+  END;
+  ```
+
+  然後執行：
+  ```SQL
+  UPDATE employees
+  SET salary = salary + 1000;
+  ```
+
+  - ### 28. 觸發器的 helloworld：編寫一個觸發器，在向 emp 表中插入紀錄時，打印 'helloworld'
+    ```SQL
+    CREATE OR REPLACE TRIGGER emp_trigger
+      AFTER
+      
+      INSERT ON emp
+      -- for each row  -- 預設為語句級，加上此句變行級
+    BEGIN
+      dbms_output.put_line('helloworld');
+    END;
+    ```
+
+  - ### 29. 行級觸發器：每更新 employees 表中的一條紀錄，都會導致觸發器執行
+    ```SQL
+    CREATE OR REPLACE TRIGGER employees_trigger
+      AFTER
+      
+      UPDATE ON employees
+      for each row
+    BEGIN
+      dbms_output.put_line('修改了一條紀錄！');
+    END;
+    ```
+
+    語句級觸發器：一個 `UPDATE` / `DELETE` / `INSERT` 語句，只使觸發器執行一次。
+    ```SQL
+    CREATE OR REPLACE TRIGGER employees_trigger
+      AFTER
+      
+      UPDATE ON employees
+    BEGIN
+      dbms_output.put_line('修改了一條紀錄！');
+    END;
+    ```
+
+  - ### 30. 使用 :new, :old 修飾符
+    ```SQL
+    CREATE OR REPLACE TRIGGER employees_trigger
+      AFTER
+      
+      UPDATE ON employees
+      for each row
+    BEGIN
+      dbms_output.put_line('old salary: ' || :old.salary || ', new salary: ' || :new.salary);
+    END;
+    ```
+
+  - ### 31. 編寫一個觸發器，在對 my_emp 紀錄進行刪除的時候，在 my_emp_bak 表中備份對應的紀錄
+    - 1. 準備工作
+      ```SQL
+      CREATE TABLE my_emp
+      AS
+      SELECT employee_id id, last_name name, salary sal
+      FROM employees;
+      ```
+      ```SQL
+      CREATE TABLE my_emp_bak
+      AS
+      SELECT employee_id id, last_name name, salary sal
+      FROM employees
+      WHERE 1 = 2;
+      ```
+
+    - 2. 
+      ```SQL
+      CREATE OR REPLACE TRIGGER bak_emp_trigger
+        BEFORE
+        
+        DELETE ON my_emp
+        for each row 
+      BEGIN
+        INSERT INTO my_emp_bak
+        values(:old.id, :old.name, :old.sal);
+      END;
+      ```
+
