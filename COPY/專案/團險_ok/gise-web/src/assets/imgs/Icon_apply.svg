@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="65" height="65" viewBox="0 0 65 65">
+  <defs>
+    <linearGradient id="linear-gradient" x1="0.5" x2="0.5" y2="1" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#4caaf5"/>
+      <stop offset="1" stop-color="#28b4be"/>
+    </linearGradient>
+    <clipPath id="clip-Icon_apply">
+      <rect width="65" height="65"/>
+    </clipPath>
+  </defs>
+  <g id="Icon_apply" clip-path="url(#clip-Icon_apply)">
+    <g id="_9004697_add_file_document_paper_files_icon" data-name="9004697_add_file_document_paper_files_icon" transform="translate(3.664 0.998)">
+      <path id="Path_14944" data-name="Path 14944" d="M52.2,19.289,36.881,3.965a13.49,13.49,0,0,0-3.838-2.646c-.095-.049-.179-.108-.271-.149A13.5,13.5,0,0,0,27.3,0H12.833A10.833,10.833,0,0,0,2,10.833V54.167A10.833,10.833,0,0,0,12.833,65h32.5A10.833,10.833,0,0,0,56.167,54.167v-25.3a13.455,13.455,0,0,0-1.173-5.46,2.3,2.3,0,0,0-.149-.271A13.477,13.477,0,0,0,52.2,19.289ZM46.92,21.667h-7A5.417,5.417,0,0,1,34.5,16.25v-7Zm3.83,32.5a5.417,5.417,0,0,1-5.417,5.417h-32.5a5.417,5.417,0,0,1-5.417-5.417V10.833a5.417,5.417,0,0,1,5.417-5.417H27.3a8.125,8.125,0,0,1,1.779.211V16.25A10.833,10.833,0,0,0,39.917,27.083H50.533a8,8,0,0,1,.217,1.779Z" transform="translate(0)" fill="url(#linear-gradient)"/>
+      <path id="Path_14945" data-name="Path 14945" d="M24.945,20.119H19.532V14.706a2.706,2.706,0,0,0-5.413,0v5.413H8.706a2.706,2.706,0,0,0,0,5.413h5.413v5.413a2.706,2.706,0,0,0,5.413,0V25.532h5.413a2.706,2.706,0,0,0,0-5.413Z" transform="translate(6.838 20.511)" fill="url(#linear-gradient)"/>
+    </g>
+  </g>
+</svg>

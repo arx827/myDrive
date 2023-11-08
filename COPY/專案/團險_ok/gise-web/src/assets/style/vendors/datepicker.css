@@ -1,0 +1,38 @@
+:root{
+  --vdp-bg-color: "#000000",
+  --vdp-text-color: "#333333",
+  --vdp-box-shadow: "0 4px 10px 0 rgba(128, 144, 160, 0.1), 0 0 1px 0 rgba(128, 144, 160, 0.81)",
+  --vdp-border-radius: "4px",
+  --vdp-elem-border-radius: "4px",
+}
+.mx-datepicker {
+  width: 100%
+}
+.mx-input{
+  color: #333333;
+  height: 40px;
+  transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+  border: 1px solid #d9d9d9;
+  box-shadow: none;
+  line-height: 1.5715em;
+}
+
+.mx-input::placeholder{
+  color:rgba(0, 0, 0, 0.25);
+}
+
+.mx-input:disabled, .mx-input.disabled{
+  background-color: #f5f5f5;
+  color: rgba(0, 0, 0, 0.25);
+}
+
+@media (min-width: 1280px) {
+  .mx-input{
+    font-size: 16px;
+  }
+}
+
+.ant-form-item-has-error :not(.ant-input-disabled):not(.ant-input-borderless).mx-input {
+  background-color: #fff;
+  border-color: #ff4d4f !important;
+}

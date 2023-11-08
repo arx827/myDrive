@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="26" height="26" viewBox="0 0 26 26">
+  <defs>
+    <clipPath id="clip-button_ID_black">
+      <rect width="26" height="26"/>
+    </clipPath>
+  </defs>
+  <g id="button_ID_black" clip-path="url(#clip-button_ID_black)">
+    <g id="Group_19394" data-name="Group 19394" transform="translate(-318.183 -31)">
+      <circle id="Ellipse_116" data-name="Ellipse 116" cx="12" cy="12" r="12" transform="translate(319.183 32)" fill="none" stroke="#363636" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+      <circle id="Ellipse_117" data-name="Ellipse 117" cx="5" cy="5" r="5" transform="translate(326.091 36.578)" fill="none" stroke="#363636" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+      <path id="Path_12504" data-name="Path 12504" d="M6.168,19.648A5.122,5.122,0,0,1,11.075,16H16.2a5.122,5.122,0,0,1,4.91,3.656" transform="translate(317.462 33.419)" fill="none" stroke="#363636" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+    </g>
+  </g>
+</svg>
