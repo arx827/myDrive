@@ -1,0 +1,63 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html{
+    @apply h-full;
+  }
+  body {
+    font-family: Helvetica, Arial, sans-serif;
+    @apply text-base h-full bg-neutral-entry;
+  }
+
+  @screen lg {
+    body {
+      @apply text-lg;
+    }
+  }
+
+  /* scroll 樣式 */
+  ::-webkit-scrollbar {
+    @apply w-[10px] bg-transparent
+  }
+  ::-webkit-scrollbar-corner {
+    @apply bg-transparent
+  }
+  ::-webkit-scrollbar-thumb {
+    @apply p-[0_3px] rounded-[6px] bg-[#7e7e7eb3]
+  }
+
+  button, [type='button'], [type='reset'], [type='submit'] {
+    &.ant-btn-primary {
+      &:not([disabled]) {
+        @apply bg-primary
+      }
+    }
+  }
+}
+
+@layer components {
+  .container {
+    @apply p-[16px_15px] lg:p-[24px_15px] mx-auto
+  }
+
+  .cursorShine {
+    animation: cursorShine 0.8s ease-in-out infinite;
+  }
+  
+  @keyframes cursorShine {
+    0% {
+      opacity: 0;
+    }
+    25% {
+      opacity: 1;
+    }
+    75% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0;
+    }
+  }
+}
