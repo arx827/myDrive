@@ -1,0 +1,55 @@
+@import 'button.scss';
+
+// 篩選條件框 右上底圖
+.searchBlock__bgImg {
+  position: absolute;
+  right: 0;
+  top: -90px;
+  width: 287px;
+}
+
+.bgImg__letterManagement {
+  top: -83px;
+  width: 255px;
+}
+
+.bgImg__maintaince {
+  top: -90px;
+  width: 287px;
+}
+
+.searchBlock__wrap {
+  position: relative;
+  .ant-form-item {
+    margin-bottom: 10px;
+    ::v-deep {
+      .ant-form-item-label {
+        line-height: 1;
+      }
+    }
+  }
+}
+
+.searchResultWrap {
+  .searchResult__control {
+    margin: 5px 0;
+    .tableHeader__button {
+      min-width: 92px;
+    }
+  }
+  .showResultsNumber {
+    margin: 5.5px 0;
+  }
+}
+
+// 穿梭框
+.customTransfer {
+  .ant-transfer-list {
+    flex: 1;
+  }
+  .ant-btn {
+    &:disabled {
+      color: #d9d9d9 !important;
+    }
+  }
+}

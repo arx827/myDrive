@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="32" height="32" viewBox="0 0 32 32">
+  <defs>
+    <clipPath id="clip-icon_edit">
+      <rect width="32" height="32"/>
+    </clipPath>
+  </defs>
+  <g id="icon_edit" clip-path="url(#clip-icon_edit)">
+    <g id="button_edit">
+      <g id="Group_17655" data-name="Group 17655" transform="translate(-1301 -421)">
+        <rect id="Rectangle_77_Copy_14" data-name="Rectangle 77 Copy 14" width="32" height="32" rx="4" transform="translate(1301 421)" fill="#f4fffb"/>
+        <g id="Icon_feather-edit-3" data-name="Icon feather-edit-3" transform="translate(1304.091 423.682)">
+          <path id="Path_12482" data-name="Path 12482" d="M18,30h8.409" transform="translate(-5.091 -9.685)" fill="none" stroke="#51b7a3" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"/>
+          <path id="Path_12483" data-name="Path 12483" d="M17.113,4.9a1.982,1.982,0,0,1,2.8,2.8L8.237,19.38,4.5,20.315l.934-3.737Z" fill="none" stroke="#51b7a3" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"/>
+        </g>
+      </g>
+    </g>
+  </g>
+</svg>

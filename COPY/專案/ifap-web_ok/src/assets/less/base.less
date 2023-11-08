@@ -1,0 +1,276 @@
+@border-radius-base : 4px;
+@padding-lg : '24px';
+@menu-highlight-color:#1FB4C0; //menu
+@menu-item-active-bg: #F7FFFF; //menu選取時底色
+
+@menu-item-color: black;//menu字的顏色
+@menu-bg: @COLOR-WHITE;
+@btn-primary-bg: #1FB4C0; //botton，type=primary顏色
+@btn-primary-color:white;
+@menu-collapsed-width: 20px;
+@switch-color:black; //switch 開啟後底色改為黑色
+
+// Card
+@card-radius:@border-radius-base;
+@card-padding-base:10px;
+
+// Tabs
+@tabs-bar-margin: 0px;
+
+// Page
+@page-header-padding-vertical: 12px;
+
+// Layout
+@layout-header-height: 60px;
+
+//-----------//
+// 色票變數
+@COLOR-MAIN1: #7CA7D6;
+@COLOR-MAIN2: #72BFDB;
+@COLOR-MAIN3: #D51D1D;
+@COLOR-MAIN4: #055A98;
+@COLOR-MAIN5: #BF6406;
+@COLOR-MAIN6: #0099CC;
+@COLOR-MAIN7: #EAF3F5;
+@COLOR-MAIN8: #F5BF55;
+@COLOR-MAIN9: #F77878;
+@COLOR-MAIN10: #4CAAF5;
+@COLOR-MAIN11: #EEF6F8;
+@COLOR-MAIN12: #e6f7ff;
+@COLOR-MAIN13: #FC0000;
+@COLOR-MAIN14: #56B4B5;
+@COLOR-MAIN15: #48999b;
+
+@COLOR-MAIN10-OPACITY: #4CAAF566;
+
+@COLOR-WHITE: #FFF;
+@COLOR-BLACK: #000;
+
+@COLOR-BLACK-OPACITY: #000000d9;
+
+@COLOR-GRAY1: #F0F2F5;
+@COLOR-GRAY2: #C7C7C7;
+@COLOR-GRAY3: #000000A6;
+@COLOR-GRAY4: #FAFAFA;
+@COLOR-GRAY5: #666;
+@COLOR-GRAY6: #788088;
+@COLOR-GRAY7: #EEEEEE;
+@COLOR-GRAY8: #d9d9d9;
+
+// 主題色票
+@theme1: @COLOR-MAIN1;
+@theme2: @COLOR-MAIN2;
+@theme3: @COLOR-MAIN14;
+@theme4: @COLOR-MAIN9;
+
+// 元件顏色變數
+// Main Bg
+@MAIN-BG-GRAY: @COLOR-GRAY1;
+
+// odp-content-header
+@ICON-BG-BLUE: @COLOR-MAIN7;
+@TOP-MENU-FONT-GRAY: @COLOR-GRAY5;
+@BUTTON-BG-YELLOW: @COLOR-MAIN8;
+
+@COLLAPSE-HEADER-BG: @COLOR-MAIN14;
+@DESCRIPTION-HEADER-BG: @COLOR-MAIN2;
+@DESCRIPTION-HEADER-BG-DARK: @COLOR-MAIN15;
+@DESCRIPTION-BORDER-COLOR: @COLOR-GRAY8;
+
+// Table
+@TABLE-SUBTAB-BORDER-COLOR: @COLOR-GRAY2;
+@TABLE-ARROW-GRAY: @COLOR-GRAY3;
+@THEAD-BG-GRAY: @COLOR-GRAY4;
+
+@ARROW-COLOR: @COLOR-MAIN6;
+
+@FONT-COLOR-RED: @COLOR-MAIN13;
+@FONT-COLOR-BLUE: @COLOR-MAIN4;
+@FONT-COLOR-BLUE-LIGHT: @COLOR-MAIN6;
+@FONT-COLOR-BROWN: @COLOR-MAIN5;
+@FONT-COLOR-BLACK: @COLOR-BLACK-OPACITY;
+
+// Modal
+@MODAL-TAB-COLOR-BLUE: @COLOR-MAIN6;
+@MODAL-BUTTON-BG-BLUE: @COLOR-MAIN2;
+@MODAL-ARROW-BLUE: @COLOR-MAIN2;
+
+// Button
+@BUTTON-CALL-BG-BLUE: @COLOR-MAIN2;
+@BUTTON-CIRCLE-BG-BLUE: @COLOR-MAIN2;
+@BUTTON-CIRCLE-COLOR-BLUE: @COLOR-MAIN2;
+@BUTTON-BG-GREEN: @COLOR-MAIN14;
+
+@BUTTON-COLOR-WHITE: @COLOR-WHITE;
+@BUTTON-BG-GRAY: @COLOR-GRAY6;
+@BUTTON-BG-LIGHT-GRAY: @COLOR-GRAY7;
+@BUTTON-DISABLED-BG-GRAY: @COLOR-GRAY2;
+@BUTTON-DISABLED-COLOR-GRAY: @COLOR-GRAY5;
+
+@BUTTON-BG-HOVER: @COLOR-MAIN10;
+@BUTTON-BORDER-HOVER: @COLOR-MAIN10-OPACITY;
+
+// 表格中的 btn
+@ICON-BUTTON-BG-BLUE: @COLOR-MAIN10;
+@ICON-BUTTON-BG-RED: @COLOR-MAIN9;
+@ICON-BG-HOVER-BLUE: @COLOR-MAIN12;
+
+// 難字樣式 - 處理白色字體
+.text-white-format() {
+  color: @COLOR-WHITE !important;
+  text-shadow: 0 0 @COLOR-WHITE !important;
+  font-weight: 500 !important;
+}
+
+.ant-page-header-heading-extra {
+    height: 0px;
+}
+
+//滾輪scroll
+::-webkit-scrollbar {
+    width: 5px;
+    height: 10px;
+    background-color: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background-color: #00000073;
+}
+
+.vue-roll-up {
+    ul {
+        li {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: block !important;
+        }
+    }
+}
+
+.ant-popover-title {
+    border-bottom: 0px;
+}
+
+.ant-page-header-heading-sub-title {
+    color: black;
+    font-size: 20px;
+}
+
+//錯誤訊息modal位置
+.error-modal-util-class>.ant-modal-wrap>.ant-modal {
+    margin-top: 150px;
+}
+
+//Table開啟捲動軸
+.ant-table-body {
+    overflow: auto;
+}
+
+/* 
+    因以下兩項有空白選項可選擇，空白選項相對較小
+    (1)班別設定->新增、編輯班別->異動後班別 (2)選單設定->新增選單->父選單名稱
+    故把下拉式選單固定高度
+  */
+.ant-select-dropdown-menu-item {
+    height: 32px;
+}
+
+// 紅色字體
+.text-color-red {
+    color: red;
+}
+
+.ant-upload-hint {
+    color: red;
+    padding-left: 10px;
+    font-size: 12px;
+}
+
+// popover提視窗字體
+.ant-popover-inner-content {
+    font-weight: 600;
+}
+
+/* ----------- 仿製 bootstrap class ---------- */
+.d-flex {
+    display: flex;
+}
+
+.d-block {
+    display: block;
+}
+
+.d-inline-block {
+    display: inline-block;
+}
+
+.ml-auto {
+    margin-left: auto;
+}
+
+.flex-column {
+    flex-direction: column;
+}
+
+.flex-1 {
+    flex: 1;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.text-left {
+    text-align: left;
+}
+
+.text-right {
+    text-align: right;
+}
+
+body {
+    font-family: "Source Sans Pro", sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.ant-table-thead>tr>th,
+.ant-empty-description,
+.ant-card-head,
+.ant-select-dropdown-menu-item,
+.ant-modal-title,
+.ant-modal-confirm-body .ant-modal-confirm-title {
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}
+
+.ant-btn-primary,
+.ant-btn-danger {
+    .text-white-format()
+}
+
+.ant-modal-confirm-body .ant-modal-confirm-content,
+.ant-message-notice-content {
+    h4 {
+        font-size: 16px;
+    }
+
+    color: @FONT-COLOR-BLACK;
+}
+
+// 調整新增Button的icon大小
+.ant-btn-primary {
+    .anticon-plus {
+        font-size: 15px;
+    }
+}

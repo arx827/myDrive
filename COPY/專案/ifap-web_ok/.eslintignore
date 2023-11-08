@@ -1,0 +1,5 @@
+# 設定忽略名單
+
+# assets/scss
+src/assets/less
+src/assets/scss

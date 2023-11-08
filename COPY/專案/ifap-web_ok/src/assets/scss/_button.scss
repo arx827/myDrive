@@ -1,0 +1,120 @@
+// 綠色漸層Button
+.linearButton {
+  min-width: 182px;
+  border-style: solid;
+  letter-spacing: normal;
+  border-radius: 8px;
+  &[disabled] {
+    margin-top: 2px;
+    margin-bottom: 2px;
+  }
+  &:not([disabled]) {
+    color: #FFF;
+    border-width: 3px;
+    border-color: transparent;
+    background: transparent linear-gradient(90deg, #50A3A2 0%, #52C9A4 100%) 0% 0% no-repeat padding-box;
+    &:hover, &:focus, &:active {
+      border-color: #52C9A44D;
+      color: #FFF;
+      background: transparent linear-gradient(90deg, #50A3A2 0%, #52C9A4 100%) 0% 0% no-repeat padding-box;
+    }
+  }
+}
+
+// 清除button(配合linearButton樣式)
+.clearButton {
+  min-width: 182px;
+  background: #efeeee padding-box;
+  border-width: 3px;
+  border-style: solid;
+  border-color: transparent;
+  letter-spacing: normal;
+  border-radius: 8px;
+  &:hover, &:focus, &:active {
+    border-color: #f7f6f6;
+    color: #afacac;
+    background: #efeeee padding-box;
+  }
+}
+
+// Table中的icon統一大小
+.tableControl__button {
+  background-position: center;
+  background-size: 100%;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  margin: 0;
+  border: 0;
+}
+
+// 編輯icon
+.editButton {
+  background-image: url("~@imgs/icon_edit.svg");
+  &:focus, &:active {
+    background-image: url("~@imgs/icon_edit.svg");
+  }
+  &:hover {
+    background-image: url("~@imgs/icon_edit_hover.svg");
+  }
+  &[disabled] {
+    background-image: url("~@imgs/icon_edit_disable.svg");
+  }
+}
+
+// 刪除icon (TODO 改垃圾桶圖)
+.deleteButton {
+  background-image: url("~@imgs/icon_delete.svg");
+  &:focus, &:active {
+    background-image: url("~@imgs/icon_delete.svg");
+  }
+  &:hover {
+    background-image: url("~@imgs/icon_delete_hover.svg");
+  }
+  &[disabled]{
+    background-image: url("~@imgs/icon_delete_disable.svg");
+  }
+}
+
+// 齒輪icon
+.settingButton {
+  background-image: url("~@imgs/icon_setting.svg");
+  &:focus, &:active {
+    background-image: url("~@imgs/icon_setting.svg");
+  }
+  &:hover {
+    background-image: url("~@imgs/icon_setting_hover.svg");
+  }
+}
+
+// 信箱icon
+.mailButton {
+  background-image: url("~@imgs/icon_mail.svg");
+  &:focus, &:active {
+    background-image: url("~@imgs/icon_mail.svg");
+  }
+  &:hover {
+    background-image: url("~@imgs/icon_mail_hover.svg");
+  }
+  &[disabled]{
+    background-image: url("~@imgs/icon_mail_disable.svg");
+  }
+}
+
+// ant icon 按鈕
+.customButton {
+  background-color: $COLOR-MAIN13;
+  color: $COLOR-MAIN11 !important;
+  &:focus, &:active {
+    background-color: $COLOR-MAIN13;
+    color: $COLOR-MAIN11 !important;
+  }
+  &:hover {
+    background-color: $COLOR-MAIN11;
+    color: $COLOR-WHITE !important;
+  }
+  &[disabled]{
+    color: $COLOR-GRAY2 !important;
+  }
+}
+
