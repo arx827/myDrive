@@ -1,0 +1,10 @@
+{
+  "options": [
+      { "search": "elliptic@6.5.4", "replace": "elliptic_6.5.4" },
+      { "search": "fedor@indutny.com", "replace": "fedor_indutny.com" },
+      { "search": "git@github.com", "replace": "git_github.com" },
+      { "search": "fubonlife123@fubon.com", "replace": "fubonlife123_fubon.com" },
+      { "search": "yiminghe@gmail.com", "replace": "yiminghe_gmail.com" },
+      { "search": "antd@2.0", "replace": "antd_2.0" }
+    ]
+}

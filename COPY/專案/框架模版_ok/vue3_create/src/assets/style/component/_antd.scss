@@ -1,0 +1,20 @@
+/* ----------------------- Message ----------------------- */
+// message icon 與 message 垂直置中調整
+.notificationCustom {
+  .ant-message-custom-content {
+    display: inline-flex;
+    text-align: left;
+    max-width: 500px;
+  }
+  .anticon {
+    line-height: 1rem;
+  }
+}
+
+/* ----------------------- Button ----------------------- */
+// loading icon 與 text 垂直置中
+.ant-btn-loading-icon {
+  .anticon {
+    vertical-align: 0;
+  }
+}

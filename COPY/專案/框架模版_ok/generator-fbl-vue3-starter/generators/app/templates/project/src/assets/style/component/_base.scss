@@ -1,0 +1,74 @@
+.svg__currentColor {
+  fill: currentColor;
+}
+
+.page__container {
+  padding: 15px;
+}
+.section__container {
+  padding: 15px;
+}
+
+.container__wrap {
+  border: 1px solid $COLOR-GRAY6;
+  padding: 25px 20px 15px;
+  border-radius: 5px;
+  box-shadow: 1px 1px 5px $COLOR-GRAY5;
+  + .container__wrap {
+    margin-top: 20px;
+  }
+}
+
+:focus-visible {
+  outline: none;
+}
+
+// ------------------- icon & text color ------------------- //
+.c-green {
+  color: $COLOR-MAIN1 !important;
+}
+.c-red {
+  color: $COLOR-MAIN6 !important;
+}
+
+.doc__tool-ul {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  .doc__tool-li {
+    padding-bottom: 20px;
+    +.doc__tool-li {
+      border-top: 1px #ddd solid;
+      padding-top: 20px;
+    }
+  }
+}
+.doc__info {
+  padding: 0 20px;
+  :deep(.ant-descriptions-item-label) {
+    width: 120px;
+    background: $COLOR-GRAY3;
+  }
+}
+
+.doc__caption {
+  font-size: 18px;
+  margin-top: 13px;
+}
+
+.doc__caption-ul {
+  li {
+    line-height: 1.8;
+  }
+}
+
+.no-list-style {
+  list-style: none;
+}
+
+.text__highlight {
+  color: $COLOR-MAIN2;
+}
+
+.inline__icon {
+  vertical-align: text-bottom;
+}

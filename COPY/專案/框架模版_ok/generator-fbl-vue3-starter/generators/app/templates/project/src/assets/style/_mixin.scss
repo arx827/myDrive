@@ -1,0 +1,112 @@
+
+@mixin rwd-sm {
+  @media (min-width: $SM-MEDIA) {
+    @content
+  }
+}
+@mixin rwd-md {
+  @media (min-width: $MD-MEDIA) {
+    @content
+  }
+}
+@mixin rwd-lg {
+  @media (min-width: $LG-MEDIA) {
+    @content
+  }
+}
+@mixin rwd-xl {
+  @media (min-width: $XL-MEDIA) {
+    @content
+  }
+}
+@mixin rwd-xll {
+  @media (min-width: $XXL-MEDIA) {
+    @content
+  }
+}
+
+// -------------------------------------- button -------------------------------------- //
+
+
+@mixin primary($color) {
+  border: solid 1px #{$color};
+  background-color: #{$color};
+  color: #FFFFFF;
+  &:hover {
+    border: solid 1px lighten($color, 5);
+    background-color: lighten($color, 5);
+  }
+}
+
+@mixin light($color) {
+  border: solid 1px #{$color};
+  background-color: #FFFFFF;
+  color: #{$color};
+  &:hover {
+    border: solid 1px lighten($color, 5);
+    color: lighten($color, 5);
+  }
+}
+
+@mixin dashed($color) {
+  border: dashed 1px #{$color};
+  background-color: #FFFFFF;
+  color: #{$color};
+  &:hover {
+    border: dashed 1px lighten($color, 5);
+    color: lighten($color, 5);
+  }
+}
+
+@mixin text($color) {
+  border: solid 1px transparent;
+  background-color: transparent;
+  color: #{$color};
+  &:hover {
+    border: solid 1px transparent;
+    background-color: rgba(0,0,0, 0.05);
+    color: lighten($color, 5);
+  }
+}
+
+@mixin link($color) {
+  border: solid 1px transparent;
+  background-color: transparent;
+  color: #{$color};
+  &:hover {
+    color: lighten($color, 5);
+  }
+}
+
+@mixin btnCreate() {
+  &[theme='primary'] {
+    @include primary($BUTTON-MAIN);
+    &[danger] {
+      @include primary($BUTTON-DANGER);
+    }
+  }
+  &[theme='light'] {
+    @include light($BUTTON-MAIN);
+    &[danger] {
+      @include light($BUTTON-DANGER);
+    }
+  }
+  &[theme='dashed'] {
+    @include dashed($BUTTON-MAIN);
+    &[danger] {
+      @include dashed($BUTTON-DANGER);
+    }
+  }
+  &[theme='text'] {
+    @include text($BUTTON-MAIN);
+    &[danger] {
+      @include text($BUTTON-DANGER);
+    }
+  }
+  &[theme='link'] {
+    @include link($BUTTON-MAIN);
+    &[danger] {
+      @include link($BUTTON-DANGER);
+    }
+  }
+}

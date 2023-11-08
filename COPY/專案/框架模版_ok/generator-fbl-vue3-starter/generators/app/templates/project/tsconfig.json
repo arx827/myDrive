@@ -1,0 +1,36 @@
+{
+  "extends": "@vue/tsconfig/tsconfig.web.json",
+  "module": "esnext",
+  "include": [
+    "env.d.ts",
+    "src/**/*",
+    "src/**/*.vue",
+    "jsconfig.json",
+  ],
+  "exclude": ["node_modules/**"],
+  "compilerOptions": {
+    "target": "esnext",
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./src/*"],
+      "@assets/*": ["./src/assets/*"],
+      "@style/*": ["./src/assets/style/*"],
+      "@imgs/*": ["./src/assets/imgs/*"],
+      "@components/*": ["./src/components/*"],
+      "@layout/*": ["./src/components/layout/*"],
+      "@shared/*": ["./src/components/shared/*"],
+      "@pages/*": ["./src/pages/*"],
+      "@stores/*": ["./src/stores/*"],
+      "@plugins/*": ["./src/plugins/*"],
+    },
+    "types": ["vite-svg-loader", "vite/client"],
+    "noImplicitAny": false,
+    "strictNullChecks": false,
+    "skipLibCheck": true,
+  },
+  "references": [
+    {
+      "path": "./tsconfig.config.json"
+    }
+  ],
+}

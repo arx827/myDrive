@@ -1,0 +1,24 @@
+$grid-columns: 12;
+$grid-gutter-width: 16px;
+$grid-breakpoints: (
+  xs: 0,
+  sm: 576px,
+  md: 768px,
+  lg: 992px,
+  xl: 1200px,
+  xxl: 1366px
+);
+// $container-padding-x: 0;
+
+$container-max-widths: (
+  sm: 540px,
+  md: 720px,
+  lg: 960px,
+  xl: 1088px, //clo-width
+  xxl: 1200px
+);
+
+$primary: $COLOR-MAIN1;
+
+// 手機、平版 側邊選單
+$offcanvas-horizontal-width: 262px;
