@@ -1,0 +1,86 @@
+*{
+  font-size: 16px;
+  position: relative;
+  word-wrap: break-word;
+}
+html{
+  height: 100%;
+}
+body{
+  min-height: 100%;
+}
+
+ul, ol {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+img {
+  max-width: 100%;
+}
+
+.flex-center{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+// tooltip (白底藍字 樣式)
+.whiteTooltip {
+  .ant-tooltip-arrow {
+    &:before {
+      background-color: $COLOR-LIGHT;
+      border-color: $COLOR-MAIN15;
+      box-shadow: 1px 1px 5px rgba($COLOR-DARK, 0.3);
+      border-style: solid;
+    }
+  }
+  &.ant-tooltip-placement-top {
+    .ant-tooltip-arrow {
+      bottom: 0;
+      transform: translate(-50%, 90%);
+      z-index: 10;
+      &:before {
+        border-width: 0 1px 1px 0;
+      }
+    }
+  }
+  &.ant-tooltip-placement-bottomLeft {
+    .ant-tooltip-arrow {
+      top: 1px;
+      transform: translate(-50%, -100%);
+      z-index: 10;
+      &:before {
+        border-width: 1px 0 0 1px;
+      }
+    }
+  }
+  .ant-tooltip-inner {
+    background-color: $COLOR-LIGHT;
+    box-shadow: 1px 1px 5px rgba($COLOR-DARK, 0.3);
+    color: $COLOR-MAIN1;
+    border: 1px solid $COLOR-MAIN15;
+  }
+}
+
+// popover (白底黑字 樣式)
+.whitePopover {
+  max-width: 473px;
+  .ant-popover-inner-content {
+    padding: 8px 11px 15px;
+  }
+//   .ant-popover-arrow {
+//     &:before {
+//       content: '';
+//       background-color: $COLOR-LIGHT;
+//       border-color: $COLOR-MAIN15;
+//       box-shadow: 1px 1px 5px rgba($COLOR-DARK, 0.3);
+//       border-style: solid;
+//       border-top-color: #fff;
+//       border-right-color: transparent;
+//       border-bottom-color: transparent;
+//       border-left-color: #fff;
+//     }
+//   }
+}
