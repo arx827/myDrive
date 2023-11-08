@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="20" height="20" viewBox="0 0 20 20">
+  <defs>
+    <clipPath id="clip-button__barChart_green">
+      <rect width="20" height="20"/>
+    </clipPath>
+  </defs>
+  <g id="button__barChart_green" data-name="button_ barChart_green" clip-path="url(#clip-button__barChart_green)">
+    <g id="Group_18483" data-name="Group 18483" transform="translate(-2 -2)">
+      <path id="Path_12607" data-name="Path 12607" d="M0,0H24V24H0Z" fill="none"/>
+      <rect id="Rectangle_6818" data-name="Rectangle 6818" width="6" height="8" rx="1" transform="translate(3 12)" fill="none" stroke="#23c4a8" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"/>
+      <rect id="Rectangle_6819" data-name="Rectangle 6819" width="6" height="12" rx="1" transform="translate(9 8)" fill="none" stroke="#23c4a8" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"/>
+      <rect id="Rectangle_6820" data-name="Rectangle 6820" width="6" height="16" rx="1" transform="translate(15 4)" fill="none" stroke="#23c4a8" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"/>
+      <line id="Line_497" data-name="Line 497" x2="14" transform="translate(4 20)" fill="none" stroke="#23c4a8" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"/>
+    </g>
+  </g>
+</svg>

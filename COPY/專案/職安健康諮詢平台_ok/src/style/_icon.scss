@@ -1,0 +1,187 @@
+.os-icon {
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+}
+
+.os-icon-1 {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+}
+
+.icon-button {
+  min-width: 46px;
+  min-height: 32px;
+  text-align: center;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: $COLOR-WHITE;
+  border-radius: 16px;
+  border: 0;
+  &.icon__calendar {
+    min-width: 40px;
+    min-height: 40px;
+    color: $BUTTON-MAIN;
+    border-radius: 50vh;
+    border: 1px solid $BUTTON-MAIN;
+  }
+  &.icon__close {
+    min-width: 40px;
+    min-height: 40px;
+    background: $BUTTON-MAIN;
+    border-radius: 50vh;
+  }
+  &.icon__edit {
+    background-color: $BUTTON-BG-LIGHT-BLUE;
+    color: $TEXT-GREEN;
+    &:hover, &:active, &:focus {
+      background: $BUTTON-MAIN;
+      color: $COLOR-WHITE;
+    }
+    &.icon__edit--disabled{
+      color: $BUTTON-DISABLED-COLOR-GRAY;
+      cursor: not-allowed;
+      background-color: $BUTTON-BG-LIGHT-GRAY;
+    }
+  }
+  &.icon__delete {
+    background-color: $BUTTON-BG-RED;
+    color: $BUTTON-COLOR-RED;
+    &:hover, &:active, &:focus {
+      background: $BUTTON-HOVER-BG-RED;
+      color: $COLOR-WHITE;
+    }
+    &.icon__delete--disabled{
+      color: $BUTTON-DISABLED-COLOR-GRAY;
+      cursor: not-allowed;
+      background-color: $BUTTON-BG-LIGHT-GRAY;
+    }
+  }
+  &.icon__barChart {
+		background: url('~@images/button_barChart_green.svg') no-repeat center;
+		background-color: $COLOR-MAIN10;
+		&:focus, &:hover {
+			background: url('~@images/button_barChart_white.svg') no-repeat center;
+			background-color: $BUTTON-MAIN;
+		}
+	}
+	&.icon__downloadList {
+		background: url('~@images/button_list_green.svg') no-repeat center;
+		background-color: $COLOR-MAIN10;
+		&:focus, &:hover {
+			background: url('~@images/button_list_white.svg') no-repeat center;
+			background-color: $BUTTON-MAIN;
+		}
+    &.icon__downloadList--disabled{
+      background: url('~@images/button_list_gray.svg') no-repeat center;
+      cursor: not-allowed;
+      background-color: $BUTTON-BG-LIGHT-GRAY;
+    }
+	}
+  &.button_singleLine {
+    background: url('~@images/button_singleLine.svg') no-repeat center;
+  }
+  &.button_mtext {
+    background: url('~@images/button_mtext.svg') no-repeat center;
+  }
+  &.button_MC {
+    background: url('~@images/button_MC.svg') no-repeat center;
+  }
+  &.button_MCQ {
+    background: url('~@images/button_MCQ.svg') no-repeat center;
+  }
+  &.button_number {
+    background: url('~@images/button_number.svg') no-repeat center;
+  }
+  &.button_star {
+    background: url('~@images/button_star.svg') no-repeat center;
+  }
+  &.button_title {
+    background: url('~@images/button_title.svg') no-repeat center;
+  }
+  &.button_matrix {
+    background: url('~@images/button_matrix.svg') no-repeat center;
+  }
+  &.icon__detailBook {
+		background: url('~@images/button_container_green.svg') no-repeat center;
+		background-color: $COLOR-MAIN10;
+		&:focus, &:hover {
+			background: url('~@images/button_container_white.svg') no-repeat center;
+			background-color: $BUTTON-MAIN;
+		}
+	}
+}
+
+.os-icon__nextPage {
+  background: url('~@images/image_nextPage.svg') no-repeat center;
+  cursor: pointer;
+}
+
+.os-icon__barChart {
+  background: url('~@images/button_barChart_green.svg') no-repeat center;
+  cursor: pointer;
+}
+
+.os-icon__expandPage {
+  background: url('~@images/image_downArrow.svg') no-repeat center;
+  cursor: pointer;
+}
+
+.os-icon__downloadList {
+  background: url('~@images/button_list_green.svg') no-repeat center;
+  cursor: pointer;
+  &.os-icon__downloadList--disabled{
+    background: url('~@images/button_list_gray.svg') no-repeat center;
+    cursor: not-allowed;
+  }
+}
+
+.btn__required__default {
+  display: flex;
+  align-items:center ;
+  padding: 0 5px;
+  height: 25px;
+  color: $COLOR-WHITE;
+  background-color: $BUTTON-DEFAULT-COLOR-GRAY;
+  span {
+    font-size: 12px;
+    margin-left: 5px;
+  }
+  &:hover, &:active, &:focus {
+    color: $COLOR-WHITE;
+    background-color: $BUTTON-DEFAULT-COLOR-GRAY;
+    border-color: transparent;
+  }
+  &.btn__required__selected {
+    color: $COLOR-WHITE;
+    background-color: $BUTTON-MAIN;
+  }
+}
+
+
+// .modal__icon--alert{
+//   background: url('~@images/image_delet.svg') no-repeat center;
+// }
+
+.menu-icon {
+  width: 26px;
+	height: 26px;
+	display: block;
+	background-repeat: no-repeat;
+	background-position: center;
+}
+.note-black-icon {
+	background-image: url("~@images/button_note_black.svg");
+	background-size: 30px;
+}
+.id-icon {
+  background-image: url("~@images/button_ID.svg");
+	background-size: 30px;
+}
+.note-white-icon {
+  background-image: url("~@images/button_note_white.svg");
+  background-size: 24px;
+}

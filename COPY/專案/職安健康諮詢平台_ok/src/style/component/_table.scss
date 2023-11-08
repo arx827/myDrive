@@ -1,0 +1,18 @@
+.table__green__head {
+  * {
+    font-size: 14px;
+  }
+  thead {
+    th {
+      background-color: $COLOR-MAIN1;
+      color: #fff;
+      border: 1px #fff solid;
+    }
+  }
+}
+
+.table__td-center {
+  td, th {
+    text-align: center !important;
+  }
+}

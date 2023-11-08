@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="1088" height="38" viewBox="0 0 1088 38">
+  <defs>
+    <clipPath id="clip-image_girlBackground">
+      <rect width="1088" height="38"/>
+    </clipPath>
+  </defs>
+  <g id="image_girlBackground" clip-path="url(#clip-image_girlBackground)">
+    <g id="Group_18956" data-name="Group 18956" transform="translate(362 -110.795)">
+      <path id="Path_12642" data-name="Path 12642" d="M0,0H1088V38.205H0Z" transform="translate(-362 110.795)" fill="#fffcfa"/>
+      <path id="Path_12643" data-name="Path 12643" d="M0,0,567.2,15.019,326.814,38.205H0Z" transform="translate(-362 110.795)" fill="#fcf4ef"/>
+      <path id="Path_12644" data-name="Path 12644" d="M567.2,0,0,15.019,240.387,38.205H567.2Z" transform="translate(158.799 110.795)" fill="#ffece0"/>
+    </g>
+  </g>
+</svg>

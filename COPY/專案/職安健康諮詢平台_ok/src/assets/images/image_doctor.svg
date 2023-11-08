@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="66" height="66" viewBox="0 0 66 66">
+  <defs>
+    <clipPath id="clip-image_doctor">
+      <rect width="66" height="66"/>
+    </clipPath>
+  </defs>
+  <g id="image_doctor" clip-path="url(#clip-image_doctor)">
+    <g id="Group_18065" data-name="Group 18065" transform="translate(-793 -717)">
+      <circle id="Ellipse_14" data-name="Ellipse 14" cx="33" cy="33" r="33" transform="translate(793 717)" fill="#23c4a8"/>
+      <g id="Group_17323" data-name="Group 17323" transform="translate(802.599 726.599)">
+        <path id="Path_11873" data-name="Path 11873" d="M0,0H46.8V46.8H0Z" transform="translate(0)" fill="none"/>
+        <path id="Path_11874" data-name="Path 11874" d="M8.85,4H6.9A3.9,3.9,0,0,0,3,7.9v6.825H3a10.725,10.725,0,0,0,21.45,0V7.9A3.9,3.9,0,0,0,20.55,4H18.6" transform="translate(2.85 3.8)" fill="none" stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"/>
+        <path id="Path_11875" data-name="Path 11875" d="M8,17.85a11.7,11.7,0,0,0,23.4,0V12" transform="translate(7.601 11.4)" fill="none" stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"/>
+        <path id="Path_11876" data-name="Path 11876" d="M11,3V6.9" transform="translate(10.451 2.85)" fill="none" stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"/>
+        <path id="Path_11877" data-name="Path 11877" d="M6,3V6.9" transform="translate(5.701 2.85)" fill="none" stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"/>
+        <circle id="Ellipse_10" data-name="Ellipse 10" cx="4" cy="4" r="4" transform="translate(34.985 15.725)" fill="none" stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"/>
+      </g>
+    </g>
+  </g>
+</svg>
