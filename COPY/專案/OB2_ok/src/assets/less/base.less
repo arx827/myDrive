@@ -1,0 +1,151 @@
+.ant-page-header-heading-extra {
+  height: 0px;
+}
+
+//滾輪scroll
+::-webkit-scrollbar
+{
+    width:5px;
+    height: 10px;
+    background-color: transparent;
+    // display: none;
+}
+::-webkit-scrollbar-thumb
+{
+    border-radius: 10px;
+	background-color: #00000073;
+}
+// ::-webkit-scrollbar-track {
+//     background: transparent;
+//     margin-bottom: 100px; 
+// }
+
+.vue-roll-up {
+    ul {
+        li {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: block !important;
+        }
+    }
+}
+.ant-popover-title{
+    border-bottom:0px;
+}
+// .ant-btn{
+//     background-color: #1FB4C0;
+//     color:white;
+// }
+
+.ant-page-header-heading-sub-title{
+    color: black;
+    font-size: 20px;
+}
+
+//錯誤訊息modal位置
+.error-modal-util-class > .ant-modal-wrap > .ant-modal{
+    margin-top: 150px;
+}
+
+//Table開啟捲動軸
+.ant-table-body {
+    overflow: auto;
+}
+
+/* 
+  因以下兩項有空白選項可選擇，空白選項相對較小
+  (1)班別設定->新增、編輯班別->異動後班別 (2)選單設定->新增選單->父選單名稱
+  故把下拉式選單固定高度
+*/
+.ant-select-dropdown-menu-item {
+    height: 32px;
+}
+
+// 紅色字體
+.text-color-red{
+    color: red;
+}
+
+.ant-upload-hint {
+    color: @FONT-COLOR-RED;
+    padding-left: 10px;
+    font-size: 12px;
+}
+
+// popover提視窗字體
+.ant-popover-inner-content {
+  font-weight: 600;
+}
+
+/* ----------- 仿製 bootstrap class ---------- */
+.d-flex {
+  display: flex;
+}
+.d-block {
+  display: block;
+}
+.d-inline-block {
+  display: inline-block;
+}
+.ml-auto {
+  margin-left: auto;
+}
+.flex-column{
+  flex-direction: column;
+}
+.flex-1{
+  flex: 1;
+}
+.text-center {
+  text-align: center;
+}
+.text-left {
+  text-align: left;
+}
+.text-right {
+  text-align: right;
+}
+
+body {
+    font-family: 'Fubon', Helvetica, Arial, sans-serif;
+    // font-family: Helvetica, 'Fubon', Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    // text-align: center;
+    // color: #2c3e50;
+    // font-weight: 600;
+    // letter-spacing: 0.1px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}
+
+h1, h2, h3, h4, h5, h6, 
+.ant-table-thead > tr > th, 
+.ant-empty-description, 
+.ant-card-head,
+.ant-select-dropdown-menu-item,
+.ant-modal-title, 
+.ant-modal-confirm-body .ant-modal-confirm-title {
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+.ant-btn-primary, .ant-btn-danger {
+  .text-white-format()
+}
+
+.ant-modal-confirm-body .ant-modal-confirm-content,
+.ant-message-notice-content {
+  h4 {
+    font-size: 16px;
+  }
+  color: @FONT-COLOR-BLACK;
+}
+
+// 調整新增Button的icon大小
+.ant-btn-primary {
+    .anticon-plus {
+        font-size: 15px;
+    }
+}

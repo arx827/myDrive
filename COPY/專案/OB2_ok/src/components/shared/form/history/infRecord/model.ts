@@ -1,0 +1,20 @@
+export default interface InfInfoGrid{
+    sequence?:string;
+    casePolicy?:string;
+    packNo?:string;
+    custId?:string;
+    custName?:string;
+    departmentId?:string;
+    infTypeId?:string;
+    infSubTyp?:string;
+    infContent?:string;
+    reviewSettingStatus?:string;
+    infInfoId?:string;
+    createDate?:string;
+    reminderDate?:string;
+    infExpireDate?:string;
+    replyDate?:string;
+    handleStatus?:string;
+    replyContent?:string;
+    infFileId?:string;
+}
