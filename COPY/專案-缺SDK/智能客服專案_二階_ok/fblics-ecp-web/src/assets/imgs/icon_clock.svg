@@ -1,9 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 17 17">
-  <g id="icon_clock" transform="translate(152 -3645)">
-    <g id="_9004683_clock_time_date_event_icon" data-name="9004683_clock_time_date_event_icon" transform="translate(-151 3646)">
-      <path id="Path_18203" data-name="Path 18203" d="M7.5,0A7.5,7.5,0,1,0,15,7.5,7.5,7.5,0,0,0,7.5,0Zm0,13.75A6.25,6.25,0,1,1,13.75,7.5,6.25,6.25,0,0,1,7.5,13.75Z" fill="#333"/>
-      <path id="Path_18204" data-name="Path 18204" d="M12.333,9.391V5.667a.667.667,0,0,0-1.333,0v4a.667.667,0,0,0,.2.471l2,2a.667.667,0,1,0,.943-.943Z" transform="translate(-4.246 -2.051)" fill="#333"/>
-    </g>
-    <rect id="Rectangle_21516" data-name="Rectangle 21516" width="17" height="17" transform="translate(-152 3645)" fill="none"/>
-  </g>
-</svg>
