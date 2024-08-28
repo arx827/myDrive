@@ -86,7 +86,7 @@
     - 範例
       - `groupId`: com.fubonlife
       - `artifactId`: shop-backend
-      - `version` 1.0-SNAPSHOP : 
+      - `version`: 1.0-SNAPSHOP
       - `package`: com.fubonlife
       - `code`: shop
 
